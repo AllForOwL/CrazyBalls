@@ -14,12 +14,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int attack, const std
 		LoadBulletNormal();
 		this->initWithFile(m_strFilename);
 	}
-	else if (m_typeObject == CNT_NAME_BOMB)
-	{
-		LoadBomb();
-		this->initWithFile(m_strFilename);
-	}
-	
+
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
@@ -36,11 +31,6 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
 		LoadBulletNormal();
-		this->initWithFile(m_strFilename);
-	}
-	else if (m_typeObject == CNT_NAME_BOMB)
-	{
-		LoadBomb();
 		this->initWithFile(m_strFilename);
 	}
 
@@ -127,13 +117,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 void PlayerBulletGraphicComponent::LoadBulletNormal()
 {
 	m_position = Point::ZERO;
-	m_strFilename = "Bullet_normal.png";
-}
-
-void PlayerBulletGraphicComponent::LoadBomb()
-{
-	m_position = Point::ZERO;
-	m_strFilename = "Bomb.png";
+	m_strFilename = "res/Bullets/Bullet_normal.png";
 }
 
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()

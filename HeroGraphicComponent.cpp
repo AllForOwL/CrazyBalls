@@ -31,37 +31,37 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 
 void HeroGraphicComponent::LoadSpritesForHell()
 {
-	m_vecSpritesWalk.push_back("walk-0001.png");
-	m_vecSpritesWalk.push_back("walk-0002.png");
-	m_vecSpritesWalk.push_back("walk-0003.png");
-	m_vecSpritesWalk.push_back("walk-0004.png");
-	m_vecSpritesWalk.push_back("walk-0005.png");
-	m_vecSpritesWalk.push_back("walk-0006.png");
-	m_vecSpritesWalk.push_back("walk-0007.png");
-	m_vecSpritesWalk.push_back("walk-0007.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0001.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0002.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0003.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0004.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0005.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0006.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0007.png");
+	m_vecSpritesWalk.push_back("res/Hero/Walk/walk-0007.png");
 
-	m_vecSpritesAttack.push_back("attack-0001.png");
-	m_vecSpritesAttack.push_back("attack-0002.png");
-	m_vecSpritesAttack.push_back("attack-0003.png");
-	m_vecSpritesAttack.push_back("attack-0004.png");
+	m_vecSpritesAttack.push_back("res/Hero/Attack/attack-0001.png");
+	m_vecSpritesAttack.push_back("res/Hero/Attack/attack-0002.png");
+	m_vecSpritesAttack.push_back("res/Hero/Attack/attack-0003.png");
+	m_vecSpritesAttack.push_back("res/Hero/Attack/attack-0004.png");
 
-	m_vecSpritesRun.push_back("run-0001.png");
-	m_vecSpritesRun.push_back("run-0002.png");
-	m_vecSpritesRun.push_back("run-0003.png");
-	m_vecSpritesRun.push_back("run-0004.png");
-	m_vecSpritesRun.push_back("run-0005.png");
-	m_vecSpritesRun.push_back("run-0006.png");
-	m_vecSpritesRun.push_back("run-0007.png");
-	m_vecSpritesRun.push_back("run-0008.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0001.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0002.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0003.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0004.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0005.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0006.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0007.png");
+	m_vecSpritesRun.push_back("res/Hero/Run/run-0008.png");
 
-	m_vecSpritesDie.push_back("die-0001.png");
-	m_vecSpritesDie.push_back("die-0002.png");
-	m_vecSpritesDie.push_back("die-0003.png");
-	m_vecSpritesDie.push_back("die-0004.png");
+	m_vecSpritesDie.push_back("res/Hero/Die/die-0001.png");
+	m_vecSpritesDie.push_back("res/Hero/Die/die-0002.png");
+	m_vecSpritesDie.push_back("res/Hero/Die/die-0003.png");
+	m_vecSpritesDie.push_back("res/Hero/Die/die-0004.png");
 
-	m_vecSpritesDizzy.push_back("dizzy-0001.png");
-	m_vecSpritesDizzy.push_back("dizzy-0002.png");
-	m_vecSpritesDizzy.push_back("dizzy-0003.png");
+	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0001.png");
+	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0002.png");
+	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0003.png");
 }
 
 /*virtual*/ bool HeroGraphicComponent::Dead(int wounded)

@@ -8,9 +8,15 @@ const int CNT_TAG_ENEMY_WOUNDED	= 1001;
 
 const std::string CNT_NAME_HERO_HELL		= "Hell";
 
-const std::string CNT_NAME_ENEMY_SOLDIER	= "Soldier";
-const std::string CNT_NAME_ENEMY_TANK		= "Tank";
-const std::string CNT_NAME_ENEMY_TURRET		= "Turret";
+const std::string CNT_NAME_ENEMY_ROCK_1	= "Rock1";
+const std::string CNT_NAME_ENEMY_ROCK_2 = "Rock2";
+const std::string CNT_NAME_ENEMY_ROCK_3 = "Rock3";
+const std::string CNT_NAME_ENEMY_ROCK_4 = "Rock4";
+const std::string CNT_NAME_ENEMY_ROCK_5 = "Rock5";
+const std::string CNT_NAME_ENEMY_ROCK_6 = "Rock6";
+const std::string CNT_NAME_ENEMY_ROCK_7 = "Rock7";
+const std::string CNT_NAME_ENEMY_ROCK_8 = "Rock8";
+const std::string CNT_NAME_ENEMY_ROCK_9 = "Rock9";
 
 const std::string CNT_NAME_WEAPON_AK47					= "AK-47";
 const std::string CNT_NAME_WEAPON_GUN					= "Gun";

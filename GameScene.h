@@ -19,7 +19,8 @@ public:
 	void update(float dt);
 	void Spawn(float dt);
 	void LoadLevel();
-	void LoadFileBackground();
+	void LoadFileNameBackground();
+	void SetBackground();
 
 	CREATE_FUNC(GameScene);
 
@@ -33,11 +34,6 @@ public:
 		m_sceneWorld = world;
 	}
 
-	cocos2d::Sprite* m_background;
-
-	cocos2d::Sprite* m_spriteHero;
-	cocos2d::Layer*  m_layer;
-
 	Monster*			m_hero;
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentWeapon;
@@ -48,11 +44,10 @@ public:
 	InputComponent*		m_botInputComponent;
 	PhysicComponent*	m_physicComponent;
 
-	std::vector<std::string> m_vecSpritesWalk;
-	int m_countSpriteInVector;
-	int m_countLevel;
-	std::vector<cocos2d::Sprite*> m_vecBackground;
-	float						  m_widthBackground;
+	std::vector<std::string>	m_vecNameBackground;
+	cocos2d::Sprite*			m_background;
+	float						m_widthBackground;
+	int							m_countLevel;
 };
 
 #endif // __GAME_SCENE_H__

@@ -20,7 +20,6 @@ public:
 	virtual bool Dead(int wounded);
 
 	void LoadBulletNormal();
-	void LoadBomb();
 	~PlayerBulletGraphicComponent();
 
 private:

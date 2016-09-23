@@ -9,42 +9,42 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 {
 	if (m_typeObject == CNT_NAME_WEAPON_AK47)
 	{
-		m_strFilename = "AK47.png";
+		m_strFilename = "res/Weapons/AK47.png";
 		this->initWithFile(m_strFilename);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_GUN)
 	{
-		m_strFilename = "Gun.png";
+		m_strFilename = "res/Weapons/Gun.png";
 		this->initWithFile(m_strFilename);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MI71)
 	{
-		m_strFilename = "MI71.png";
+		m_strFilename = "res/Weapons/MI71.png";
 		this->initWithFile(m_strFilename);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MK15)
 	{
-		m_strFilename = "MK15.png";
+		m_strFilename = "res/Weapons/MK15.png";
 		this->initWithFile(m_strFilename);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_REVOLVER_MONI_SHADE)
 	{
-		m_strFilename = "Revolver_moni_shade.png";
+		m_strFilename = "res/Weapons/Revolver_moni_shade.png";
 		this->initWithFile(m_strFilename);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_STEN_GUN_SHADE_2)
 	{
-		m_strFilename = "Sten_gun_shade_2.png";
+		m_strFilename = "res/Weapons/Sten_gun_shade_2.png";
 		this->initWithFile(m_strFilename);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_TS23)
 	{
-		m_strFilename = "TS23.png";
+		m_strFilename = "res/Weapons/TS23.png";
 		this->initWithFile(m_strFilename);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_UMG)
 	{
-		m_strFilename = "Umg.png";
+		m_strFilename = "res/Weapons/Umg.png";
 		this->initWithFile(m_strFilename);
 	}
 }
