@@ -53,66 +53,67 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		{
 			case 1:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_1;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_1;
+				break;
 			}
 			case 2:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_2;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_2;
+				break;
 			}
 			case 3:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_3;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_3;
+				break;
 			}
 			case 4:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_4;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_4;
+				break;
 			}
 			case 5:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_5;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_5;
+				break;
 			}
 			case 6:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_6;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_6;
+				break;
 			}
 			case 7:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_7;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_7;
+				break;
 			}
 			case 8:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_8;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_8;
+				break;
 			}
 			case 9:
 			{
-					  _typeObjectEnemy = CNT_NAME_ENEMY_ROCK_9;
-					  break;
+				_typeObjectEnemy = CNT_NAME_ENEMY_ROCK_9;
+				break;
 			}
-		default:
-			break;
+				default:
+				break;
 		}
 	
 		int _attackEnemy	= 100; 
 	//	int _attackbullet	= 200;
-		int _health			= 100 + m_vecComponentEnemy.size();
+		int _health			= 100;
 
 		//int _attackSumm = _attackEnemy + _attackbullet;
 
 	//	m_stateBullet	= GameObjectMonster::StateBullet::STATE_NOTHING;
 
-	//	std::string _typeObjectEnemy	= CNT_NAME_ENEMY_ROCK_1;
-		std::string _typeObjectWeapon	= CNT_NAME_WEAPON_AK47;
+	//	std::str	ing _typeObjectEnemy	= CNT_NAME_ENEMY_ROCK_1;
+		//std::string _typeObjectWeapon	= CNT_NAME_WEAPON_AK47;
 		std::string _typeObjectBullet	= CNT_NAME_BULLET_DEFAULT;
 
 		m_enemy		= new BreedGraphicComponent		(_attackEnemy, _health, _typeObjectEnemy);
+		//m_enemy->_ID = 10;
 		//m_bullet	= new BotBulletGraphicComponent	(, _typeObjectBullet);
 
 		int _widthEnemy	 = m_enemy->getContentSize().width;

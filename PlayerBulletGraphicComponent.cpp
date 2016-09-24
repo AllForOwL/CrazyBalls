@@ -69,7 +69,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			if (m_position == cocos2d::Point::ZERO)
 			{
 				m_position = hero.m_graphicComponentHeroWeapon->getPosition();
-				m_position.x += 50;
+				m_position.x += 80;
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{

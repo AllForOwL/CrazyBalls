@@ -31,11 +31,6 @@ public:
 	virtual std::string GetTypeObject() const;
 	virtual bool Dead(int wounded);
 
-	void		LoadSpritesForSoldier();
-	void		LoadSpritesForTanks();
-	void		LoadSpritesForTurrets();
-	void		LoadSpritesForAirplanes();
-
 	void		Fire();
 	void		Move();
 	void		Attack();

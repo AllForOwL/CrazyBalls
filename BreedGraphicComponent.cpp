@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "GameScene.h"
 #include "constants.h"
+#include <time.h>
 
 BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::string& typeObject)
 											: m_attack(attack),
@@ -54,7 +55,9 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
-	physicsBody->setTag(m_health - 100);
+
+	srand(time(NULL));
+	physicsBody->setTag(rand() % 1000000 + 1);
 
 	this->setPhysicsBody(physicsBody);
 }
@@ -110,7 +113,7 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 	//physicsBody->setDynamic(false);
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
-	physicsBody->setTag(m_health - 100);
+	physicsBody->setTag(breed.getTag());
 	this->setPhysicsBody(physicsBody);
 }
 
@@ -231,26 +234,6 @@ bool BreedGraphicComponent::Death()
 	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesDeath[m_countDefaultSpriteInDeath]));
 
 	return false;
-}
-
-void BreedGraphicComponent::LoadSpritesForSoldier()
-{
-
-}
-
-void BreedGraphicComponent::LoadSpritesForTanks()
-{
-	
-}
-
-void BreedGraphicComponent::LoadSpritesForTurrets()
-{
-	
-}
-
-void BreedGraphicComponent::LoadSpritesForAirplanes()
-{
-
 }
 
 BreedGraphicComponent::~BreedGraphicComponent()

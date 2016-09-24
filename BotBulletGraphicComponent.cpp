@@ -9,22 +9,17 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int attack, const std::stri
 														: m_attack		(attack),
 														  m_typeObject	(typeObject)
 {
-	this->setTag(0);
-
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
 
-	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
+	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
 	{
-		LoadBulletNormal();
-		this->initWithFile(m_strFilename);
-		physicBody->setTag(CNT_TAG_BULLET_NORMAL);
+		this->initWithFile("res/Stones/rock1.png");
 	}
-	else if (m_typeObject == CNT_NAME_BOMB)
+	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
 	{
-		LoadBomb();
-		this->initWithFile(m_strFilename);
+		this->initWithFile("res/Stones/rock2.png");
 	}
 
 	this->setPhysicsBody(physicBody);
@@ -76,11 +71,6 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-//	if (this->getTag() == CNT_TAG_BULLET_HIT_IN_TARGET)
-//	{
-//		hero.m_objectMonster->m_stateBullet = GameObjectMonster::StateBullet::STATE_HIT_IN_TARGET;
-//	}
-
 	switch (hero.m_objectMonster->m_stateBullet)
 	{
 		case GameObjectMonster::StateBullet::STATE_FIRE:

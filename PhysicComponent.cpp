@@ -18,20 +18,32 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 	{
 		case StatePhysic::STATE_WOUNDED_ENEMY:
 		{
-			if (hero.m_objectMonster->m_vecComponentEnemy[m_TagEnemy]->Dead(hero.m_graphiComponentHeroBullet->GetAttack()))
-			{
-				hero.m_objectMonster->m_vecComponentEnemy[m_TagEnemy]->removeFromParentAndCleanup(true);
-				hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin() + m_TagEnemy);
+			//if (hero.m_objectMonster->m_vecComponentEnemy[m_TagEnemy]->Dead(hero.m_graphiComponentHeroBullet->GetAttack()))
+			//{
+				//hero.m_objectMonster->m_vecComponentEnemy[m_TagEnemy]->removeFromParentAndCleanup(true);
+				//hero.m_objectMonster->m_vecComponentEnemy;
+				
+				for (int i = 0; i < hero.m_objectMonster->m_vecComponentEnemy.size(); i++)
+				{
+					auto body =  hero.m_objectMonster->m_vecComponentEnemy[i]->getPhysicsBody();
+					if (body->getTag() == m_TagEnemy)
+					{
+						hero.m_objectMonster->m_vecComponentEnemy[i]->removeFromParentAndCleanup(true);
+						hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin() + i);
+					}
+				}
+				//hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin(), hero.m_objectMonster->m_vecComponentEnemy.end(), m_TagEnemy);
 				hero.m_graphiComponentHeroBullet->setVisible(false);
-				hero.m_graphiComponentHeroBullet->setPosition(Point::ZERO);
+				hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
 
+				m_TagEnemy = 0;
 				this->m_statePhysic = StatePhysic::STATE_NOTHING;
-			}
-			else
-			{
-				hero.m_graphiComponentHeroBullet->removeFromParentAndCleanup(true);
-				this->m_statePhysic = StatePhysic::STATE_NOTHING;
-			}
+			//}
+			//else
+			//{
+			//	hero.m_graphiComponentHeroBullet->removeFromParentAndCleanup(true);
+			//	this->m_statePhysic = StatePhysic::STATE_NOTHING;
+			//}
 			break;
 		}
 		case StatePhysic::STATE_WOUNDED_HERO:
@@ -66,21 +78,14 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 		m_TagEnemy = _a->getTag();
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_ENEMY;
 
-		CCLOG("Collision hero");
+		CCLOG("Collision enemy a");
 	}
 	else if (_a->getCollisionBitmask() == BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == ENEMY_COLLISION_BITMASK)
 	{
 		m_TagEnemy = _b->getTag();
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_ENEMY;
 
-		CCLOG("Collision enemy");
-	}
-	else if (_a->getCollisionBitmask() == ENEMY_COLLISION_BITMASK && _b->getCollisionBitmask() == BULLET_COLLISION_BITMASK)
-	{
-		int m_TagEnemy = _a->getTag();
-		this->m_statePhysic = StatePhysic::STATE_WOUNDED_ENEMY;
-
-		CCLOG("Collision enemy");
+		CCLOG("Collision enemy b");
 	}
 
 	return true;
