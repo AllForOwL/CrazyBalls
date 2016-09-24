@@ -52,6 +52,19 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock9.png");
 	}
 
+
+	time_t timer;
+	struct tm y2k = { 0 };
+
+	y2k.tm_hour = 0;   y2k.tm_min = 0; y2k.tm_sec = 0;
+	y2k.tm_year = 100; y2k.tm_mon = 0; y2k.tm_mday = 1;
+
+	time(&timer);  /* get current time; same as: timer = time(NULL)  */
+
+	m_BeginSecond = difftime(timer, mktime(&y2k));
+
+	m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE;
+
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
@@ -119,11 +132,17 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 
 /*virtual*/ void BreedGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	/*if (this->getTag() != 0)
+	time_t timer;
+	struct tm y2k = { 0 };
+	y2k.tm_hour = 0;   y2k.tm_min = 0; y2k.tm_sec = 0;
+	y2k.tm_year = 100; y2k.tm_mon = 0; y2k.tm_mday = 1;
+	time(&timer);  /* get current time; same as: timer = time(NULL)  */
+
+	if (difftime(timer, mktime(&y2k)) == m_FireSecond)
 	{
-		this->m_stateEnemy = StateEnemy::ENEMY_STATE_WOUNDED;
+		this->m_stateEnemy = StateEnemy::ENEMY_STATE_FIRE;
 	}
-	*/
+
 	switch (this->m_stateEnemy)
 	{
 			case StateEnemy::ENEMY_STATE_FIRE:
@@ -185,20 +204,14 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 
 void BreedGraphicComponent::Fire()
 {
-	if (++m_countDefaultSpriteInFire == m_vecDefaultNamesFire.size())
-	{
-		m_countDefaultSpriteInFire = 0;
-	}
-	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesFire[m_countDefaultSpriteInFire]));
+	Point _position = this->getPosition();
+	_position.x -= CNT_SPEED_STONE;
+
+	this->setPosition(_position);
 }
 
 void BreedGraphicComponent::Move()
 {
-//	if (this->GetTypeObject() == CNT_NAME_ENEMY_TURRET)
-//	{
-//		return;
-//	}
-
 	if (++m_countDefaultSpriteInMove == m_vecDefaultNamesMove.size())
 	{
 		m_countDefaultSpriteInMove = 0;
@@ -222,11 +235,6 @@ void BreedGraphicComponent::Wounded()
 
 bool BreedGraphicComponent::Death()
 {
-//	if (this->GetTypeObject() != CNT_NAME_ENEMY_TANK)
-//	{
-//		return true;
-//	}
-
 	if (++m_countDefaultSpriteInDeath == m_vecDefaultNamesDeath.size())
 	{
 		return true;

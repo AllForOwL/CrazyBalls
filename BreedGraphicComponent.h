@@ -53,5 +53,7 @@ public:
 	int m_countDefaultSpriteInDeath;
 
 	StateEnemy	m_stateEnemy;
+	double		m_BeginSecond;
+	double		m_FireSecond;
 };
 #endif
