@@ -44,6 +44,7 @@ public:
 	cocos2d::Point GetPosition();
 	void LoadField();
 	bool FreePosition(int indexPosition);
+	void ReleaseCell(Point point);
 
 	~GameObjectMonster();
 public:

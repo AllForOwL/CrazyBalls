@@ -113,7 +113,6 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_JUMP:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("jump.png"));	
 			Point _position = this->getPosition();
 			_position.y += 5;
 			this->setPosition(_position);

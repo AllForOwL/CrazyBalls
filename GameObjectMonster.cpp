@@ -210,6 +210,19 @@ bool GameObjectMonster::FreePosition(int indexPosition)
 	}	
 }
 
+void GameObjectMonster::ReleaseCell(Point point)
+{
+	for (int i = 0; i < m_vecField.size(); i++)
+	{
+		if (m_vecField[i].m_X = (int)point.x && m_vecField[i].m_Y == (int)point.y)
+		{
+			m_vecField[i].m_Free = true;
+			CCLOG("Release cell");
+			break;
+		}
+	}
+}
+
 GameObjectMonster::~GameObjectMonster()
 {
 	

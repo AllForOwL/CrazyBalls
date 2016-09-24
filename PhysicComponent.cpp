@@ -29,6 +29,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 					if (body->getTag() == m_TagEnemy)
 					{
 						hero.m_objectMonster->m_vecComponentEnemy[i]->removeFromParentAndCleanup(true);
+						hero.m_objectMonster->ReleaseCell(hero.m_objectMonster->m_vecComponentEnemy[i]->getPosition());
 						hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin() + i);
 					}
 				}
