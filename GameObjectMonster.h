@@ -16,6 +16,18 @@ class GameObjectMonster
 {
 public:
 
+	struct Field
+	{
+		int		m_X;
+		int		m_Y;
+		bool	m_Free;
+
+		Field(int x, int y, bool state) : m_X(x), m_Y(y), m_Free(state)
+		{
+
+		}
+	};
+	
 	enum StateBullet
 	{
 		STATE_FIRE,
@@ -29,6 +41,9 @@ public:
 
 	void Update(Monster& hero, GameScene& scene);
 	void Spawner(GameScene& scene);
+	cocos2d::Point GetPosition();
+	void LoadField();
+	bool FreePosition(int indexPosition);
 
 	~GameObjectMonster();
 public:
@@ -41,7 +56,8 @@ public:
 	std::vector<GraphicComponent*>	m_vecComponentBullet;
 	GraphicComponent*				m_bullet;
 
-	StateBullet		m_stateBullet;
+	StateBullet			m_stateBullet;
+	std::vector<Field>	m_vecField;
 };
 
 

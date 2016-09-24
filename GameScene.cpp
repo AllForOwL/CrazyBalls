@@ -71,7 +71,6 @@ bool GameScene::init()
 										);
 	this->addChild(m_graphicComponentBullet);
 
-	
 	m_inputComponent			= new PlayerInputComponent();
 	m_gameObjectMonster			= new GameObjectMonster();
 	m_botInputComponent			= new BotInputComponent();

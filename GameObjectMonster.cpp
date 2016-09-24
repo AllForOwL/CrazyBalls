@@ -6,11 +6,11 @@
 #include "Monster.h"
 #include "GraphicComponent.h"
 #include "constants.h"
-#include <time.h>       /* time */
+#include <time.h>      
 
 GameObjectMonster::GameObjectMonster()
 {
-
+	LoadField();
 }
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
@@ -37,15 +37,9 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 
 void GameObjectMonster::Spawner(GameScene& scene)
 {
-	//if (m_vecComponentEnemy.size() > 0)
-	//{
-	//	return;
-	//}
-
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
 	srand(time(NULL));
-
 	int _randomValue = rand() % 9 + 1;
 	std::string _typeObjectEnemy;
 
@@ -113,7 +107,6 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		std::string _typeObjectBullet	= CNT_NAME_BULLET_DEFAULT;
 
 		m_enemy		= new BreedGraphicComponent		(_attackEnemy, _health, _typeObjectEnemy);
-		//m_enemy->_ID = 10;
 		//m_bullet	= new BotBulletGraphicComponent	(, _typeObjectBullet);
 
 		int _widthEnemy	 = m_enemy->getContentSize().width;
@@ -122,15 +115,15 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		//int _widthBullet	= m_bullet->getContentSize().width;
 		//int _heightBullet	= m_bullet->getContentSize().height;
 
-		m_enemy->setScale(_visibleSize.width / _widthEnemy / 10,
-							_visibleSize.height / _heightEnemy / 8);
+		m_enemy->setScale(_visibleSize.width / _widthEnemy / 15,
+							_visibleSize.height / _heightEnemy / 10);
 		//m_bullet->setScale(_visibleSize.width / _widthBullet / 40,
 		//					_visibleSize.height / _heightBullet / 40);
 
 		int _randomValue_X = rand() % 350 + 250;
 		int _randomValue_Y = rand() % 250 + 25;
 
-		m_enemy->setPosition	(_randomValue_X, _randomValue_Y);
+		m_enemy->setPosition	(GetPosition());
 //		m_bullet->setPosition	(_randomValue_X, _randomValue_Y);
 	//	m_bullet->setVisible(false);
 
@@ -142,6 +135,79 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 		scene.addChild(m_vecComponentEnemy[m_vecComponentEnemy.size() - 1]);
 //		scene.addChild(m_vecComponentBullet[m_vecComponentBullet.size() - 1]);
+}
+
+void GameObjectMonster::LoadField()
+{
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+
+	int _x_begin = _visibleSize.width / 2;
+
+	int _x_interval = _visibleSize.width / CNT_COLS;
+	int _y_interval = _visibleSize.height / CNT_ROWS;
+
+	std::vector<int> _vecPositionX;
+	std::vector<int> _vecPositionY;
+
+	_vecPositionX.push_back(_x_begin + _x_interval / 2);
+	_vecPositionX.push_back(_vecPositionX[0] + _x_interval);
+	_vecPositionX.push_back(_vecPositionX[1] + _x_interval);
+	_vecPositionX.push_back(_vecPositionX[2] + _x_interval);
+	_vecPositionX.push_back(_vecPositionX[3] + _x_interval);
+
+	_vecPositionY.push_back(_y_interval / 2);
+	_vecPositionY.push_back(_vecPositionY[0] + _y_interval);
+	_vecPositionY.push_back(_vecPositionY[1] + _y_interval);
+	_vecPositionY.push_back(_vecPositionY[2] + _y_interval);
+	_vecPositionY.push_back(_vecPositionY[3] + _y_interval);
+	_vecPositionY.push_back(_vecPositionY[4] + _y_interval);
+	_vecPositionY.push_back(_vecPositionY[5] + _y_interval);
+
+	for (int i = 0; i < CNT_COLS; i++)
+	{
+		for (int j = 0; j < CNT_ROWS; j++)
+		{
+			m_vecField.push_back(Field(_vecPositionX[i], _vecPositionY[j], true));
+		}
+	}
+}
+
+cocos2d::Point GameObjectMonster::GetPosition()
+{
+	int _random_cols	= 0;
+	int _random_rows	= 0;
+	int _indexPosition	= 0;
+	srand(time(NULL));
+	do
+	{
+		_random_cols = rand() % CNT_COLS - 1 + 1;
+		_random_rows = rand() % CNT_ROWS - 1 + 1;
+		_indexPosition = _random_cols * _random_rows;
+	}
+	while (!FreePosition(_indexPosition));
+
+	Point _position;
+	_position.x = m_vecField[_indexPosition].m_X;
+	_position.y = m_vecField[_indexPosition].m_Y;
+
+	return _position;
+}
+
+bool GameObjectMonster::FreePosition(int indexPosition)
+{
+	if (indexPosition > CNT_MAX_INDEX_POSITION)
+	{
+		return false;
+	}
+	if (m_vecField[indexPosition].m_Free)
+	{
+		m_vecField[indexPosition].m_Free = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}	
 }
 
 GameObjectMonster::~GameObjectMonster()
