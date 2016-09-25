@@ -29,7 +29,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 					if (body->getTag() == m_TagEnemy)
 					{
 						hero.m_objectMonster->m_vecComponentEnemy[i]->removeFromParentAndCleanup(true);
-						hero.m_objectMonster->ReleaseCell(hero.m_objectMonster->m_vecComponentEnemy[i]->getPosition());
+						//hero.m_objectMonster->ReleaseCell(hero.m_objectMonster->m_vecComponentEnemy[i]->getPosition());
 						hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin() + i);
 					}
 				}
@@ -73,14 +73,12 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				}
 			}
 			//hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin(), hero.m_objectMonster->m_vecComponentEnemy.end(), m_TagEnemy);
-			hero.m_graphiComponentHeroBullet->setVisible(false);
-			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
+			//hero.m_graphiComponentHeroBullet->setVisible(false);
+			//hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
 
 			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
-
-
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_WOUNDED;
+			hero.m_stateHero	= Monster::StateHero::HERO_STATE_WOUNDED;
 
 			break;
 		}

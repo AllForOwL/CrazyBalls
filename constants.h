@@ -9,7 +9,7 @@ const int CNT_TAG_ENEMY_WOUNDED	= 1001;
 
 const int CNT_NUMBER_SPRITE_IN_DIZZY = 3;
 
-const int CNT_COLS	=	3;
+const int CNT_COLS	=	2;
 const int CNT_ROWS	=	4;
 const int CNT_MAX_INDEX_POSITION = 29;
 

@@ -56,5 +56,7 @@ public:
 	double		m_BeginSecond;
 	double		m_FireSecond;
 	int			m_scale_x;
+	Point		m_pointBeginPosition;
+
 };
 #endif

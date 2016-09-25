@@ -115,8 +115,8 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		//int _widthBullet	= m_bullet->getContentSize().width;
 		//int _heightBullet	= m_bullet->getContentSize().height;
 
-		m_enemy->setScale(_visibleSize.width / _widthEnemy / 10,
-							_visibleSize.height / _heightEnemy / 10);
+		m_enemy->setScale(_visibleSize.width / _widthEnemy / 25,
+							_visibleSize.height / _heightEnemy / 25);
 
 		int _randomValue_X = rand() % 350 + 250;
 		int _randomValue_Y = rand() % 250 + 25;
@@ -140,29 +140,41 @@ void GameObjectMonster::LoadField()
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
 	// отримуємо другу половину поля
-	int _x_begin = _visibleSize.width / 2;
-
-	int _x_interval = _x_begin / CNT_COLS;
-	int _y_interval = _visibleSize.height / CNT_ROWS;
-
+	int _widthField = _visibleSize.width / 2;
+	
 	std::vector<int> _vecPositionX;
 	std::vector<int> _vecPositionY;
 
-	_vecPositionX.push_back(_x_begin + _x_interval / 2);
-	_vecPositionX.push_back(_vecPositionX[0] + _x_interval);
-	_vecPositionX.push_back(_vecPositionX[1] + _x_interval);
-	_vecPositionX.push_back(_vecPositionX[2] + _x_interval);
-//	_vecPositionX.push_back(_vecPositionX[3] + _x_interval);
-
-	_vecPositionY.push_back(_y_interval);
-	_vecPositionY.push_back(_vecPositionY[0] + _y_interval);
-	_vecPositionY.push_back(_vecPositionY[1] + _y_interval);
-	_vecPositionY.push_back(_vecPositionY[2] + _y_interval);
-	_vecPositionY.push_back(_vecPositionY[3] + _y_interval);
-
-	for (int i = 0; i < CNT_COLS; i++)
+	/*int _end_X = _widthField + 50;
+	do
 	{
-		for (int j = 0; j < CNT_ROWS; j++)
+		_vecPositionX.push_back(_end_X);
+		_end_X += 50;
+	}
+	while (_end_X < _visibleSize.width - 50);
+
+	int _end_Y = 50;
+	do
+	{
+		_vecPositionY.push_back(_end_Y);
+		_end_Y += 50;
+	} 
+	while (_end_Y < _visibleSize.height - 50);
+	*/
+
+	_vecPositionX.push_back(260);
+	_vecPositionX.push_back(310);
+	_vecPositionX.push_back(360);
+
+	_vecPositionY.push_back(50);
+	_vecPositionY.push_back(100);
+	_vecPositionY.push_back(150);
+	_vecPositionY.push_back(200);
+	_vecPositionY.push_back(250);
+
+	for (int i = 0; i < _vecPositionX.size(); i++)
+	{
+		for (int j = 0; j < _vecPositionY.size(); j++)
 		{
 			m_vecField.push_back(Field(_vecPositionX[i], _vecPositionY[j], true));
 		}
@@ -177,8 +189,8 @@ cocos2d::Point GameObjectMonster::GetPosition()
 	srand(time(NULL));
 	do
 	{
-		_random_cols = rand() % CNT_COLS - 1 + 1;
-		_random_rows = rand() % CNT_ROWS - 1 + 1;
+		_random_cols = rand() % CNT_COLS + 1;
+		_random_rows = rand() % CNT_ROWS + 1;
 		_indexPosition = _random_cols * _random_rows;
 	}
 	while (!FreePosition(_indexPosition));
@@ -211,7 +223,7 @@ void GameObjectMonster::ReleaseCell(Point point)
 {
 	for (int i = 0; i < m_vecField.size(); i++)
 	{
-		if (m_vecField[i].m_X = (int)point.x && m_vecField[i].m_Y == (int)point.y)
+		if (m_vecField[i].m_X == (int)point.x && m_vecField[i].m_Y == (int)point.y)
 		{
 			m_vecField[i].m_Free = true;
 			CCLOG("Release cell");
