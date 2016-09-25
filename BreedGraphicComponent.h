@@ -55,5 +55,6 @@ public:
 	StateEnemy	m_stateEnemy;
 	double		m_BeginSecond;
 	double		m_FireSecond;
+	int			m_scale_x;
 };
 #endif

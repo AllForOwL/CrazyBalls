@@ -34,6 +34,7 @@ public:
 	int m_countSpriteInVectorWalk;
 	int m_countSpriteInVectorAttack;
 	int m_countSpriteInVectorRun;
+	int m_countSpriteInVectorDizzy;
 
 	std::string m_typeHero;
 

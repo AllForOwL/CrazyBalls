@@ -19,6 +19,7 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 	m_countSpriteInVectorWalk		= 0;
 	m_countSpriteInVectorAttack		= 0;
 	m_countSpriteInVectorRun		= 0;
+	m_countSpriteInVectorDizzy		= 0;
 
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 
@@ -139,12 +140,20 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_WOUNDED:
 		{
-			if (!(this->m_health -= this->getTag()))
+			/*if (!(this->m_health -= this->getTag()))
 			{
 				hero.m_stateHero = Monster::StateHero::HERO_STATE_DEATH;
 			}
+			this->setTag(0);*/
+			
+			if (++m_countSpriteInVectorDizzy == CNT_NUMBER_SPRITE_IN_DIZZY)
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				m_countSpriteInVectorDizzy = 0;
+				break;
+			}
 
-			this->setTag(0);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesDizzy[m_countSpriteInVectorDizzy]));
 
 			break;
 		}

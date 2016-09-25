@@ -68,6 +68,7 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
+	physicsBody->setRotationEnable(true);
 
 	srand(time(NULL));
 	physicsBody->setTag(rand() % 1000000 + 1);
@@ -141,13 +142,45 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 	if (difftime(timer, mktime(&y2k)) == m_FireSecond)
 	{
 		this->m_stateEnemy = StateEnemy::ENEMY_STATE_FIRE;
+		Size _visibleSize = Director::getInstance()->getVisibleSize();
+		Size _size = this->getContentSize();
+		this->setScale(_visibleSize.width / _size.width / 15,
+						_visibleSize.height / _size.height / 15);
+		
+		Point _targetPoint = hero.m_graphicComponentHero->getPosition();
+		Point _normalized = ccpNormalize(ccpSub(_targetPoint, this->getPosition()));
+		float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
+
+		Point _myPosition = ccpAdd(this->getPosition(), ccpMult(_normalized, CNT_SPEED_STONE));
+
+		this->setPosition(_myPosition);
+		this->setRotation(_angle);
+
+		//Actual moving to next waypoint.
+		/*CCPoint targetPoint = destinationWaypoint->getPosition();
+		CCPoint normalized = ccpNormalize(ccpSub(targetPoint, this->getPosition()));
+		float movementSpeed = walkingSpeed;
+		float angle = CC_RADIANS_TO_DEGREES(atan2f(normalized.y, -normalized.x));
+		CCPoint desiredPosition = ccpAdd(this->getPosition(), ccpMult(normalized, movementSpeed));
+
+		this->setPosition(desiredPosition);
+		this->setRotation(angle);*/
 	}
 
 	switch (this->m_stateEnemy)
 	{
 			case StateEnemy::ENEMY_STATE_FIRE:
 			{
-				Fire();			
+	/*			Point _targetPoint = hero.m_graphicComponentHero->getPosition();
+				Point _normalized = ccpNormalize(ccpSub(_targetPoint, this->getPosition()));
+				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
+
+				Point _myPosition = ccpAdd(this->getPosition(), ccpMult(_normalized, CNT_SPEED_STONE));
+
+				this->setPosition(_myPosition);
+				this->setRotation(_angle);
+		*/
+				//Fire();			
 				break;
 			}
 			case StateEnemy::ENEMY_STATE_MOVE:
@@ -207,7 +240,15 @@ void BreedGraphicComponent::Fire()
 	Point _position = this->getPosition();
 	_position.x -= CNT_SPEED_STONE;
 
-	this->setPosition(_position);
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	Size _size = this->getContentSize();
+
+	--m_scale_x;
+
+	this->setScale(_visibleSize.width / _size.width / m_scale_x,
+					_visibleSize.height / _size.height / m_scale_x);
+
+	
 }
 
 void BreedGraphicComponent::Move()
