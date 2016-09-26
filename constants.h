@@ -1,6 +1,8 @@
 const float CNT_TIME_SPAWN			= 4.0;
 const float CNT_TIME_UPDATE_SCENE	= 0.05;
 
+const int CNT_NUMBER_COINS_ONE_LEVEL = 10;
+
 const int CNT_SPEED_BULLET	= 8;
 const int CNT_SPEED_STONE	= 8;
 
@@ -13,7 +15,15 @@ const int CNT_COLS	=	2;
 const int CNT_ROWS	=	4;
 const int CNT_MAX_INDEX_POSITION = 29;
 
-const int CNT_TIME_SHOT_STONE	= 5;
+const int CNT_TIME_SHOT_STONE_ROCK_1	= 15;
+const int CNT_TIME_SHOT_STONE_ROCK_2	= 12;
+const int CNT_TIME_SHOT_STONE_ROCK_3	= 9;
+const int CNT_TIME_SHOT_STONE_ROCK_4	= 8;
+const int CNT_TIME_SHOT_STONE_ROCK_5	= 10;
+const int CNT_TIME_SHOT_STONE_ROCK_6	= 11;
+const int CNT_TIME_SHOT_STONE_ROCK_7	= 6;
+const int CNT_TIME_SHOT_STONE_ROCK_8	= 9;
+const int CNT_TIME_SHOT_STONE_ROCK_9	= 3;
 
 const std::string CNT_NAME_HERO_HELL		= "Hell";
 

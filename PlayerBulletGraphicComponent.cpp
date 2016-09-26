@@ -120,6 +120,22 @@ void PlayerBulletGraphicComponent::LoadBulletNormal()
 	m_strFilename = "res/Bullets/Bullet_normal.png";
 }
 
+
+/*virtual*/ void PlayerBulletGraphicComponent::ChangeCoins(int coins)
+{
+
+}
+
+/*virtual*/ bool PlayerBulletGraphicComponent::Winner() const
+{
+	return true;
+}
+
+/*virtual*/ int PlayerBulletGraphicComponent::GetValue() const
+{
+	return 2;
+}
+
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()
 {
 

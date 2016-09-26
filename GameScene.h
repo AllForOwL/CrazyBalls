@@ -7,6 +7,7 @@
 #include "GraphicComponent.h"
 #include "PlayerInputComponent.h"
 #include "GameObjectMonster.h"
+#include "GameLayer.h"
 
 using namespace cocos2d;
 
@@ -34,6 +35,7 @@ public:
 		m_sceneWorld = world;
 	}
 
+	GameLayer*			m_gameLayer;
 	Monster*			m_hero;
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentWeapon;

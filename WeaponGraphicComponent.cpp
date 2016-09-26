@@ -120,6 +120,22 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 	return true;
 }
 
+
+/*virtual*/ void WeaponGraphicComponent::ChangeCoins(int coins)
+{
+
+}
+
+/*virtual*/ bool WeaponGraphicComponent::Winner() const
+{
+	return true;
+}
+
+/*virtual*/ int WeaponGraphicComponent::GetValue() const
+{
+	return 2;
+}
+
 WeaponGraphicComponent::~WeaponGraphicComponent()
 {
 

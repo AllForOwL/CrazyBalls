@@ -8,6 +8,7 @@
 #include "BreedGraphicComponent.h"
 #include "BotInputComponent.h"
 #include "PhysicComponent.h"
+#include "GameLayer.h"
 
 USING_NS_CC;
 
@@ -75,8 +76,16 @@ bool GameScene::init()
 	m_gameObjectMonster			= new GameObjectMonster();
 	m_botInputComponent			= new BotInputComponent();
 	m_physicComponent			= new PhysicComponent();
-	m_hero						= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent, m_botInputComponent, m_physicComponent);
+	m_hero						= new Monster(	m_graphicComponentHero,		m_graphicComponentWeapon, 
+												m_graphicComponentBullet,	m_gameObjectMonster, 
+												m_inputComponent,			m_botInputComponent, 
+												m_physicComponent
+											 );
 		
+	m_gameLayer = GameLayer::create();
+	
+	this->addChild(m_gameLayer);
+
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
 	//listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
@@ -96,10 +105,8 @@ bool GameScene::init()
 
 void GameScene::update(float dt)
 {
-	//auto position = m_background->getPosition();
-	//m_background->setPosition(--position.x, position.y);
-
-	m_hero->Update(*this);
+	m_hero->Update		(*this);
+	m_gameLayer->Update	(*m_hero);
 }
 
 void GameScene::Spawn(float dt)

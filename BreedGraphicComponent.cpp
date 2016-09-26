@@ -11,58 +11,62 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 {
 	m_stateEnemy = StateEnemy::ENEMY_STATE_NOTHING;
 
+	m_BeginSecond = GetTime();
+
 	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
 	{
 		this->initWithFile("res/Stones/rock1.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_1;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_1;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
 	{
 		this->initWithFile("res/Stones/rock2.png");
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
-	{
-		this->initWithFile("res/Stones/rock2.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_2;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_2;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_3)
 	{
 		this->initWithFile("res/Stones/rock3.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_3;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_3;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_4)
 	{
 		this->initWithFile("res/Stones/rock4.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_4;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_4;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_5)
 	{
 		this->initWithFile("res/Stones/rock5.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_5;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_5;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_6)
 	{
 		this->initWithFile("res/Stones/rock6.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_6;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_6;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_7)
 	{
 		this->initWithFile("res/Stones/rock7.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_7;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_7;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_8)
 	{
 		this->initWithFile("res/Stones/rock8.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_8;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_8;
 	}
-	else
+	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_9)
 	{
 		this->initWithFile("res/Stones/rock9.png");
+		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_9;
+		m_value = CNT_TIME_SHOT_STONE_ROCK_9;
 	}
-
-	time_t timer;
-	struct tm y2k = { 0 };
-
-	y2k.tm_hour = 0;   y2k.tm_min = 0; y2k.tm_sec = 0;
-	y2k.tm_year = 100; y2k.tm_mon = 0; y2k.tm_mday = 1;
-
-	time(&timer);  /* get current time; same as: timer = time(NULL)  */
-
-	m_BeginSecond = difftime(timer, mktime(&y2k));
-
-	m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE;
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
@@ -130,49 +134,34 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 	this->setPhysicsBody(physicsBody);
 }
 
+double BreedGraphicComponent::GetTime()
+{
+	time_t _timer;
+	struct tm _y2k = { 0 };
+
+	_y2k = { 0 };
+	_y2k.tm_hour = 0;   _y2k.tm_min = 0; _y2k.tm_sec = 0;
+	_y2k.tm_year = 100; _y2k.tm_mon = 0; _y2k.tm_mday = 1;
+	time(&_timer);  /* get current time; same as: timer = time(NULL)  */
+
+	return difftime(_timer, mktime(&_y2k));
+}
+
 /*virtual*/ void BreedGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	time_t timer;
-	struct tm y2k = { 0 };
-	y2k.tm_hour = 0;   y2k.tm_min = 0; y2k.tm_sec = 0;
-	y2k.tm_year = 100; y2k.tm_mon = 0; y2k.tm_mday = 1;
-	time(&timer);  /* get current time; same as: timer = time(NULL)  */
-
-	if (difftime(timer, mktime(&y2k)) == m_FireSecond)
+	if (GetTime() == m_FireSecond)
 	{
 		m_pointBeginPosition = this->getPosition();
 		hero.m_objectMonster->ReleaseCell(this->getPosition());
 
 		this->m_stateEnemy = StateEnemy::ENEMY_STATE_FIRE;
-
-		/*Size _visibleSize = Director::getInstance()->getVisibleSize();
-		Size _size = this->getContentSize();
-		
-		Point _targetPoint = hero.m_graphicComponentHero->getPosition();
-		Point _normalized = ccpNormalize(ccpSub(_targetPoint, this->getPosition()));
-		float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
-
-		Point _myPosition = ccpAdd(this->getPosition(), ccpMult(_normalized, CNT_SPEED_STONE));
-
-		this->setPosition(_myPosition);
-		this->setRotation(_angle);*/
 	}
 
 	switch (this->m_stateEnemy)
 	{
 			case StateEnemy::ENEMY_STATE_FIRE:
 			{
-				Size _visibleSize = Director::getInstance()->getVisibleSize();
-				Size _size = this->getContentSize();
-		
-				Point _targetPoint = hero.m_graphicComponentHero->getPosition();
-				Point _normalized = ccpNormalize(ccpSub(_targetPoint, this->getPosition()));
-				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
-
-				Point _myPosition = ccpAdd(this->getPosition(), ccpMult(_normalized, CNT_SPEED_STONE));
-
-				this->setPosition(_myPosition);
-				this->setRotation(_angle);
+				Fire(hero.m_graphicComponentHero->getPosition());
 				break;
 			}
 			case StateEnemy::ENEMY_STATE_MOVE:
@@ -227,18 +216,19 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 	}
 }
 
-void BreedGraphicComponent::Fire()
+void BreedGraphicComponent::Fire(Point i_position)
 {
-	Point _position = this->getPosition();
-	_position.x -= CNT_SPEED_STONE;
+	Size _visibleSize	= Director::getInstance()->getVisibleSize();
+	Size _size			= this->getContentSize();
 
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
-	Size _size = this->getContentSize();
+	Point _targetPoint	= i_position;
+	Point _normalized	= ccpNormalize(ccpSub(_targetPoint, this->getPosition()));
+	float _angle		= CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
 
-	--m_scale_x;
+	Point _myPosition = ccpAdd(this->getPosition(), ccpMult(_normalized, CNT_SPEED_STONE));
 
-	this->setScale(_visibleSize.width / _size.width / m_scale_x,
-					_visibleSize.height / _size.height / m_scale_x);
+	this->setPosition(_myPosition);
+	this->setRotation(_angle);
 }
 
 void BreedGraphicComponent::Move()
@@ -273,6 +263,21 @@ bool BreedGraphicComponent::Death()
 	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesDeath[m_countDefaultSpriteInDeath]));
 
 	return false;
+}
+
+/*virtual*/ int BreedGraphicComponent::GetValue() const
+{
+	return m_value;
+}
+
+/*virtual*/ void BreedGraphicComponent::ChangeCoins(int coins)
+{
+
+}
+
+/*virtual*/ bool BreedGraphicComponent::Winner() const
+{
+	return true;
 }
 
 BreedGraphicComponent::~BreedGraphicComponent()

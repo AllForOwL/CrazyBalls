@@ -15,10 +15,13 @@ public:
 
 	virtual void Update(Monster& hero, GameScene& scene);
 
+	virtual int GetValue()  const;
 	virtual int GetAttack() const;
 	virtual int GetHealth() const;
 	virtual std::string GetTypeObject() const;
 	virtual bool Dead(int wounded);
+	virtual void ChangeCoins(int coins);
+	virtual bool Winner() const;
 
 	~WeaponGraphicComponent();
 

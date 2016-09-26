@@ -14,10 +14,14 @@ public:
 	HeroGraphicComponent(HeroGraphicComponent& heroGraphiComponent);
 
 	virtual void Update(Monster& hero, GameScene& scene);
+	
+	virtual int GetValue() const;
+	virtual bool Winner() const;
 	virtual int GetAttack() const;
 	virtual int GetHealth() const;
 	virtual std::string GetTypeObject() const;
 	virtual bool Dead(int wounded);
+	virtual void ChangeCoins(int coins);
 
 	void LoadSpritesForHell();
 
@@ -35,14 +39,14 @@ public:
 	int m_countSpriteInVectorAttack;
 	int m_countSpriteInVectorRun;
 	int m_countSpriteInVectorDizzy;
+	int m_countSpriteInVectorDie;
+	int m_countSpriteInVectorFall;
 
 	std::string m_typeHero;
 
 	int m_attack;
 	int m_health;
-
-	LabelProtocol* m_lblAttack;
-	LabelProtocol* m_lblHealth;
+	int m_coins;
 };
 
 #endif

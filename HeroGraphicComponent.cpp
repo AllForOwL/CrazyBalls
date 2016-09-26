@@ -16,10 +16,14 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 		m_health = 100;
 	}
 
+	m_coins = 0;
+
 	m_countSpriteInVectorWalk		= 0;
 	m_countSpriteInVectorAttack		= 0;
 	m_countSpriteInVectorRun		= 0;
 	m_countSpriteInVectorDizzy		= 0;
+	m_countSpriteInVectorDie		= 0;
+	m_countSpriteInVectorFall		= 0;
 
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 
@@ -63,11 +67,16 @@ void HeroGraphicComponent::LoadSpritesForHell()
 	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0001.png");
 	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0002.png");
 	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0003.png");
+
+	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0001.png");
+	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0002.png");
+	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0003.png");
 }
 
 /*virtual*/ bool HeroGraphicComponent::Dead(int wounded)
 {
 	m_health -= wounded;
+
 	if (m_health < 0)
 	{
 		return true;
@@ -79,7 +88,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 
 }
 
-/*virtual*/void HeroGraphicComponent::Update(Monster& hero, GameScene& scene)
+/*virtual*/ void HeroGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_stateHero)
 	{
@@ -140,16 +149,11 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_WOUNDED:
 		{
-			/*if (!(this->m_health -= this->getTag()))
-			{
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_DEATH;
-			}
-			this->setTag(0);*/
-			
 			if (++m_countSpriteInVectorDizzy == CNT_NUMBER_SPRITE_IN_DIZZY)
 			{
 				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 				m_countSpriteInVectorDizzy = 0;
+				m_health -= 10;
 				break;
 			}
 
@@ -159,7 +163,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_CHANGE_WEAPON_BULLET:
 		{
-			std::string nameWeapon = "ts-23.png";
+			/*std::string nameWeapon = "ts-23.png";
 			WeaponGraphicComponent* _weapon = new WeaponGraphicComponent(100, nameWeapon);
 			Size _visibleSize = Director::getInstance()->getVisibleSize();
 			_weapon->setScale(_visibleSize.width / _weapon->getContentSize().width / 6,
@@ -168,7 +172,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 			
 			hero.ChangeWeapon(*_weapon);
 			scene.addChild(_weapon);
-
+			*/
 			///* here code for change bullet *///
 
 			//std::string nameBullet = "bullet.jpg";
@@ -183,7 +187,26 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_DEATH:
 		{
-			this->removeFromParentAndCleanup(true);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesDie[m_countSpriteInVectorDie]));
+		
+			if (++m_countSpriteInVectorDie == m_vecSpritesDie.size())
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				this->removeFromParentAndCleanup(true);
+			}
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_WINNER:
+		{
+			if (++m_countSpriteInVectorFall == m_vecSpritesFall.size())
+			{
+				scene.removeAllChildrenWithCleanup(true);
+				scene.pauseSchedulerAndActions();
+				break;
+			}
+
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[m_countSpriteInVectorFall]));
+
 			break;
 		}
 	}
@@ -202,6 +225,28 @@ void HeroGraphicComponent::LoadSpritesForHell()
 /*virtual*/ std::string HeroGraphicComponent::GetTypeObject() const
 {
 	return m_typeHero;
+}
+
+/*virtual*/ void HeroGraphicComponent::ChangeCoins(int coins)
+{
+	m_coins += coins;
+}
+
+/*virtual*/ bool HeroGraphicComponent::Winner() const
+{
+	if (m_coins >= CNT_NUMBER_COINS_ONE_LEVEL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+/*virtual*/ int HeroGraphicComponent::GetValue() const
+{
+	return m_coins;
 }
 
 HeroGraphicComponent::~HeroGraphicComponent()
