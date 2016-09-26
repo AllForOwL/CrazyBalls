@@ -12,15 +12,22 @@
 
 USING_NS_CC;
 
+static int m_level  = 0;
+
 Scene *GameScene::createScene() 
 {
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	scene->getPhysicsWorld()->setGravity(Vec2(0, 0));
 
+	if (++m_level == 12)
+	{
+		m_level = 0;
+	}
+	
+
 	auto layer = GameScene::create();
 	layer->SetPhysicsWorld(scene->getPhysicsWorld());
-
 	scene->addChild(layer);
 
 	return scene;
@@ -134,7 +141,7 @@ void GameScene::SetBackground()
 {
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
-	m_background = Sprite::create(m_vecNameBackground[m_countLevel]);
+	m_background = Sprite::create(m_vecNameBackground[m_level]);
 	m_background->setScale(_visibleSize.width / m_background->getContentSize().width,
 		_visibleSize.height / m_background->getContentSize().height);
 	m_background->setPosition(_visibleSize.width / 2,

@@ -15,6 +15,7 @@ class GameScene : public cocos2d::Layer
 {
 public:
 	// methods
+	
 	static cocos2d::Scene *createScene();
 	virtual bool init();
 	void update(float dt);
