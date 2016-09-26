@@ -145,8 +145,8 @@ void GameScene::SetBackground()
 
 void GameScene::LoadLevel()
 {
-	++m_countLevel;
-	m_background->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameBackground[m_countLevel]));
+	auto reScene = TransitionFade::create(1.0f, GameScene::createScene(), Color3B(0, 0, 0));
+	Director::getInstance()->replaceScene(reScene);
 }
 
 GameScene::~GameScene()

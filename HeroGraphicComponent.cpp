@@ -198,14 +198,15 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_WINNER:
 		{
-			if (++m_countSpriteInVectorFall == m_vecSpritesFall.size())
-			{
-				scene.removeAllChildrenWithCleanup(true);
-				scene.pauseSchedulerAndActions();
-				break;
-			}
+		//	if (++m_countSpriteInVectorFall == m_vecSpritesFall.size())
+		//	{
+				scene.LoadLevel();
 
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[m_countSpriteInVectorFall]));
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+		//		break;
+		//	}
+
+		//	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[m_countSpriteInVectorFall]));
 
 			break;
 		}
