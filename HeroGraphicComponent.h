@@ -24,6 +24,7 @@ public:
 	virtual void ChangeCoins(int coins);
 
 	void LoadSpritesForHell();
+	void LoadNumberCoinsForTransitionNextLevel();
 
 	~HeroGraphicComponent();
 
@@ -34,6 +35,8 @@ public:
 	std::vector<std::string> m_vecSpritesFall;
 	std::vector<std::string> m_vecSpritesDie;
 	std::vector<std::string> m_vecSpritesDizzy;
+
+	std::vector<int> m_vecNumberCoinsForTransitionNextLevel;
 
 	int m_countSpriteInVectorWalk;
 	int m_countSpriteInVectorAttack;

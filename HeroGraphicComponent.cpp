@@ -9,6 +9,7 @@
 HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
 {
 	this->setTag(0);
+	LoadNumberCoinsForTransitionNextLevel();
 	if (m_typeHero == CNT_NAME_HERO_HELL)
 	{
 		LoadSpritesForHell();
@@ -71,6 +72,17 @@ void HeroGraphicComponent::LoadSpritesForHell()
 	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0001.png");
 	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0002.png");
 	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0003.png");
+}
+
+void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
+{
+	m_vecNumberCoinsForTransitionNextLevel.push_back(50);
+	int _numberCoins = 50;
+	for (int i = 1; i < 12; i++)
+	{
+		_numberCoins = m_vecNumberCoinsForTransitionNextLevel[i-1] + 50;
+		m_vecNumberCoinsForTransitionNextLevel.push_back(_numberCoins);
+	}	
 }
 
 /*virtual*/ bool HeroGraphicComponent::Dead(int wounded)
@@ -235,7 +247,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 
 /*virtual*/ bool HeroGraphicComponent::Winner() const
 {
-	if (m_coins >= CNT_NUMBER_COINS_ONE_LEVEL)
+	if (m_coins >= m_vecNumberCoinsForTransitionNextLevel[GameScene::m_level])
 	{
 		return true;
 	}

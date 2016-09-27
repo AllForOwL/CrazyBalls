@@ -25,7 +25,6 @@ Scene *GameScene::createScene()
 		m_level = 0;
 	}
 	
-
 	auto layer = GameScene::create();
 	layer->SetPhysicsWorld(scene->getPhysicsWorld());
 	scene->addChild(layer);
