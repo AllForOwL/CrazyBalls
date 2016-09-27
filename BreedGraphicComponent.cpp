@@ -16,56 +16,65 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
 	{
 		this->initWithFile("res/Stones/rock1.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_1;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_1;
+		int _randValueForFire	= rand() % 30 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
 	{
 		this->initWithFile("res/Stones/rock2.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_2;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_2;
+		int _randValueForFire	= rand() % 28 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_3)
 	{
 		this->initWithFile("res/Stones/rock3.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_3;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_3;
+		int _randValueForFire	= rand() % 26 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_4)
 	{
 		this->initWithFile("res/Stones/rock4.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_4;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_4;
+		int _randValueForFire	= rand() % 24 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_5)
 	{
 		this->initWithFile("res/Stones/rock5.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_5;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_5;
+		int _randValueForFire	= rand() % 22 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_6)
 	{
 		this->initWithFile("res/Stones/rock6.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_6;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_6;
+		int _randValueForFire	= rand() % 20 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_7)
 	{
 		this->initWithFile("res/Stones/rock7.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_7;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_7;
+		int _randValueForFire	= rand() % 18 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_8)
 	{
 		this->initWithFile("res/Stones/rock8.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_8;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_8;
+		int _randValueForFire	= rand() % 16 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_9)
 	{
 		this->initWithFile("res/Stones/rock9.png");
-		m_FireSecond = m_BeginSecond + CNT_TIME_SHOT_STONE_ROCK_9;
-		m_value = CNT_TIME_SHOT_STONE_ROCK_9;
+		int _randValueForFire	= rand() % 14 - GameScene::m_level + 1;
+		m_FireSecond			= m_BeginSecond + _randValueForFire;
+		m_value					= _randValueForFire;
 	}
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
@@ -133,6 +142,29 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 	physicsBody->setTag(breed.getTag());
 	this->setPhysicsBody(physicsBody);
 }
+
+// ***for future targets*** //
+/*void BreedGraphicComponent::LoadTimeForShot()
+{
+	if (m_mapTimeShot.size())
+	{
+		return;
+	}
+
+	for (int i = 0; i < 12; i++)
+	{
+		m_mapTimeShot[i, 0] = rand() % 20 - i + 5;
+		m_mapTimeShot[i, 1] = rand() % 30 - i + 5;
+		m_mapTimeShot[i, 2] = rand() % 15 - i + 5;
+		m_mapTimeShot[i, 3] = rand() % 36 - i + 5;
+		m_mapTimeShot[i, 4] = rand() % 15 - i + 5;
+		m_mapTimeShot[i, 5] = rand() % 14 - i + 5;
+		m_mapTimeShot[i, 6] = rand() % 20 - i + 2;
+		m_mapTimeShot[i, 7] = rand() % 20 - i + 5;
+		m_mapTimeShot[i, 8] = rand() % 15 - i + 5;
+		m_mapTimeShot[i, 9] = rand() % 14 - i + 5;
+	}
+}*/
 
 double BreedGraphicComponent::GetTime()
 {

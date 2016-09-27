@@ -36,6 +36,11 @@ public:
 	virtual bool Winner() const;
 
 
+	// ***for future targets*** //
+	//void		LoadTimeForShot();
+	//std::map<int,int> m_mapTimeShot;
+
+
 	void		Fire(Point i_position);
 	void		Move();
 	void		Attack();

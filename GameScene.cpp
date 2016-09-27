@@ -12,7 +12,7 @@
 
 USING_NS_CC;
 
-static int m_level  = 0;
+int GameScene::m_level = 0;
 
 Scene *GameScene::createScene() 
 {

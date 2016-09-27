@@ -35,7 +35,8 @@ public:
 	{
 		m_sceneWorld = world;
 	}
-
+	
+	static int			m_level;
 	GameLayer*			m_gameLayer;
 	Monster*			m_hero;
 	GraphicComponent*	m_graphicComponentHero;

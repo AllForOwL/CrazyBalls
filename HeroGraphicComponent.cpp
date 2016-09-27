@@ -116,7 +116,6 @@ void HeroGraphicComponent::LoadSpritesForHell()
 			if (++m_countSpriteInVectorRun >= m_vecSpritesRun.size())
 			{
 				m_countSpriteInVectorRun = 0;
-				//hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 			}
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesRun[m_countSpriteInVectorRun]));
 			break;
@@ -145,6 +144,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 			hero.m_graphicComponentHeroWeapon->setPosition(_positionWeapon);
 
 			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+
 			break;
 		}
 		case Monster::StateHero::HERO_STATE_WOUNDED:

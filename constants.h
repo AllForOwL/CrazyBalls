@@ -23,7 +23,7 @@ const int CNT_TIME_SHOT_STONE_ROCK_5	= 10;
 const int CNT_TIME_SHOT_STONE_ROCK_6	= 11;
 const int CNT_TIME_SHOT_STONE_ROCK_7	= 6;
 const int CNT_TIME_SHOT_STONE_ROCK_8	= 9;
-const int CNT_TIME_SHOT_STONE_ROCK_9	= 3;
+const int CNT_TIME_SHOT_STONE_ROCK_9	= 5;
 
 const std::string CNT_NAME_HERO_HELL		= "Hell";
 
