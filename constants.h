@@ -1,5 +1,6 @@
 const float CNT_TIME_SPAWN			= 4.0;
 const float CNT_TIME_UPDATE_SCENE	= 0.05;
+const float CNT_TIME_SPAWN_BONUS	= 2.0;
 
 const int CNT_NUMBER_COINS_ONE_LEVEL = 10;
 
@@ -37,6 +38,21 @@ const std::string CNT_NAME_ENEMY_ROCK_7 = "Rock7";
 const std::string CNT_NAME_ENEMY_ROCK_8 = "Rock8";
 const std::string CNT_NAME_ENEMY_ROCK_9 = "Rock9";
 
+const int CNT_TYPE_OBJECT_RANDOM						= 0;
+const int CNT_TYPE_OBJECT_CASKET_COINS					= 1;
+const int CNT_TYPE_OBJECT_CASKET_CLOTHES				= 2;
+const int CNT_TYPE_OBJECT_WEAPON_AK47					= 3;
+const int CNT_TYPE_OBJECT_WEAPON_GUN					= 4;
+const int CNT_TYPE_OBJECT_WEAPON_MI71					= 5;
+const int CNT_TYPE_OBJECT_WEAPON_MK15					= 6;
+const int CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE	= 7;
+const int CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2		= 8;
+const int CNT_TYPE_OBJECT_WEAPON_TS23					= 9;
+const int CNT_TYPE_OBJECT_WEAPON_UMG					= 10;
+const int CNT_TYPE_OBJECT_BULLET_NORMAL					= 11;
+const int CNT_TYPE_OBJECT_BULLET_BOMB					= 12;
+
+
 const std::string CNT_NAME_WEAPON_AK47					= "AK-47";
 const std::string CNT_NAME_WEAPON_GUN					= "Gun";
 const std::string CNT_NAME_WEAPON_MI71					= "MI-71";
@@ -48,6 +64,11 @@ const std::string CNT_NAME_WEAPON_UMG					= "UMG";
 
 const std::string CNT_NAME_BULLET_DEFAULT	= "Bullet_normal";
 const std::string CNT_NAME_BOMB				= "Bomd";
+
+const std::string CNT_NAME_COINS			= "Coins";
+const std::string CNT_NAME_CASKET_COINS		= "Casket_coins";
+const std::string CNT_NAME_CASKET_CLOTHES	= "Casket_clothes";
+
 
 #define HERO_COLLISION_BITMASK		0x000001
 #define ENEMY_COLLISION_BITMASK		0x000002

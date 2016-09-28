@@ -8,6 +8,7 @@
 #include "PlayerInputComponent.h"
 #include "GameObjectMonster.h"
 #include "GameLayer.h"
+#include "BonusGraphicComponent.h"
 
 using namespace cocos2d;
 
@@ -18,8 +19,11 @@ public:
 	
 	static cocos2d::Scene *createScene();
 	virtual bool init();
-	void update(float dt);
-	void Spawn(float dt);
+	
+	void update		(float dt);
+	void Spawn		(float dt);
+	void SpawnBonus	(float dt);
+	
 	void LoadLevel();
 	void LoadFileNameBackground();
 	void SetBackground();
@@ -36,17 +40,18 @@ public:
 		m_sceneWorld = world;
 	}
 	
-	static int			m_level;
-	GameLayer*			m_gameLayer;
-	Monster*			m_hero;
-	GraphicComponent*	m_graphicComponentHero;
-	GraphicComponent*	m_graphicComponentWeapon;
-	GraphicComponent*	m_graphicComponentBullet;
-	InputComponent*		m_inputComponent;
-	GameObjectMonster*	m_gameObjectMonster;
-	GraphicComponent*	m_objectMonster;
-	InputComponent*		m_botInputComponent;
-	PhysicComponent*	m_physicComponent;
+	static int				m_level;
+	GameLayer*				m_gameLayer;
+	Monster*				m_hero;
+	GraphicComponent*		m_graphicComponentHero;
+	GraphicComponent*		m_graphicComponentWeapon;
+	GraphicComponent*		m_graphicComponentBullet;
+	InputComponent*			m_inputComponent;
+	GameObjectMonster*		m_gameObjectMonster;
+	GraphicComponent*		m_objectMonster;
+	InputComponent*			m_botInputComponent;
+	PhysicComponent*		m_physicComponent;
+	BonusGraphicComponent*	m_bonusGraphicComponent;
 
 	std::vector<std::string>	m_vecNameBackground;
 	cocos2d::Sprite*			m_background;

@@ -34,6 +34,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				
 			hero.m_graphiComponentHeroBullet->setVisible(false);
 			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
+			
 
 			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;

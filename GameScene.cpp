@@ -88,6 +88,8 @@ bool GameScene::init()
 												m_physicComponent
 											 );
 		
+	m_bonusGraphicComponent = new BonusGraphicComponent();
+
 	m_gameLayer = GameLayer::create();
 	
 	this->addChild(m_gameLayer);
@@ -102,8 +104,9 @@ bool GameScene::init()
 	
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
-	this->schedule(schedule_selector(GameScene::update), CNT_TIME_UPDATE_SCENE);
-	this->schedule(schedule_selector(GameScene::Spawn),  CNT_TIME_SPAWN);
+	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
+	//this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
+	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
 	//this->scheduleUpdate();
 
 	return true;
@@ -118,6 +121,27 @@ void GameScene::update(float dt)
 void GameScene::Spawn(float dt)
 {
 	m_gameObjectMonster->Spawner(*this);
+}
+
+void GameScene::SpawnBonus(float dt)
+{
+	if (m_bonusGraphicComponent->m_actived)
+	{
+		return;
+	}
+
+	m_bonusGraphicComponent->AddBonus(CNT_TYPE_OBJECT_CASKET_COINS);
+
+	Size _visibleSize	= Director::getInstance()->getVisibleSize();
+	Size _sizeBonus		= m_bonusGraphicComponent->getContentSize();		
+
+	m_bonusGraphicComponent->setPosition(250, 160);
+	m_bonusGraphicComponent->setScale(	_visibleSize.width / _sizeBonus.width / 10,
+										_visibleSize.height / _sizeBonus.height / 10
+									 );
+	m_bonusGraphicComponent->m_actived = true;
+
+	this->addChild(m_bonusGraphicComponent);
 }
 
 void GameScene::LoadFileNameBackground()

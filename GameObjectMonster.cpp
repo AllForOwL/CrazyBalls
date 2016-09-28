@@ -173,10 +173,12 @@ cocos2d::Point GameObjectMonster::GetPosition()
 	int _random_cols	= 0;
 	int _random_rows	= 0;
 	int _indexPosition	= 0;
-	srand(time(NULL));
+	
 	do
 	{
+		srand(time(NULL));
 		_random_cols = rand() % CNT_COLS + 1;
+		srand(time(NULL));
 		_random_rows = rand() % CNT_ROWS + 1;
 		_indexPosition = _random_cols * _random_rows;
 	}
