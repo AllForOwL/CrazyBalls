@@ -7,6 +7,27 @@ BonusGraphicComponent::BonusGraphicComponent()
 {
 	m_actived		= false;
 	m_openCasket	= false;
+	m_indexInVector = 0;
+	m_showAnimation = false;
+
+	this->initWithFile("res/Weapons/AK47.png");
+	this->setVisible(false);
+
+	Size _visibleSize	= Director::getInstance()->getVisibleSize();
+	Size _sizeBonus		= this->getContentSize();
+
+	this->setScale(	_visibleSize.width / _sizeBonus.width / 10,
+					_visibleSize.height / _sizeBonus.height / 10
+				  );
+	this->setPosition(Point(500, 500));
+
+
+	this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.4);
+
+	auto physicBodyBonus = PhysicsBody::createBox(this->getContentSize());
+	physicBodyBonus->setContactTestBitmask(true);
+	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
+	this->setPhysicsBody(physicBodyBonus);
 }
 
 void BonusGraphicComponent::AddBonus(int typeObject)
@@ -23,7 +44,7 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		case CNT_TYPE_OBJECT_CASKET_COINS:
 		{
 			LoadNameOpenCakset();
-			this->initWithFile(m_vecNameSpritesOpenCasket[0]);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
 			this->m_typeObject = CNT_NAME_CASKET_COINS;
 			this->m_openCasket = true;
 
@@ -32,7 +53,7 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		case CNT_TYPE_OBJECT_CASKET_CLOTHES:
 		{
 			LoadNameOpenCakset();
-			this->initWithFile(m_vecNameSpritesOpenCasket[0]);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
 			this->m_typeObject = CNT_NAME_CASKET_CLOTHES;
 			this->m_openCasket = true;
 
@@ -40,15 +61,14 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		}
 		case CNT_TYPE_OBJECT_WEAPON_AK47:
 		{
-			this->initWithFile("res/Weapons/AK47.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/AK47.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_AK47;
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_WEAPON_GUN:
 		{
-			this->initWithFile("res/Weapons/Gun.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/Gun.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_GUN;
 
 			break;
@@ -121,7 +141,6 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 	default:
 		break;
 	}
-
 }
 
 void BonusGraphicComponent::LoadNameOpenCakset()
@@ -136,6 +155,22 @@ void BonusGraphicComponent::LoadNameOpenCakset()
 	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Coins/Coin_2.png");
 	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Coins/Coin_3.png");
 	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Coins/Coin_4.png");
+}
+
+void BonusGraphicComponent::ShowBonusAnimation(float dt)
+{
+	if (!m_showAnimation)
+	{
+		return;
+	}
+
+	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
+
+	if (++m_indexInVector == m_vecNameSpritesOpenCasket.size())
+	{
+		m_showAnimation = false;
+		return;
+	}
 }
 
 /*virtual*/ void BonusGraphicComponent::Update(Monster& hero, GameScene& scene)

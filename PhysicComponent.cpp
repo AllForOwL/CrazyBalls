@@ -92,6 +92,20 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 
 			break;
 		}
+		case StatePhysic::STATE_TARGET_BONUS:
+		{	
+			hero.m_graphiComponentHeroBullet->setVisible(false);
+			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
+			
+			//if (!scene.m_bonusGraphicComponent->ShowBonusAnimation())
+			//{
+			//	scene.removeChildByName("bonus");
+				this->m_statePhysic = StatePhysic::STATE_NOTHING;
+				scene.m_bonusGraphicComponent->m_showAnimation = true;
+		//	}
+			
+			break;
+		}
 	default:
 		break;
 	}
@@ -102,7 +116,15 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	PhysicsBody* _a = contact.getShapeA()->getBody();
 	PhysicsBody* _b = contact.getShapeB()->getBody();
 
-	if (_a->getCollisionBitmask() == ENEMY_COLLISION_BITMASK && _b->getCollisionBitmask() == BULLET_COLLISION_BITMASK)
+	if (_a->getCollisionBitmask() == BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == BONUS_COLLISION_BITMASK ||
+		_a->getCollisionBitmask() == BONUS_COLLISION_BITMASK && _b->getCollisionBitmask() == BULLET_COLLISION_BITMASK
+	)
+	{
+		this->m_statePhysic = StatePhysic::STATE_TARGET_BONUS;
+
+		CCLOG("Collision bonus");
+	}
+	else if (_a->getCollisionBitmask() == ENEMY_COLLISION_BITMASK && _b->getCollisionBitmask() == BULLET_COLLISION_BITMASK)
 	{
 		m_TagEnemy = _a->getTag();
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_ENEMY;

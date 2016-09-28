@@ -89,6 +89,8 @@ bool GameScene::init()
 											 );
 		
 	m_bonusGraphicComponent = new BonusGraphicComponent();
+	m_bonusGraphicComponent->setName("bonus");
+	this->addChild(m_bonusGraphicComponent);
 
 	m_gameLayer = GameLayer::create();
 	
@@ -136,12 +138,11 @@ void GameScene::SpawnBonus(float dt)
 	Size _sizeBonus		= m_bonusGraphicComponent->getContentSize();		
 
 	m_bonusGraphicComponent->setPosition(250, 160);
-	m_bonusGraphicComponent->setScale(	_visibleSize.width / _sizeBonus.width / 10,
+	m_bonusGraphicComponent->setScale(	_visibleSize.width  / _sizeBonus.width / 10,
 										_visibleSize.height / _sizeBonus.height / 10
 									 );
 	m_bonusGraphicComponent->m_actived = true;
-
-	this->addChild(m_bonusGraphicComponent);
+	m_bonusGraphicComponent->setVisible(true);
 }
 
 void GameScene::LoadFileNameBackground()

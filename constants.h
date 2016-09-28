@@ -69,8 +69,8 @@ const std::string CNT_NAME_COINS			= "Coins";
 const std::string CNT_NAME_CASKET_COINS		= "Casket_coins";
 const std::string CNT_NAME_CASKET_CLOTHES	= "Casket_clothes";
 
-
 #define HERO_COLLISION_BITMASK		0x000001
 #define ENEMY_COLLISION_BITMASK		0x000002
 #define BULLET_COLLISION_BITMASK	0x000003
 #define SCENE_COLLISION_BITMASK		0x000004
+#define BONUS_COLLISION_BITMASK		0x000005

@@ -25,6 +25,7 @@ public:
 
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset();
+	void ShowBonusAnimation(float dt);
 
 	~BonusGraphicComponent();
 
@@ -34,6 +35,10 @@ public:
 	std::string m_strFilename;
 	bool		m_openCasket;
 	bool		m_actived;
+	int			m_indexInVector;
+	bool		m_showAnimation;
+	int			m_interval;
+
 
 	std::vector<std::string> m_vecNameSpritesOpenCasket;
 };
