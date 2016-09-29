@@ -47,6 +47,14 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 		m_strFilename = "res/Weapons/Umg.png";
 		this->initWithFile(m_strFilename);
 	}
+
+	this->setName(m_typeObject);
+
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	Size _sizeWeapon  = this->getContentSize();
+
+	this->setScale(_visibleSize.width / _sizeWeapon.width / 8,
+		_visibleSize.height / _sizeWeapon.height / 8);
 }
 
 WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
@@ -97,6 +105,15 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_strFilename));
+	this->setPosition(hero.m_graphicComponentHero->getPosition());
+	
+	if (!this->getParent())
+	{
+		scene.removeChildByName(CNT_NAME_WEAPON_AK47);
+		scene.addChild(this);
+	}
+
 	return;
 }
 

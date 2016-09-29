@@ -11,9 +11,7 @@ class BonusGraphicComponent : public GraphicComponent
 {
 public:
 	BonusGraphicComponent();
-	//BonusGraphicComponent(int attack, const std::string& typeObject);
-	//BonusGraphicComponent(BonusGraphicComponent& bonus);
-
+	
 	virtual void		Update(Monster& hero, GameScene& scene);
 	virtual int			GetValue()  const;
 	virtual int			GetAttack() const;

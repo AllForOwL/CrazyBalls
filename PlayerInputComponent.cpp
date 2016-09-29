@@ -47,9 +47,15 @@ PlayerInputComponent::PlayerInputComponent()
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE_UP;
 			break;
 		}
-		case EventKeyboard::KeyCode::KEY_C:
+		case EventKeyboard::KeyCode::KEY_W:
 		{
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_WEAPON_BULLET;
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_WEAPON;
+			break;
+		}
+		case EventKeyboard::KeyCode::KEY_B:
+		{
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_BULLET;
+			break;
 		}
 	}
 

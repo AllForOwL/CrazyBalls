@@ -36,6 +36,7 @@ private:
 	int m_TagBullet;
 	int m_TagEnemy;
 	int m_TagHero;
+	int m_TagBonus;
 	int m_damage;
 	int m_coin;
 };

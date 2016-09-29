@@ -14,9 +14,34 @@ class PhysicComponent;
 class WeaponGraphicComponent;
 class PlayerBulletGraphicComponent;
 
+struct ComponentHero
+{
+	GraphicComponent*	m_GraphicComponent;
+	bool				m_active;
+
+	ComponentHero(GraphicComponent* component, bool active) : m_GraphicComponent(component), m_active(active)
+	{
+	}
+	void SetActive()
+	{
+		this->m_active = true;
+	}
+
+	void SetNotActive()
+	{
+		this->m_active = false;
+	}
+
+	bool isActive()
+	{
+		return m_active;
+	}
+};
+
 class Monster
 {
 public:
+
 	enum StateHero
 	{
 		HERO_STATE_WALK,
@@ -25,7 +50,8 @@ public:
 		HERO_STATE_JUMP,
 		HERO_STATE_FALL,
 		HERO_STATE_WOUNDED,
-		HERO_STATE_CHANGE_WEAPON_BULLET,
+		HERO_STATE_CHANGE_BULLET,
+		HERO_STATE_CHANGE_WEAPON,
 		HERO_STATE_DEATH,
 		HERO_STATE_WINNER
 	};
@@ -63,6 +89,15 @@ public:
 	void ChangeWeapon(WeaponGraphicComponent& weapon);
 	void ChangeBullet(PlayerBulletGraphicComponent& bullet);
 
+	int GetIndexActiveWeapon();
+	int GetIndexActiveBullet();
+
+	void AddWeapon(int typeWeapon);
+	void AddBullet(int typeBullet);
+
+	void SetActiveBullet(int index);
+	void SetActiveWeapon(int index);
+
 	~Monster();
 
 public:
@@ -77,8 +112,9 @@ public:
 	StateWeapon			m_stateWeapon;
 	StateBullet			m_stateBullet;
 	StatePhysic			m_statePhysic;
-	cocos2d::Label* m_lbl;
 
+	std::vector<ComponentHero*> m_vecGraphicComponentWeapon;
+	std::vector<ComponentHero*> m_vecGraphicComponentBullet;
 };
 
 #endif

@@ -47,6 +47,7 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
 			this->m_typeObject = CNT_NAME_CASKET_COINS;
 			this->m_openCasket = true;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_CASKET_COINS);
 
 			break;
 		}
@@ -56,6 +57,7 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
 			this->m_typeObject = CNT_NAME_CASKET_CLOTHES;
 			this->m_openCasket = true;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_CASKET_CLOTHES);
 
 			break;
 		}
@@ -63,6 +65,7 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		{
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/AK47.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_AK47;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_AK47);
 
 			break;
 		}
@@ -70,46 +73,52 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		{
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/Gun.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_GUN;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_GUN);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_WEAPON_MI71:
 		{
-			this->initWithFile("res/Weapons/MI71.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/MI71.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_MI71;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_MI71);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_WEAPON_MK15:
 		{
-			this->initWithFile("res/Weapons/MK15.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/MK15.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_MK15;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_MK15);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE:
 		{
-			this->initWithFile("res/Weapons/Revolver_moni_shade.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/Revolver_moni_shade.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_REVOLVER_MONI_SHADE;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2:
 		{
-			this->initWithFile("res/Weapons/Sten_gun_shade_2.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/Sten_gun_shade_2.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_STEN_GUN_SHADE_2;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_WEAPON_TS23:
 		{
-			this->initWithFile("res/Weapons/TS23.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/TS23.png"));
 			this->m_typeObject = CNT_NAME_WEAPON_TS23;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_TS23);
 
 			break;
 
@@ -118,22 +127,25 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		{
 			this->initWithFile("res/Weapons/Umg.png");
 			this->m_typeObject = CNT_NAME_WEAPON_UMG;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_UMG);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_BULLET_NORMAL:
 		{
-			this->initWithFile("res/Bullets/Bullet_normal.png");
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Bullets/Bullet_normal.png"));
 			this->m_typeObject = CNT_NAME_BULLET_DEFAULT;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_BULLET_NORMAL);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_BULLET_BOMB:
 		{
-			this->initWithFile("res/Bullets/Bomd.png");
-			this->m_typeObject = CNT_NAME_WEAPON_AK47;
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Bullets/Bomd.png"));
+			this->m_typeObject = CNT_NAME_BOMB;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_BULLET_BOMB);
 
 			break;
 
@@ -168,6 +180,7 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 
 	if (++m_indexInVector == m_vecNameSpritesOpenCasket.size())
 	{
+		this->removeFromParentAndCleanup(true);
 		m_showAnimation = false;
 		return;
 	}

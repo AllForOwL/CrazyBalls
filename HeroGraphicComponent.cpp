@@ -173,27 +173,49 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 			break;
 		}
-		case Monster::StateHero::HERO_STATE_CHANGE_WEAPON_BULLET:
+		case Monster::StateHero::HERO_STATE_CHANGE_WEAPON:
 		{
-			/*std::string nameWeapon = "ts-23.png";
-			WeaponGraphicComponent* _weapon = new WeaponGraphicComponent(100, nameWeapon);
-			Size _visibleSize = Director::getInstance()->getVisibleSize();
-			_weapon->setScale(_visibleSize.width / _weapon->getContentSize().width / 6,
-							  _visibleSize.height / _weapon->getContentSize().height / 2);
-			_weapon->setPosition(100, 50);
+			int _amountWeapon = hero.m_vecGraphicComponentWeapon.size();
 			
-			hero.ChangeWeapon(*_weapon);
-			scene.addChild(_weapon);
-			*/
-			///* here code for change bullet *///
+			if (_amountWeapon == 1)
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				break;
+			}
+			else
+			{
+				int _currentIndexWeapon = hero.GetIndexActiveWeapon();
 
-			//std::string nameBullet = "bullet.jpg";
-			//BulletGraphicComponent* b = new BulletGraphicComponent(20, nameBullet);
-			//b->setPosition(Point(Point::ZERO));
-			//hero.ChangeBullet(*b);
-			//scene.addChild(b);
+				if (++_currentIndexWeapon >= _amountWeapon)
+				{
+					_currentIndexWeapon = 0;
+				}
+				
+				hero.SetActiveWeapon(_currentIndexWeapon);
+			}
 
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_CHANGE_BULLET:
+		{
+			int _amountBullet = hero.m_vecGraphicComponentBullet.size();
+			
+			if (_amountBullet == 1)
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				break;
+			}
+			else
+			{
+				int _currentIndexBullet = hero.GetIndexActiveBullet();
+
+				if (++_currentIndexBullet >= _amountBullet)
+				{
+					_currentIndexBullet = 0;
+				}
+				
+				hero.SetActiveBullet(_currentIndexBullet);
+			}
 
 			break;
 		}
