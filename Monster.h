@@ -95,8 +95,8 @@ public:
 	void AddWeapon(int typeWeapon);
 	void AddBullet(int typeBullet);
 
-	void SetActiveBullet(int index);
-	void SetActiveWeapon(int index);
+	void SetActiveBullet(GameScene& scene, int index);
+	void SetActiveWeapon(GameScene& scene, int index);
 
 	~Monster();
 

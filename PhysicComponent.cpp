@@ -96,7 +96,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		{	
 			hero.m_graphiComponentHeroBullet->setVisible(false);
 			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
-			
+
 			if (m_TagBonus <= CNT_TYPE_OBJECT_CASKET_CLOTHES)
 			{
 				hero.m_graphicComponentHero->ChangeCoins(50);
@@ -111,6 +111,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				hero.AddBullet(m_TagBullet);
 			}
 
+			scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			this->m_statePhysic	= StatePhysic::STATE_NOTHING;
 
 			break;

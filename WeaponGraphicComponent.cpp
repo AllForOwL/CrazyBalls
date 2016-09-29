@@ -105,14 +105,8 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_strFilename));
+	//this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_strFilename));
 	this->setPosition(hero.m_graphicComponentHero->getPosition());
-	
-	if (!this->getParent())
-	{
-		scene.removeChildByName(CNT_NAME_WEAPON_AK47);
-		scene.addChild(this);
-	}
 
 	return;
 }

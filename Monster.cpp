@@ -143,24 +143,34 @@ void Monster::AddBullet(int typeBullet)
 	m_vecGraphicComponentBullet.push_back(_heroComponent);
 }
 
-void Monster::SetActiveBullet(int index)
+void Monster::SetActiveBullet(GameScene& scene, int index)
 {
 	for (int i = 0; i < m_vecGraphicComponentBullet.size(); i++)
 	{
 		m_vecGraphicComponentBullet[i]->SetNotActive();
+		if (!m_vecGraphicComponentBullet[i]->m_GraphicComponent->getParent())
+		{
+			scene.removeChildByName(m_vecGraphicComponentBullet[i]->m_GraphicComponent->getName());
+		}
 	}
 
 	this->m_vecGraphicComponentBullet[index]->SetActive();
+	scene.addChild(m_vecGraphicComponentBullet[index]->m_GraphicComponent);
 }
 
-void Monster::SetActiveWeapon(int index)
+void Monster::SetActiveWeapon(GameScene& scene, int index)
 {
 	for (int i = 0; i < m_vecGraphicComponentWeapon.size(); i++)
 	{
 		m_vecGraphicComponentWeapon[i]->SetNotActive();
+		if (m_vecGraphicComponentWeapon[i]->m_GraphicComponent->getParent())
+		{
+			scene.removeChildByName(m_vecGraphicComponentWeapon[i]->m_GraphicComponent->getName());
+		}
 	}
 
 	this->m_vecGraphicComponentWeapon[index]->SetActive();
+	scene.addChild(m_vecGraphicComponentWeapon[index]->m_GraphicComponent);
 }
 
 void Monster::Update(GameScene& scene)

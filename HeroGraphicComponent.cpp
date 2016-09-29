@@ -191,8 +191,10 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 					_currentIndexWeapon = 0;
 				}
 				
-				hero.SetActiveWeapon(_currentIndexWeapon);
+				hero.SetActiveWeapon(scene, _currentIndexWeapon);
 			}
+
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 
 			break;
 		}
@@ -214,7 +216,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 					_currentIndexBullet = 0;
 				}
 				
-				hero.SetActiveBullet(_currentIndexBullet);
+				hero.SetActiveBullet(scene, _currentIndexBullet);
 			}
 
 			break;
