@@ -9,17 +9,26 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int attack, const std
 																			: m_attack		(attack),
 																			  m_typeObject	(typeObject)
 {
+	m_speed = 8;
+	m_position = Point(-10, -10);
+	this->setPosition(m_position);
+	this->setVisible(false);
+
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
 		LoadBulletNormal();
 		this->initWithFile(m_strFilename);
 	}
 
+	this->setName(m_typeObject);
+
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+	physicBody->setName("physics");
 
 	this->setPhysicsBody(physicBody);
+	m_isBody = true;
 }
 
 PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicComponent& bullet)
@@ -50,6 +59,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 {
 	return 1;
 }
+
 /*virtual*/ std::string PlayerBulletGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
@@ -66,51 +76,34 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	{
 		case Monster::StateBullet::BULLET_STATE_FIRE:
 		{
-			if (m_position == cocos2d::Point::ZERO)
+			m_position = this->getPosition();
+
+			if (m_position.x < 0)
 			{
-				m_position = hero.m_graphicComponentHeroWeapon->getPosition();
-				m_position.x += 80;
-			}
-			else if (m_position < Director::getInstance()->getVisibleSize())
-			{
-				m_position.x += CNT_SPEED_BULLET;
+				this->setVisible(true);
+				Vec2 _positionWeapon = hero.m_vecGraphicComponentWeapon[0]->m_GraphicComponent->getPosition();
+				_positionWeapon.x += 40;
+				m_position = _positionWeapon;
+				this->setPosition(m_position);
 			}
 			else
 			{
-				m_position = Point::ZERO;
-				hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
+				m_position.x += m_speed;
+				this->setPosition(m_position);
 			}
-			setPosition(m_position);
 
 			break;
 		}
-		case Monster::StateBullet::BULLET_STATE_FIRE_UP:
+		case Monster::StateBullet::BULLET_STATE_TARGET:
 		{
-			if (m_position == cocos2d::Point::ZERO)
-			{
-				m_position = hero.m_graphicComponentHeroWeapon->getPosition();
-			}
-			else if (m_position < Director::getInstance()->getVisibleSize())
-			{
-				++m_position.x;
-				m_position.y += 2;
-			}
-			else
-			{
-				m_position = Point::ZERO;
-				hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
-			}
-			setPosition(m_position);
+			m_position = this->getPosition();
+
+			m_position = Point::ZERO;
+			this->setPosition(m_position);
+			this->setVisible(false);
 
 			break;
 		}
-		case Monster::StateBullet::BULLET_STATE_REST:
-		{
-			
-			break;
-		}
-		default:
-			break;
 	}
 }
 
@@ -120,10 +113,19 @@ void PlayerBulletGraphicComponent::LoadBulletNormal()
 	m_strFilename = "res/Bullets/Bullet_normal.png";
 }
 
+void PlayerBulletGraphicComponent::SetSpeedBullet(int speed)
+{
+	this->m_speed = speed;
+}
+
+int PlayerBulletGraphicComponent::GetSpeedBullet() const
+{
+	return this->m_speed;
+}
 
 /*virtual*/ void PlayerBulletGraphicComponent::ChangeCoins(int coins)
 {
-
+	
 }
 
 /*virtual*/ bool PlayerBulletGraphicComponent::Winner() const

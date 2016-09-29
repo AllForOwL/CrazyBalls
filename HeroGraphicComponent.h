@@ -23,6 +23,9 @@ public:
 	virtual bool Dead(int wounded);
 	virtual void ChangeCoins(int coins);
 
+	virtual void SetSpeedBullet(int speed);
+	virtual int GetSpeedBullet() const;
+
 	void LoadSpritesForHell();
 	void LoadNumberCoinsForTransitionNextLevel();
 

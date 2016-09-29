@@ -286,6 +286,16 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 	return m_coins;
 }
 
+/*virtual*/ void HeroGraphicComponent::SetSpeedBullet(int speed)
+{
+
+}
+
+/*virtual*/ int HeroGraphicComponent::GetSpeedBullet() const
+{
+	return 2;
+}
+ 
 HeroGraphicComponent::~HeroGraphicComponent()
 {
 

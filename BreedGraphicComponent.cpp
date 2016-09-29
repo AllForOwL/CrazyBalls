@@ -342,6 +342,16 @@ bool BreedGraphicComponent::Death()
 	return true;
 }
 
+/*virtual*/ void BreedGraphicComponent::SetSpeedBullet(int speed)
+{
+
+}
+
+/*virtual*/ int BreedGraphicComponent::GetSpeedBullet() const
+{
+	return 2;
+}
+
 BreedGraphicComponent::~BreedGraphicComponent()
 {
 

@@ -16,17 +16,18 @@ BonusGraphicComponent::BonusGraphicComponent()
 	Size _visibleSize	= Director::getInstance()->getVisibleSize();
 	Size _sizeBonus		= this->getContentSize();
 
-	this->setScale(	_visibleSize.width / _sizeBonus.width / 10,
+	this->setScale(	_visibleSize.width  / _sizeBonus.width / 10,
 					_visibleSize.height / _sizeBonus.height / 10
 				  );
 	this->setPosition(Point(500, 500));
-
 
 	this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.4);
 
 	auto physicBodyBonus = PhysicsBody::createBox(this->getContentSize());
 	physicBodyBonus->setContactTestBitmask(true);
 	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
+	physicBodyBonus->setDynamic(false);
+	physicBodyBonus->setName("physics");
 	this->setPhysicsBody(physicBodyBonus);
 }
 
@@ -153,6 +154,13 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 	default:
 		break;
 	}
+
+	/*this->removeChildByName("physics");
+	auto physicBodyBonus = PhysicsBody::createBox(this->getContentSize());
+	physicBodyBonus->setContactTestBitmask(true);
+	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
+	physicBodyBonus->setName("physics");
+	this-setPhysicsBody(physicBodyBonus);*/
 }
 
 void BonusGraphicComponent::LoadNameOpenCakset()
@@ -226,11 +234,20 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 	return 2;
 }
 
-BonusGraphicComponent::~BonusGraphicComponent()
+/*virtual*/ void BonusGraphicComponent::SetSpeedBullet(int speed)
 {
 
 }
 
+/*virtual*/ int BonusGraphicComponent::GetSpeedBullet() const
+{
+	return 2;
+}
+
+BonusGraphicComponent::~BonusGraphicComponent()
+{
+
+}
 
 // ***Bonus element*** //
 /*

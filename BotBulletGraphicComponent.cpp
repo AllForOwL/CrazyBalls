@@ -11,6 +11,7 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int attack, const std::stri
 {
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
+	physicBody->setDynamic(false);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
 
 	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
@@ -67,6 +68,15 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 /*virtual*/ bool BotBulletGraphicComponent::Dead(int wounded)
 {
 	return true;
+}
+
+/*virtual*/ void BotBulletGraphicComponent::SetSpeedBullet(int speed)
+{
+
+}
+/*virtual*/ int BotBulletGraphicComponent::GetSpeedBullet() const
+{
+	return 2;
 }
 
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)

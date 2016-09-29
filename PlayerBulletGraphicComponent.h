@@ -23,16 +23,20 @@ public:
 	virtual void ChangeCoins(int coins);
 	virtual bool Winner() const;
 
-
+	virtual void SetSpeedBullet(int speed);
+	virtual int GetSpeedBullet() const;
 	void LoadBulletNormal();
 	~PlayerBulletGraphicComponent();
 
 private:
+	int m_speed;
 	cocos2d::Point	m_position;
 	std::string		m_typeObject;
 	int				m_attack;
 
 	std::string		m_strFilename;
+
+	bool m_isBody;
 };
 
 #endif

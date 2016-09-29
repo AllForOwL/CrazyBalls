@@ -23,9 +23,13 @@ public:
 	virtual void ChangeCoins(int coins);
 	virtual bool Winner() const;
 
+	virtual void SetSpeedBullet(int speed);
+	virtual int GetSpeedBullet() const;
+
 	~WeaponGraphicComponent();
 
 public:
+	int			m_speedBullet;
 	int			m_attack;
 	std::string m_typeObject;
 	

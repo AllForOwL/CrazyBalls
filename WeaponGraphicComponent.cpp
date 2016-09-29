@@ -11,41 +11,49 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 	{
 		m_strFilename = "res/Weapons/AK47.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 8;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_GUN)
 	{
 		m_strFilename = "res/Weapons/Gun.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 7;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MI71)
 	{
 		m_strFilename = "res/Weapons/MI71.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 6;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MK15)
 	{
 		m_strFilename = "res/Weapons/MK15.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 5;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_REVOLVER_MONI_SHADE)
 	{
 		m_strFilename = "res/Weapons/Revolver_moni_shade.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 4;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_STEN_GUN_SHADE_2)
 	{
 		m_strFilename = "res/Weapons/Sten_gun_shade_2.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 3;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_TS23)
 	{
 		m_strFilename = "res/Weapons/TS23.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 2;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_UMG)
 	{
 		m_strFilename = "res/Weapons/Umg.png";
 		this->initWithFile(m_strFilename);
+		m_speedBullet = 5;
 	}
 
 	this->setName(m_typeObject);
@@ -105,10 +113,23 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	//this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_strFilename));
-	this->setPosition(hero.m_graphicComponentHero->getPosition());
+	if (hero.m_graphiComponentHeroBullet->GetSpeedBullet() != m_speedBullet)
+	{
+		hero.m_graphiComponentHeroBullet->SetSpeedBullet(m_speedBullet);
+	}
+	this->setPosition(hero.m_graphicComponentHero->getPosition().x, hero.m_graphicComponentHero->getPosition().y - 18);
 
 	return;
+}
+
+/*virtual*/ void WeaponGraphicComponent::SetSpeedBullet(int speed)
+{
+
+}
+
+/*virtual*/ int WeaponGraphicComponent::GetSpeedBullet() const
+{
+	return 2;
 }
 
 /*virtual*/ int WeaponGraphicComponent::GetAttack() const

@@ -143,6 +143,11 @@ void GameScene::SpawnBonus(float dt)
 									 );
 	m_bonusGraphicComponent->m_actived = true;
 	m_bonusGraphicComponent->setVisible(true);
+
+	if (!m_bonusGraphicComponent->getParent())
+	{
+		this->addChild(m_bonusGraphicComponent);
+	}
 }
 
 void GameScene::LoadFileNameBackground()

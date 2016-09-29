@@ -19,6 +19,9 @@ public:
 	virtual std::string GetTypeObject() const;
 	virtual bool Dead(int wounded);
 
+	virtual void SetSpeedBullet(int speed);
+	virtual int GetSpeedBullet() const;
+
 	void LoadBulletNormal();
 	void LoadBomb();
 

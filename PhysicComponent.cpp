@@ -33,8 +33,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			}
 				
 			hero.m_graphiComponentHeroBullet->setVisible(false);
-			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
-			
+			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());	
 
 			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
@@ -94,8 +93,10 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		}
 		case StatePhysic::STATE_TARGET_BONUS:
 		{	
-			hero.m_graphiComponentHeroBullet->setVisible(false);
-			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());
+			//hero.m_graphiComponentHeroBullet->setVisible(false);
+			//hero.m_graphiComponentHeroBullet->setPosition(500, 500);
+			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_TARGET;
+			//hero.m_vecGraphicComponentBullet[0]->m_GraphicComponent->
 
 			if (m_TagBonus <= CNT_TYPE_OBJECT_CASKET_CLOTHES)
 			{
@@ -105,19 +106,21 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			else if (m_TagBonus <= CNT_TYPE_OBJECT_WEAPON_UMG)	// last object for weapon
 			{
 				hero.AddWeapon(m_TagBonus);
+				scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 			else
 			{
-				hero.AddBullet(m_TagBullet);
+				hero.AddBullet(m_TagBonus);
+				scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 
-			scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
-			this->m_statePhysic	= StatePhysic::STATE_NOTHING;
+			scene.m_bonusGraphicComponent->m_actived	= false;
+			this->m_statePhysic							= StatePhysic::STATE_NOTHING;
 
 			break;
 		}
-	default:
-		break;
+		default:
+			break;
 	}
 }
 

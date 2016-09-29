@@ -21,6 +21,9 @@ public:
 	virtual void		ChangeCoins(int coins);
 	virtual bool		Winner() const;
 
+	virtual void SetSpeedBullet(int speed);
+	virtual int GetSpeedBullet() const;
+
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset();
 	void ShowBonusAnimation(float dt);
