@@ -166,6 +166,10 @@ void GameObjectMonster::LoadField()
 	while (_end_Y < _visibleSize.height - 50);
 	*/
 
+	/*
+		480x320
+	*/
+
 	_vecPositionX.push_back(260);
 	_vecPositionX.push_back(310);
 	_vecPositionX.push_back(360);
@@ -183,21 +187,34 @@ void GameObjectMonster::LoadField()
 			m_vecField.push_back(Field(_vecPositionX[i], _vecPositionY[j], true));
 		}
 	}
+	for (int i = 0; i < m_vecField.size(); i++)
+	{
+		m_vecIndexFreePosition.push_back(i);
+	}
 }
 
 cocos2d::Point GameObjectMonster::GetPosition()
 {
-	int _random_cols	= 0;
-	int _random_rows	= 0;
-	int _indexPosition	= 0;
-	
+	int _indexPosition;
+	int _amountCells = m_vecField.size();
+
 	do
 	{
-		srand(time(NULL));
-		_random_cols = rand() % CNT_COLS + 1;
-		srand(time(NULL));
-		_random_rows = rand() % CNT_ROWS + 1;
-		_indexPosition = _random_cols * _random_rows;
+		if (!m_vecIndexFreePosition.size()) return Point(-50, -50);
+
+		if (m_vecIndexFreePosition.size() >= _amountCells)
+		{
+			_indexPosition = rand() % _amountCells + 0;
+		}
+		else 
+		{
+			int _amountFreePosition = m_vecIndexFreePosition.size();
+			int _indexPositionFree = rand() % _amountFreePosition + 0;
+			_indexPosition = m_vecIndexFreePosition[_indexPositionFree];
+			m_vecIndexFreePosition.erase(m_vecIndexFreePosition.begin() + _indexPositionFree);
+			break;
+			break;
+		}
 	}
 	while (!FreePosition(_indexPosition));
 
@@ -216,6 +233,7 @@ bool GameObjectMonster::FreePosition(int indexPosition)
 	}
 	if (m_vecField[indexPosition].m_Free)
 	{
+		m_vecIndexFreePosition.erase(m_vecIndexFreePosition.begin() + indexPosition);
 		m_vecField[indexPosition].m_Free = false;
 		return true;
 	}

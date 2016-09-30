@@ -96,7 +96,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			{
 				hero.AddWeapon(m_TagBonus);
 				scene.m_bonusGraphicComponent->setVisible(false);
-				scene.m_bonusGraphicComponent->setPosition(500, 500);
+				scene.m_bonusGraphicComponent->setPosition(-10, -10);
 				scene.m_bonusGraphicComponent->m_actived = false;
 			}
 			else

@@ -5,11 +5,12 @@
 
 BonusGraphicComponent::BonusGraphicComponent()
 {
-	m_actived		= false;
-	m_openCasket	= false;
-	m_indexInVector = 0;
-	m_indexInVectorAnimation = 0;
-	m_showAnimation = false;
+	m_actived					= false;
+	m_openCasket				= false;
+	m_showAnimation				= false;
+	m_indexInVector				= 0;
+	m_indexInVectorAnimation	= 0;
+	
 	LoadNameOpenCakset();
 
 	this->initWithFile("res/Weapons/AK47.png");
@@ -264,10 +265,10 @@ BonusGraphicComponent::~BonusGraphicComponent()
 
 // ***Bonus element*** //
 /*
-	- casket:
-		- coins;
-		- clothes;
-	- all type weapon;
+	 casket:
+		+ coins;
+		+- clothes;
+	+ all type weapon;
 	- up/down speed;
-	- all type bullet;
+	+ all type bullet;
 */
