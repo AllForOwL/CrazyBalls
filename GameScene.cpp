@@ -107,9 +107,8 @@ bool GameScene::init()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
-	//this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
+	this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
 	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
-	//this->scheduleUpdate();
 
 	return true;
 }

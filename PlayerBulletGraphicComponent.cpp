@@ -82,7 +82,8 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			if (m_position.x < 0)
 			{
 				this->setVisible(true);
-				Vec2 _positionWeapon = hero.m_vecGraphicComponentWeapon[0]->m_GraphicComponent->getPosition();
+				int _indexActiveWeapon = hero.GetIndexActiveWeapon();
+				Vec2 _positionWeapon = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getPosition();
 				_positionWeapon.x += 40;
 				m_position = _positionWeapon;
 				this->setPosition(m_position);
@@ -105,7 +106,6 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 		case Monster::StateBullet::BULLET_STATE_TARGET:
 		{
 			m_position = this->getPosition();
-
 			m_position = Point::ZERO;
 			this->setPosition(m_position);
 			this->setVisible(false);

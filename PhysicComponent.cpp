@@ -32,8 +32,9 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				}
 			}
 				
+			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
 			hero.m_graphiComponentHeroBullet->setVisible(false);
-			hero.m_graphiComponentHeroBullet->setPosition(hero.m_graphicComponentHero->getPosition());	
+			hero.m_graphiComponentHeroBullet->setPosition(Point(-10, -10));	
 
 			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
