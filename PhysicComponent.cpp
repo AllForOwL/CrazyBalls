@@ -50,19 +50,6 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		}
 		case StatePhysic::STATE_WOUNDED_HERO:
 		{
-			/*if (hero.m_graphicComponentHero->Dead(hero.m_objectMonster->m_vecComponentBullet[0]->GetAttack()))
-			{
-				hero.m_graphicComponentHero->removeFromParentAndCleanup(true);
-				hero.m_graphicComponentHeroWeapon->removeFromParentAndCleanup(true);
-				hero.m_objectMonster->m_vecComponentBullet[0]->removeFromParentAndCleanup(true);
-				m_statePhysic = StatePhysic::STATE_NOTHING;
-			}
-			else
-			{
-				hero.m_objectMonster->m_vecComponentBullet[0]->removeFromParentAndCleanup(true);
-				m_statePhysic = StatePhysic::STATE_NOTHING;
-			}*/
-						
 			for (int i = 0; i < hero.m_objectMonster->m_vecComponentEnemy.size(); i++)
 			{
 				auto body =  hero.m_objectMonster->m_vecComponentEnemy[i]->getPhysicsBody();
@@ -82,7 +69,11 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			if (hero.m_graphicComponentHero->Dead(m_damage))
 			{
 				m_damage = 0;
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_DEATH;
+				hero.m_stateHero	= Monster::StateHero::HERO_STATE_DEATH;
+				hero.m_stateBullet	= Monster::StateBullet::BULLET_STATE_DEATH;
+				hero.m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEATH;
+				hero.m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_DEATH;
+				hero.m_stateBonus	= Monster::StateBonus::BONUS_DEATH;
 			}
 			else
 			{
@@ -94,10 +85,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		}
 		case StatePhysic::STATE_TARGET_BONUS:
 		{	
-			//hero.m_graphiComponentHeroBullet->setVisible(false);
-			//hero.m_graphiComponentHeroBullet->setPosition(500, 500);
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_TARGET;
-			//hero.m_vecGraphicComponentBullet[0]->m_GraphicComponent->
 
 			if (m_TagBonus <= CNT_TYPE_OBJECT_CASKET_CLOTHES)
 			{
@@ -110,7 +98,6 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				scene.m_bonusGraphicComponent->setVisible(false);
 				scene.m_bonusGraphicComponent->setPosition(500, 500);
 				scene.m_bonusGraphicComponent->m_actived = false;
-				//scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 			else
 			{
@@ -118,10 +105,9 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				scene.m_bonusGraphicComponent->setVisible(false);
 				scene.m_bonusGraphicComponent->setPosition(500, 500);
 				scene.m_bonusGraphicComponent->m_actived = false;
-				//scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 
-			this->m_statePhysic							= StatePhysic::STATE_NOTHING;
+			this->m_statePhysic	= StatePhysic::STATE_NOTHING;
 
 			break;
 		}

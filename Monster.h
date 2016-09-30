@@ -60,7 +60,8 @@ public:
 	{
 		WEAPON_STATE_FIRE,
 		WEAPON_STATE_FIRE_UP,
-		WEAPON_STATE_REST
+		WEAPON_STATE_REST,
+		WEAPON_STATE_DEATH
 	};
 
 	enum StateBullet
@@ -68,7 +69,19 @@ public:
 		BULLET_STATE_FIRE,
 		BULLET_STATE_FIRE_UP,
 		BULLET_STATE_REST,
-		BULLET_STATE_TARGET
+		BULLET_STATE_TARGET,
+		BULLET_STATE_DEATH
+	};
+
+	enum StateEnemys
+	{
+		ENEMY_STATE_LIFE,
+		ENEMY_STATE_DEATH
+	};
+
+	enum StateBonus
+	{
+		BONUS_DEATH
 	};
 
 	enum StatePhysic
@@ -113,6 +126,8 @@ public:
 	StateWeapon			m_stateWeapon;
 	StateBullet			m_stateBullet;
 	StatePhysic			m_statePhysic;
+	StateEnemys			m_stateEnemy;
+	StateBonus			m_stateBonus;
 
 	std::vector<ComponentHero*> m_vecGraphicComponentWeapon;
 	std::vector<ComponentHero*> m_vecGraphicComponentBullet;

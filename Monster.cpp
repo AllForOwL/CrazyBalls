@@ -23,9 +23,10 @@ Monster::Monster(
 								m_physicComponent			(physicComponent)
 {
 	m_stateHero		= Monster::StateHero::HERO_STATE_WALK;
-	m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_REST;
+	m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_FIRE;
 	m_stateBullet	= Monster::StateBullet::BULLET_STATE_REST;
 	m_statePhysic	= Monster::StatePhysic::PHYSIC_NOTHING;
+	m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_LIFE;;
 
 	ComponentHero* _tempWeapon = new ComponentHero(m_graphicComponentHeroWeapon, true);
 	ComponentHero* _tempBullet = new ComponentHero(m_graphiComponentHeroBullet, true);
@@ -163,14 +164,21 @@ void Monster::SetActiveWeapon(GameScene& scene, int index)
 	for (int i = 0; i < m_vecGraphicComponentWeapon.size(); i++)
 	{
 		m_vecGraphicComponentWeapon[i]->SetNotActive();
-		if (m_vecGraphicComponentWeapon[i]->m_GraphicComponent->getParent())
-		{
-			scene.removeChildByName(m_vecGraphicComponentWeapon[i]->m_GraphicComponent->getName());
-		}
+		m_vecGraphicComponentWeapon[i]->m_GraphicComponent->setPosition(Point(-10, -10));
+		m_vecGraphicComponentWeapon[i]->m_GraphicComponent->setVisible(false);
 	}
 
 	this->m_vecGraphicComponentWeapon[index]->SetActive();
-	scene.addChild(m_vecGraphicComponentWeapon[index]->m_GraphicComponent);
+	if (!m_vecGraphicComponentWeapon[index]->m_GraphicComponent->getParent())
+	{
+		scene.addChild(m_vecGraphicComponentWeapon[index]->m_GraphicComponent);
+		m_vecGraphicComponentWeapon[index]->m_GraphicComponent->setVisible(true);
+		m_vecGraphicComponentWeapon[index]->m_GraphicComponent->setPosition(m_graphicComponentHero->getPosition().x, m_graphicComponentHero->getPosition().y - 18);
+	}
+	else
+	{
+		m_vecGraphicComponentWeapon[index]->m_GraphicComponent->setVisible(true);
+	}
 }
 
 void Monster::Update(GameScene& scene)

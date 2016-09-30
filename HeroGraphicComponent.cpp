@@ -28,10 +28,40 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 
-	auto physicBodyHero = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.00000001);
+	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
+//	physicBodyHero->setDynamic(false);
 	physicBodyHero->setContactTestBitmask(true);
 	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
+	this->setPhysicsBody(physicBodyHero);
+}
 
+HeroGraphicComponent::HeroGraphicComponent(HeroGraphicComponent& heroGraphicComponent)
+{
+	this->setTag(heroGraphicComponent.getTag());
+	LoadNumberCoinsForTransitionNextLevel();
+
+	if (m_typeHero == CNT_NAME_HERO_HELL)
+	{
+		LoadSpritesForHell();
+		m_attack = 120;
+		m_health = 100;
+	}
+
+	m_coins = 0;
+
+	m_countSpriteInVectorWalk = 0;
+	m_countSpriteInVectorAttack = 0;
+	m_countSpriteInVectorRun = 0;
+	m_countSpriteInVectorDizzy = 0;
+	m_countSpriteInVectorDie = 0;
+	m_countSpriteInVectorFall = 0;
+
+	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
+
+	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
+//	physicBodyHero->setDynamic(false);
+	physicBodyHero->setContactTestBitmask(true);
+	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyHero);
 }
 

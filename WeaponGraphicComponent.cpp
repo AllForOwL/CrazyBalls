@@ -113,11 +113,26 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	if (hero.m_graphiComponentHeroBullet->GetSpeedBullet() != m_speedBullet)
+	switch (hero.m_stateWeapon)
 	{
-		hero.m_graphiComponentHeroBullet->SetSpeedBullet(m_speedBullet);
+		case Monster::StateWeapon::WEAPON_STATE_FIRE:
+		{
+			if (hero.m_graphiComponentHeroBullet->GetSpeedBullet() != m_speedBullet)
+			{
+				hero.m_graphiComponentHeroBullet->SetSpeedBullet(m_speedBullet);
+			}
+			this->setPosition(hero.m_graphicComponentHero->getPosition().x, hero.m_graphicComponentHero->getPosition().y - 18);
+															
+			break;
+		}
+		case Monster::StateWeapon::WEAPON_STATE_DEATH:
+		{
+			this->removeFromParentAndCleanup(true);
+			break;
+		}
+	default:
+		break;
 	}
-	this->setPosition(hero.m_graphicComponentHero->getPosition().x, hero.m_graphicComponentHero->getPosition().y - 18);
 
 	return;
 }

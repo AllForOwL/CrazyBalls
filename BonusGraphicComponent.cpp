@@ -25,7 +25,7 @@ BonusGraphicComponent::BonusGraphicComponent()
 
 	this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.2);
 
-	auto physicBodyBonus = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.1, Vec2::ZERO);
+	auto physicBodyBonus = PhysicsBody::createBox(this->getContentSize());
 	physicBodyBonus->setContactTestBitmask(true);
 	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
 	physicBodyBonus->setDynamic(false);
@@ -198,6 +198,17 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 
 /*virtual*/ void BonusGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	switch (hero.m_stateBonus)
+	{
+		case Monster::StateBonus::BONUS_DEATH:
+		{
+			this->removeFromParentAndCleanup(true);
+			break;
+		}
+	default:
+		break;
+	}
+
 	return;
 }
 

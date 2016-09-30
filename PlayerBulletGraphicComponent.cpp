@@ -82,10 +82,10 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			if (m_position.x < 0)
 			{
 				this->setVisible(true);
-				int _indexActiveWeapon = hero.GetIndexActiveWeapon();
-				Vec2 _positionWeapon = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getPosition();
-				_positionWeapon.x += 40;
-				m_position = _positionWeapon;
+				int _indexActiveWeapon	= hero.GetIndexActiveWeapon();
+				Vec2 _positionWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getPosition();
+				_positionWeapon.x		+= 40;
+				m_position				= _positionWeapon;
 				this->setPosition(m_position);
 			}
 			else if (m_position.x > Director::getInstance()->getVisibleSize().width)
@@ -110,6 +110,11 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			this->setPosition(m_position);
 			this->setVisible(false);
 
+			break;
+		}
+		case  Monster::StateBullet::BULLET_STATE_DEATH:
+		{
+			this->removeFromParentAndCleanup(true);
 			break;
 		}
 	}

@@ -238,10 +238,10 @@ double BreedGraphicComponent::GetTime()
 			}
 			case StateEnemy::ENEMY_STATE_DEATH:
 			{
-				if (Death())
+				/*if (Death())
 				{
 					hero.m_objectMonster->m_vecComponentEnemy.pop_back();
-				}
+				}*/
 				break;
 			}
 			default:

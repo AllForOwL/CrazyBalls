@@ -15,15 +15,32 @@ GameObjectMonster::GameObjectMonster()
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 {
-	if (m_vecComponentEnemy.size())
+	switch (hero.m_stateEnemy)
 	{
-		for (int i = 0; i < m_vecComponentEnemy.size(); i++)
+		case Monster::StateEnemys::ENEMY_STATE_LIFE:
 		{
 			if (m_vecComponentEnemy.size())
 			{
-				m_vecComponentEnemy[i]->Update(hero, scene);
+				for (int i = 0; i < m_vecComponentEnemy.size(); i++)
+				{
+					if (m_vecComponentEnemy.size())
+					{
+						m_vecComponentEnemy[i]->Update(hero, scene);
+					}
+				}
 			}
+			break;
 		}
+		case Monster::StateEnemys::ENEMY_STATE_DEATH:
+		{
+			for (int i = 0; i < m_vecComponentEnemy.size(); i++)
+			{
+				m_vecComponentEnemy[i]->removeFromParentAndCleanup(true);
+			}
+			break;
+		}
+	default:
+		break;
 	}
 }
 
