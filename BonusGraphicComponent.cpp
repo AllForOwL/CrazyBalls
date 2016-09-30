@@ -8,6 +8,7 @@ BonusGraphicComponent::BonusGraphicComponent()
 	m_actived		= false;
 	m_openCasket	= false;
 	m_indexInVector = 0;
+	m_indexInVectorAnimation = 0;
 	m_showAnimation = false;
 	LoadNameOpenCakset();
 
@@ -24,11 +25,12 @@ BonusGraphicComponent::BonusGraphicComponent()
 
 	this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.2);
 
-	auto physicBodyBonus = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.0, Vec2::ZERO);
+	auto physicBodyBonus = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.1, Vec2::ZERO);
 	physicBodyBonus->setContactTestBitmask(true);
 	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
 	physicBodyBonus->setDynamic(false);
 	physicBodyBonus->setName("physics");
+
 	this->setPhysicsBody(physicBodyBonus);
 }
 
@@ -41,11 +43,15 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		_typeObject = rand() % 11 + 1;
 	}
 
+	if (!m_vecNameSpritesOpenCasket.size())
+	{
+		LoadNameOpenCakset();
+	}
+
 	switch (_typeObject)
 	{
 		case CNT_TYPE_OBJECT_CASKET_COINS:
 		{
-			LoadNameOpenCakset();
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
 			this->m_typeObject = CNT_NAME_CASKET_COINS;
 			this->m_openCasket = true;
@@ -55,7 +61,6 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		}
 		case CNT_TYPE_OBJECT_CASKET_CLOTHES:
 		{
-			LoadNameOpenCakset();
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
 			this->m_typeObject = CNT_NAME_CASKET_CLOTHES;
 			this->m_openCasket = true;
@@ -155,14 +160,6 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 	default:
 		break;
 	}
-
-	/*auto physicBodyBonus = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.0, Vec2::ZERO);
-	physicBodyBonus->setOwner()
-	physicBodyBonus->setContactTestBitmask(true);
-	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
-	physicBodyBonus->setDynamic(false);
-	physicBodyBonus->setName("physics");
-	this->setPhysicsBody(physicBodyBonus);*/
 }
 
 void BonusGraphicComponent::LoadNameOpenCakset()
@@ -186,11 +183,14 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 		return;
 	}
 
-	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
+	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVectorAnimation]));
 
-	if (++m_indexInVector == m_vecNameSpritesOpenCasket.size())
+	if (++m_indexInVectorAnimation == m_vecNameSpritesOpenCasket.size())
 	{
-		this->removeFromParentAndCleanup(true);
+		this->m_actived = false;
+		m_indexInVectorAnimation = 0;
+		this->setPosition(Point(-10, -10));
+		this->setVisible(false);
 		m_showAnimation = false;
 		return;
 	}

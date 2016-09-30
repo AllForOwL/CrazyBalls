@@ -108,6 +108,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				hero.AddWeapon(m_TagBonus);
 				scene.m_bonusGraphicComponent->setVisible(false);
 				scene.m_bonusGraphicComponent->setPosition(500, 500);
+				scene.m_bonusGraphicComponent->m_actived = false;
 				//scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 			else
@@ -115,10 +116,10 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				hero.AddBullet(m_TagBonus);
 				scene.m_bonusGraphicComponent->setVisible(false);
 				scene.m_bonusGraphicComponent->setPosition(500, 500);
+				scene.m_bonusGraphicComponent->m_actived = false;
 				//scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 
-			scene.m_bonusGraphicComponent->m_actived	= false;
 			this->m_statePhysic							= StatePhysic::STATE_NOTHING;
 
 			break;

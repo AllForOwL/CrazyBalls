@@ -137,7 +137,11 @@ void GameScene::SpawnBonus(float dt)
 	Size _visibleSize	= Director::getInstance()->getVisibleSize();
 	Size _sizeBonus		= m_bonusGraphicComponent->getContentSize();		
 
-	m_bonusGraphicComponent->setPosition(250, 160);
+	srand(time(NULL));
+	int _rand_X = rand() % 240 + 200;
+	int _rand_Y = rand() % 200 + 20;
+
+	m_bonusGraphicComponent->setPosition(_rand_X, _rand_Y);
 	m_bonusGraphicComponent->setScale(	_visibleSize.width  / _sizeBonus.width / 10,
 										_visibleSize.height / _sizeBonus.height / 10
 									 );

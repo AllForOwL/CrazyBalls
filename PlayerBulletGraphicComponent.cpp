@@ -24,6 +24,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int attack, const std
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
+	//physicBody->setDynamic(false);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
 	physicBody->setName("physics");
 
@@ -85,6 +86,13 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 				_positionWeapon.x += 40;
 				m_position = _positionWeapon;
 				this->setPosition(m_position);
+			}
+			else if (m_position.x > Director::getInstance()->getVisibleSize().width)
+			{
+				m_position = Point(-10, -10);
+				this->setPosition(m_position);
+				this->setVisible(false);
+				hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
 			}
 			else
 			{

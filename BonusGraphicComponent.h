@@ -37,9 +37,9 @@ public:
 	bool		m_openCasket;
 	bool		m_actived;
 	int			m_indexInVector;
+	int			m_indexInVectorAnimation;
 	bool		m_showAnimation;
 	int			m_interval;
-
 
 	std::vector<std::string> m_vecNameSpritesOpenCasket;
 };

@@ -28,7 +28,7 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 
-	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
+	auto physicBodyHero = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.00000001);
 	physicBodyHero->setContactTestBitmask(true);
 	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
 
