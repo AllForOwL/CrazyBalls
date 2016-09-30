@@ -9,6 +9,7 @@ BonusGraphicComponent::BonusGraphicComponent()
 	m_openCasket	= false;
 	m_indexInVector = 0;
 	m_showAnimation = false;
+	LoadNameOpenCakset();
 
 	this->initWithFile("res/Weapons/AK47.png");
 	this->setVisible(false);
@@ -21,9 +22,9 @@ BonusGraphicComponent::BonusGraphicComponent()
 				  );
 	this->setPosition(Point(500, 500));
 
-	this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.4);
+	this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.2);
 
-	auto physicBodyBonus = PhysicsBody::createBox(this->getContentSize());
+	auto physicBodyBonus = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.0, Vec2::ZERO);
 	physicBodyBonus->setContactTestBitmask(true);
 	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
 	physicBodyBonus->setDynamic(false);
@@ -155,12 +156,13 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		break;
 	}
 
-	/*this->removeChildByName("physics");
-	auto physicBodyBonus = PhysicsBody::createBox(this->getContentSize());
+	/*auto physicBodyBonus = PhysicsBody::createEdgeBox(this->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 0.0, Vec2::ZERO);
+	physicBodyBonus->setOwner()
 	physicBodyBonus->setContactTestBitmask(true);
 	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
+	physicBodyBonus->setDynamic(false);
 	physicBodyBonus->setName("physics");
-	this-setPhysicsBody(physicBodyBonus);*/
+	this->setPhysicsBody(physicBodyBonus);*/
 }
 
 void BonusGraphicComponent::LoadNameOpenCakset()

@@ -106,12 +106,16 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			else if (m_TagBonus <= CNT_TYPE_OBJECT_WEAPON_UMG)	// last object for weapon
 			{
 				hero.AddWeapon(m_TagBonus);
-				scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
+				scene.m_bonusGraphicComponent->setVisible(false);
+				scene.m_bonusGraphicComponent->setPosition(500, 500);
+				//scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 			else
 			{
 				hero.AddBullet(m_TagBonus);
-				scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
+				scene.m_bonusGraphicComponent->setVisible(false);
+				scene.m_bonusGraphicComponent->setPosition(500, 500);
+				//scene.m_bonusGraphicComponent->removeFromParentAndCleanup(true);
 			}
 
 			scene.m_bonusGraphicComponent->m_actived	= false;
