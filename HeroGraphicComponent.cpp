@@ -14,7 +14,7 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 	{
 		LoadSpritesForHell();
 		m_attack = 120;
-		m_health = 100000000;
+		m_health = 100;
 	}
 
 	m_coins = 0;

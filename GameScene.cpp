@@ -9,6 +9,7 @@
 #include "BotInputComponent.h"
 #include "PhysicComponent.h"
 #include "GameLayer.h"
+#include <time.h>
 
 USING_NS_CC;
 
@@ -192,3 +193,6 @@ GameScene::~GameScene()
 {
 
 }
+
+
+/**********Jump table*********/

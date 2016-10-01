@@ -149,27 +149,6 @@ void GameObjectMonster::LoadField()
 	std::vector<int> _vecPositionX;
 	std::vector<int> _vecPositionY;
 
-	/*int _end_X = _widthField + 50;
-	do
-	{
-		_vecPositionX.push_back(_end_X);
-		_end_X += 50;
-	}
-	while (_end_X < _visibleSize.width - 50);
-
-	int _end_Y = 50;
-	do
-	{
-		_vecPositionY.push_back(_end_Y);
-		_end_Y += 50;
-	} 
-	while (_end_Y < _visibleSize.height - 50);
-	*/
-
-	/*
-		480x320
-	*/
-
 	_vecPositionX.push_back(260);
 	_vecPositionX.push_back(310);
 	_vecPositionX.push_back(360);
@@ -250,6 +229,7 @@ void GameObjectMonster::ReleaseCell(Point point)
 		if (m_vecField[i].m_X == (int)point.x && m_vecField[i].m_Y == (int)point.y)
 		{
 			m_vecField[i].m_Free = true;
+			m_vecIndexFreePosition.push_back(i);
 			CCLOG("Release cell");
 			break;
 		}
