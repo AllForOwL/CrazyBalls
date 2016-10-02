@@ -28,6 +28,10 @@ Scene *GameScene::createScene(bool nextLevel)
 			m_level = 0;
 		}
 	}
+	else 
+	{
+		m_level = 0;
+	}
 	
 	auto layer = GameScene::create();
 	layer->SetPhysicsWorld(scene->getPhysicsWorld());

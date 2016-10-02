@@ -185,11 +185,11 @@ void Monster::Update(GameScene& scene)
 {
 	m_inputComponentHero->Update		(*this);
 	m_graphicComponentHero->Update		(*this, scene);
-	m_vecGraphicComponentWeapon[GetIndexActiveWeapon()]->m_GraphicComponent->Update(*this, scene);
 	m_botInputComponent->Update			(*this);
 	m_objectMonster->Update				(*this, scene);
-	m_vecGraphicComponentBullet[GetIndexActiveBullet()]->m_GraphicComponent->Update(*this, scene);
 	m_physicComponent->Update			(*this, scene);
+	m_vecGraphicComponentWeapon[GetIndexActiveWeapon()]->m_GraphicComponent->Update(*this, scene);
+	m_vecGraphicComponentBullet[GetIndexActiveBullet()]->m_GraphicComponent->Update(*this, scene);
 }
 
 Monster::~Monster()

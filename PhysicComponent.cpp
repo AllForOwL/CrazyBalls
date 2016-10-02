@@ -112,6 +112,10 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				scene.m_bonusGraphicComponent->m_actived = false;
 			}
 
+			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
+			hero.m_graphiComponentHeroBullet->setVisible(false);
+			hero.m_graphiComponentHeroBullet->setPosition(Point(-10, -10));
+
 			this->m_statePhysic	= StatePhysic::STATE_NOTHING;
 
 			break;

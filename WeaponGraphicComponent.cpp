@@ -17,43 +17,43 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 	{
 		m_strFilename = "res/Weapons/Gun.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 7;
+		m_speedBullet = 9;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MI71)
 	{
 		m_strFilename = "res/Weapons/MI71.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 6;
+		m_speedBullet = 10;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MK15)
 	{
 		m_strFilename = "res/Weapons/MK15.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 5;
+		m_speedBullet = 11;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_REVOLVER_MONI_SHADE)
 	{
 		m_strFilename = "res/Weapons/Revolver_moni_shade.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 4;
+		m_speedBullet = 12;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_STEN_GUN_SHADE_2)
 	{
 		m_strFilename = "res/Weapons/Sten_gun_shade_2.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 3;
+		m_speedBullet = 13;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_TS23)
 	{
 		m_strFilename = "res/Weapons/TS23.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 2;
+		m_speedBullet = 14;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_UMG)
 	{
 		m_strFilename = "res/Weapons/Umg.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 5;
+		m_speedBullet = 14;
 	}
 
 	this->setName(m_typeObject);
@@ -166,7 +166,6 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 {
 	return true;
 }
-
 
 /*virtual*/ void WeaponGraphicComponent::ChangeCoins(int coins)
 {
