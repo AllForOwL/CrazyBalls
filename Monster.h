@@ -18,9 +18,11 @@ struct ComponentHero
 {
 	GraphicComponent*	m_GraphicComponent;
 	bool				m_active;
+	int					m_quantity;
 
-	ComponentHero(GraphicComponent* component, bool active) : m_GraphicComponent(component), m_active(active)
+	ComponentHero(GraphicComponent* component, bool active) : m_GraphicComponent(component), m_active(active), m_quantity(1)
 	{
+
 	}
 	void SetActive()
 	{
@@ -35,6 +37,16 @@ struct ComponentHero
 	bool isActive()
 	{
 		return m_active;
+	}
+
+	void IncreaseQuantityIdenticalType()
+	{
+		++m_quantity;
+	}
+
+	int GetQuentity() const
+	{
+		return m_quantity;
 	}
 };
 

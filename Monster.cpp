@@ -121,8 +121,23 @@ void Monster::AddWeapon(int typeWeapon)
 			break;
 	}
 
-	ComponentHero* _heroComponent = new ComponentHero(_weapon, false);
-	m_vecGraphicComponentWeapon.push_back(_heroComponent);
+	bool _findParallel = false;
+	for (int i = 0; i < m_vecGraphicComponentWeapon.size(); i++)
+	{
+		if (m_vecGraphicComponentWeapon[i]->m_GraphicComponent->GetTypeObject() == _weapon->GetTypeObject())
+		{
+			m_vecGraphicComponentWeapon[i]->IncreaseQuantityIdenticalType();
+			_findParallel = true;
+			break;
+			break;
+		}
+	}
+	
+	if (!_findParallel)
+	{
+		ComponentHero* _heroComponent = new ComponentHero(_weapon, false);
+		m_vecGraphicComponentWeapon.push_back(_heroComponent);
+	}
 }
 
 void Monster::AddBullet(int typeBullet)
