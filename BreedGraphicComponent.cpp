@@ -352,6 +352,17 @@ bool BreedGraphicComponent::Death()
 	return 2;
 }
 
+/*virtual*/ void BreedGraphicComponent::DescreaseQuentityBullet()
+{
+
+}
+
+/*virtual*/ int BreedGraphicComponent::GetQuentityBullet() const
+{
+	return 1;
+}
+
+
 BreedGraphicComponent::~BreedGraphicComponent()
 {
 

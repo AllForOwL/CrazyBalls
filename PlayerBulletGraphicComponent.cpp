@@ -81,8 +81,9 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 
 			if (m_position.x < 0)
 			{
+				int _indexActiveWeapon = hero.GetIndexActiveWeapon();
+
 				this->setVisible(true);
-				int _indexActiveWeapon	= hero.GetIndexActiveWeapon();
 				Vec2 _positionWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getPosition();
 				_positionWeapon.x		+= 40;
 				m_position				= _positionWeapon;
@@ -150,6 +151,17 @@ int PlayerBulletGraphicComponent::GetSpeedBullet() const
 {
 	return 2;
 }
+
+/*virtual*/ void PlayerBulletGraphicComponent::DescreaseQuentityBullet()
+{
+
+}
+
+/*virtual*/ int PlayerBulletGraphicComponent::GetQuentityBullet() const
+{
+	return 1;
+}
+
 
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()
 {

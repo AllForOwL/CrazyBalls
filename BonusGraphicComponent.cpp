@@ -258,6 +258,16 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 	return 2;
 }
 
+/*virtual*/ void BonusGraphicComponent::DescreaseQuentityBullet()
+{
+
+}
+
+/*virtual*/ int BonusGraphicComponent::GetQuentityBullet() const
+{
+	return 1;
+}
+
 BonusGraphicComponent::~BonusGraphicComponent()
 {
 

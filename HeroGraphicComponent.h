@@ -26,6 +26,9 @@ public:
 	virtual void SetSpeedBullet(int speed);
 	virtual int GetSpeedBullet() const;
 
+	virtual void DescreaseQuentityBullet();
+	virtual int  GetQuentityBullet() const;
+
 	void LoadSpritesForHell();
 	void LoadNumberCoinsForTransitionNextLevel();
 

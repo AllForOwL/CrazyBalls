@@ -26,6 +26,9 @@ public:
 	virtual void SetSpeedBullet(int speed);
 	virtual int GetSpeedBullet() const;
 
+	virtual void DescreaseQuentityBullet();
+	virtual int  GetQuentityBullet() const;
+
 	~WeaponGraphicComponent();
 
 public:
@@ -34,6 +37,8 @@ public:
 	std::string m_typeObject;
 	
 	std::string m_strFilename;
+
+	int			m_quentityBullet;
 
 };
 

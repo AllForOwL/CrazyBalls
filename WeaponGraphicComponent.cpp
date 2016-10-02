@@ -11,49 +11,57 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 	{
 		m_strFilename = "res/Weapons/AK47.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 8;
+		m_speedBullet		= 8;
+		m_quentityBullet	= 2;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_GUN)
 	{
 		m_strFilename = "res/Weapons/Gun.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 9;
+		m_speedBullet		= 9;
+		m_quentityBullet	= 15;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MI71)
 	{
 		m_strFilename = "res/Weapons/MI71.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 10;
+		m_speedBullet		= 10;
+		m_quentityBullet	= 20;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MK15)
 	{
 		m_strFilename = "res/Weapons/MK15.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 11;
+		m_speedBullet		= 11;
+		m_quentityBullet	= 25;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_REVOLVER_MONI_SHADE)
 	{
 		m_strFilename = "res/Weapons/Revolver_moni_shade.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 12;
+		m_speedBullet		= 12;
+		m_quentityBullet	= 30;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_STEN_GUN_SHADE_2)
 	{
 		m_strFilename = "res/Weapons/Sten_gun_shade_2.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 13;
+		m_speedBullet		= 13;
+		m_quentityBullet	= 35;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_TS23)
 	{
 		m_strFilename = "res/Weapons/TS23.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 14;
+		m_speedBullet		= 14;
+		m_quentityBullet	= 40;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_UMG)
 	{
 		m_strFilename = "res/Weapons/Umg.png";
 		this->initWithFile(m_strFilename);
-		m_speedBullet = 14;
+		m_speedBullet		= 14;
+		m_quentityBullet	= 45;
 	}
 
 	this->setName(m_typeObject);
@@ -145,6 +153,16 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 /*virtual*/ int WeaponGraphicComponent::GetSpeedBullet() const
 {
 	return 2;
+}
+
+/*virtual*/ void WeaponGraphicComponent::DescreaseQuentityBullet()
+{
+	--m_quentityBullet;
+}
+
+/*virtual*/ int WeaponGraphicComponent::GetQuentityBullet() const
+{
+	return m_quentityBullet;
 }
 
 /*virtual*/ int WeaponGraphicComponent::GetAttack() const

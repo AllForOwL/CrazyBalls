@@ -24,6 +24,9 @@ public:
 	virtual void SetSpeedBullet(int speed);
 	virtual int GetSpeedBullet() const;
 
+	virtual void DescreaseQuentityBullet();
+	virtual int  GetQuentityBullet() const;
+
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset();
 	void ShowBonusAnimation(float dt);

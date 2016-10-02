@@ -138,6 +138,18 @@ void BotBulletGraphicComponent::LoadBomb()
 	m_strFilename = "Bomb.png";
 }
 
+
+/*virtual*/ void BotBulletGraphicComponent::DescreaseQuentityBullet()
+{
+
+}
+
+/*virtual*/ int BotBulletGraphicComponent::GetQuentityBullet() const
+{
+	return 1;
+}
+
+
 BotBulletGraphicComponent::~BotBulletGraphicComponent()
 {
 

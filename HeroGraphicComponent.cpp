@@ -208,6 +208,11 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 		{
 			int _amountWeapon = hero.m_vecGraphicComponentWeapon.size();
 			
+			if (_amountWeapon == 0)
+			{
+				return;
+			}
+
 			if (_amountWeapon == 1)
 			{
 				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
@@ -233,6 +238,11 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 		{
 			int _amountBullet = hero.m_vecGraphicComponentBullet.size();
 			
+			if (_amountBullet == 0)
+			{
+				return;
+			}
+
 			if (_amountBullet == 1)
 			{
 				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
@@ -327,6 +337,17 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 	return 2;
 }
  
+/*virtual*/ void HeroGraphicComponent::DescreaseQuentityBullet()
+{
+
+}
+
+/*virtual*/ int HeroGraphicComponent::GetQuentityBullet() const
+{
+	return 1;
+}
+
+
 HeroGraphicComponent::~HeroGraphicComponent()
 {
 

@@ -17,7 +17,7 @@ bool GameLayer::init()
 	m_lblHealthHero = Label::create();
 	m_lblCoinsHero  = Label::create();
 
-	cocos2d::Label* _lblPause = Label::create("Pause", "", 10);
+	cocos2d::Label* _lblPause = Label::create("Pause", "", 12);
 
 	auto _itemMenuPause = MenuItemLabel::create(_lblPause, CC_CALLBACK_1(GameLayer::GoToPause, this));
 	_itemMenuPause->setPosition(_visibleSize.width - _itemMenuPause->getContentSize().width,

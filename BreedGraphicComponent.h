@@ -38,6 +38,9 @@ public:
 	virtual void SetSpeedBullet(int speed);
 	virtual int GetSpeedBullet() const;
 
+	virtual void DescreaseQuentityBullet();
+	virtual int  GetQuentityBullet() const;
+
 	// ***for future targets*** //
 	//void		LoadTimeForShot();
 	//std::map<int,int> m_mapTimeShot;
