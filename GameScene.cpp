@@ -15,15 +15,18 @@ USING_NS_CC;
 
 int GameScene::m_level = 0;
 
-Scene *GameScene::createScene() 
+Scene *GameScene::createScene(bool nextLevel) 
 {
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	scene->getPhysicsWorld()->setGravity(Vec2(0, 0));
 
-	if (++m_level == 12)
+	if (nextLevel)
 	{
-		m_level = 0;
+		if (++m_level == 12)
+		{
+			m_level = 0;
+		}
 	}
 	
 	auto layer = GameScene::create();
@@ -156,9 +159,14 @@ void GameScene::SpawnBonus(float dt)
 
 void GameScene::LoadFileNameBackground()
 {
-	m_vecNameBackground.push_back("res/Backgrounds/1-night.png");
-	m_vecNameBackground.push_back("res/Backgrounds/2-night.png");
-	m_vecNameBackground.push_back("res/Backgrounds/2.png");
+	m_vecNameBackground.push_back("res/Backgrounds/8.png");
+	m_vecNameBackground.push_back("res/Backgrounds/9.png");
+	m_vecNameBackground.push_back("res/Backgrounds/10.png");
+	m_vecNameBackground.push_back("res/Backgrounds/11.png");
+	m_vecNameBackground.push_back("res/Backgrounds/12.png");
+	m_vecNameBackground.push_back("res/Backgrounds/13.png");
+	m_vecNameBackground.push_back("res/Backgrounds/14.png");
+	m_vecNameBackground.push_back("res/Backgrounds/15.png");
 	m_vecNameBackground.push_back("res/Backgrounds/3-night.png");
 	m_vecNameBackground.push_back("res/Backgrounds/4-night.png");
 	m_vecNameBackground.push_back("res/Backgrounds/4.png");
@@ -185,7 +193,7 @@ void GameScene::SetBackground()
 
 void GameScene::LoadLevel()
 {
-	auto reScene = TransitionFade::create(1.0f, GameScene::createScene(), Color3B(0, 0, 0));
+	auto reScene = TransitionFade::create(1.0f, GameScene::createScene(true), Color3B(0, 0, 0));
 	Director::getInstance()->replaceScene(reScene);
 }
 

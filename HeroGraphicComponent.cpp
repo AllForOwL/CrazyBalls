@@ -121,6 +121,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 	if (m_health < 0)
 	{
+		this->removeFromParentAndCleanup(true);
 		return true;
 	}
 	else

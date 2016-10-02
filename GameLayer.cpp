@@ -1,5 +1,6 @@
 #include "GameLayer.h"
 #include "Monster.h"
+#include "PauseScene.h"
 
 USING_NS_CC;
 
@@ -15,6 +16,17 @@ bool GameLayer::init()
 	m_lblAttackHero = Label::create();
 	m_lblHealthHero = Label::create();
 	m_lblCoinsHero  = Label::create();
+
+	cocos2d::Label* _lblPause = Label::create("Pause", "", 10);
+
+	auto _itemMenuPause = MenuItemLabel::create(_lblPause, CC_CALLBACK_1(GameLayer::GoToPause, this));
+	_itemMenuPause->setPosition(_visibleSize.width - _itemMenuPause->getContentSize().width,
+		_visibleSize.height - _itemMenuPause->getContentSize().height);
+
+	auto menu = Menu::create(_itemMenuPause, NULL);
+	menu->setPosition(Point::ZERO);
+
+	this->addChild(menu);
 
 	m_lblAttackHero->setPosition(50, 300);
 	m_lblHealthHero->setPosition(100, 300);
@@ -40,4 +52,12 @@ void GameLayer::Update(Monster& hero)
 	m_lblAttackHero->setString(_attack);
 	m_lblHealthHero->setString(_health);
 	m_lblCoinsHero->setString(_coins);
+}
+
+void GameLayer::GoToPause(cocos2d::Ref* ref)
+{
+	srand(time(NULL));
+	auto reScene = TransitionFade::create(1.0f, PauseScene::createScene(), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+	Director::getInstance()->pushScene(reScene);
+	//Director::getInstance()->replaceScene(reScene);
 }

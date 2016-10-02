@@ -11,6 +11,9 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(MainMenuScene);
+
+
+	void GoToGameScene(cocos2d::Ref* ref);
 };
 
 #endif // __MAIN_MENU_SCENE_H__

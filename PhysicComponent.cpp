@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "HeroGraphicComponent.h"
 #include "constants.h"
+#include "GameOverScene.h"
 
 PhysicComponent::PhysicComponent()
 {
@@ -74,6 +75,10 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				hero.m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEATH;
 				hero.m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_DEATH;
 				hero.m_stateBonus	= Monster::StateBonus::BONUS_DEATH;
+
+				srand(time(NULL));
+				auto reScene = TransitionFade::create(1.0f, GameOverScene::createScene(), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+				Director::getInstance()->replaceScene(reScene);
 			}
 			else
 			{
