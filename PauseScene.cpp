@@ -24,6 +24,8 @@ bool PauseScene::init()
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
+	this->setColor(Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+
 	auto _itemGoToMainMenu	= MenuItemFont::create("Main menu",		CC_CALLBACK_1(PauseScene::GoToMainMenu, this));
 	auto _itemBackGame		= MenuItemFont::create("Back game",		CC_CALLBACK_1(PauseScene::GoToGame, this));
 

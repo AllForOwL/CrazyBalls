@@ -46,7 +46,7 @@ bool GameScene::init()
 	{
 		return false;
 	}
-	
+
 	Size _visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
 
@@ -125,6 +125,18 @@ void GameScene::update(float dt)
 {
 	m_hero->Update		(*this);
 	m_gameLayer->Update	(*m_hero);
+
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+
+	if ((_visibleSize.width / 2) - m_background->getPositionX() > (m_background->getContentSize().width - _visibleSize.width) / 2)
+	{
+		m_background->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+	}
+	else
+	{
+		Point _positionBackground = m_background->getPosition();
+		m_background->setPosition(--_positionBackground.x, _positionBackground.y);
+	}
 }
 
 void GameScene::Spawn(float dt)
@@ -187,8 +199,9 @@ void GameScene::SetBackground()
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
 	m_background = Sprite::create(m_vecNameBackground[m_level]);
-	m_background->setScale(_visibleSize.width / m_background->getContentSize().width,
-		_visibleSize.height / m_background->getContentSize().height);
+	//m_background->setScale(_visibleSize.width / m_background->getContentSize().width,
+	//	_visibleSize.height / m_background->getContentSize().height);
+	
 	m_background->setPosition(_visibleSize.width / 2,
 		_visibleSize.height / 2);
 	
@@ -208,3 +221,6 @@ GameScene::~GameScene()
 
 
 /**********Jump table*********/
+//std::random_shuffle(_grid.begin(), _grid.end());		//	shuffle all vector(change position for each component vector)
+//this->setAnchorPoint();								//  around him move and transition
+

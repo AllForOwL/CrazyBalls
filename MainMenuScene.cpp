@@ -24,6 +24,8 @@ bool MainMenuScene::init()
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
+	this->setColor(Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+
 	auto _itemStartGame = MenuItemFont::create("Start game", CC_CALLBACK_1(MainMenuScene::GoToGameScene, this));
 
 	auto menu = Menu::create(_itemStartGame, NULL);
@@ -38,6 +40,6 @@ void MainMenuScene::GoToGameScene(cocos2d::Ref* ref)
 	auto _gameScene = GameScene::createScene(false);
 
 	srand(time(NULL));
-	auto reScene = TransitionFade::create(2.0f, _gameScene, Color3B(rand() % 255 + 0, 255 + 0, 255 + 0));
+	auto reScene = TransitionFade::create(2.0f, _gameScene, Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
 	Director::getInstance()->replaceScene(reScene);
 }

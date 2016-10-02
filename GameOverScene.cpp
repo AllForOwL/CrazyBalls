@@ -23,6 +23,8 @@ bool GameOverScene::init()
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
+	this->setColor(Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+
 	auto _itemGoToMainMenu	= MenuItemFont::create("Main menu", CC_CALLBACK_1(GameOverScene::GoToMainMenu, this));
 	auto _itemExit			= MenuItemFont::create("EXIT",		CC_CALLBACK_1(GameOverScene::Exit, this));
 
