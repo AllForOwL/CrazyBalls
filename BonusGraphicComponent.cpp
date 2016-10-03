@@ -11,8 +11,6 @@ BonusGraphicComponent::BonusGraphicComponent()
 	m_indexInVector				= 0;
 	m_indexInVectorAnimation	= 0;
 	
-	LoadNameOpenCakset();
-
 	this->initWithFile("res/Weapons/AK47.png");
 	this->setVisible(false);
 
@@ -44,28 +42,25 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		_typeObject = rand() % 11 + 1;
 	}
 
-	if (!m_vecNameSpritesOpenCasket.size())
-	{
-		LoadNameOpenCakset();
-	}
-
 	switch (_typeObject)
 	{
 		case CNT_TYPE_OBJECT_CASKET_COINS:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
+			LoadNameOpenCakset(CNT_NAME_CASKET_COINS);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasketCoins[m_indexInVector]));
 			this->m_typeObject = CNT_NAME_CASKET_COINS;
 			this->m_openCasket = true;
 			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_CASKET_COINS);
 
 			break;
 		}
-		case CNT_TYPE_OBJECT_CASKET_CLOTHES:
+		case CNT_TYPE_OBJECT_CASKET_POWER:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
-			this->m_typeObject = CNT_NAME_CASKET_CLOTHES;
+			LoadNameOpenCakset(CNT_NAME_CASKET_POWERS);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasketPowers[m_indexInVector]));
+			this->m_typeObject = CNT_NAME_CASKET_POWERS;
 			this->m_openCasket = true;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_CASKET_CLOTHES);
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_CASKET_POWER);
 
 			break;
 		}
@@ -163,18 +158,34 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 	}
 }
 
-void BonusGraphicComponent::LoadNameOpenCakset()
+void BonusGraphicComponent::LoadNameOpenCakset(const std::string& typeCasket)
 {
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Casket/1.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Casket/2.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Casket/3.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Casket/4.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Casket/5.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Casket/6.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Coins/Coin_1.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Coins/Coin_2.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Coins/Coin_3.png");
-	m_vecNameSpritesOpenCasket.push_back("res/Bonus/Coins/Coin_4.png");
+	if (typeCasket == CNT_NAME_CASKET_COINS)
+	{
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Casket/1.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Casket/2.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Casket/3.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Casket/4.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Casket/5.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Casket/6.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Coins/Coin_1.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Coins/Coin_2.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Coins/Coin_3.png");
+		m_vecNameSpritesOpenCasketCoins.push_back("res/Bonus/Coins/Coin_4.png");
+	}
+	else
+	{
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Casket/1.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Casket/2.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Casket/3.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Casket/4.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Casket/5.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Casket/6.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Power/life_power_up_1.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Power/life_power_up_2.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Power/life_power_up_3.png");
+		m_vecNameSpritesOpenCasketPowers.push_back("res/Bonus/Power/life_power_up_4.png");
+	}
 }
 
 void BonusGraphicComponent::ShowBonusAnimation(float dt)
@@ -184,9 +195,9 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 		return;
 	}
 
-	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVectorAnimation]));
+	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasketCoins[m_indexInVectorAnimation]));
 
-	if (++m_indexInVectorAnimation == m_vecNameSpritesOpenCasket.size())
+	if (++m_indexInVectorAnimation == m_vecNameSpritesOpenCasketCoins.size())
 	{
 		this->m_actived = false;
 		m_indexInVectorAnimation = 0;

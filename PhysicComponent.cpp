@@ -94,7 +94,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_TARGET;
 			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
 
-			if (m_TagBonus <= CNT_TYPE_OBJECT_CASKET_CLOTHES)
+			if (m_TagBonus <= CNT_TYPE_OBJECT_CASKET_POWER)
 			{
 				hero.m_graphicComponentHero->ChangeCoins(50);
 				scene.m_bonusGraphicComponent->m_showAnimation = true;

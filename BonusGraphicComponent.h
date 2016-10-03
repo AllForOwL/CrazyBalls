@@ -22,13 +22,13 @@ public:
 	virtual bool		Winner() const;
 
 	virtual void SetSpeedBullet(int speed);
-	virtual int GetSpeedBullet() const;
+	virtual int  GetSpeedBullet() const;
 
 	virtual void DescreaseQuentityBullet();
 	virtual int  GetQuentityBullet() const;
 
 	void AddBonus(int typeObject);
-	void LoadNameOpenCakset();
+	void LoadNameOpenCakset(const std::string& typeCasket);
 	void ShowBonusAnimation(float dt);
 
 	~BonusGraphicComponent();
@@ -44,7 +44,8 @@ public:
 	bool		m_showAnimation;
 	int			m_interval;
 
-	std::vector<std::string> m_vecNameSpritesOpenCasket;
+	std::vector<std::string> m_vecNameSpritesOpenCasketCoins;
+	std::vector<std::string> m_vecNameSpritesOpenCasketPowers;
 };
 
 #endif

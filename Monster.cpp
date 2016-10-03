@@ -9,9 +9,9 @@
 #include "constants.h"
 
 Monster::Monster(
-				GraphicComponent* graphicComponentHero, GraphicComponent* graphicComponentWeapon,
-				GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, 
-				InputComponent* inputComponent, InputComponent* botInputComponent,
+				GraphicComponent* graphicComponentHero,		GraphicComponent* graphicComponentWeapon,
+				GraphicComponent* graphicComponentBullet,	GameObjectMonster* objectMonster, 
+				InputComponent* inputComponent,				InputComponent* botInputComponent,
 				PhysicComponent* physicComponent
 				) 
 							:	m_graphicComponentHero		(graphicComponentHero),

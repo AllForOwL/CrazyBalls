@@ -40,7 +40,7 @@ const std::string CNT_NAME_ENEMY_ROCK_9 = "Rock9";
 
 const int CNT_TYPE_OBJECT_RANDOM						= 0;
 const int CNT_TYPE_OBJECT_CASKET_COINS					= 1;
-const int CNT_TYPE_OBJECT_CASKET_CLOTHES				= 2;
+const int CNT_TYPE_OBJECT_CASKET_POWER					= 2;
 const int CNT_TYPE_OBJECT_WEAPON_AK47					= 3;
 const int CNT_TYPE_OBJECT_WEAPON_GUN					= 4;
 const int CNT_TYPE_OBJECT_WEAPON_MI71					= 5;
@@ -67,7 +67,7 @@ const std::string CNT_NAME_BOMB				= "Bomd";
 
 const std::string CNT_NAME_COINS			= "Coins";
 const std::string CNT_NAME_CASKET_COINS		= "Casket_coins";
-const std::string CNT_NAME_CASKET_CLOTHES	= "Casket_clothes";
+const std::string CNT_NAME_CASKET_POWERS	= "Casket_clothes";
 
 #define HERO_COLLISION_BITMASK		0x000001
 #define ENEMY_COLLISION_BITMASK		0x000002
