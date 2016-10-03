@@ -113,9 +113,6 @@ public:
 
 	virtual void Update(GameScene& scene);
 	
-	void ChangeWeapon(WeaponGraphicComponent& weapon);
-	void ChangeBullet(PlayerBulletGraphicComponent& bullet);
-
 	int GetIndexActiveWeapon();
 	int GetIndexActiveBullet();
 

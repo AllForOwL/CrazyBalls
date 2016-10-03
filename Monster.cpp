@@ -35,18 +35,6 @@ Monster::Monster(
 	m_vecGraphicComponentBullet.push_back(_tempBullet);
 }
 
-void Monster::ChangeWeapon(WeaponGraphicComponent& weapon)
-{
-	m_graphicComponentHeroWeapon->removeFromParent();
-	m_graphicComponentHeroWeapon = new WeaponGraphicComponent(weapon);
-}
-
-void Monster::ChangeBullet(PlayerBulletGraphicComponent& bullet)
-{
-	m_graphiComponentHeroBullet->removeFromParent();
-	m_graphiComponentHeroBullet = new PlayerBulletGraphicComponent(bullet);
-}
-
 int Monster::GetIndexActiveWeapon()
 {
 	if (!m_vecGraphicComponentWeapon.size())
@@ -229,10 +217,17 @@ void Monster::Update(GameScene& scene)
 	m_physicComponent->Update			(*this, scene);
 	
 	int _indexActiveWeapon = GetIndexActiveWeapon();
+	int _indexActiveBullet = GetIndexActiveBullet();
 	if (_indexActiveWeapon != -1)
 	{
-		m_vecGraphicComponentWeapon[GetIndexActiveWeapon()]->m_GraphicComponent->Update(*this, scene);
-		m_vecGraphicComponentBullet[GetIndexActiveBullet()]->m_GraphicComponent->Update(*this, scene);
+		if (!m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getParent() || 
+			!m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->isVisible()
+		   )
+		{
+			SetActiveWeapon(scene, _indexActiveWeapon);
+		}
+		m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->Update(*this, scene);
+		m_vecGraphicComponentBullet[_indexActiveBullet]->m_GraphicComponent->Update(*this, scene);
 	}
 }
 

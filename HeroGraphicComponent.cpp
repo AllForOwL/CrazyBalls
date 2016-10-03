@@ -348,7 +348,6 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 	return 1;
 }
 
-
 HeroGraphicComponent::~HeroGraphicComponent()
 {
 

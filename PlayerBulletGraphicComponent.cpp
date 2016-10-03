@@ -164,7 +164,6 @@ int PlayerBulletGraphicComponent::GetSpeedBullet() const
 	return 1;
 }
 
-
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()
 {
 
