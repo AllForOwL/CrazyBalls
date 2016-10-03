@@ -54,40 +54,32 @@ int Monster::GetIndexActiveWeapon()
 		return -1;
 	}
 
-	bool _removeElement = false;
-
 	for (int i = 0; i < m_vecGraphicComponentWeapon.size(); i++)
 	{
-		if (!m_vecGraphicComponentWeapon[i]->GetQuentity())
+		if (m_vecGraphicComponentWeapon[i]->isActive())
 		{
-			m_vecGraphicComponentWeapon[i]->m_GraphicComponent->removeFromParentAndCleanup(true);
-			m_vecGraphicComponentWeapon.erase(m_vecGraphicComponentWeapon.begin() + i);
-			_removeElement = true;
+			return i;
 		}
 	}
 
-	if (!_removeElement)
+	m_vecGraphicComponentWeapon[GetRandWeapon()]->SetActive();
+
+	return GetRandWeapon();
+}
+
+int Monster::GetRandWeapon()
+{
+	int _quentityWeapon = m_vecGraphicComponentWeapon.size();
+	--_quentityWeapon;
+
+	if (_quentityWeapon == 0)
 	{
-		for (int i = 0; i < m_vecGraphicComponentWeapon.size(); i++)
-		{
-			if (m_vecGraphicComponentWeapon[i]->isActive())
-			{
-				return i;
-			}
-		}
+		return 0;
 	}
 	else
 	{
-		if (!m_vecGraphicComponentWeapon.size())
-		{
-			return -1;
-		}
-
-		m_vecGraphicComponentWeapon[0]->SetActive();
-
-		return 0;
+		return  rand() % _quentityWeapon + 0;
 	}
-
 }
 
 int Monster::GetIndexActiveBullet()
@@ -230,20 +222,18 @@ void Monster::SetActiveWeapon(GameScene& scene, int index)
 
 void Monster::Update(GameScene& scene)
 {
-	int _indexActiveWeapon = GetIndexActiveWeapon();
-	int _indexActiveBullet = GetIndexActiveBullet();
-
-	if (_indexActiveWeapon >= 0)
-	{
-		m_vecGraphicComponentWeapon[GetIndexActiveWeapon()]->m_GraphicComponent->Update(*this, scene);
-		m_vecGraphicComponentBullet[GetIndexActiveBullet()]->m_GraphicComponent->Update(*this, scene);
-	}
-
 	m_inputComponentHero->Update		(*this);
 	m_graphicComponentHero->Update		(*this, scene);
 	m_botInputComponent->Update			(*this);
 	m_objectMonster->Update				(*this, scene);
 	m_physicComponent->Update			(*this, scene);
+	
+	int _indexActiveWeapon = GetIndexActiveWeapon();
+	if (_indexActiveWeapon != -1)
+	{
+		m_vecGraphicComponentWeapon[GetIndexActiveWeapon()]->m_GraphicComponent->Update(*this, scene);
+		m_vecGraphicComponentBullet[GetIndexActiveBullet()]->m_GraphicComponent->Update(*this, scene);
+	}
 }
 
 Monster::~Monster()

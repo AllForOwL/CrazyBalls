@@ -85,6 +85,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 
 				this->setVisible(true);
 				Vec2 _positionWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getPosition();
+				hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->DescreaseQuentityBullet();
 				_positionWeapon.x		+= 40;
 				m_position				= _positionWeapon;
 				this->setPosition(m_position);
@@ -95,6 +96,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 				this->setPosition(m_position);
 				this->setVisible(false);
 				hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
+				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
 			}
 			else
 			{

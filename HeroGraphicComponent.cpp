@@ -14,7 +14,7 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 	{
 		LoadSpritesForHell();
 		m_attack = 120;
-		m_health = 100;
+		m_health = 1000;
 	}
 
 	m_coins = 0;
@@ -215,6 +215,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 			if (_amountWeapon == 1)
 			{
+				hero.SetActiveWeapon(scene, 0);
 				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 				break;
 			}

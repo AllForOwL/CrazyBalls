@@ -73,6 +73,7 @@ public:
 		WEAPON_STATE_FIRE,
 		WEAPON_STATE_FIRE_UP,
 		WEAPON_STATE_REST,
+		WEAPON_CHECK_QUENTITY_BULLET,
 		WEAPON_STATE_DEATH
 	};
 
@@ -123,6 +124,9 @@ public:
 
 	void SetActiveBullet(GameScene& scene, int index);
 	void SetActiveWeapon(GameScene& scene, int index);
+
+	void CheckQuentityBulletInActiveWeapon();
+	int  GetRandWeapon();
 
 	~Monster();
 

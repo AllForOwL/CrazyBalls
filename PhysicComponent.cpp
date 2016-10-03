@@ -34,6 +34,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			}
 				
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
+			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
 			hero.m_graphiComponentHeroBullet->setVisible(false);
 			hero.m_graphiComponentHeroBullet->setPosition(Point(-10, -10));	
 
@@ -91,6 +92,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		case StatePhysic::STATE_TARGET_BONUS:
 		{	
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_TARGET;
+			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
 
 			if (m_TagBonus <= CNT_TYPE_OBJECT_CASKET_CLOTHES)
 			{

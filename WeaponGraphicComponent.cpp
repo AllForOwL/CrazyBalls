@@ -129,13 +129,44 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 			{
 				hero.m_graphiComponentHeroBullet->SetSpeedBullet(m_speedBullet);
 			}
+
 			this->setPosition(hero.m_graphicComponentHero->getPosition().x, hero.m_graphicComponentHero->getPosition().y - 18);
 															
 			break;
 		}
+		case Monster::StateWeapon::WEAPON_STATE_REST:
+		{	
+			this->setPosition(hero.m_graphicComponentHero->getPosition().x, hero.m_graphicComponentHero->getPosition().y - 18);
+
+			break;
+		}
+		case Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET:
+		{
+			if (m_quentityBullet <= 0)
+			{
+				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_DEATH;
+			}
+			else
+			{
+				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_FIRE;
+			}
+
+			break;
+		}
 		case Monster::StateWeapon::WEAPON_STATE_DEATH:
 		{
+			for (int i = 0; i < hero.m_vecGraphicComponentWeapon.size(); i++)
+			{
+				if (!hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->GetQuentityBullet())
+				{
+					hero.m_vecGraphicComponentWeapon.erase(hero.m_vecGraphicComponentWeapon.begin() + i);
+					break;
+				}
+			}
+
 			this->removeFromParentAndCleanup(true);
+			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
+
 			break;
 		}
 	default:
