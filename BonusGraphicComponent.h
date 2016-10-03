@@ -44,8 +44,7 @@ public:
 	bool		m_showAnimation;
 	int			m_interval;
 
-	std::vector<std::string> m_vecNameSpritesOpenCasketCoins;
-	std::vector<std::string> m_vecNameSpritesOpenCasketPowers;
+	std::vector<std::string> m_vecNameSpritesOpenCasket;
 };
 
 #endif

@@ -153,50 +153,175 @@ void GameLayer::Update(Monster& hero)
 			}
 			case CNT_TYPE_OBJECT_WEAPON_GUN:
 			{
-				int _index = CNT_TYPE_OBJECT_WEAPON_GUN - 3;
-				m_vecSpritesWeapon[_index]->setPosition(210, 300);
+				int _index = CNT_TYPE_OBJECT_WEAPON_GUN - 3;												
+				if (m_vecLevelQuentityBullet[_index]->getTag() == CNT_TYPE_OBJECT_WEAPON_GUN)
+				{
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+				}
+				else
+				{
+					m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
 
+					m_positionX += 30;
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+					m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
+					m_vecLevelQuentityBullet[_index]->setTag(CNT_TYPE_OBJECT_WEAPON_GUN);
+
+					m_positionX += 30;
+				}
 				break;
 			}
 			case CNT_TYPE_OBJECT_WEAPON_MI71:
 			{
-				int _index = CNT_TYPE_OBJECT_WEAPON_MI71 - 3;
-				m_vecSpritesWeapon[_index]->setPosition(210, 300);
+				int _index = CNT_TYPE_OBJECT_WEAPON_MI71 - 3;												
+				if (m_vecLevelQuentityBullet[_index]->getTag() == CNT_TYPE_OBJECT_WEAPON_MI71)
+				{
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+				}
+				else
+				{
+					m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
+
+					m_positionX += 30;
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+					m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
+					m_vecLevelQuentityBullet[_index]->setTag(CNT_TYPE_OBJECT_WEAPON_MI71);
+
+					m_positionX += 30;
+				}
 
 				break;
 			}
 			case CNT_TYPE_OBJECT_WEAPON_MK15:
 			{
-				int _index = CNT_TYPE_OBJECT_WEAPON_MK15 - 3;
-				m_vecSpritesWeapon[_index]->setPosition(210, 300);
+				int _index = CNT_TYPE_OBJECT_WEAPON_MK15 - 3;												
+				if (m_vecLevelQuentityBullet[_index]->getTag() == CNT_TYPE_OBJECT_WEAPON_MK15)
+				{
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+				}
+				else
+				{
+					m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
+
+					m_positionX += 30;
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+					m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
+					m_vecLevelQuentityBullet[_index]->setTag(CNT_TYPE_OBJECT_WEAPON_MK15);
+
+					m_positionX += 30;
+				}
 
 				break;
 			}
 			case CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE:
 			{
-				int _index = CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE - 3;
-				m_vecSpritesWeapon[_index]->setPosition(210, 300);
+				int _index = CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE - 3;												
+				if (m_vecLevelQuentityBullet[_index]->getTag() == CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE)
+				{
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+				}
+				else
+				{
+					m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
+
+					m_positionX += 30;
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+					m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
+					m_vecLevelQuentityBullet[_index]->setTag(CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE);
+
+					m_positionX += 30;
+				}
 
 				break;
 			}
 			case CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2:
 			{
-				int _index = CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2 - 3;
-				m_vecSpritesWeapon[_index]->setPosition(210, 300);
+				int _index = CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2 - 3;												
+				if (m_vecLevelQuentityBullet[_index]->getTag() == CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2)
+				{
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+				}
+				else
+				{
+					m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
+
+					m_positionX += 30;
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+					m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
+					m_vecLevelQuentityBullet[_index]->setTag(CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2);
+
+					m_positionX += 30;
+				}
 
 				break;
 			}
 			case CNT_TYPE_OBJECT_WEAPON_TS23:
 			{
-				int _index = CNT_TYPE_OBJECT_WEAPON_TS23 - 3;
-				m_vecSpritesWeapon[_index]->setPosition(210, 300);
+				int _index = CNT_TYPE_OBJECT_WEAPON_TS23 - 3;												
+				if (m_vecLevelQuentityBullet[_index]->getTag() == CNT_TYPE_OBJECT_WEAPON_TS23)
+				{
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+				}
+				else
+				{
+					m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
+
+					m_positionX += 30;
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+					m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
+					m_vecLevelQuentityBullet[_index]->setTag(CNT_TYPE_OBJECT_WEAPON_TS23);
+
+					m_positionX += 30;
+				}
 
 				break;
 			}
 			case CNT_TYPE_OBJECT_WEAPON_UMG:
 			{
-				int _index = CNT_TYPE_OBJECT_WEAPON_UMG - 3;
-				m_vecSpritesWeapon[_index]->setPosition(210, 300);
+				int _index = CNT_TYPE_OBJECT_WEAPON_UMG - 3;												
+				if (m_vecLevelQuentityBullet[_index]->getTag() == CNT_TYPE_OBJECT_WEAPON_UMG)
+				{
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+				}
+				else
+				{
+					m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
+
+					m_positionX += 30;
+					char _chquentityBullet[10];
+					itoa(_quentityBullet, _chquentityBullet, 10);
+					m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+					m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
+					m_vecLevelQuentityBullet[_index]->setTag(CNT_TYPE_OBJECT_WEAPON_UMG);
+
+					m_positionX += 30;
+				}
 				
 				this->addChild(m_vecSpritesWeapon[_index]);
 
