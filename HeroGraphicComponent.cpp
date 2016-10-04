@@ -311,6 +311,10 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 	m_coins += coins;
 }
 
+/*virtual*/ void HeroGraphicComponent::ChangeHealth(int health)
+{
+	m_health += health;
+}
 /*virtual*/ bool HeroGraphicComponent::Winner() const
 {
 	if (m_coins >= m_vecNumberCoinsForTransitionNextLevel[GameScene::m_level])

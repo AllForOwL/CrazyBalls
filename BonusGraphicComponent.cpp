@@ -10,7 +10,8 @@ BonusGraphicComponent::BonusGraphicComponent()
 	m_showAnimation				= false;
 	m_indexInVector				= 0;
 	m_indexInVectorAnimation	= 0;
-	
+	//m_stateBonus				= StateBonus::BONUS_REST;
+
 	this->initWithFile("res/Weapons/AK47.png");
 	this->setVisible(false);
 
@@ -277,6 +278,11 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 /*virtual*/ int BonusGraphicComponent::GetQuentityBullet() const
 {
 	return 1;
+}
+
+/*virtual*/ void BonusGraphicComponent::ChangeHealth(int health)
+{
+
 }
 
 BonusGraphicComponent::~BonusGraphicComponent()

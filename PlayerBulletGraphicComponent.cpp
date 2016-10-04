@@ -164,6 +164,11 @@ int PlayerBulletGraphicComponent::GetSpeedBullet() const
 	return 1;
 }
 
+/*virtual*/ void PlayerBulletGraphicComponent::ChangeHealth(int health)
+{
+
+}
+
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()
 {
 

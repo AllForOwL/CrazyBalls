@@ -25,6 +25,8 @@ public:
 	virtual void DescreaseQuentityBullet();
 	virtual int  GetQuentityBullet() const;
 
+	virtual void ChangeHealth(int health);
+
 	void LoadBulletNormal();
 	void LoadBomb();
 

@@ -94,6 +94,10 @@ public:
 
 	enum StateBonus
 	{
+		BONUS_COIN,
+		BONUS_POWER,
+		BONUS_WEAPON,
+		BONUS_REST,
 		BONUS_DEATH
 	};
 

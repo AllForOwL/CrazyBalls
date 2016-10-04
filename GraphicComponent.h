@@ -21,6 +21,7 @@ public:
 	virtual std::string		GetTypeObject()				const	= 0;
 	virtual bool			Dead(int wounded)					= 0;
 	virtual void			ChangeCoins(int coins)				= 0;
+	virtual void			ChangeHealth(int health)			= 0;
 	virtual bool			Winner()					const	= 0;
 	virtual void			SetSpeedBullet(int speed)			= 0;
 	virtual int				GetSpeedBullet()			const	= 0;

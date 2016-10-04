@@ -35,6 +35,8 @@ public:
 	virtual void ChangeCoins(int coins);
 	virtual bool Winner() const;
 
+	virtual void ChangeHealth(int health);
+
 	virtual void SetSpeedBullet(int speed);
 	virtual int GetSpeedBullet() const;
 

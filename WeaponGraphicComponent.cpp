@@ -239,6 +239,11 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 	return 2;
 }
 
+/*virtual*/ void WeaponGraphicComponent::ChangeHealth(int health)
+{
+
+}
+
 WeaponGraphicComponent::~WeaponGraphicComponent()
 {
 

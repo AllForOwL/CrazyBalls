@@ -13,7 +13,12 @@ public:
 
 	void Update(Monster& hero);
 
+	void ShowAnimation(float dt);
+
 	void GoToPause(cocos2d::Ref* ref);
+	void ShowQuentityBullet(int tagWeapon, int quentityBullet);
+
+	void LoadSpritesName();
 
 	CREATE_FUNC(GameLayer);
 
@@ -31,6 +36,17 @@ public:
 	std::vector<int> m_IndexShowWeapon;
 
 	int m_positionX;
+
+	cocos2d::Sprite* m_animationPower;
+	cocos2d::Sprite* m_animationCoin;
+
+	std::vector<std::string> m_vecNameSpritesAnimationPower;
+	std::vector<std::string> m_vecNameSpritesAnimationCoin;
+
+	std::string m_typeAnimation;
+
+	int m_indexInVectorAnimation;
+
 };
 
 #endif // __GAME_LAYER_H__

@@ -362,6 +362,11 @@ bool BreedGraphicComponent::Death()
 	return 1;
 }
 
+/*virtual*/ void BreedGraphicComponent::ChangeHealth(int health)
+{
+
+}
+
 
 BreedGraphicComponent::~BreedGraphicComponent()
 {

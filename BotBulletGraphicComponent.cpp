@@ -149,6 +149,10 @@ void BotBulletGraphicComponent::LoadBomb()
 	return 1;
 }
 
+/*virtual*/ void BotBulletGraphicComponent::ChangeHealth(int health)
+{
+
+}
 
 BotBulletGraphicComponent::~BotBulletGraphicComponent()
 {

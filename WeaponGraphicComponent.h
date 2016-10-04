@@ -29,6 +29,8 @@ public:
 	virtual void DescreaseQuentityBullet();
 	virtual int  GetQuentityBullet() const;
 
+	virtual void ChangeHealth(int health);
+
 	~WeaponGraphicComponent();
 
 public:

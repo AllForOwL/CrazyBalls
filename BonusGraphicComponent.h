@@ -10,6 +10,7 @@ using namespace cocos2d;
 class BonusGraphicComponent : public GraphicComponent
 {
 public:
+	
 	BonusGraphicComponent();
 	
 	virtual void		Update(Monster& hero, GameScene& scene);
@@ -26,6 +27,8 @@ public:
 
 	virtual void DescreaseQuentityBullet();
 	virtual int  GetQuentityBullet() const;
+
+	virtual void ChangeHealth(int health);
 
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset(const std::string& typeCasket);

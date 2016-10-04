@@ -94,10 +94,18 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_TARGET;
 			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
 
-			if (m_TagBonus <= CNT_TYPE_OBJECT_CASKET_POWER)
+			if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_COINS)
 			{
 				hero.m_graphicComponentHero->ChangeCoins(50);
 				scene.m_bonusGraphicComponent->m_showAnimation = true;
+				hero.m_stateBonus = Monster::StateBonus::BONUS_COIN;
+
+			}
+			else if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_POWER)
+			{
+				hero.m_graphicComponentHero->ChangeHealth(50);
+				scene.m_bonusGraphicComponent->m_showAnimation = true;
+				hero.m_stateBonus = Monster::StateBonus::BONUS_POWER;
 			}
 			else if (m_TagBonus <= CNT_TYPE_OBJECT_WEAPON_UMG)	// last object for weapon
 			{
@@ -105,6 +113,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				scene.m_bonusGraphicComponent->setVisible(false);
 				scene.m_bonusGraphicComponent->setPosition(-500, -500);
 				scene.m_bonusGraphicComponent->m_actived = false;
+				hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
 			}
 			else
 			{
@@ -112,6 +121,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				scene.m_bonusGraphicComponent->setVisible(false);
 				scene.m_bonusGraphicComponent->setPosition(-500, -500);
 				scene.m_bonusGraphicComponent->m_actived = false;
+				hero.m_stateBonus = Monster::StateBonus::BONUS_REST;
 			}
 
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;

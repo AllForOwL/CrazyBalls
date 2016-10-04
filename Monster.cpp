@@ -27,6 +27,7 @@ Monster::Monster(
 	m_stateBullet	= Monster::StateBullet::BULLET_STATE_REST;
 	m_statePhysic	= Monster::StatePhysic::PHYSIC_NOTHING;
 	m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_LIFE;;
+	m_stateBonus	= Monster::StateBonus::BONUS_WEAPON;
 
 	ComponentHero* _tempWeapon = new ComponentHero(m_graphicComponentHeroWeapon, true);
 	ComponentHero* _tempBullet = new ComponentHero(m_graphiComponentHeroBullet, true);
