@@ -9,18 +9,18 @@
 #include "constants.h"
 
 Monster::Monster(
-				GraphicComponent* graphicComponentHero,		GraphicComponent* graphicComponentWeapon,
-				GraphicComponent* graphicComponentBullet,	GameObjectMonster* objectMonster, 
-				InputComponent* inputComponent,				InputComponent* botInputComponent,
-				PhysicComponent* physicComponent
+				GraphicComponent& graphicComponentHero,		GraphicComponent& graphicComponentWeapon,
+				GraphicComponent& graphicComponentBullet,	GameObjectMonster& objectMonster, 
+				InputComponent& inputComponent,				InputComponent& botInputComponent,
+				PhysicComponent& physicComponent
 				) 
-							:	m_graphicComponentHero		(graphicComponentHero),
-								m_graphicComponentHeroWeapon(graphicComponentWeapon),
-								m_graphiComponentHeroBullet (graphicComponentBullet),
-								m_objectMonster				(objectMonster),
-								m_inputComponentHero		(inputComponent),
-								m_botInputComponent			(botInputComponent),
-								m_physicComponent			(physicComponent)
+							:	m_graphicComponentHero		(&graphicComponentHero),
+								m_graphicComponentHeroWeapon(&graphicComponentWeapon),
+								m_graphiComponentHeroBullet (&graphicComponentBullet),
+								m_objectMonster				(&objectMonster),
+								m_inputComponentHero		(&inputComponent),
+								m_botInputComponent			(&botInputComponent),
+								m_physicComponent			(&physicComponent)
 {
 	m_stateHero		= Monster::StateHero::HERO_STATE_WALK;
 	m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_FIRE;

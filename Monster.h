@@ -109,10 +109,10 @@ public:
 	};
 
 	Monster::Monster(
-						GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, 
-						GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, 
-						InputComponent* inputComponent, InputComponent* botInputComponent,
-						PhysicComponent* physicComponent
+						GraphicComponent& graphicComponentHero, GraphicComponent& graphiComponentWeapon, 
+						GraphicComponent& graphicComponentBullet, GameObjectMonster& objectMonster, 
+						InputComponent& inputComponent, InputComponent& botInputComponent,
+						PhysicComponent& physicComponent
 					 );
 
 	virtual void Update(GameScene& scene);

@@ -90,10 +90,10 @@ bool GameScene::init()
 	m_gameObjectMonster			= new GameObjectMonster();
 	m_botInputComponent			= new BotInputComponent();
 	m_physicComponent			= new PhysicComponent();
-	m_hero						= new Monster(	m_graphicComponentHero,		m_graphicComponentWeapon, 
-												m_graphicComponentBullet,	m_gameObjectMonster, 
-												m_inputComponent,			m_botInputComponent, 
-												m_physicComponent
+	m_hero						= new Monster(	*m_graphicComponentHero,	*m_graphicComponentWeapon, 
+												*m_graphicComponentBullet,	*m_gameObjectMonster, 
+												*m_inputComponent,			*m_botInputComponent, 
+												*m_physicComponent
 											 );
 		
 	m_bonusGraphicComponent = new BonusGraphicComponent();
