@@ -1,10 +1,12 @@
-#include "HeroGraphicComponent.h"
+п»ї#include "HeroGraphicComponent.h"
 #include "Monster.h"
 #include "GraphicComponent.h"
 #include "GameScene.h"
 #include "constants.h"
 #include "WeaponGraphicComponent.h"
 #include "PlayerBulletGraphicComponent.h"
+#include "TransitionMainScene.h"
+
 
 HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
 {
@@ -106,7 +108,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 
 void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 {
-	m_vecNumberCoinsForTransitionNextLevel.push_back(50);
+	m_vecNumberCoinsForTransitionNextLevel.push_back(10);
 	int _numberCoins = 50;
 	for (int i = 1; i < 12; i++)
 	{
@@ -276,11 +278,50 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 		}
 		case Monster::StateHero::HERO_STATE_WINNER:
 		{
+				/*srand(time(NULL));
+				auto reScene = TransitionFade::create(1.0f, TransitionMainScene::createScene(), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+				Director::getInstance()->pushScene(reScene);*/
+				
+				Sprite* _sprite = Sprite::create("res/Weapons/AK47.png");
+				_sprite->setPosition(150, 150);
+				this->addChild(_sprite);
+
+			//	EventListenerTouchAllAtOnce* touchEvent = EventListenerTouchAllAtOnce::create();
+			//	//и§¦ж‘ёжЊ‰дё‹
+			//	touchEvent->onTouchesBegan = [=](const std::vector<Touch*>& touches, Event* event){
+			//		for (auto &item : touches)       //йЃЌеЋ†е®№е™Ёдё­зљ„еђ„дёЄж€ђе‘
+			//		{
+			//			auto touch = item;
+			//			auto location = touch->getLocation();
+			//			//LEFT
+			//			if (rect_but_left.containsPoint(location))
+			//			{
+			//				hero->moveLeft();
+			//			}
+			//			//RIGHT
+			//			else if (rect_but_right.containsPoint(location))
+			//			{
+			//				hero->moveRight();
+			//			} 
+			//			//A
+			//			else if (rect_but_A.containsPoint(location))
+			//			{
+			//				hero->fire();
+			//			} 
+			//			//B
+			//			else if (rect_but_B.containsPoint(location))
+			//			{
+			//				hero->jump();
+			//			}
+			//		}
+			//};
+
+
 		//	if (++m_countSpriteInVectorFall == m_vecSpritesFall.size())
 		//	{
-				scene.LoadLevel();
+			//	scene.LoadLevel();
 
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+//					hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 		//		break;
 		//	}
 
@@ -357,8 +398,8 @@ HeroGraphicComponent::~HeroGraphicComponent()
 
 }
 
-/*  GraphicComponent	- тільки малює спрайти 
-	PhysicsComponent	- виявлє зіткнення героя
-	InputComponent		- приймає діна з клавіатури
-	Monster				- контейнер для цих компонентів
+/*  GraphicComponent	- С‚С–Р»СЊРєРё РјР°Р»СЋС” СЃРїСЂР°Р№С‚Рё 
+	PhysicsComponent	- РІРёСЏРІР»С” Р·С–С‚РєРЅРµРЅРЅСЏ РіРµСЂРѕСЏ
+	InputComponent		- РїСЂРёР№РјР°С” РґС–РЅР° Р· РєР»Р°РІС–Р°С‚СѓСЂРё
+	Monster				- РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С†РёС… РєРѕРјРїРѕРЅРµРЅС‚С–РІ
 */

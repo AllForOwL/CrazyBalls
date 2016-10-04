@@ -151,7 +151,7 @@ void GameScene::SpawnBonus(float dt)
 		return;
 	}
 
-	m_bonusGraphicComponent->AddBonus(CNT_TYPE_OBJECT_CASKET_COINS);
+	m_bonusGraphicComponent->AddBonus(CNT_TYPE_OBJECT_RANDOM);
 
 	Size _visibleSize	= Director::getInstance()->getVisibleSize();
 	Size _sizeBonus		= m_bonusGraphicComponent->getContentSize();		
