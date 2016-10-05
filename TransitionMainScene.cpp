@@ -1,12 +1,25 @@
 #include "TransitionMainScene.h"
+#include "GameScene.h"
 
 const int CNT_SCALE = 5;
+const int CNT_CHOOISE_COIN		= 10;
+const int CNT_CHOOISE_LIFE		= 11;
+const int CNT_CHOOISE_WEAPON	= 12;
 
 USING_NS_CC;
 
-Scene *TransitionMainScene::createScene()
+int TransitionMainScene::m_sCoin = 0;
+int TransitionMainScene::m_sLife = 0;
+std::vector<int> TransitionMainScene::m_sVecWeapon;
+
+Scene *TransitionMainScene::createScene(int coin, int life, std::vector<int>& vecWeapon)
 {
 	auto scene = Scene::create();
+
+	m_sCoin = coin;
+	m_sLife = life;
+	m_sVecWeapon.resize(vecWeapon.size());
+	std::copy(vecWeapon.begin(), vecWeapon.end(), m_sVecWeapon.begin());
 
 	auto layer = TransitionMainScene::create();
 
@@ -21,6 +34,11 @@ bool TransitionMainScene::init()
 	{
 		return false;
 	}
+
+	m_quentityCounter = 0;
+
+	m_coin = 0;
+	m_life = 0;
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	Size _spriteSize;
@@ -64,17 +82,27 @@ bool TransitionMainScene::init()
 	
 	// chooise coin
 	if (_rectCoin.containsPoint(_location))
-	{
-		Director::getInstance()->popScene();
+	{	
+		m_coin = m_sCoin;
 		CCLOG("COIN");
 	}// life
 	else if (_rectLife.containsPoint(_location))
 	{
+		m_life = m_sLife;
 		CCLOG("LIFE");
 	}//weapon
 	else if (_rectWeapon.containsPoint(_location))
 	{
+		m_vecWeapon.resize(m_sVecWeapon.size());
+		std::copy(m_sVecWeapon.begin(), m_sVecWeapon.end(), m_vecWeapon.begin());
 		CCLOG("WEAPON");
+	}
+
+	if (++m_quentityCounter == 2)
+	{
+		srand(time(NULL));
+		auto reScene = TransitionFade::create(0.1f, GameScene::createScene(true, m_coin, m_life, m_vecWeapon), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+		Director::getInstance()->replaceScene(reScene);
 	}
 
 	return true;

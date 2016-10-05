@@ -278,54 +278,20 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 		}
 		case Monster::StateHero::HERO_STATE_WINNER:
 		{
-				/*srand(time(NULL));
-				auto reScene = TransitionFade::create(1.0f, TransitionMainScene::createScene(), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
-				Director::getInstance()->pushScene(reScene);*/
-				
-				Sprite* _sprite = Sprite::create("res/Weapons/AK47.png");
-				_sprite->setPosition(150, 150);
-				this->addChild(_sprite);
+			srand(time(NULL));
+			int _coin	= hero.m_graphicComponentHero->GetAttack();
+			int _health = hero.m_graphicComponentHero->GetHealth();
+			std::vector<int> _vecTagWeapon;
 
-			//	EventListenerTouchAllAtOnce* touchEvent = EventListenerTouchAllAtOnce::create();
-			//	//触摸按下
-			//	touchEvent->onTouchesBegan = [=](const std::vector<Touch*>& touches, Event* event){
-			//		for (auto &item : touches)       //遍历容器中的各个成员
-			//		{
-			//			auto touch = item;
-			//			auto location = touch->getLocation();
-			//			//LEFT
-			//			if (rect_but_left.containsPoint(location))
-			//			{
-			//				hero->moveLeft();
-			//			}
-			//			//RIGHT
-			//			else if (rect_but_right.containsPoint(location))
-			//			{
-			//				hero->moveRight();
-			//			} 
-			//			//A
-			//			else if (rect_but_A.containsPoint(location))
-			//			{
-			//				hero->fire();
-			//			} 
-			//			//B
-			//			else if (rect_but_B.containsPoint(location))
-			//			{
-			//				hero->jump();
-			//			}
-			//		}
-			//};
+			int _tag = 0;
+			for (int i = 0; i < hero.m_vecGraphicComponentWeapon.size(); i++)
+			{
+				_tag = hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->getTag();
+				_vecTagWeapon.push_back(_tag);
+			}
 
-
-		//	if (++m_countSpriteInVectorFall == m_vecSpritesFall.size())
-		//	{
-			//	scene.LoadLevel();
-
-//					hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
-		//		break;
-		//	}
-
-		//	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[m_countSpriteInVectorFall]));
+			auto reScene = TransitionFade::create(0.1f, TransitionMainScene::createScene(_coin, _health, _vecTagWeapon), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+			Director::getInstance()->replaceScene(reScene);
 
 			break;
 		}

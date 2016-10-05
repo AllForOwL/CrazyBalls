@@ -49,7 +49,8 @@ bool SplashScene::init()
 
 void SplashScene::GoToMainMenuScene(float delay)
 {
-	auto mainMenuScene = GameScene::createScene(false);
+	std::vector<int> _vec;
+	auto mainMenuScene = GameScene::createScene(false, 0, 0, _vec);
 
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, mainMenuScene));
 }

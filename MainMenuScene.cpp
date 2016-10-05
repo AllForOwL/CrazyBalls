@@ -37,7 +37,8 @@ bool MainMenuScene::init()
 
 void MainMenuScene::GoToGameScene(cocos2d::Ref* ref)
 {
-	auto _gameScene = GameScene::createScene(false);
+	std::vector<int> _vec;
+	auto _gameScene = GameScene::createScene(false, 0, 0, _vec);
 
 	srand(time(NULL));
 	auto reScene = TransitionFade::create(2.0f, _gameScene, Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));

@@ -14,8 +14,11 @@
 USING_NS_CC;
 
 int GameScene::m_level = 0;
+int GameScene::m_coin  = 0;
+int GameScene::m_life  = 0;
+std::vector<int> GameScene::m_vecNameWeapon;
 
-Scene *GameScene::createScene(bool nextLevel) 
+Scene *GameScene::createScene(bool nextLevel, int coin, int life, std::vector<int>& vecNameWeapon) 
 {
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
@@ -27,12 +30,25 @@ Scene *GameScene::createScene(bool nextLevel)
 		{
 			m_level = 0;
 		}
+
+		m_coin = coin;
+		m_life = life;
 	}
 	else 
 	{
 		m_level = 0;
 	}
 	
+	if (vecNameWeapon.size())
+	{
+		m_vecNameWeapon.resize(vecNameWeapon.size());
+		std::copy(vecNameWeapon.begin(), vecNameWeapon.end(), m_vecNameWeapon.begin());
+	}
+	else
+	{
+		m_vecNameWeapon.clear();
+	}
+
 	auto layer = GameScene::create();
 	layer->SetPhysicsWorld(scene->getPhysicsWorld());
 	scene->addChild(layer);
@@ -95,7 +111,29 @@ bool GameScene::init()
 												*m_inputComponent,			*m_botInputComponent, 
 												*m_physicComponent
 											 );
+	
+	if (GameScene::m_level)
+	{
+		m_hero->m_vecGraphicComponentWeapon[0]->m_GraphicComponent->removeFromParentAndCleanup(true);
+		m_hero->m_vecGraphicComponentWeapon.clear();
 		
+		if (m_coin)
+		{
+			m_hero->m_graphicComponentHero->ChangeCoins(m_coin);
+		}
+		if (m_life)
+		{
+			m_hero->m_graphicComponentHero->ChangeHealth(m_life);
+		}
+		if (m_vecNameWeapon.size())
+		{
+			for (int i = 0; i < m_vecNameWeapon.size(); i++)
+			{
+				m_hero->AddWeapon(m_vecNameWeapon[i]);
+			}
+		}
+	}
+
 	m_bonusGraphicComponent = new BonusGraphicComponent();
 	m_bonusGraphicComponent->setName("bonus");
 	this->addChild(m_bonusGraphicComponent);
@@ -210,15 +248,14 @@ void GameScene::SetBackground()
 
 void GameScene::LoadLevel()
 {
-	auto reScene = TransitionFade::create(1.0f, GameScene::createScene(true), Color3B(0, 0, 0));
-	Director::getInstance()->replaceScene(reScene);
+	/*auto reScene = TransitionFade::create(1.0f, GameScene::createScene(true, ), Color3B(0, 0, 0));
+	Director::getInstance()->replaceScene(reScene);*/
 }
 
 GameScene::~GameScene()
 {
 
 }
-
 
 /**********Jump table*********/
 //std::random_shuffle(_grid.begin(), _grid.end());		//	shuffle all vector(change position for each component vector)

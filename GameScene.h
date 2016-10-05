@@ -17,7 +17,7 @@ class GameScene : public cocos2d::Layer
 public:
 	// methods
 	
-	static cocos2d::Scene *createScene(bool nextLeve);
+	static cocos2d::Scene *createScene(bool nextLevel, int coin, int life, std::vector<int>& vecNameWeapon);
 	virtual bool init();
 	
 	void update		(float dt);
@@ -41,6 +41,9 @@ public:
 	}
 	
 	static int				m_level;
+	static int				m_coin;
+	static int				m_life;
+	static std::vector<int> m_vecNameWeapon;
 	GameLayer*				m_gameLayer;
 	Monster*				m_hero;
 	GraphicComponent*		m_graphicComponentHero;
