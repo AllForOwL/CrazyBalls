@@ -108,7 +108,7 @@ public:
 		PHYSIC_KILL_HERO
 	};
 
-	Monster::Monster(
+	Monster(
 						GraphicComponent& graphicComponentHero, GraphicComponent& graphiComponentWeapon, 
 						GraphicComponent& graphicComponentBullet, GameObjectMonster& objectMonster, 
 						InputComponent& inputComponent, InputComponent& botInputComponent,

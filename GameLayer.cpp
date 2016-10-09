@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "GameLayer.h"
 #include "Monster.h"
 #include "PauseScene.h"
