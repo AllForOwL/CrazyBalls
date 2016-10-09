@@ -142,10 +142,20 @@ bool GameScene::init()
 	
 	this->addChild(m_gameLayer);
 
-	auto listener = EventListenerKeyboard::create();
+	/*auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
 	//listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);*/
+
+
+	auto _touchListenerPress = EventListenerTouchOneByOne::create();
+	_touchListenerPress->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListenerPress, this);
+
+	/*auto _touchListenerMoved = EventListenerTouchOneByOne::create();
+	_touchListenerMoved->onTouchMoved = CC_CALLBACK_1(PlayerInputComponent::onTouchMoved, m_inputComponent);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListenerMoved, this);
+	*/
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(PhysicComponent::onContactBegin, m_physicComponent);
@@ -155,6 +165,13 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
 	this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
 	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
+
+	return true;
+}
+
+/*virtual*/ bool GameScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+	m_hero->m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE_UP;
 
 	return true;
 }

@@ -20,6 +20,8 @@ public:
 	static cocos2d::Scene *createScene(bool nextLevel, int coin, int life, std::vector<int>& vecNameWeapon);
 	virtual bool init();
 	
+	virtual bool onTouchBegan(cocos2d::Touch*, cocos2d::Event*);
+
 	void update		(float dt);
 	void Spawn		(float dt);
 	void SpawnBonus	(float dt);
