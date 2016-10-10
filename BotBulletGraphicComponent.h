@@ -28,6 +28,7 @@ public:
 	virtual void ChangeHealth(int health);
 
 	virtual void SetTargetPointForBullet(cocos2d::Point point);
+	virtual void SetTargetPosition_YForHero(int target_y) = 0;
 
 	void LoadBulletNormal();
 	void LoadBomb();

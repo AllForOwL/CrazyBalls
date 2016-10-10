@@ -165,6 +165,11 @@ int PlayerBulletGraphicComponent::GetSpeedBullet() const
 	return true;
 }
 
+/*virtual*/ void PlayerBulletGraphicComponent::SetTargetPosition_YForHero(int target_y)
+{
+
+}
+
 /*virtual*/ int PlayerBulletGraphicComponent::GetValue() const
 {
 	return 2;

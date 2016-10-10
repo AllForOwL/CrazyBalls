@@ -259,6 +259,11 @@ double BreedGraphicComponent::GetTime()
 
 }
 
+/*virtual*/ void BreedGraphicComponent::SetTargetPosition_YForHero(int target_y)
+{
+
+}
+
 /*virtual*/int BreedGraphicComponent::GetHealth() const
 {
 	return m_health;

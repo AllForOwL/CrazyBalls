@@ -2,7 +2,7 @@ const float CNT_TIME_SPAWN			= 5.0;
 const float CNT_TIME_UPDATE_SCENE	= 0.05;
 const float CNT_TIME_SPAWN_BONUS	= 15.0;
 
-const int CNT_NUMBER_COINS_ONE_LEVEL = 10;
+const int CNT_NUMBER_COINS_ONE_LEVEL = 50;
 
 const int CNT_SPEED_BULLET	= 8;
 const int CNT_SPEED_STONE	= 8;

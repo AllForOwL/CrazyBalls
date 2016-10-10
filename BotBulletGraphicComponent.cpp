@@ -84,6 +84,11 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 
 }
 
+/*virtual*/ void BotBulletGraphicComponent::SetTargetPosition_YForHero(int target_y)
+{
+
+}
+
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_objectMonster->m_stateBullet)

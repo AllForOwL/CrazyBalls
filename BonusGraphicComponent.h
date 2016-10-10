@@ -31,6 +31,8 @@ public:
 	virtual void ChangeHealth(int health);
 
 	virtual void SetTargetPointForBullet(cocos2d::Point point);
+	virtual void SetTargetPosition_YForHero(int target_y);
+
 
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset(const std::string& typeCasket);

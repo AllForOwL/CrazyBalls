@@ -7,9 +7,14 @@
 #include "PlayerBulletGraphicComponent.h"
 #include "TransitionMainScene.h"
 
+const int CNT_SPEED_HERO				= 5;
+const int CNT_VISIBLE_ZONE_ENEMY		= 3;
+const int CNT_COUNT_SPRITES_IN_VECTOR	= 3;
 
 HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
 {
+	this->m_target_Y = 0;
+	this->m_speed    = CNT_SPEED_HERO;
 	this->setTag(0);
 	LoadNumberCoinsForTransitionNextLevel();
 	if (m_typeHero == CNT_NAME_HERO_HELL)
@@ -28,10 +33,12 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 	m_countSpriteInVectorDie		= 0;
 	m_countSpriteInVectorFall		= 0;
 
+	m_countSpritesInVectorClimbUp   = 0;
+	m_countSpritesInVectorClimbDown = 3;
+
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 
 	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
-//	physicBodyHero->setDynamic(false);
 	physicBodyHero->setContactTestBitmask(true);
 	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyHero);
@@ -50,13 +57,17 @@ HeroGraphicComponent::HeroGraphicComponent(HeroGraphicComponent& heroGraphicComp
 	}
 
 	m_coins = 0;
+	m_speed = CNT_SPEED_HERO;
 
-	m_countSpriteInVectorWalk = 0;
+	m_countSpriteInVectorWalk	= 0;
 	m_countSpriteInVectorAttack = 0;
-	m_countSpriteInVectorRun = 0;
-	m_countSpriteInVectorDizzy = 0;
-	m_countSpriteInVectorDie = 0;
-	m_countSpriteInVectorFall = 0;
+	m_countSpriteInVectorRun	= 0;
+	m_countSpriteInVectorDizzy	= 0;
+	m_countSpriteInVectorDie	= 0;
+	m_countSpriteInVectorFall	= 0;
+
+	m_countSpritesInVectorClimbUp	= 0;
+	m_countSpritesInVectorClimbDown = 3;
 
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 
@@ -104,11 +115,17 @@ void HeroGraphicComponent::LoadSpritesForHell()
 	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0001.png");
 	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0002.png");
 	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0003.png");
+
+	m_vecSpritesClimb.push_back("res/Hero/Climb/climb-0001.png");
+	m_vecSpritesClimb.push_back("res/Hero/Climb/climb-0002.png");
+	m_vecSpritesClimb.push_back("res/Hero/Climb/climb-0003.png");
+	m_vecSpritesClimb.push_back("res/Hero/Climb/climb-0004.png");
+
 }
 
 void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 {
-	m_vecNumberCoinsForTransitionNextLevel.push_back(10);
+	m_vecNumberCoinsForTransitionNextLevel.push_back(50);
 	int _numberCoins = 50;
 	for (int i = 1; i < 12; i++)
 	{
@@ -295,12 +312,67 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 			break;
 		}
+		case Monster::StateHero::HERO_STATE_GO_TO_TARGET:
+		{
+			if ((int)this->getPositionY() >= m_target_Y - CNT_VISIBLE_ZONE_ENEMY &&
+				(int)this->getPositionY() <= m_target_Y + CNT_VISIBLE_ZONE_ENEMY
+			   )
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+
+				this->m_countSpritesInVectorClimbDown = CNT_COUNT_SPRITES_IN_VECTOR;
+				this->m_countSpritesInVectorClimbUp   = 0;
+
+				break;
+			}
+
+			if (this->getPositionY() > m_target_Y)
+			{
+				Point _normalized = ccpNormalize(ccpSub(Point(this->getPositionX(), m_target_Y), this->getPosition()));
+				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
+
+				this->setPosition(ccpAdd(this->getPosition(), ccpMult(_normalized, m_speed)));
+				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesClimb[m_countSpritesInVectorClimbDown]));
+
+				if (m_countSpritesInVectorClimbDown)
+				{
+					--m_countSpritesInVectorClimbDown;
+				}
+				else
+				{
+					m_countSpritesInVectorClimbDown = 3;
+				}
+			}
+			else
+			{
+				Point _normalized = ccpNormalize(ccpSub(Point(this->getPositionX(), m_target_Y), this->getPosition()));
+				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
+
+				this->setPosition(ccpAdd(this->getPosition(), ccpMult(_normalized, m_speed)));
+				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesClimb[m_countSpritesInVectorClimbUp]));
+
+				if (m_countSpritesInVectorClimbUp != 3)
+				{
+					++m_countSpritesInVectorClimbUp;
+				}
+				else
+				{
+					m_countSpritesInVectorClimbUp = 0;
+				}
+			}
+			break;	
+		}
 	}
 }
 
 /*virtual*/ int HeroGraphicComponent::GetAttack() const
 {
 	return m_attack;
+}
+
+/*virtual*/ void HeroGraphicComponent::SetTargetPosition_YForHero(int target_y)
+{
+	this->m_target_Y = target_y;
 }
 
 /*virtual*/ void HeroGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)

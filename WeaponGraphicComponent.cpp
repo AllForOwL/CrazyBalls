@@ -13,7 +13,7 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 		m_strFilename = "res/Weapons/AK47.png";
 		this->initWithFile(m_strFilename);
 		m_speedBullet		= 8;
-		m_quentityBullet	= 2;
+		m_quentityBullet	= 50;
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_GUN)
 	{
@@ -193,6 +193,12 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 {
 
 }
+
+/*virtual*/ void WeaponGraphicComponent::SetTargetPosition_YForHero(int target_y)
+{
+
+}
+
 
 /*virtual*/ int WeaponGraphicComponent::GetSpeedBullet() const
 {

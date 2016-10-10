@@ -290,6 +290,12 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 
 }
 
+/*virtual*/ void BonusGraphicComponent::SetTargetPosition_YForHero(int target_y)
+{
+
+}
+
+
 BonusGraphicComponent::~BonusGraphicComponent()
 {
 

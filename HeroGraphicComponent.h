@@ -32,6 +32,8 @@ public:
 
 	virtual void SetTargetPointForBullet(cocos2d::Point point);
 
+	virtual void SetTargetPosition_YForHero(int target_y);
+
 	void LoadSpritesForHell();
 	void LoadNumberCoinsForTransitionNextLevel();
 
@@ -44,6 +46,7 @@ public:
 	std::vector<std::string> m_vecSpritesFall;
 	std::vector<std::string> m_vecSpritesDie;
 	std::vector<std::string> m_vecSpritesDizzy;
+	std::vector<std::string> m_vecSpritesClimb;
 
 	std::vector<int> m_vecNumberCoinsForTransitionNextLevel;
 
@@ -54,11 +57,18 @@ public:
 	int m_countSpriteInVectorDie;
 	int m_countSpriteInVectorFall;
 
+	int m_countSpritesInVectorClimbUp;
+	int m_countSpritesInVectorClimbDown;
+
 	std::string m_typeHero;
 
 	int m_attack;
 	int m_health;
 	int m_coins;
+
+	int m_target_Y;
+	int m_speed;
+
 };
 
 #endif

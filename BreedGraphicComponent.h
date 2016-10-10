@@ -44,6 +44,8 @@ public:
 	virtual int  GetQuentityBullet() const;
 
 	virtual void SetTargetPointForBullet(cocos2d::Point point);
+	virtual void SetTargetPosition_YForHero(int target_y);
+
 
 	// ***for future targets*** //
 	//void		LoadTimeForShot();

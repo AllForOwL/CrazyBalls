@@ -28,6 +28,7 @@ public:
 	virtual void			DescreaseQuentityBullet()			= 0;
 	virtual int				GetQuentityBullet()			const	= 0;
 	virtual void			SetTargetPointForBullet(cocos2d::Point point) = 0;
+	virtual void			SetTargetPosition_YForHero(int target_y) = 0;
 
 	virtual ~GraphicComponent() {};
 };

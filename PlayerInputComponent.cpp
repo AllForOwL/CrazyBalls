@@ -40,7 +40,9 @@ PlayerInputComponent::PlayerInputComponent()
 		case EventKeyboard::KeyCode::KEY_F:
 		{
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE;
+			hero.m_stateHero   = Monster::StateHero::HERO_STATE_GO_TO_TARGET;
 			hero.m_vecGraphicComponentBullet[0]->m_GraphicComponent->SetTargetPointForBullet(m_locationTouch);
+			hero.m_graphicComponentHero->SetTargetPosition_YForHero(m_locationTouch.y);
 			m_locationTouch = Vec2::ZERO;
 			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 			break;
