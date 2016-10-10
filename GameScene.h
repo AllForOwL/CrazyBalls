@@ -12,7 +12,7 @@
 
 using namespace cocos2d;
 
-class GameScene : public cocos2d::Layer
+class GameScene : public cocos2d::LayerColor
 {
 public:
 	// methods
@@ -57,6 +57,8 @@ public:
 	InputComponent*			m_botInputComponent;
 	PhysicComponent*		m_physicComponent;
 	BonusGraphicComponent*	m_bonusGraphicComponent;
+
+	cocos2d::LayerColor*	m_layerColor;
 
 	std::vector<std::string>	m_vecNameBackground;
 	cocos2d::Sprite*			m_background;
