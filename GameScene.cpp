@@ -149,7 +149,7 @@ bool GameScene::init()
 
 
 	auto _touchListenerPress = EventListenerTouchOneByOne::create();
-	_touchListenerPress->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
+	_touchListenerPress->onTouchBegan = CC_CALLBACK_2(InputComponent::onTouchBegan, m_inputComponent);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListenerPress, this);
 
 	/*auto _touchListenerMoved = EventListenerTouchOneByOne::create();

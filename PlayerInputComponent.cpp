@@ -62,13 +62,13 @@ PlayerInputComponent::PlayerInputComponent()
 	m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 }
 
-/*virtual*/ /*bool PlayerInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
+/*virtual*/ bool PlayerInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 	m_keyCode = EventKeyboard::KeyCode::KEY_F;
 
 	return true;
 }
-*/
+
 /*virtual*/ /*void PlayerInputComponent::onTouchMoved(cocos2d::Touch* moved, cocos2d::Event* event)
 {
 	Size _visibleSize = Director::getInstance()->getVisibleSize();

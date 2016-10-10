@@ -22,6 +22,11 @@ BotInputComponent::BotInputComponent()
 
 }
 
+/*virtual*/ bool BotInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+	return true;
+}
+
 BotInputComponent::~BotInputComponent()
 {
 

@@ -19,6 +19,8 @@ public:
 	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
+	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+
 	~BotInputComponent();
 };
 

@@ -8,13 +8,15 @@ using namespace cocos2d;
 using namespace std;
 
 // intarface for other input classes
-class InputComponent
+class InputComponent 
 {
 public:
 	virtual void Update(Monster& heroes) = 0;
 
 	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) = 0;
 	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) = 0;
+
+	virtual bool onTouchBegan(Touch* touch, Event* event) = 0;
 
 	virtual ~InputComponent() {};
 
