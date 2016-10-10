@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "GraphicComponent.h"
+#include <ctime>
 
 using namespace std;
 using namespace cocos2d;
@@ -58,7 +59,7 @@ public:
 	void		Wounded();
 	bool		Death();
 
-	double GetTime();
+	std::chrono::time_point<std::chrono::system_clock> GetTime();
 
 	~BreedGraphicComponent();
 
@@ -76,8 +77,8 @@ public:
 	int m_countDefaultSpriteInDeath;
 
 	StateEnemy	m_stateEnemy;
-	double		m_BeginSecond;
-	double		m_FireSecond;
+	std::chrono::time_point<std::chrono::system_clock> m_BeginSecond;
+	int		m_FireSecond;
 	int			m_scale_x;
 	Point		m_pointBeginPosition;
 	int			m_value;

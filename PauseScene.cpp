@@ -1,5 +1,5 @@
 #include "PauseScene.h"
-#include "GameScene.h"S
+#include "GameScene.h"
 #include "MainMenuScene.h"
 
 USING_NS_CC;

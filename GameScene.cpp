@@ -58,7 +58,7 @@ Scene *GameScene::createScene(bool nextLevel, int coin, int life, std::vector<in
 
 bool GameScene::init()
 {
-	if (!LayerColor::initWithColor(cocos2d::Color4B(120, 100, 140, 160)))	// if layer not create exit from function
+	if (!LayerColor::initWithColor(cocos2d::Color4B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0)))	// if layer not create exit from function
 	{
 		return false;
 	}

@@ -12,7 +12,7 @@ class HeroGraphicComponent : public GraphicComponent
 public:
 	HeroGraphicComponent(const std::string& typeHero);
 	HeroGraphicComponent(HeroGraphicComponent& heroGraphiComponent);
-
+	
 	virtual void Update(Monster& hero, GameScene& scene);
 	
 	virtual int GetValue() const;
