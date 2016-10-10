@@ -303,6 +303,11 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 	return m_attack;
 }
 
+/*virtual*/ void HeroGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
+{
+
+}
+
 /*virtual*/ int HeroGraphicComponent::GetHealth() const
 {
 	return m_health;

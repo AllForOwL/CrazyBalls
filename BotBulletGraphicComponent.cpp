@@ -79,6 +79,11 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 	return 2;
 }
 
+/*virtual*/ void BotBulletGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
+{
+
+}
+
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_objectMonster->m_stateBullet)

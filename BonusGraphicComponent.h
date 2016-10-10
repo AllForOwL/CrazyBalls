@@ -30,6 +30,8 @@ public:
 
 	virtual void ChangeHealth(int health);
 
+	virtual void SetTargetPointForBullet(cocos2d::Point point);
+
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset(const std::string& typeCasket);
 	void ShowBonusAnimation(float dt);

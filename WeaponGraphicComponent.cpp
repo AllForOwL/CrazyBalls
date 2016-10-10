@@ -189,6 +189,11 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 
 }
 
+/*virtual*/ void WeaponGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
+{
+
+}
+
 /*virtual*/ int WeaponGraphicComponent::GetSpeedBullet() const
 {
 	return 2;

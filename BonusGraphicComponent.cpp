@@ -285,6 +285,11 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 
 }
 
+/*virtual*/ void BonusGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
+{
+
+}
+
 BonusGraphicComponent::~BonusGraphicComponent()
 {
 

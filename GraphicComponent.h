@@ -27,7 +27,7 @@ public:
 	virtual int				GetSpeedBullet()			const	= 0;
 	virtual void			DescreaseQuentityBullet()			= 0;
 	virtual int				GetQuentityBullet()			const	= 0;
-
+	virtual void			SetTargetPointForBullet(cocos2d::Point point) = 0;
 
 	virtual ~GraphicComponent() {};
 };

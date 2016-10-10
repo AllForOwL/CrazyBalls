@@ -30,6 +30,8 @@ public:
 	virtual void DescreaseQuentityBullet();
 	virtual int  GetQuentityBullet() const;
 
+	virtual void SetTargetPointForBullet(cocos2d::Point point);
+
 	void LoadSpritesForHell();
 	void LoadNumberCoinsForTransitionNextLevel();
 

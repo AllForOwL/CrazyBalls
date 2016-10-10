@@ -8,7 +8,7 @@
 #include "BreedGraphicComponent.h"
 #include "BotInputComponent.h"
 #include "PhysicComponent.h"
-#include "GameLayer.h"
+//#include "GameLayer.h"
 #include <time.h>
 
 USING_NS_CC;
@@ -58,10 +58,12 @@ Scene *GameScene::createScene(bool nextLevel, int coin, int life, std::vector<in
 
 bool GameScene::init()
 {
-	if (!Layer::init())	// if layer not create exit from function
+	if (!LayerColor::initWithColor(cocos2d::Color4B(120, 100, 140, 160)))	// if layer not create exit from function
 	{
 		return false;
 	}
+
+	//this->setColor(cocos2d::Color3B(0.3, 0.4, 0.5));
 
 	Size _visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
@@ -138,9 +140,9 @@ bool GameScene::init()
 	m_bonusGraphicComponent->setName("bonus");
 	this->addChild(m_bonusGraphicComponent);
 
-	m_gameLayer = GameLayer::create();
+	//m_gameLayer = GameLayer::create();
 	
-	this->addChild(m_gameLayer);
+	//this->addChild(m_gameLayer);
 
 	/*auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
@@ -150,8 +152,8 @@ bool GameScene::init()
 
 	auto _touchListener = EventListenerTouchOneByOne::create();
 	_touchListener->onTouchBegan = CC_CALLBACK_2(InputComponent::onTouchBegan, m_inputComponent);
-	_touchListener->onTouchMoved = CC_CALLBACK_2(InputComponent::onTouchMoved, m_inputComponent);
-	_touchListener->onTouchEnded = CC_CALLBACK_2(InputComponent::onTouchEnded, m_inputComponent);
+	//_touchListener->onTouchMoved = CC_CALLBACK_2(InputComponent::onTouchMoved, m_inputComponent);
+	//_touchListener->onTouchEnded = CC_CALLBACK_2(InputComponent::onTouchEnded, m_inputComponent);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListener, this);
 
 	/*auto _touchListenerMoved = EventListenerTouchOneByOne::create();
@@ -181,9 +183,9 @@ bool GameScene::init()
 void GameScene::update(float dt)
 {
 	m_hero->Update		(*this);
-	m_gameLayer->Update	(*m_hero);
+	//m_gameLayer->Update	(*m_hero);
 
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	/*Size _visibleSize = Director::getInstance()->getVisibleSize();
 
 	if ((_visibleSize.width / 2) - m_background->getPositionX() > (m_background->getContentSize().width - _visibleSize.width) / 2)
 	{
@@ -193,7 +195,7 @@ void GameScene::update(float dt)
 	{
 		Point _positionBackground = m_background->getPosition();
 		m_background->setPosition(--_positionBackground.x, _positionBackground.y);
-	}
+	}*/
 }
 
 void GameScene::Spawn(float dt)
@@ -232,7 +234,7 @@ void GameScene::SpawnBonus(float dt)
 
 void GameScene::LoadFileNameBackground()
 {
-	m_vecNameBackground.push_back("res/Backgrounds/8.png");
+	m_vecNameBackground.push_back("res/Backgrounds/1.png");
 	m_vecNameBackground.push_back("res/Backgrounds/9.png");
 	m_vecNameBackground.push_back("res/Backgrounds/10.png");
 	m_vecNameBackground.push_back("res/Backgrounds/11.png");
@@ -262,7 +264,7 @@ void GameScene::SetBackground()
 	m_background->setPosition(_visibleSize.width / 2,
 		_visibleSize.height / 2);
 	
-	this->addChild(m_background);
+	//this->addChild(m_background);
 }
 
 void GameScene::LoadLevel()

@@ -25,6 +25,7 @@ public:
 
 public:
 	EventKeyboard::KeyCode m_keyCode;
+	cocos2d::Vec2 m_locationTouch;
 };
 
 #endif

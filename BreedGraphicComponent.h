@@ -43,6 +43,8 @@ public:
 	virtual void DescreaseQuentityBullet();
 	virtual int  GetQuentityBullet() const;
 
+	virtual void SetTargetPointForBullet(cocos2d::Point point);
+
 	// ***for future targets*** //
 	//void		LoadTimeForShot();
 	//std::map<int,int> m_mapTimeShot;

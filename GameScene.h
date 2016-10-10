@@ -12,7 +12,7 @@
 
 using namespace cocos2d;
 
-class GameScene : public cocos2d::Layer
+class GameScene : public cocos2d::LayerColor
 {
 public:
 	// methods

@@ -172,6 +172,11 @@ void Monster::AddBullet(int typeBullet)
 	m_vecGraphicComponentBullet.push_back(_heroComponent);
 }
 
+/*virtual*/ void Monster::SetTargetPointForBullet(cocos2d::Point point)
+{
+
+}
+
 void Monster::SetActiveBullet(GameScene& scene, int index)
 {
 	for (int i = 0; i < m_vecGraphicComponentBullet.size(); i++)

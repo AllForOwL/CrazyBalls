@@ -40,6 +40,8 @@ PlayerInputComponent::PlayerInputComponent()
 		case EventKeyboard::KeyCode::KEY_F:
 		{
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE;
+			hero.m_vecGraphicComponentBullet[0]->m_GraphicComponent->SetTargetPointForBullet(m_locationTouch);
+			m_locationTouch = Vec2::ZERO;
 			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 			break;
 		}
@@ -63,6 +65,7 @@ PlayerInputComponent::PlayerInputComponent()
 
 /*virtual*/ bool PlayerInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
+	m_locationTouch = touch->getLocation();
 	m_keyCode = EventKeyboard::KeyCode::KEY_F;
 
 	return true;

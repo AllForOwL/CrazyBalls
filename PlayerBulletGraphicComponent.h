@@ -31,6 +31,8 @@ public:
 
 	virtual void ChangeHealth(int health);
 
+	virtual void SetTargetPointForBullet(cocos2d::Point point);
+
 	void LoadBulletNormal();
 	~PlayerBulletGraphicComponent();
 
@@ -43,6 +45,9 @@ private:
 	std::string		m_strFilename;
 
 	bool m_isBody;
+
+	cocos2d::Point	m_targetPoint;
+
 };
 
 #endif

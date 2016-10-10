@@ -254,6 +254,11 @@ double BreedGraphicComponent::GetTime()
 	return m_attack;
 }
 
+/*virtual*/ void BreedGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
+{
+
+}
+
 /*virtual*/int BreedGraphicComponent::GetHealth() const
 {
 	return m_health;

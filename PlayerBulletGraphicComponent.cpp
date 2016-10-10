@@ -11,6 +11,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int attack, const std
 {
 	m_speed = 8;
 	m_position = Point(-10, -10);
+	m_targetPoint = Point(Point::ZERO);
 	this->setPosition(m_position);
 	this->setVisible(false);
 
@@ -37,6 +38,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	this->m_attack		= bullet.GetAttack();
 	this->m_typeObject	= bullet.GetTypeObject();
 	this->m_position	= cocos2d::Point::ZERO;
+	this->m_targetPoint = cocos2d::Point::ZERO;
 
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
@@ -100,8 +102,17 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			}
 			else
 			{
-				m_position.x += m_speed;
-				this->setPosition(m_position);
+				Size _visibleSize = Director::getInstance()->getVisibleSize();
+				Size _size = this->getContentSize();
+
+				Point _targetPoint = m_targetPoint;
+				Point _normalized = ccpNormalize(ccpSub(_targetPoint, this->getPosition()));
+				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
+
+				Point _myPosition = ccpAdd(this->getPosition(), ccpMult(_normalized, CNT_SPEED_STONE));
+
+				this->setPosition(_myPosition);
+				this->setRotation(_angle);
 			}
 
 			break;
@@ -121,6 +132,11 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			break;
 		}
 	}
+}
+
+/*virtual*/ void PlayerBulletGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
+{
+	m_targetPoint = point;
 }
 
 void PlayerBulletGraphicComponent::LoadBulletNormal()

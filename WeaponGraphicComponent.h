@@ -31,6 +31,8 @@ public:
 
 	virtual void ChangeHealth(int health);
 
+	virtual void SetTargetPointForBullet(cocos2d::Point point);
+
 	~WeaponGraphicComponent();
 
 public:
