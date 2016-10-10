@@ -148,9 +148,11 @@ bool GameScene::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);*/
 
 
-	auto _touchListenerPress = EventListenerTouchOneByOne::create();
-	_touchListenerPress->onTouchBegan = CC_CALLBACK_2(InputComponent::onTouchBegan, m_inputComponent);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListenerPress, this);
+	auto _touchListener = EventListenerTouchOneByOne::create();
+	_touchListener->onTouchBegan = CC_CALLBACK_2(InputComponent::onTouchBegan, m_inputComponent);
+	_touchListener->onTouchMoved = CC_CALLBACK_2(InputComponent::onTouchMoved, m_inputComponent);
+	_touchListener->onTouchEnded = CC_CALLBACK_2(InputComponent::onTouchEnded, m_inputComponent);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListener, this);
 
 	/*auto _touchListenerMoved = EventListenerTouchOneByOne::create();
 	_touchListenerMoved->onTouchMoved = CC_CALLBACK_1(PlayerInputComponent::onTouchMoved, m_inputComponent);

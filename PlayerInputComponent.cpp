@@ -40,6 +40,7 @@ PlayerInputComponent::PlayerInputComponent()
 		case EventKeyboard::KeyCode::KEY_F:
 		{
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE;
+			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 			break;
 		}
 		case EventKeyboard::KeyCode::KEY_U:
@@ -58,8 +59,6 @@ PlayerInputComponent::PlayerInputComponent()
 			break;
 		}
 	}
-
-	m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 }
 
 /*virtual*/ bool PlayerInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
@@ -67,6 +66,28 @@ PlayerInputComponent::PlayerInputComponent()
 	m_keyCode = EventKeyboard::KeyCode::KEY_F;
 
 	return true;
+}
+
+/*virtual*/ void PlayerInputComponent::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	
+	auto _locationTouch = touch->getLocation();
+
+	if (_locationTouch.y > _visibleSize.height / 2)
+	{
+		m_keyCode = EventKeyboard::KeyCode::KEY_UP_ARROW;
+	}
+	else if (_locationTouch.y < _visibleSize.height / 2)
+	{
+		m_keyCode = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
+	}
+
+}
+
+/*virtual*/ void PlayerInputComponent::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+	m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 }
 
 /*virtual*/ /*void PlayerInputComponent::onTouchMoved(cocos2d::Touch* moved, cocos2d::Event* event)

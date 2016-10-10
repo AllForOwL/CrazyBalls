@@ -27,6 +27,16 @@ BotInputComponent::BotInputComponent()
 	return true;
 }
 
+/*virtual*/ void BotInputComponent::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+
+}
+
+/*virtual*/ void BotInputComponent::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+
+}
+
 BotInputComponent::~BotInputComponent()
 {
 
