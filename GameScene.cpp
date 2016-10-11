@@ -6,6 +6,7 @@
 #include "WeaponGraphicComponent.h"
 #include "PlayerBulletGraphicComponent.h"
 #include "BreedGraphicComponent.h"
+#include "ButtonGraphicComponent.h"
 #include "BotInputComponent.h"
 #include "PhysicComponent.h"
 //#include "GameLayer.h"
@@ -102,16 +103,17 @@ bool GameScene::init()
 										);
 	this->addChild(m_graphicComponentBullet);
 
-	m_inputComponent			= new PlayerInputComponent();
-	m_inputComponent->AddButtonFire(*this);
+	m_graphicComponentButtonFire = new ButtonGraphicComponent();
+	this->addChild(m_graphicComponentButtonFire);
 
-	m_gameObjectMonster			= new GameObjectMonster();
-	m_botInputComponent			= new BotInputComponent();
-	m_physicComponent			= new PhysicComponent();
+	m_inputComponent				= new PlayerInputComponent();
+	m_gameObjectMonster				= new GameObjectMonster();
+	m_botInputComponent				= new BotInputComponent();
+	m_physicComponent				= new PhysicComponent();
 	m_hero						= new Monster(	*m_graphicComponentHero,	*m_graphicComponentWeapon, 
-												*m_graphicComponentBullet,	*m_gameObjectMonster, 
-												*m_inputComponent,			*m_botInputComponent, 
-												*m_physicComponent
+												*m_graphicComponentBullet,	*m_graphicComponentButtonFire,
+												*m_gameObjectMonster, 		*m_inputComponent,			
+												*m_botInputComponent,		*m_physicComponent
 											 );
 	
 	if (GameScene::m_level)

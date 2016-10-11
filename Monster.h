@@ -54,6 +54,12 @@ class Monster
 {
 public:
 
+	enum StateButtonFire
+	{
+		BUTTON_STATE_FIRE,
+		BUTTON_STATE_RELEASE
+	};
+
 	enum StateHero
 	{
 		HERO_STATE_WALK,
@@ -111,7 +117,8 @@ public:
 
 	Monster(
 						GraphicComponent& graphicComponentHero, GraphicComponent& graphiComponentWeapon, 
-						GraphicComponent& graphicComponentBullet, GameObjectMonster& objectMonster, 
+						GraphicComponent& graphicComponentBullet, GraphicComponent& graphicComponentButtonFire,
+						GameObjectMonster& objectMonster, 
 						InputComponent& inputComponent, InputComponent& botInputComponent,
 						PhysicComponent& physicComponent
 					 );
@@ -138,6 +145,7 @@ public:
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentHeroWeapon;
 	GraphicComponent*	m_graphiComponentHeroBullet;
+	GraphicComponent*	m_graphicComponentButtonFire;
 	GameObjectMonster*	m_objectMonster;
 	InputComponent*		m_inputComponentHero;
 	InputComponent*		m_botInputComponent;
@@ -148,6 +156,7 @@ public:
 	StatePhysic			m_statePhysic;
 	StateEnemys			m_stateEnemy;
 	StateBonus			m_stateBonus;
+	StateButtonFire		m_stateButtonFire;
 
 	std::vector<ComponentHero*> m_vecGraphicComponentWeapon;
 	std::vector<ComponentHero*> m_vecGraphicComponentBullet;

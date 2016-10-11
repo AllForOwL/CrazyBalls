@@ -10,13 +10,15 @@
 
 Monster::Monster(
 				GraphicComponent& graphicComponentHero,		GraphicComponent& graphicComponentWeapon,
-				GraphicComponent& graphicComponentBullet,	GameObjectMonster& objectMonster, 
+				GraphicComponent& graphicComponentBullet,   GraphicComponent& graphicComponentButtonFire,
+				GameObjectMonster& objectMonster,
 				InputComponent& inputComponent,				InputComponent& botInputComponent,
 				PhysicComponent& physicComponent
 				) 
 							:	m_graphicComponentHero		(&graphicComponentHero),
 								m_graphicComponentHeroWeapon(&graphicComponentWeapon),
 								m_graphiComponentHeroBullet (&graphicComponentBullet),
+								m_graphicComponentButtonFire(&graphicComponentButtonFire),
 								m_objectMonster				(&objectMonster),
 								m_inputComponentHero		(&inputComponent),
 								m_botInputComponent			(&botInputComponent),
@@ -218,6 +220,7 @@ void Monster::Update(GameScene& scene)
 {
 	m_inputComponentHero->Update		(*this);
 	m_graphicComponentHero->Update		(*this, scene);
+	m_graphicComponentButtonFire->Update(*this, scene);
 	m_botInputComponent->Update			(*this);
 	m_objectMonster->Update				(*this, scene);
 	m_physicComponent->Update			(*this, scene);

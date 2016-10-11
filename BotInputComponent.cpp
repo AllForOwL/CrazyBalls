@@ -37,11 +37,6 @@ BotInputComponent::BotInputComponent()
 
 }
 
-/*virtual*/ void BotInputComponent::AddButtonFire(GameScene& scene)
-{
-
-}
-
 BotInputComponent::~BotInputComponent()
 {
 

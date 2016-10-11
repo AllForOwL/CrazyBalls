@@ -1,4 +1,4 @@
-const float CNT_TIME_SPAWN			= 5.0;
+const float CNT_TIME_SPAWN			= 3.0;
 const float CNT_TIME_UPDATE_SCENE	= 0.05;
 const float CNT_TIME_SPAWN_BONUS	= 15.0;
 
