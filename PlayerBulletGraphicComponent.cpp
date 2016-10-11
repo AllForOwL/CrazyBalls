@@ -105,14 +105,8 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 				Size _visibleSize = Director::getInstance()->getVisibleSize();
 				Size _size = this->getContentSize();
 
-				Point _targetPoint = m_targetPoint;
-				Point _normalized = ccpNormalize(ccpSub(_targetPoint, this->getPosition()));
-				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
-
-				Point _myPosition = ccpAdd(this->getPosition(), ccpMult(_normalized, CNT_SPEED_STONE));
-
+				Point _myPosition = Point(this->getPositionX() + CNT_SPEED_BULLET, this->getPositionY());
 				this->setPosition(_myPosition);
-				this->setRotation(_angle);
 			}
 
 			break;

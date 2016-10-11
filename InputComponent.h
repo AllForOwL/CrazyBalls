@@ -20,6 +20,8 @@ public:
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) = 0;
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) = 0;
 
+	virtual void AddButtonFire(GameScene& scene) = 0;
+
 	virtual ~InputComponent() {};
 
 public:

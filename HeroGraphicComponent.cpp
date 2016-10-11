@@ -312,56 +312,6 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 			break;
 		}
-		case Monster::StateHero::HERO_STATE_GO_TO_TARGET:
-		{
-			if ((int)this->getPositionY() >= m_target_Y - CNT_VISIBLE_ZONE_ENEMY &&
-				(int)this->getPositionY() <= m_target_Y + CNT_VISIBLE_ZONE_ENEMY
-			   )
-			{
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
-
-				this->m_countSpritesInVectorClimbDown = CNT_COUNT_SPRITES_IN_VECTOR;
-				this->m_countSpritesInVectorClimbUp   = 0;
-
-				break;
-			}
-
-			if (this->getPositionY() > m_target_Y)
-			{
-				Point _normalized = ccpNormalize(ccpSub(Point(this->getPositionX(), m_target_Y), this->getPosition()));
-				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
-
-				this->setPosition(ccpAdd(this->getPosition(), ccpMult(_normalized, m_speed)));
-				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesClimb[m_countSpritesInVectorClimbDown]));
-
-				if (m_countSpritesInVectorClimbDown)
-				{
-					--m_countSpritesInVectorClimbDown;
-				}
-				else
-				{
-					m_countSpritesInVectorClimbDown = 3;
-				}
-			}
-			else
-			{
-				Point _normalized = ccpNormalize(ccpSub(Point(this->getPositionX(), m_target_Y), this->getPosition()));
-				float _angle = CC_RADIANS_TO_DEGREES(atan2f(_normalized.y, -_normalized.x));
-
-				this->setPosition(ccpAdd(this->getPosition(), ccpMult(_normalized, m_speed)));
-				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesClimb[m_countSpritesInVectorClimbUp]));
-
-				if (m_countSpritesInVectorClimbUp != 3)
-				{
-					++m_countSpritesInVectorClimbUp;
-				}
-				else
-				{
-					m_countSpritesInVectorClimbUp = 0;
-				}
-			}
-			break;	
-		}
 	}
 }
 

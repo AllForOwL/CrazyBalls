@@ -63,8 +63,6 @@ bool GameScene::init()
 		return false;
 	}
 
-	//this->setColor(cocos2d::Color3B(0.3, 0.4, 0.5));
-
 	Size _visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
 
@@ -82,7 +80,6 @@ bool GameScene::init()
 
 	LoadFileNameBackground();
 	SetBackground();
-	SetButtonFire();
 
 	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
@@ -100,12 +97,14 @@ bool GameScene::init()
 	
 	
 	m_graphicComponentBullet	= new PlayerBulletGraphicComponent(150, CNT_NAME_BULLET_DEFAULT); 
-	m_graphicComponentBullet->setScale(_visibleSize.width / m_graphicComponentBullet->getContentSize().width / 40,
-										_visibleSize.height / m_graphicComponentBullet->getContentSize().height  / 40
+	m_graphicComponentBullet->setScale(_visibleSize.width / m_graphicComponentBullet->getContentSize().width / 50,
+										_visibleSize.height / m_graphicComponentBullet->getContentSize().height  / 50
 										);
 	this->addChild(m_graphicComponentBullet);
 
 	m_inputComponent			= new PlayerInputComponent();
+	m_inputComponent->AddButtonFire(*this);
+
 	m_gameObjectMonster			= new GameObjectMonster();
 	m_botInputComponent			= new BotInputComponent();
 	m_physicComponent			= new PhysicComponent();
@@ -241,26 +240,6 @@ void GameScene::LoadFileNameBackground()
 	m_vecNameBackground.push_back("res/Backgrounds/6.png");
 	m_vecNameBackground.push_back("res/Backgrounds/7-night.png");
 	m_vecNameBackground.push_back("res/Backgrounds/7.png");
-}
-
-void GameScene::SetButtonFire()
-{
-	m_btnFire = Sprite::create("res/Bonus/Ruby.png");
-
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
-	Size _sizeBtn = m_btnFire->getContentSize();
-
-	m_btnFire->setScale(_visibleSize.width / _sizeBtn.width / 6, 
-						_visibleSize.height / _sizeBtn.height / 6);
-
-	_sizeBtn.width = m_btnFire->getScaleX();
-	_sizeBtn.height = m_btnFire->getScaleY();
-
-	cocos2d::Point _positionBtn = cocos2d::Point(_visibleSize.width - _sizeBtn.width - 30, 
-												_sizeBtn.height + 30);
-	m_btnFire->setPosition(_positionBtn);
-
-	this->addChild(m_btnFire);
 }
 
 void GameScene::SetBackground()

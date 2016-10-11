@@ -4,7 +4,7 @@ const float CNT_TIME_SPAWN_BONUS	= 15.0;
 
 const int CNT_NUMBER_COINS_ONE_LEVEL = 50;
 
-const int CNT_SPEED_BULLET	= 70;
+const int CNT_SPEED_BULLET	= 50;
 const int CNT_SPEED_STONE	= 8;
 
 const int CNT_TAG_BULLET_NORMAL = 1000;

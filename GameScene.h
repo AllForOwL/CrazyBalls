@@ -29,7 +29,6 @@ public:
 	void LoadLevel();
 	void LoadFileNameBackground();
 	void SetBackground();
-	void SetButtonFire();
 
 	CREATE_FUNC(GameScene);
 

@@ -20,12 +20,15 @@ public:
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
 
+	virtual void AddButtonFire(GameScene& scene);
+
 	PlayerInputComponent();
 	~PlayerInputComponent();
 
 public:
 	EventKeyboard::KeyCode m_keyCode;
 	cocos2d::Vec2 m_locationTouch;
+	cocos2d::Sprite* m_btnFire;
 };
 
 #endif
