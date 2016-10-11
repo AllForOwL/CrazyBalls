@@ -88,7 +88,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 				this->setVisible(true);
 				Vec2 _positionWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getPosition();
 				hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->DescreaseQuentityBullet();
-				_positionWeapon.x		+= 40;
+				_positionWeapon.x		+= CNT_SPEED_BULLET;
 				m_position				= _positionWeapon;
 				this->setPosition(m_position);
 			}

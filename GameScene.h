@@ -29,6 +29,7 @@ public:
 	void LoadLevel();
 	void LoadFileNameBackground();
 	void SetBackground();
+	void SetButtonFire();
 
 	CREATE_FUNC(GameScene);
 
@@ -60,6 +61,7 @@ public:
 
 	std::vector<std::string>	m_vecNameBackground;
 	cocos2d::Sprite*			m_background;
+	cocos2d::Sprite*			m_btnFire;
 	float						m_widthBackground;
 	int							m_countLevel;
 };

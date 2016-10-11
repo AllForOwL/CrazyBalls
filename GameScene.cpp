@@ -82,6 +82,7 @@ bool GameScene::init()
 
 	LoadFileNameBackground();
 	SetBackground();
+	SetButtonFire();
 
 	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
@@ -144,22 +145,11 @@ bool GameScene::init()
 	
 	//this->addChild(m_gameLayer);
 
-	/*auto listener = EventListenerKeyboard::create();
-	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
-	//listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);*/
-
-
 	auto _touchListener = EventListenerTouchOneByOne::create();
 	_touchListener->onTouchBegan = CC_CALLBACK_2(InputComponent::onTouchBegan, m_inputComponent);
-	//_touchListener->onTouchMoved = CC_CALLBACK_2(InputComponent::onTouchMoved, m_inputComponent);
-	//_touchListener->onTouchEnded = CC_CALLBACK_2(InputComponent::onTouchEnded, m_inputComponent);
+	_touchListener->onTouchMoved = CC_CALLBACK_2(InputComponent::onTouchMoved, m_inputComponent);
+	_touchListener->onTouchEnded = CC_CALLBACK_2(InputComponent::onTouchEnded, m_inputComponent);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListener, this);
-
-	/*auto _touchListenerMoved = EventListenerTouchOneByOne::create();
-	_touchListenerMoved->onTouchMoved = CC_CALLBACK_1(PlayerInputComponent::onTouchMoved, m_inputComponent);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListenerMoved, this);
-	*/
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(PhysicComponent::onContactBegin, m_physicComponent);
@@ -251,6 +241,26 @@ void GameScene::LoadFileNameBackground()
 	m_vecNameBackground.push_back("res/Backgrounds/6.png");
 	m_vecNameBackground.push_back("res/Backgrounds/7-night.png");
 	m_vecNameBackground.push_back("res/Backgrounds/7.png");
+}
+
+void GameScene::SetButtonFire()
+{
+	m_btnFire = Sprite::create("res/Bonus/Ruby.png");
+
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	Size _sizeBtn = m_btnFire->getContentSize();
+
+	m_btnFire->setScale(_visibleSize.width / _sizeBtn.width / 6, 
+						_visibleSize.height / _sizeBtn.height / 6);
+
+	_sizeBtn.width = m_btnFire->getScaleX();
+	_sizeBtn.height = m_btnFire->getScaleY();
+
+	cocos2d::Point _positionBtn = cocos2d::Point(_visibleSize.width - _sizeBtn.width - 30, 
+												_sizeBtn.height + 30);
+	m_btnFire->setPosition(_positionBtn);
+
+	this->addChild(m_btnFire);
 }
 
 void GameScene::SetBackground()

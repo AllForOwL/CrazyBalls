@@ -67,9 +67,15 @@ PlayerInputComponent::PlayerInputComponent()
 
 /*virtual*/ bool PlayerInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	m_locationTouch = touch->getLocation();
-	m_keyCode = EventKeyboard::KeyCode::KEY_F;
+	/*m_locationTouch = touch->getLocation();
 
+	Rect _rectBtnFire = m_btnFire->getBoundingBox();
+
+	if (_rectBtnFire.containsPoint(m_locationTouch))
+	{
+		m_keyCode = EventKeyboard::KeyCode::KEY_F;
+		m_btnFire->setOpacity(20);
+	}*/
 	return true;
 }
 
@@ -77,31 +83,10 @@ PlayerInputComponent::PlayerInputComponent()
 {
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
-	auto _locationTouch = touch->getLocation();
+	auto _locationTouchNow		= touch->getLocation();
+	auto _locationTouchPrevious = touch->getPreviousLocation();
 
-	if (_locationTouch.y > _visibleSize.height / 2)
-	{
-		m_keyCode = EventKeyboard::KeyCode::KEY_UP_ARROW;
-	}
-	else if (_locationTouch.y < _visibleSize.height / 2)
-	{
-		m_keyCode = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
-	}
-
-}
-
-/*virtual*/ void PlayerInputComponent::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
-{
-	m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
-}
-
-/*virtual*/ /*void PlayerInputComponent::onTouchMoved(cocos2d::Touch* moved, cocos2d::Event* event)
-{
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
-
-	auto _location = moved->getLocation();
-
-	if (_location.y > _visibleSize.width / 2)
+	if (_locationTouchNow > _locationTouchPrevious)
 	{
 		m_keyCode = EventKeyboard::KeyCode::KEY_UP_ARROW;
 	}
@@ -110,8 +95,16 @@ PlayerInputComponent::PlayerInputComponent()
 		m_keyCode = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
 	}
 
-	return true;
-}*/
+}
+
+/*virtual*/ void PlayerInputComponent::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+	/*if (m_btnFire->getOpacity() == 20)
+	{
+		m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
+		m_btnFire->setOpacity(0);
+	}*/
+}
 
 /*virtual*/ void PlayerInputComponent::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {

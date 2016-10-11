@@ -16,7 +16,7 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 											  m_health(health),
 											  m_typeObject(typeObject)
 {
-	m_stateEnemy = StateEnemy::ENEMY_STATE_NOTHING;
+	m_stateEnemy = StateEnemy::ENEMY_STATE_MOVE;
 
 	m_BeginSecond = GetTime();
 	m_FireSecond = CNT_BEGIN_VALUE_FIRE_ENEMY;
@@ -308,7 +308,7 @@ void BreedGraphicComponent::Fire(Point i_position)
 
 void BreedGraphicComponent::Move()
 {
-	this->setPositionY(this->getPositionY() + 1);
+	this->setPositionX(this->getPositionX() - 1);
 }
 
 void BreedGraphicComponent::Wounded()
