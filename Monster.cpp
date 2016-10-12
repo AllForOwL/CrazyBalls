@@ -239,7 +239,6 @@ void Monster::Update(GameScene& scene)
 		m_vecGraphicComponentBullet[_indexActiveBullet]->m_GraphicComponent->Update(*this, scene);
 	}
 }
-
 Monster::~Monster()
 {
 	delete m_graphicComponentHero;

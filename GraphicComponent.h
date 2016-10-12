@@ -16,9 +16,9 @@ public:
 	virtual void Update(Monster& hero, GameScene& scene)  = 0;
 	virtual ~GraphicComponent() {};
 
-	virtual std::string GetTypeObject() const
+	virtual std::string GetTypeObject()const
 	{
-		return std::string("good");
+		return std::string("");
 	}
 
 	virtual int	GetValue() const

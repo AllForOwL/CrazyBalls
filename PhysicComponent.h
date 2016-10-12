@@ -27,7 +27,7 @@ public:
 
 	~PhysicComponent();
 
-private:
+public:
 	StatePhysic						m_statePhysic;
 	int								m_countElementInVector;
 	cocos2d::Vec2					m_positionCollision;
