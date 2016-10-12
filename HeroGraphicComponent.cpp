@@ -13,6 +13,9 @@ const int CNT_COUNT_SPRITES_IN_VECTOR	= 3;
 
 HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
 {
+	this->m_getSizeEnemy = false;
+	this->m_speed_Y = 5;
+	this->m_sizeEnemy = 0;
 	this->m_target_Y = 0;
 	this->m_speed    = CNT_SPEED_HERO;
 	this->setTag(0);
@@ -152,6 +155,12 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 /*virtual*/ void HeroGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	if (!m_getSizeEnemy && hero.m_objectMonster->m_vecComponentEnemy.size())
+	{
+		m_getSizeEnemy = true;
+		m_speed_Y = hero.m_objectMonster->m_vecComponentEnemy[0]->getBoundingBox().size.height / 2;
+	}
+
 	switch (hero.m_stateHero)
 	{
 		case Monster::StateHero::HERO_STATE_WALK:
@@ -195,7 +204,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 			}
 			else
 			{
-				_positionY += 5;
+				_positionY += m_speed_Y;
 			}
 			
 			this->setPositionY(_positionY);
@@ -220,7 +229,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 			}
 			else
 			{
-				_positionY -= 5;
+				_positionY -= m_speed_Y;
 			}
 
 			this->setPositionY(_positionY);

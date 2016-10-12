@@ -78,7 +78,9 @@ public:
 
 	StateEnemy	m_stateEnemy;
 	std::chrono::time_point<std::chrono::system_clock> m_BeginSecond;
-	int		m_FireSecond;
+	int			m_FireSecond;
+	int			m_SpeedMove;
+	int			m_PositionXShotInHero;
 	int			m_scale_x;
 	Point		m_pointBeginPosition;
 	int			m_value;

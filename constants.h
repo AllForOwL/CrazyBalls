@@ -16,15 +16,15 @@ const int CNT_COLS	=	2;
 const int CNT_ROWS	=	4;
 const int CNT_MAX_INDEX_POSITION = 29;
 
-const int CNT_TIME_SHOT_STONE_ROCK_1	= 20;
-const int CNT_TIME_SHOT_STONE_ROCK_2	= 19;
-const int CNT_TIME_SHOT_STONE_ROCK_3	= 18;
-const int CNT_TIME_SHOT_STONE_ROCK_4	= 17;
-const int CNT_TIME_SHOT_STONE_ROCK_5	= 16;
-const int CNT_TIME_SHOT_STONE_ROCK_6	= 15;
-const int CNT_TIME_SHOT_STONE_ROCK_7	= 14;
-const int CNT_TIME_SHOT_STONE_ROCK_8	= 13;
-const int CNT_TIME_SHOT_STONE_ROCK_9	= 12;
+const int CNT_TIME_SHOT_STONE_ROCK_1	= 15;
+const int CNT_TIME_SHOT_STONE_ROCK_2	= 14;
+const int CNT_TIME_SHOT_STONE_ROCK_3	= 13;
+const int CNT_TIME_SHOT_STONE_ROCK_4	= 12;
+const int CNT_TIME_SHOT_STONE_ROCK_5	= 11;
+const int CNT_TIME_SHOT_STONE_ROCK_6	= 10;
+const int CNT_TIME_SHOT_STONE_ROCK_7	= 9;
+const int CNT_TIME_SHOT_STONE_ROCK_8	= 8;
+const int CNT_TIME_SHOT_STONE_ROCK_9	= 7;
 
 const std::string CNT_NAME_HERO_HELL		= "Hell";
 

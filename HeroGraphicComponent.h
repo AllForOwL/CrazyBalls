@@ -69,6 +69,9 @@ public:
 	int m_target_Y;
 	int m_speed;
 
+	int m_speed_Y;
+	int m_sizeEnemy;
+	bool m_getSizeEnemy;
 };
 
 #endif

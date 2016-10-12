@@ -85,8 +85,8 @@ bool GameScene::init()
 	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
-	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 7,
-									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 5);
+	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 8,
+									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 6);
 	this->addChild(m_graphicComponentHero);
 	
 	
@@ -272,4 +272,3 @@ GameScene::~GameScene()
 /**********Jump table*********/
 //std::random_shuffle(_grid.begin(), _grid.end());		//	shuffle all vector(change position for each component vector)
 //this->setAnchorPoint();								//  around him move and transition
-

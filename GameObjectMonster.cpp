@@ -10,8 +10,7 @@
 
 GameObjectMonster::GameObjectMonster()
 {
-	m_scaleX	= 0;
-	m_scaleY	= 0;
+	m_sizeEnemy = Point::ZERO;
 	//LoadField();
 }
 
@@ -136,7 +135,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 	m_vecComponentEnemy.push_back(m_enemy);
 
-	if (!m_scaleX)
+	if (m_sizeEnemy.width == 0)
 	{
 		LoadField();
 	}
@@ -158,24 +157,20 @@ void GameObjectMonster::LoadField()
 	std::vector<int> _vecPositionX;
 	std::vector<int> _vecPositionY;
 
-	m_scaleX = m_vecComponentEnemy[0]->getScaleX();
-	m_scaleY = m_vecComponentEnemy[0]->getScaleY();
-	
-	m_scaleX += 10;
-	m_scaleY += 10;
+	m_sizeEnemy = m_vecComponentEnemy[0]->getBoundingBox().size;
 
 	int _tempPositionX = _widthField;
 	while (_tempPositionX < _visibleSize.width)
 	{
 		_vecPositionX.push_back(_tempPositionX);
-		_tempPositionX += m_scaleX;
+		_tempPositionX += m_sizeEnemy.width;
 	}
 
-	int _tempPositionY = m_scaleY;
+	int _tempPositionY = m_sizeEnemy.height;
 	while (_tempPositionY < _visibleSize.height)
 	{
 		_vecPositionY.push_back(_tempPositionY);
-		_tempPositionY += m_scaleY;
+		_tempPositionY += m_sizeEnemy.height;
 	}
 
 	for (int i = 0; i < _vecPositionX.size(); i++)

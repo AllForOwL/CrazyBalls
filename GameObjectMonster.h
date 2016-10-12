@@ -60,8 +60,8 @@ public:
 	StateBullet			m_stateBullet;
 	std::vector<Field>	m_vecField;
 	std::vector<int>	m_vecIndexFreePosition;
-	float m_scaleX;
-	float m_scaleY;
+	cocos2d::Size		m_sizeEnemy;
+
 
 };
 

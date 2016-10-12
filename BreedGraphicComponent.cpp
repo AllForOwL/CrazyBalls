@@ -8,6 +8,8 @@
 #include <chrono>
 
 const int CNT_BEGIN_VALUE_FIRE_ENEMY = 3;
+const int CNT_BEGIN_VALUE_SPEED_MOVE = 1;
+const int CNT_BEGIN_VALUE_SHOT_IN_HERO = 10;
 
 using namespace std;
 
@@ -18,15 +20,18 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 {
 	m_stateEnemy = StateEnemy::ENEMY_STATE_MOVE;
 
-	m_BeginSecond = GetTime();
-	m_FireSecond = CNT_BEGIN_VALUE_FIRE_ENEMY;
-
+	m_BeginSecond			= GetTime();
+	m_FireSecond			= CNT_BEGIN_VALUE_FIRE_ENEMY;
+	m_SpeedMove				= CNT_BEGIN_VALUE_SPEED_MOVE;
+	m_PositionXShotInHero	= CNT_BEGIN_VALUE_SHOT_IN_HERO;
 
 	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
 	{
 		this->initWithFile("res/Stones/rock1.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_1 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		++m_SpeedMove;
+		m_PositionXShotInHero += 5;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
@@ -34,6 +39,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock2.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_2 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		m_SpeedMove += 2;
+		m_PositionXShotInHero += 10;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_3)
@@ -41,6 +48,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock3.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_3 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		m_SpeedMove += 3;
+		m_PositionXShotInHero += 15;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_4)
@@ -48,6 +57,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock4.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_4 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		m_SpeedMove += 4;
+		m_PositionXShotInHero += 20;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_5)
@@ -55,6 +66,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock5.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_5 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		m_SpeedMove += 5;
+		m_PositionXShotInHero += 25;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_6)
@@ -62,6 +75,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock6.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_6 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		++m_SpeedMove;
+		m_PositionXShotInHero += 5;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_7)
@@ -69,6 +84,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock7.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_7 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		m_SpeedMove += 2;
+		m_PositionXShotInHero += 10;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_8)
@@ -76,6 +93,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock8.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_8 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		m_SpeedMove += 3;
+		m_PositionXShotInHero += 15;
 		m_value = _randValueForFire;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_9)
@@ -83,6 +102,8 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		this->initWithFile("res/Stones/rock9.png");
 		int _randValueForFire = rand() % CNT_TIME_SHOT_STONE_ROCK_9 - GameScene::m_level + 1;
 		m_FireSecond += _randValueForFire;
+		m_SpeedMove += 4;
+		m_PositionXShotInHero += 20;
 		m_value = _randValueForFire;
 	}
 
@@ -217,7 +238,7 @@ std::chrono::time_point<std::chrono::system_clock> BreedGraphicComponent::GetTim
 	if ((int)std::chrono::duration<double>(GetTime() - m_BeginSecond).count() == m_FireSecond)
 	{
 		m_pointBeginPosition = this->getPosition();
-		hero.m_objectMonster->ReleaseCell(this->getPosition());
+		hero.m_objectMonster->ReleaseCell(this->getPosition());	
 
 		this->m_stateEnemy = StateEnemy::ENEMY_STATE_FIRE;
 	}
@@ -231,7 +252,15 @@ std::chrono::time_point<std::chrono::system_clock> BreedGraphicComponent::GetTim
 			}
 			case StateEnemy::ENEMY_STATE_MOVE:
 			{
-				Move();
+				if (this->getPositionX() <= hero.m_graphicComponentHero->getPositionX() + 50)
+				{
+					this->m_stateEnemy = BreedGraphicComponent::StateEnemy::ENEMY_STATE_FIRE;
+				}
+				else
+				{
+					Move();
+				}
+
 				break;
 			}
 			case StateEnemy::ENEMY_STATE_WOUNDED:
@@ -308,7 +337,7 @@ void BreedGraphicComponent::Fire(Point i_position)
 
 void BreedGraphicComponent::Move()
 {
-	this->setPositionX(this->getPositionX() - 1);
+	this->setPositionX(this->getPositionX() - m_SpeedMove);
 }
 
 void BreedGraphicComponent::Wounded()
@@ -375,7 +404,6 @@ bool BreedGraphicComponent::Death()
 {
 
 }
-
 
 BreedGraphicComponent::~BreedGraphicComponent()
 {
