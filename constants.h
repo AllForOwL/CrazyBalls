@@ -52,6 +52,10 @@ const int CNT_TYPE_OBJECT_WEAPON_UMG					= 10;
 const int CNT_TYPE_OBJECT_BULLET_NORMAL					= 11;
 const int CNT_TYPE_OBJECT_BULLET_BOMB					= 12;
 
+const int CNT_TYPE_OBJECT_SUPER_DIAMOND = 13;
+const int CNT_TYPE_OBJECT_SUPER_GOLD	= 14;
+const int CNT_TYPE_OBJECT_SUPER_ONYX	= 15;
+const int CNT_TYPE_OBJECT_SUPER_RUBY	= 16;
 
 const std::string CNT_NAME_WEAPON_AK47					= "AK-47";
 const std::string CNT_NAME_WEAPON_GUN					= "Gun";
@@ -68,6 +72,11 @@ const std::string CNT_NAME_BOMB				= "Bomd";
 const std::string CNT_NAME_COINS			= "Coins";
 const std::string CNT_NAME_CASKET_COINS		= "Casket_coins";
 const std::string CNT_NAME_CASKET_POWERS	= "Casket_clothes";
+
+const std::string CNT_NAME_DIAMOND	= "Diamond";
+const std::string CNT_NAME_GOLD		= "Gold";
+const std::string CNT_NAME_ONYX		= "Onyx";
+const std::string CNT_NAME_RUBY		= "Ruby";
 
 #define HERO_COLLISION_BITMASK		0x000001
 #define ENEMY_COLLISION_BITMASK		0x000002

@@ -11,7 +11,6 @@
 GameObjectMonster::GameObjectMonster()
 {
 	m_sizeEnemy = Point::ZERO;
-	//LoadField();
 }
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)

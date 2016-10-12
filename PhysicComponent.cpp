@@ -115,13 +115,17 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 				scene.m_bonusGraphicComponent->m_actived = false;
 				hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
 			}
-			else
+			else if (m_TagBonus == CNT_TYPE_OBJECT_BULLET_NORMAL)
 			{
 				hero.AddBullet(m_TagBonus);
 				scene.m_bonusGraphicComponent->setVisible(false);
 				scene.m_bonusGraphicComponent->setPosition(-500, -500);
 				scene.m_bonusGraphicComponent->m_actived = false;
 				hero.m_stateBonus = Monster::StateBonus::BONUS_REST;
+			}
+			else
+			{
+				hero.m_graphicComponentHero->ChangeCoins(100);
 			}
 
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;

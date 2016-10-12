@@ -32,11 +32,15 @@ public:
 
 	virtual void SetTargetPointForBullet(cocos2d::Point point);
 	virtual void SetTargetPosition_YForHero(int target_y);
-
-
+	
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset(const std::string& typeCasket);
 	void ShowBonusAnimation(float dt);
+
+	void AddSuperBonus(float dt);
+	void LoadNameSpritesSuperBonus();
+
+	std::chrono::time_point<std::chrono::system_clock> GetTime();
 
 	~BonusGraphicComponent();
 
@@ -52,6 +56,11 @@ public:
 	int			m_interval;
 
 	std::vector<std::string> m_vecNameSpritesOpenCasket;
+
+	std::vector<std::string> m_vecNameSpritesSuperBonus;
+
+	std::chrono::time_point<std::chrono::system_clock> m_BeginSecond;
+
 };
 
 #endif

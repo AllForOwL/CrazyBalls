@@ -101,6 +101,7 @@ public:
 
 	enum StateBonus
 	{
+		SUPER_BONUS,
 		BONUS_COIN,
 		BONUS_POWER,
 		BONUS_WEAPON,

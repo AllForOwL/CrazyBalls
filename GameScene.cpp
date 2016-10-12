@@ -160,6 +160,7 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
 	this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
 	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
+//	this->schedule(schedule_selector(GameScene::SpawnBonus), 8.0);
 
 	return true;
 }
@@ -216,6 +217,15 @@ void GameScene::SpawnBonus(float dt)
 									 );
 	m_bonusGraphicComponent->m_actived = true;
 	m_bonusGraphicComponent->setVisible(true);
+
+	if (m_bonusGraphicComponent->m_typeObject == CNT_NAME_DIAMOND ||
+		m_bonusGraphicComponent->m_typeObject == CNT_NAME_GOLD ||
+		m_bonusGraphicComponent->m_typeObject == CNT_NAME_ONYX ||
+		m_bonusGraphicComponent->m_typeObject == CNT_NAME_RUBY
+		)
+	{
+		this->m_hero->m_stateBonus = Monster::StateBonus::SUPER_BONUS;
+	}
 
 	if (!m_bonusGraphicComponent->getParent())
 	{

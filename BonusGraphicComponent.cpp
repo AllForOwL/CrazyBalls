@@ -3,6 +3,8 @@
 #include "GameScene.h"
 #include "constants.h"
 
+const int CNT_SECOND_VISIBLE_SUPER_BONUS = 10;
+
 BonusGraphicComponent::BonusGraphicComponent()
 {
 	m_actived					= false;
@@ -11,6 +13,8 @@ BonusGraphicComponent::BonusGraphicComponent()
 	m_indexInVector				= 0;
 	m_indexInVectorAnimation	= 0;
 	//m_stateBonus				= StateBonus::BONUS_REST;
+
+	LoadNameSpritesSuperBonus();
 
 	this->initWithFile("res/Weapons/AK47.png");
 	this->setVisible(false);
@@ -159,6 +163,56 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 	}
 }
 
+void BonusGraphicComponent::AddSuperBonus(float dt)
+{
+	srand(time(NULL));
+	int _numberSuperBonus = rand() % m_vecNameSpritesSuperBonus.size() + 0;
+	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesSuperBonus[_numberSuperBonus]));
+	//this->m_actived = true;
+
+	switch (_numberSuperBonus)
+	{
+		case CNT_TYPE_OBJECT_SUPER_DIAMOND:
+		{
+			this->m_typeObject = CNT_NAME_DIAMOND;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_SUPER_DIAMOND);
+
+			break;
+		}
+		case CNT_TYPE_OBJECT_SUPER_GOLD:
+		{
+			this->m_typeObject = CNT_NAME_GOLD;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_SUPER_GOLD);
+
+			break;
+		}
+		case CNT_TYPE_OBJECT_SUPER_ONYX:
+		{
+			this->m_typeObject = CNT_NAME_ONYX;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_SUPER_ONYX);
+
+			break;
+		}
+		case CNT_TYPE_OBJECT_SUPER_RUBY:
+		{
+			this->m_typeObject = CNT_NAME_RUBY;
+			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_SUPER_RUBY);
+
+			break;
+		}
+	}
+
+	m_BeginSecond = GetTime();
+}
+
+void BonusGraphicComponent::LoadNameSpritesSuperBonus()
+{
+	m_vecNameSpritesSuperBonus.push_back("res/Bonus/Diamond.png");
+	m_vecNameSpritesSuperBonus.push_back("res/Bonus/Gold.png");
+	m_vecNameSpritesSuperBonus.push_back("res/Bonus/Onyx.png");
+	m_vecNameSpritesSuperBonus.push_back("res/Bonus/Ruby.png");
+}
+
 void BonusGraphicComponent::LoadNameOpenCakset(const std::string& typeCasket)
 {
 	if (typeCasket == CNT_NAME_CASKET_COINS)
@@ -209,10 +263,28 @@ void BonusGraphicComponent::ShowBonusAnimation(float dt)
 	}
 }
 
+std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTime()
+{
+	std::chrono::time_point<std::chrono::system_clock> _time = std::chrono::system_clock::now();
+
+	return _time;
+}
+
+
 /*virtual*/ void BonusGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_stateBonus)
 	{
+		case Monster::StateBonus::SUPER_BONUS:
+		{
+			if ((int)std::chrono::duration<double>(GetTime() - m_BeginSecond).count() == CNT_SECOND_VISIBLE_SUPER_BONUS)
+			{
+				this->setPosition(Point(-10, -10));
+				this->setVisible(false);
+				this->m_actived = false;
+			}
+			break;
+		}
 		case Monster::StateBonus::BONUS_DEATH:
 		{
 			this->removeFromParentAndCleanup(true);
