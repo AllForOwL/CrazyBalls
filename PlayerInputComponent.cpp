@@ -100,9 +100,9 @@ PlayerInputComponent::PlayerInputComponent()
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
 	auto _locationTouchNow		= touch->getLocation();
-	auto _locationTouchPrevious = touch->getPreviousLocation();
+	auto _locationTouchStart	= touch->getStartLocation();
 
-	if (_locationTouchNow > _locationTouchPrevious)
+	if (_locationTouchNow > _locationTouchStart)
 	{
 		m_keyCode = EventKeyboard::KeyCode::KEY_UP_ARROW;
 	}

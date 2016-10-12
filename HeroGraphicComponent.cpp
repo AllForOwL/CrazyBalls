@@ -184,28 +184,53 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 		}
 		case Monster::StateHero::HERO_STATE_JUMP:
 		{
-			Point _position = this->getPosition();
-			_position.y += 5;
-			this->setPosition(_position);
-		
+			Size _visibleSize = Director::getInstance()->getVisibleSize();
+			float _positionY = this->getPositionY();
+			float _topOrderScreen = (_visibleSize.height - (this->getBoundingBox().size.height / 2));
+
+			if (_positionY >= _topOrderScreen)
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_FALL;
+				return;
+			}
+			else
+			{
+				_positionY += 5;
+			}
+			
+			this->setPositionY(_positionY);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[1]));
+
 			Point _positionWeapon = hero.m_graphicComponentHeroWeapon->getPosition();
 			_positionWeapon.y += 5;
 			hero.m_graphicComponentHeroWeapon->setPosition(_positionWeapon);
 			
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 			break;
 		}
 		case Monster::StateHero::HERO_STATE_FALL:
 		{
-			Point _position = this->getPosition();
-			_position.y -= 5;
-			this->setPosition(_position);
+			Size _visibleSize = Director::getInstance()->getVisibleSize();
+			float _positionY = this->getPositionY();
+			float _bottomOrderScreen = (this->getBoundingBox().size.height / 2);
+
+			if (_positionY <= _bottomOrderScreen)
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP;
+				return;
+			}
+			else
+			{
+				_positionY -= 5;
+			}
+
+			this->setPositionY(_positionY);
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[0]));
 
 			Point _positionWeapon = hero.m_graphicComponentHeroWeapon->getPosition();
 			_positionWeapon.y -= 5;
 			hero.m_graphicComponentHeroWeapon->setPosition(_positionWeapon);
 
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+			//hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 
 			break;
 		}
@@ -213,7 +238,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 		{
 			if (++m_countSpriteInVectorDizzy == CNT_NUMBER_SPRITE_IN_DIZZY)
 			{
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP;
 				m_countSpriteInVectorDizzy = 0;
 				m_health -= 10;
 				break;
@@ -235,7 +260,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 			if (_amountWeapon == 1)
 			{
 				hero.SetActiveWeapon(scene, 0);
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP;
 				break;
 			}
 			else
@@ -250,7 +275,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 				hero.SetActiveWeapon(scene, _currentIndexWeapon);
 			}
 
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP;
 
 			break;
 		}
@@ -265,7 +290,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 			if (_amountBullet == 1)
 			{
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP;
 				break;
 			}
 			else
@@ -288,7 +313,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 		
 			if (++m_countSpriteInVectorDie == m_vecSpritesDie.size())
 			{
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP;
 				this->removeFromParentAndCleanup(true);
 			}
 			break;
@@ -349,6 +374,7 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 {
 	m_health += health;
 }
+
 /*virtual*/ bool HeroGraphicComponent::Winner() const
 {
 	if (m_coins >= m_vecNumberCoinsForTransitionNextLevel[GameScene::m_level])

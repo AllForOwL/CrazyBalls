@@ -10,7 +10,9 @@
 
 GameObjectMonster::GameObjectMonster()
 {
-	LoadField();
+	m_scaleX	= 0;
+	m_scaleY	= 0;
+	//LoadField();
 }
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
@@ -131,10 +133,17 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 	m_enemy->setScale(_visibleSize.width / _widthEnemy / 20,
 					 _visibleSize.height / _heightEnemy / 20);
+
+	m_vecComponentEnemy.push_back(m_enemy);
+
+	if (!m_scaleX)
+	{
+		LoadField();
+	}
+
 	m_enemy->setPosition(GetPosition());
 	m_enemy->setName(_typeObjectEnemy);
 
-	m_vecComponentEnemy.push_back(m_enemy);
 	
 	scene.addChild(m_vecComponentEnemy[m_vecComponentEnemy.size() - 1]);
 }
@@ -149,15 +158,25 @@ void GameObjectMonster::LoadField()
 	std::vector<int> _vecPositionX;
 	std::vector<int> _vecPositionY;
 
-	_vecPositionX.push_back(260);
-	_vecPositionX.push_back(310);
-	_vecPositionX.push_back(360);
+	m_scaleX = m_vecComponentEnemy[0]->getScaleX();
+	m_scaleY = m_vecComponentEnemy[0]->getScaleY();
+	
+	m_scaleX += 10;
+	m_scaleY += 10;
 
-	_vecPositionY.push_back(50);
-	_vecPositionY.push_back(100);
-	_vecPositionY.push_back(150);
-	_vecPositionY.push_back(200);
-	_vecPositionY.push_back(250);
+	int _tempPositionX = _widthField;
+	while (_tempPositionX < _visibleSize.width)
+	{
+		_vecPositionX.push_back(_tempPositionX);
+		_tempPositionX += m_scaleX;
+	}
+
+	int _tempPositionY = m_scaleY;
+	while (_tempPositionY < _visibleSize.height)
+	{
+		_vecPositionY.push_back(_tempPositionY);
+		_tempPositionY += m_scaleY;
+	}
 
 	for (int i = 0; i < _vecPositionX.size(); i++)
 	{
@@ -174,39 +193,23 @@ void GameObjectMonster::LoadField()
 
 cocos2d::Point GameObjectMonster::GetPosition()
 {
-	int _indexPosition;
-	int _amountCells = m_vecField.size();
-
+	int _randPosition = 0;
 	do
 	{
-		if (!m_vecIndexFreePosition.size()) return Point(-50, -50);
-
-		if (m_vecIndexFreePosition.size() >= _amountCells)
-		{
-			_indexPosition = rand() % _amountCells + 0;
-		}
-		else 
-		{
-			int _amountFreePosition = m_vecIndexFreePosition.size();
-			int _indexPositionFree = rand() % _amountFreePosition + 0;
-			_indexPosition = m_vecIndexFreePosition[_indexPositionFree];
-			m_vecIndexFreePosition.erase(m_vecIndexFreePosition.begin() + _indexPositionFree);
-			break;
-			break;
-		}
+		_randPosition = rand() % m_vecIndexFreePosition.size() + 0;
 	}
-	while (!FreePosition(_indexPosition));
+	while (!FreePosition(_randPosition));
 
 	Point _position;
-	_position.x = m_vecField[_indexPosition].m_X;
-	_position.y = m_vecField[_indexPosition].m_Y;
+	_position.x = m_vecField[_randPosition].m_X;
+	_position.y = m_vecField[_randPosition].m_Y;
 
 	return _position;
 }
 
 bool GameObjectMonster::FreePosition(int indexPosition)
 {
-	if (indexPosition > CNT_MAX_INDEX_POSITION)
+	if (indexPosition > m_vecField.size())
 	{
 		return false;
 	}

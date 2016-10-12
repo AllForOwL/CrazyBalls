@@ -85,8 +85,8 @@ bool GameScene::init()
 	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
-	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 6,
-									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 4);
+	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 7,
+									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 5);
 	this->addChild(m_graphicComponentHero);
 	
 	

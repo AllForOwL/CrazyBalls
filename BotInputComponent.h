@@ -11,7 +11,6 @@ using namespace cocos2d;
 class BotInputComponent : public InputComponent
 {
 public:
-
 	BotInputComponent();
 
 	virtual void Update(Monster& heroes);
