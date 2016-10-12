@@ -270,7 +270,6 @@ std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTim
 	return _time;
 }
 
-
 /*virtual*/ void BonusGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_stateBonus)
@@ -297,76 +296,10 @@ std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTim
 	return;
 }
 
-/*virtual*/ int BonusGraphicComponent::GetAttack() const
-{
-	return m_attack;
-}
-
-/*virtual*/ int BonusGraphicComponent::GetHealth() const
-{
-	return 1;
-}
-
 /*virtual*/ std::string BonusGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
 }
-
-/*virtual*/ bool BonusGraphicComponent::Dead(int wounded)
-{
-	return true;
-}
-
-/*virtual*/ void BonusGraphicComponent::ChangeCoins(int coins)
-{
-
-}
-
-/*virtual*/ bool BonusGraphicComponent::Winner() const
-{
-	return true;
-}
-
-/*virtual*/ int BonusGraphicComponent::GetValue() const
-{
-	return 2;
-}
-
-/*virtual*/ void BonusGraphicComponent::SetSpeedBullet(int speed)
-{
-
-}
-
-/*virtual*/ int BonusGraphicComponent::GetSpeedBullet() const
-{
-	return 2;
-}
-
-/*virtual*/ void BonusGraphicComponent::DescreaseQuentityBullet()
-{
-
-}
-
-/*virtual*/ int BonusGraphicComponent::GetQuentityBullet() const
-{
-	return 1;
-}
-
-/*virtual*/ void BonusGraphicComponent::ChangeHealth(int health)
-{
-
-}
-
-/*virtual*/ void BonusGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
-{
-
-}
-
-/*virtual*/ void BonusGraphicComponent::SetTargetPosition_YForHero(int target_y)
-{
-
-}
-
 
 BonusGraphicComponent::~BonusGraphicComponent()
 {

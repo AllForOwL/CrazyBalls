@@ -24,14 +24,6 @@ public:
 	virtual void ChangeCoins(int coins);
 	virtual void ChangeHealth(int health);
 
-	virtual void SetSpeedBullet(int speed);
-	virtual int GetSpeedBullet() const;
-
-	virtual void DescreaseQuentityBullet();
-	virtual int  GetQuentityBullet() const;
-
-	virtual void SetTargetPointForBullet(cocos2d::Point point);
-
 	virtual void SetTargetPosition_YForHero(int target_y);
 
 	void LoadSpritesForHell();

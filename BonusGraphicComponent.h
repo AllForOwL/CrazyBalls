@@ -14,25 +14,8 @@ public:
 	BonusGraphicComponent();
 	
 	virtual void		Update(Monster& hero, GameScene& scene);
-	virtual int			GetValue()  const;
-	virtual int			GetAttack() const;
-	virtual int			GetHealth() const;
 	virtual std::string GetTypeObject() const;
-	virtual bool		Dead(int wounded);
-	virtual void		ChangeCoins(int coins);
-	virtual bool		Winner() const;
-
-	virtual void SetSpeedBullet(int speed);
-	virtual int  GetSpeedBullet() const;
-
-	virtual void DescreaseQuentityBullet();
-	virtual int  GetQuentityBullet() const;
-
-	virtual void ChangeHealth(int health);
-
-	virtual void SetTargetPointForBullet(cocos2d::Point point);
-	virtual void SetTargetPosition_YForHero(int target_y);
-	
+		
 	void AddBonus(int typeObject);
 	void LoadNameOpenCakset(const std::string& typeCasket);
 	void ShowBonusAnimation(float dt);

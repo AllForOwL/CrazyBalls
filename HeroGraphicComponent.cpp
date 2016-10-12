@@ -359,11 +359,6 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 	this->m_target_Y = target_y;
 }
 
-/*virtual*/ void HeroGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
-{
-
-}
-
 /*virtual*/ int HeroGraphicComponent::GetHealth() const
 {
 	return m_health;
@@ -399,26 +394,6 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 /*virtual*/ int HeroGraphicComponent::GetValue() const
 {
 	return m_coins;
-}
-
-/*virtual*/ void HeroGraphicComponent::SetSpeedBullet(int speed)
-{
-
-}
-
-/*virtual*/ int HeroGraphicComponent::GetSpeedBullet() const
-{
-	return 2;
-}
- 
-/*virtual*/ void HeroGraphicComponent::DescreaseQuentityBullet()
-{
-
-}
-
-/*virtual*/ int HeroGraphicComponent::GetQuentityBullet() const
-{
-	return 1;
 }
 
 HeroGraphicComponent::~HeroGraphicComponent()

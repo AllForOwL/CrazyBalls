@@ -286,16 +286,6 @@ std::chrono::time_point<std::chrono::system_clock> BreedGraphicComponent::GetTim
 	return m_attack;
 }
 
-/*virtual*/ void BreedGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
-{
-
-}
-
-/*virtual*/ void BreedGraphicComponent::SetTargetPosition_YForHero(int target_y)
-{
-
-}
-
 /*virtual*/int BreedGraphicComponent::GetHealth() const
 {
 	return m_health;
@@ -368,41 +358,6 @@ bool BreedGraphicComponent::Death()
 /*virtual*/ int BreedGraphicComponent::GetValue() const
 {
 	return m_value;
-}
-
-/*virtual*/ void BreedGraphicComponent::ChangeCoins(int coins)
-{
-
-}
-
-/*virtual*/ bool BreedGraphicComponent::Winner() const
-{
-	return true;
-}
-
-/*virtual*/ void BreedGraphicComponent::SetSpeedBullet(int speed)
-{
-
-}
-
-/*virtual*/ int BreedGraphicComponent::GetSpeedBullet() const
-{
-	return 2;
-}
-
-/*virtual*/ void BreedGraphicComponent::DescreaseQuentityBullet()
-{
-
-}
-
-/*virtual*/ int BreedGraphicComponent::GetQuentityBullet() const
-{
-	return 1;
-}
-
-/*virtual*/ void BreedGraphicComponent::ChangeHealth(int health)
-{
-
 }
 
 BreedGraphicComponent::~BreedGraphicComponent()

@@ -184,27 +184,6 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 	return;
 }
 
-/*virtual*/ void WeaponGraphicComponent::SetSpeedBullet(int speed)
-{
-
-}
-
-/*virtual*/ void WeaponGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
-{
-
-}
-
-/*virtual*/ void WeaponGraphicComponent::SetTargetPosition_YForHero(int target_y)
-{
-
-}
-
-
-/*virtual*/ int WeaponGraphicComponent::GetSpeedBullet() const
-{
-	return 2;
-}
-
 /*virtual*/ void WeaponGraphicComponent::DescreaseQuentityBullet()
 {
 	--m_quentityBullet;
@@ -220,39 +199,9 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 	return m_attack;
 }
 
-/*virtual*/ int WeaponGraphicComponent::GetHealth() const
-{
-	return 1;
-}
-
 /*virtual*/ std::string WeaponGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
-}
-
-/*virtual*/ bool WeaponGraphicComponent::Dead(int wounded)
-{
-	return true;
-}
-
-/*virtual*/ void WeaponGraphicComponent::ChangeCoins(int coins)
-{
-
-}
-
-/*virtual*/ bool WeaponGraphicComponent::Winner() const
-{
-	return true;
-}
-
-/*virtual*/ int WeaponGraphicComponent::GetValue() const
-{
-	return 2;
-}
-
-/*virtual*/ void WeaponGraphicComponent::ChangeHealth(int health)
-{
-
 }
 
 WeaponGraphicComponent::~WeaponGraphicComponent()

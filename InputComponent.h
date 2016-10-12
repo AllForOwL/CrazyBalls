@@ -13,12 +13,18 @@ class InputComponent
 public:
 	virtual void Update(Monster& heroes) = 0;
 
-	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) = 0;
-	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) = 0;
+	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
+	{
+		return true;
+	}
+	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
+	{
+		
+	}
+	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+	{
 
-	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) = 0;
-	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) = 0;
-	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) = 0;
+	}
 
 	virtual ~InputComponent() {};
 

@@ -13,24 +13,66 @@ class Monster;
 class GraphicComponent : public cocos2d::Sprite
 {
 public:
-	virtual void Update(Monster& hero, GameScene& scene)	= 0;
-
-	virtual int				GetValue()					const	= 0;
-	virtual int				GetAttack()					const	= 0;
-	virtual int				GetHealth()					const	= 0;
-	virtual std::string		GetTypeObject()				const	= 0;
-	virtual bool			Dead(int wounded)					= 0;
-	virtual void			ChangeCoins(int coins)				= 0;
-	virtual void			ChangeHealth(int health)			= 0;
-	virtual bool			Winner()					const	= 0;
-	virtual void			SetSpeedBullet(int speed)			= 0;
-	virtual int				GetSpeedBullet()			const	= 0;
-	virtual void			DescreaseQuentityBullet()			= 0;
-	virtual int				GetQuentityBullet()			const	= 0;
-	virtual void			SetTargetPointForBullet(cocos2d::Point point) = 0;
-	virtual void			SetTargetPosition_YForHero(int target_y) = 0;
-
+	virtual void Update(Monster& hero, GameScene& scene)  = 0;
 	virtual ~GraphicComponent() {};
+
+	virtual std::string GetTypeObject() const
+	{
+		return std::string("good");
+	}
+
+	virtual int	GetValue() const
+	{
+		return 1;
+	}
+	virtual int	GetAttack()	const
+	{
+		return 1;
+	}
+	virtual int	GetHealth() const
+	{
+		return 1;
+	}
+	virtual bool Dead(int wounded)
+	{
+		return true;
+	}
+	virtual void ChangeCoins(int coins)
+	{
+
+	}
+	virtual void ChangeHealth(int health)
+	{
+
+	}
+	virtual bool Winner() const
+	{
+		return true;
+	}
+	virtual void SetSpeedBullet(int speed)
+	{
+
+	}
+	virtual int	GetSpeedBullet() const
+	{
+		return 1;
+	}
+	virtual void DescreaseQuentityBullet()
+	{
+
+	}
+	virtual int	GetQuentityBullet()	const
+	{
+		return 1;
+	}
+	virtual void SetTargetPointForBullet(cocos2d::Point point)
+	{
+
+	}
+	virtual void SetTargetPosition_YForHero(int target_y)
+	{
+
+	}
 };
 
 #endif

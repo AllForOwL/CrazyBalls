@@ -60,35 +60,6 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 	return m_typeObject;
 }
 
-/*virtual*/ int BotBulletGraphicComponent::GetHealth() const
-{
-	return 1;
-}
-
-/*virtual*/ bool BotBulletGraphicComponent::Dead(int wounded)
-{
-	return true;
-}
-
-/*virtual*/ void BotBulletGraphicComponent::SetSpeedBullet(int speed)
-{
-
-}
-/*virtual*/ int BotBulletGraphicComponent::GetSpeedBullet() const
-{
-	return 2;
-}
-
-/*virtual*/ void BotBulletGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)
-{
-
-}
-
-/*virtual*/ void BotBulletGraphicComponent::SetTargetPosition_YForHero(int target_y)
-{
-
-}
-
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_objectMonster->m_stateBullet)
@@ -146,22 +117,6 @@ void BotBulletGraphicComponent::LoadBomb()
 {
 	m_position = Point::ZERO;
 	m_strFilename = "Bomb.png";
-}
-
-
-/*virtual*/ void BotBulletGraphicComponent::DescreaseQuentityBullet()
-{
-
-}
-
-/*virtual*/ int BotBulletGraphicComponent::GetQuentityBullet() const
-{
-	return 1;
-}
-
-/*virtual*/ void BotBulletGraphicComponent::ChangeHealth(int health)
-{
-
 }
 
 BotBulletGraphicComponent::~BotBulletGraphicComponent()

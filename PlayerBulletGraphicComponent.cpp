@@ -58,19 +58,9 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	return m_attack;
 }
 
-/*virtual*/ int PlayerBulletGraphicComponent::GetHealth() const
-{
-	return 1;
-}
-
 /*virtual*/ std::string PlayerBulletGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
-}
-
-/*virtual*/ bool PlayerBulletGraphicComponent::Dead(int wounded)
-{
-	return true;
 }
 
 /*virtual*/ void PlayerBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
@@ -147,41 +137,6 @@ void PlayerBulletGraphicComponent::SetSpeedBullet(int speed)
 int PlayerBulletGraphicComponent::GetSpeedBullet() const
 {
 	return this->m_speed;
-}
-
-/*virtual*/ void PlayerBulletGraphicComponent::ChangeCoins(int coins)
-{
-	
-}
-
-/*virtual*/ bool PlayerBulletGraphicComponent::Winner() const
-{
-	return true;
-}
-
-/*virtual*/ void PlayerBulletGraphicComponent::SetTargetPosition_YForHero(int target_y)
-{
-
-}
-
-/*virtual*/ int PlayerBulletGraphicComponent::GetValue() const
-{
-	return 2;
-}
-
-/*virtual*/ void PlayerBulletGraphicComponent::DescreaseQuentityBullet()
-{
-
-}
-
-/*virtual*/ int PlayerBulletGraphicComponent::GetQuentityBullet() const
-{
-	return 1;
-}
-
-/*virtual*/ void PlayerBulletGraphicComponent::ChangeHealth(int health)
-{
-
 }
 
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()
