@@ -9,7 +9,7 @@
 #include "ButtonGraphicComponent.h"
 #include "BotInputComponent.h"
 #include "PhysicComponent.h"
-//#include "GameLayer.h"
+#include "GameLayer.h"
 #include <time.h>
 
 USING_NS_CC;
@@ -142,9 +142,9 @@ bool GameScene::init()
 	m_bonusGraphicComponent->setName("bonus");
 	this->addChild(m_bonusGraphicComponent);
 
-	//m_gameLayer = GameLayer::create();
+	m_gameLayer = GameLayer::create();
 	
-	//this->addChild(m_gameLayer);
+	this->addChild(m_gameLayer);
 
 	auto _touchListener = EventListenerTouchOneByOne::create();
 	_touchListener->onTouchBegan = CC_CALLBACK_2(InputComponent::onTouchBegan, m_inputComponent);
@@ -161,19 +161,6 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
 	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
 
-
-	///*** create custom event ***///
-	/*auto _myListener = EventListenerCustom::create("click", myVirtualEventMethod);
-	_myListener =  EventListenerCustom::create("click",
-		CC_CALLBACK_1(GameScene::myVirtualEventMethod, this));
-	/*virtual void GameScene::myVirtualEventMethod(EventCustom*)
-	{
-
-	}
-	
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_myListener, this);
-	*/
-
 	return true;
 }
 
@@ -187,7 +174,7 @@ bool GameScene::init()
 void GameScene::update(float dt)
 {
 	m_hero->Update		(*this);
-	//m_gameLayer->Update	(*m_hero);
+	m_gameLayer->Update	(*m_hero);
 
 	/*Size _visibleSize = Director::getInstance()->getVisibleSize();
 

@@ -298,7 +298,6 @@ void BonusGraphicComponent::HideObject()
 	this->m_actived = false;
 }
 
-
 /*virtual*/ void BonusGraphicComponent::StartShowAnimation()
 {
 	this->m_showAnimation = true;

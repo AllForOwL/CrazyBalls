@@ -104,7 +104,6 @@ void WeaponGraphicComponent::SetPropertiesWeapon(const int& i_typeObject, const 
 	m_quentityBullet = i_quentityBullet;
 }
 
-
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_stateWeapon)

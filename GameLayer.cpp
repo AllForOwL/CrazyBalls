@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
+#include <string>
 #include "GameLayer.h"
 #include "Monster.h"
 #include "PauseScene.h"
@@ -183,18 +181,18 @@ void GameLayer::ShowQuentityBullet(int tagWeapon, int quentityBullet)
 		int _index = _tagWeapon - 3;												
 		if (m_vecLevelQuentityBullet[_index]->getTag() == _tagWeapon)
 		{
-			char _chquentityBullet[10];
-			itoa(_quentityBullet, _chquentityBullet, 10);
-			m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+			std::string _strQuentityBullet;
+			_strQuentityBullet = std::to_string(_quentityBullet);
+			m_vecLevelQuentityBullet[_index]->setString(_strQuentityBullet);
 		}
 		else
 		{
 			m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
 
 			m_positionX += 30;
-			char _chquentityBullet[10];
-			itoa(_quentityBullet, _chquentityBullet, 10);
-			m_vecLevelQuentityBullet[_index]->setString(_chquentityBullet);
+			std::string _strQuentityBullet;
+			_strQuentityBullet = std::to_string(_quentityBullet);
+			m_vecLevelQuentityBullet[_index]->setString(_strQuentityBullet);
 			m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
 			m_vecLevelQuentityBullet[_index]->setTag(_tagWeapon);
 
@@ -217,24 +215,20 @@ void GameLayer::LoadSpritesName()
 
 void GameLayer::Update(Monster& hero)
 {
-	char _health[10];
-	char _attack[10];
-	char _coins[10];
+	std::string _strAttack = std::to_string(hero.m_graphicComponentHero->GetAttack());
+	std::string _strHealth = std::to_string(hero.m_graphicComponentHero->GetHealth());
+	std::string _strCoin = std::to_string(hero.m_graphicComponentHero->GetValue());
 
-	itoa(hero.m_graphicComponentHero->GetAttack(),	_attack, 10);
-	itoa(hero.m_graphicComponentHero->GetHealth(),	_health, 10);
-	itoa(hero.m_graphicComponentHero->GetValue(),	_coins,  10);
-
-	m_lblAttackHero->setString	(_attack);
-	m_lblHealthHero->setString	(_health);
-	m_lblCoinsHero->setString	(_coins);
+	m_lblAttackHero->setString	(_strAttack);
+	m_lblHealthHero->setString	(_strHealth);
+	m_lblCoinsHero->setString	(_strCoin);
 
 	switch (hero.m_stateBonus)
 	{
 		case Monster::StateBonus::BONUS_TAKE_COIN:
 		{
-			itoa(hero.m_graphicComponentHero->GetAttack(), _coins, 10);
-			m_lblAttackHero->setString(_coins);
+			_strAttack = std::to_string(hero.m_graphicComponentHero->GetAttack());
+			m_lblAttackHero->setString(_strAttack);
 
 			m_typeAnimation = CNT_ANIMATION_COIN;
 			hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
@@ -244,8 +238,8 @@ void GameLayer::Update(Monster& hero)
 
 		case Monster::StateBonus::BONUS_TAKE_POWER:
 		{
-			itoa(hero.m_graphicComponentHero->GetHealth(), _health, 10);
-			m_lblHealthHero->setString(_health);
+			_strHealth = std::to_string(hero.m_graphicComponentHero->GetHealth());
+			m_lblHealthHero->setString(_strHealth);
 
 			m_typeAnimation = CNT_ANIMATION_POWER;
 			hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
