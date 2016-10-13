@@ -34,6 +34,7 @@ public:
 		STATE_FIRE_UP,
 		STATE_FIRE_BOMB,
 		STATE_HIT_IN_TARGET,
+		STATE_REMOVE_ENEMY,
 		STATE_NOTHING
 	};
 
@@ -45,6 +46,11 @@ public:
 	void LoadField();
 	bool FreePosition(int indexPosition);
 	void ReleaseCell(Point point);
+
+	int GetIndexEnemyForRemove(int tagEnemy) const;
+	int RemoveAndCleanEnemy(int tagEnemy);
+	int GetCoinForEnemy() const;
+	int GetDamage(int indexEnemy) const;
 
 	~GameObjectMonster();
 public:
@@ -62,7 +68,7 @@ public:
 	std::vector<int>	m_vecIndexFreePosition;
 	cocos2d::Size		m_sizeEnemy;
 
-
+	int					m_coinForEnemy;
 };
 
 

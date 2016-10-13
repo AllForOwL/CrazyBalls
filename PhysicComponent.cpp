@@ -4,6 +4,7 @@
 #include "HeroGraphicComponent.h"
 #include "constants.h"
 #include "GameOverScene.h"
+#include "BonusGraphicComponent.h"
 
 PhysicComponent::PhysicComponent()
 {
@@ -21,71 +22,26 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 	{
 		case StatePhysic::STATE_WOUNDED_ENEMY:
 		{		
-			for (int i = 0; i < hero.m_objectMonster->m_vecComponentEnemy.size(); i++)
-			{
-				auto body =  hero.m_objectMonster->m_vecComponentEnemy[i]->getPhysicsBody();
-				if (body->getTag() == m_TagEnemy)
-				{
-					m_coin = hero.m_objectMonster->m_vecComponentEnemy[i]->GetValue();
-					hero.m_objectMonster->ReleaseCell(hero.m_objectMonster->m_vecComponentEnemy[i]->getPosition());
-					hero.m_objectMonster->m_vecComponentEnemy[i]->removeFromParentAndCleanup(true);
-					hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin() + i);
-				}
-			}
-				
-			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
-			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
-			hero.m_graphiComponentHeroBullet->setVisible(false);
-			hero.m_graphiComponentHeroBullet->setPosition(Point(-10, -10));	
+			int _indexEnemy			= hero.m_objectMonster->GetIndexEnemyForRemove(m_TagEnemy);
+			int _coinForRemoveEnemy = hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
+			hero.m_graphicComponentHero->ChangeCoins(_coinForRemoveEnemy);
+			hero.CheckHeroOnLevelCompete();
 
-			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
-			
-			hero.m_graphicComponentHero->ChangeCoins(m_coin);
-			m_coin = 0;
-			if (hero.m_graphicComponentHero->Winner())
-			{
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WINNER;
-			}
+			m_TagEnemy = 0;
 
 			break;
 		}
 		case StatePhysic::STATE_WOUNDED_HERO:
 		{
-			for (int i = 0; i < hero.m_objectMonster->m_vecComponentEnemy.size(); i++)
-			{
-				auto body =  hero.m_objectMonster->m_vecComponentEnemy[i]->getPhysicsBody();
-				if (body->getTag() == m_TagEnemy)
-				{
-					m_damage = hero.m_objectMonster->m_vecComponentEnemy[i]->GetAttack();
-					hero.m_objectMonster->m_vecComponentEnemy[i]->removeFromParentAndCleanup(true);
-					hero.m_objectMonster->ReleaseCell(hero.m_objectMonster->m_vecComponentEnemy[i]->getPosition());
-					hero.m_objectMonster->m_vecComponentEnemy.erase(hero.m_objectMonster->m_vecComponentEnemy.begin() + i);
-					break;
-				}
-			}
+			int _indexEnemy			= hero.m_objectMonster->GetIndexEnemyForRemove(m_TagEnemy);
+			int _damage				= hero.m_objectMonster->GetDamage(_indexEnemy);
+			int _coinForRemoveEnemy = hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
+			
+			hero.CauseDamage(_damage);
 
 			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
-
-			if (hero.m_graphicComponentHero->Dead(m_damage))
-			{
-				m_damage = 0;
-				hero.m_stateHero	= Monster::StateHero::HERO_STATE_DEATH;
-				hero.m_stateBullet	= Monster::StateBullet::BULLET_STATE_DEATH;
-				hero.m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEATH;
-				hero.m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_DEATH;
-				hero.m_stateBonus	= Monster::StateBonus::BONUS_DEATH;
-
-				srand(time(NULL));
-				auto reScene = TransitionFade::create(1.0f, GameOverScene::createScene(), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
-				Director::getInstance()->replaceScene(reScene);
-			}
-			else
-			{
-				m_damage = 0;
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WOUNDED;
-			}
 
 			break;
 		}
@@ -96,41 +52,24 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 
 			if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_COINS)
 			{
-				hero.m_graphicComponentHero->ChangeCoins(50);
-				scene.m_bonusGraphicComponent->m_showAnimation = true;
-				hero.m_stateBonus = Monster::StateBonus::BONUS_COIN;
-
+				hero.m_stateHero  = Monster::StateHero::HERO_STATE_TAKE_COIN;
+				scene.m_bonusGraphicComponent->StartShowAnimation();
 			}
 			else if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_POWER)
 			{
-				hero.m_graphicComponentHero->ChangeHealth(50);
-				scene.m_bonusGraphicComponent->m_showAnimation = true;
-				hero.m_stateBonus = Monster::StateBonus::BONUS_POWER;
+				hero.m_stateHero  = Monster::StateHero::HERO_STATE_TAKE_POWER; 
+				scene.m_bonusGraphicComponent->StartShowAnimation();
 			}
 			else if (m_TagBonus <= CNT_TYPE_OBJECT_WEAPON_UMG)	// last object for weapon
 			{
 				hero.AddWeapon(m_TagBonus);
-				scene.m_bonusGraphicComponent->setVisible(false);
-				scene.m_bonusGraphicComponent->setPosition(-500, -500);
-				scene.m_bonusGraphicComponent->m_actived = false;
-				hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
+				scene.m_bonusGraphicComponent->HideObject();
 			}
 			else if (m_TagBonus == CNT_TYPE_OBJECT_BULLET_NORMAL)
 			{
 				hero.AddBullet(m_TagBonus);
-				scene.m_bonusGraphicComponent->setVisible(false);
-				scene.m_bonusGraphicComponent->setPosition(-500, -500);
-				scene.m_bonusGraphicComponent->m_actived = false;
-				hero.m_stateBonus = Monster::StateBonus::BONUS_REST;
+				scene.m_bonusGraphicComponent->HideObject();
 			}
-			else
-			{
-				hero.m_graphicComponentHero->ChangeCoins(100);
-			}
-
-			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
-			hero.m_graphiComponentHeroBullet->setVisible(false);
-			hero.m_graphiComponentHeroBullet->setPosition(Point(-10, -10));
 
 			this->m_statePhysic	= StatePhysic::STATE_NOTHING;
 

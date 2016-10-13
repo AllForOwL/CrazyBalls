@@ -6,6 +6,7 @@
 #include "GameObjectMonster.h"
 #include "PhysicComponent.h"
 #include "PlayerBulletGraphicComponent.h"
+#include "GameOverScene.h"
 #include "constants.h"
 
 Monster::Monster(
@@ -239,6 +240,47 @@ void Monster::Update(GameScene& scene)
 		m_vecGraphicComponentBullet[_indexActiveBullet]->m_GraphicComponent->Update(*this, scene);
 	}
 }
+
+void Monster::HideBullet()
+{
+	m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
+	m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
+	m_graphiComponentHeroBullet->setVisible(false);
+	m_graphiComponentHeroBullet->setPosition(Point(-10, -10));
+}
+
+void Monster::CheckHeroOnLevelCompete()
+{
+	if (m_graphicComponentHero->Winner())
+	{
+		m_stateHero = Monster::StateHero::HERO_STATE_WINNER;
+	}
+}
+
+void Monster::CauseDamage(int damage)
+{
+	if (m_graphicComponentHero->Dead(damage))
+	{
+		m_stateHero = Monster::StateHero::HERO_STATE_DEATH;
+		m_stateBullet = Monster::StateBullet::BULLET_STATE_DEATH;
+		m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_DEATH;
+		m_stateEnemy = Monster::StateEnemys::ENEMY_STATE_DEATH;
+		m_stateBonus = Monster::StateBonus::BONUS_DEATH;
+	}
+	else
+	{
+		m_stateHero = Monster::StateHero::HERO_STATE_WOUNDED;
+	}
+}
+
+
+void Monster::LoadGameOver() const
+{
+	srand(time(NULL));
+	auto reScene = TransitionFade::create(1.0f, GameOverScene::createScene(), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+	Director::getInstance()->replaceScene(reScene);
+}
+
 Monster::~Monster()
 {
 	delete m_graphicComponentHero;

@@ -160,7 +160,19 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
 	this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
 	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
-//	this->schedule(schedule_selector(GameScene::SpawnBonus), 8.0);
+
+
+	///*** create custom event ***///
+	/*auto _myListener = EventListenerCustom::create("click", myVirtualEventMethod);
+	_myListener =  EventListenerCustom::create("click",
+		CC_CALLBACK_1(GameScene::myVirtualEventMethod, this));
+	/*virtual void GameScene::myVirtualEventMethod(EventCustom*)
+	{
+
+	}
+	
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_myListener, this);
+	*/
 
 	return true;
 }

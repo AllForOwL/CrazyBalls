@@ -231,7 +231,7 @@ void GameLayer::Update(Monster& hero)
 
 	switch (hero.m_stateBonus)
 	{
-		case Monster::StateBonus::BONUS_COIN:
+		case Monster::StateBonus::BONUS_TAKE_COIN:
 		{
 			itoa(hero.m_graphicComponentHero->GetAttack(), _coins, 10);
 			m_lblAttackHero->setString(_coins);
@@ -242,7 +242,7 @@ void GameLayer::Update(Monster& hero)
 			break;
 		}
 
-		case Monster::StateBonus::BONUS_POWER:
+		case Monster::StateBonus::BONUS_TAKE_POWER:
 		{
 			itoa(hero.m_graphicComponentHero->GetHealth(), _health, 10);
 			m_lblHealthHero->setString(_health);

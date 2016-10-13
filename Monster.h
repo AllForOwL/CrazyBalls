@@ -72,7 +72,9 @@ public:
 		HERO_STATE_CHANGE_WEAPON,
 		HERO_STATE_DEATH,
 		HERO_STATE_WINNER,
-		HERO_STATE_GO_TO_TARGET
+		HERO_STATE_GO_TO_TARGET,
+		HERO_STATE_TAKE_COIN,
+		HERO_STATE_TAKE_POWER,
 	};
 
 	enum StateWeapon
@@ -102,10 +104,12 @@ public:
 	enum StateBonus
 	{
 		SUPER_BONUS,
-		BONUS_COIN,
-		BONUS_POWER,
 		BONUS_WEAPON,
 		BONUS_REST,
+		BONUS_TAKE_BULLET,
+		BONUS_TAKE_COIN,
+		BONUS_TAKE_POWER,
+		BONUS_TAKE_WEAPON,
 		BONUS_DEATH
 	};
 
@@ -139,6 +143,16 @@ public:
 
 	void CheckQuentityBulletInActiveWeapon();
 	int  GetRandWeapon();
+
+	void HideBullet();
+
+	void CheckHeroOnLevelCompete();
+
+	void CauseDamage(int damage);
+
+	void CauseBonus(int tagBonus);
+
+	void LoadGameOver() const;
 
 	~Monster();
 

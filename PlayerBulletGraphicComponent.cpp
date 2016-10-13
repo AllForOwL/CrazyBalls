@@ -139,6 +139,12 @@ int PlayerBulletGraphicComponent::GetSpeedBullet() const
 	return this->m_speed;
 }
 
+/*virtual*/ void PlayerBulletGraphicComponent::HideObject()
+{
+	this->setVisible(false);
+	this->setPosition(Point(-10, -10));
+}
+
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()
 {
 

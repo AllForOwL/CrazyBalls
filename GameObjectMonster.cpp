@@ -233,6 +233,49 @@ void GameObjectMonster::ReleaseCell(Point point)
 	}
 }
 
+int GameObjectMonster::GetIndexEnemyForRemove(int tagEnemy) const
+{
+	int _tagEnemy = tagEnemy;
+
+	for (int i = 0; i < m_vecComponentEnemy.size(); i++)
+	{
+		auto body = m_vecComponentEnemy[i]->getPhysicsBody();
+		if (body->getTag() == _tagEnemy)
+		{
+			return i;
+		}
+	}
+}
+
+int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
+{
+	if (m_vecComponentEnemy.size())
+	{
+		int _indexEnemy = indexEnemy;
+		int _coinEnemy = m_vecComponentEnemy[_indexEnemy]->GetValue();
+
+		ReleaseCell(m_vecComponentEnemy[_indexEnemy]->getPosition());
+		m_vecComponentEnemy[_indexEnemy]->removeFromParentAndCleanup(true);
+		m_vecComponentEnemy.erase(m_vecComponentEnemy.begin() + _indexEnemy);
+
+		return _coinEnemy;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int GameObjectMonster::GetCoinForEnemy() const
+{
+	return m_coinForEnemy;
+}
+
+int GameObjectMonster::GetDamage(int indexEnemy) const
+{
+	return m_vecComponentEnemy[indexEnemy]->GetAttack();
+}
+
 GameObjectMonster::~GameObjectMonster()
 {
 	

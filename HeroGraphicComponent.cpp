@@ -11,6 +11,9 @@ const int CNT_SPEED_HERO				= 5;
 const int CNT_VISIBLE_ZONE_ENEMY		= 3;
 const int CNT_COUNT_SPRITES_IN_VECTOR	= 3;
 
+const int CNT_COIN_DEFAULT	= 50;
+const int CNT_POWER_DEFAULT = 20;
+
 HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
 {
 	this->m_getSizeEnemy = false;
@@ -343,6 +346,20 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 			auto reScene = TransitionFade::create(0.1f, TransitionMainScene::createScene(_coin, _health, _vecTagWeapon), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
 			Director::getInstance()->replaceScene(reScene);
+
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_TAKE_COIN:
+		{
+			ChangeCoins(CNT_COIN_DEFAULT);
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP;
+
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_TAKE_POWER:
+		{
+			ChangeHealth(CNT_POWER_DEFAULT);
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_FALL;
 
 			break;
 		}

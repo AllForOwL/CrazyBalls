@@ -73,6 +73,14 @@ public:
 	{
 
 	}
+	virtual void HideObject()
+	{
+
+	}
+	virtual void StartShowAnimation()
+	{
+
+	}
 };
 
 #endif

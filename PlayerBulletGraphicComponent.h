@@ -24,6 +24,9 @@ public:
 	virtual void SetTargetPointForBullet(cocos2d::Point point);
 	
 	void LoadBulletNormal();
+
+	virtual void HideObject();
+
 	~PlayerBulletGraphicComponent();
 
 private:

@@ -25,6 +25,9 @@ public:
 
 	std::chrono::time_point<std::chrono::system_clock> GetTime();
 
+	virtual void HideObject();
+	virtual void StartShowAnimation();
+
 	~BonusGraphicComponent();
 
 public:

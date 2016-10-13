@@ -284,9 +284,34 @@ std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTim
 			}
 			break;
 		}
+		case Monster::StateBonus::BONUS_TAKE_BULLET:
+		{
+
+			break;
+		}
+		case Monster::StateBonus::BONUS_TAKE_COIN:
+		{
+			m_showAnimation = true;
+			LoadNameOpenCakset(CNT_NAME_CASKET_COINS);
+
+			break;
+		}
+		case Monster::StateBonus::BONUS_TAKE_POWER:
+		{
+			m_showAnimation = true;
+			LoadNameOpenCakset(CNT_NAME_CASKET_POWERS);
+
+			break;
+		}
+		case Monster::StateBonus::BONUS_TAKE_WEAPON:
+		{
+
+			break;
+		}
 		case Monster::StateBonus::BONUS_DEATH:
 		{
 			this->removeFromParentAndCleanup(true);
+
 			break;
 		}
 	default:
@@ -299,6 +324,19 @@ std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTim
 /*virtual*/ std::string BonusGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
+}
+
+void BonusGraphicComponent::HideObject()
+{
+	this->setVisible(false);
+	this->setPosition(-500, -500);
+	this->m_actived = false;
+}
+
+
+/*virtual*/ void BonusGraphicComponent::StartShowAnimation()
+{
+	this->m_showAnimation = true;
 }
 
 BonusGraphicComponent::~BonusGraphicComponent()
