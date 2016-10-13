@@ -28,6 +28,10 @@ public:
 	virtual void HideObject();
 	virtual void StartShowAnimation();
 
+	void SetPropertiesBonus(const std::string& i_nameSprites, const std::string& i_nameWeapon, const int& i_typeWeapon);
+
+	bool StopShowSuperBonus();
+
 	~BonusGraphicComponent();
 
 public:

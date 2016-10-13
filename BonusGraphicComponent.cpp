@@ -38,6 +38,13 @@ BonusGraphicComponent::BonusGraphicComponent()
 	this->setPhysicsBody(physicBodyBonus);
 }
 
+void BonusGraphicComponent::SetPropertiesBonus(const std::string& i_nameSprites, const std::string& i_nameWeapon, const int& i_typeWeapon)
+{
+	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(i_nameSprites));
+	this->m_typeObject = i_nameWeapon;
+	this->getPhysicsBody()->setTag(i_typeWeapon);
+}
+
 void BonusGraphicComponent::AddBonus(int typeObject)
 {
 	int _typeObject = typeObject;
@@ -51,112 +58,80 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 	{
 		case CNT_TYPE_OBJECT_CASKET_COINS:
 		{
+			SetPropertiesBonus(m_vecNameSpritesOpenCasket[m_indexInVector], CNT_NAME_CASKET_COINS, CNT_TYPE_OBJECT_CASKET_COINS);
 			LoadNameOpenCakset(CNT_NAME_CASKET_COINS);
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
-			this->m_typeObject = CNT_NAME_CASKET_COINS;
 			this->m_openCasket = true;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_CASKET_COINS);
 
 			break;
 		}
 		case CNT_TYPE_OBJECT_CASKET_POWER:
 		{
+			SetPropertiesBonus(m_vecNameSpritesOpenCasket[m_indexInVector], CNT_NAME_CASKET_POWERS, CNT_TYPE_OBJECT_CASKET_POWER);
 			LoadNameOpenCakset(CNT_NAME_CASKET_POWERS);
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesOpenCasket[m_indexInVector]));
-			this->m_typeObject = CNT_NAME_CASKET_POWERS;
 			this->m_openCasket = true;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_CASKET_POWER);
-
+	
 			break;
 		}
 		case CNT_TYPE_OBJECT_WEAPON_AK47:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/AK47.png"));
-			this->m_typeObject = CNT_NAME_WEAPON_AK47;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_AK47);
+			SetPropertiesBonus("res/Weapons/AK47.png", CNT_NAME_WEAPON_AK47, CNT_TYPE_OBJECT_WEAPON_AK47);
 
 			break;
 		}
 		case CNT_TYPE_OBJECT_WEAPON_GUN:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/Gun.png"));
-			this->m_typeObject = CNT_NAME_WEAPON_GUN;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_GUN);
+			SetPropertiesBonus("res/Weapons/Gun.png", CNT_NAME_WEAPON_GUN, CNT_TYPE_OBJECT_WEAPON_GUN);
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_WEAPON_MI71:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/MI71.png"));
-			this->m_typeObject = CNT_NAME_WEAPON_MI71;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_MI71);
+			SetPropertiesBonus("res/Weapons/MI71.png", CNT_NAME_WEAPON_MI71, CNT_TYPE_OBJECT_WEAPON_MI71);
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_WEAPON_MK15:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/MK15.png"));
-			this->m_typeObject = CNT_NAME_WEAPON_MK15;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_MK15);
+			SetPropertiesBonus("res/Weapons/MK15.png", CNT_NAME_WEAPON_MK15, CNT_TYPE_OBJECT_WEAPON_MK15);
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/Revolver_moni_shade.png"));
-			this->m_typeObject = CNT_NAME_WEAPON_REVOLVER_MONI_SHADE;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE);
+			SetPropertiesBonus("res/Weapons/Revolver_moni_shade.png", CNT_NAME_WEAPON_REVOLVER_MONI_SHADE, CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE);
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/Sten_gun_shade_2.png"));
-			this->m_typeObject = CNT_NAME_WEAPON_STEN_GUN_SHADE_2;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2);
+			SetPropertiesBonus("res/Weapons/Sten_gun_shade_2.png", CNT_NAME_WEAPON_STEN_GUN_SHADE_2, CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2);
 
 			break;
 
 		}
 		case CNT_TYPE_OBJECT_WEAPON_TS23:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Weapons/TS23.png"));
-			this->m_typeObject = CNT_NAME_WEAPON_TS23;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_TS23);
+			SetPropertiesBonus("res/Weapons/TS23.png", CNT_NAME_WEAPON_TS23, CNT_TYPE_OBJECT_WEAPON_TS23);
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_WEAPON_UMG:
 		{
-			this->initWithFile("res/Weapons/Umg.png");
-			this->m_typeObject = CNT_NAME_WEAPON_UMG;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_WEAPON_UMG);
+			SetPropertiesBonus("res/Weapons/Umg.png", CNT_NAME_WEAPON_UMG, CNT_TYPE_OBJECT_WEAPON_UMG);
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_BULLET_NORMAL:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Bullets/Bullet_normal.png"));
-			this->m_typeObject = CNT_NAME_BULLET_DEFAULT;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_BULLET_NORMAL);
+			SetPropertiesBonus("res/Bullets/Bullet_normal.png", CNT_NAME_BULLET_DEFAULT, CNT_TYPE_OBJECT_BULLET_NORMAL);
 
 			break;
-
 		}
 		case CNT_TYPE_OBJECT_BULLET_BOMB:
 		{
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Bullets/Bomd.png"));
-			this->m_typeObject = CNT_NAME_BOMB;
-			this->getPhysicsBody()->setTag(CNT_TYPE_OBJECT_BULLET_BOMB);
+			SetPropertiesBonus("res/Bullets/Bomd.png", CNT_NAME_BOMB, CNT_TYPE_OBJECT_BULLET_BOMB);
 
 			break;
-
 		}
 	default:
 		break;
@@ -270,42 +245,32 @@ std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTim
 	return _time;
 }
 
+bool BonusGraphicComponent::StopShowSuperBonus()
+{
+	if ((int)std::chrono::duration<double>(GetTime() - m_BeginSecond).count() == CNT_SECOND_VISIBLE_SUPER_BONUS)
+	{
+		this->setPosition(Point(-50, -50));
+		this->setVisible(false);
+		this->m_actived = false;
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 /*virtual*/ void BonusGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_stateBonus)
 	{
 		case Monster::StateBonus::SUPER_BONUS:
 		{
-			if ((int)std::chrono::duration<double>(GetTime() - m_BeginSecond).count() == CNT_SECOND_VISIBLE_SUPER_BONUS)
+			if (StopShowSuperBonus())
 			{
-				this->setPosition(Point(-10, -10));
-				this->setVisible(false);
-				this->m_actived = false;
+				hero.m_stateBonus = Monster::StateBonus::BONUS_REST;
 			}
-			break;
-		}
-		case Monster::StateBonus::BONUS_TAKE_BULLET:
-		{
-
-			break;
-		}
-		case Monster::StateBonus::BONUS_TAKE_COIN:
-		{
-			m_showAnimation = true;
-			LoadNameOpenCakset(CNT_NAME_CASKET_COINS);
-
-			break;
-		}
-		case Monster::StateBonus::BONUS_TAKE_POWER:
-		{
-			m_showAnimation = true;
-			LoadNameOpenCakset(CNT_NAME_CASKET_POWERS);
-
-			break;
-		}
-		case Monster::StateBonus::BONUS_TAKE_WEAPON:
-		{
-
 			break;
 		}
 		case Monster::StateBonus::BONUS_DEATH:

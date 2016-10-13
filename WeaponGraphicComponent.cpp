@@ -9,67 +9,35 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 {
 	if (m_typeObject == CNT_NAME_WEAPON_AK47)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_AK47);
-		m_strFilename = "res/Weapons/AK47.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 8;
-		m_quentityBullet	= 50;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_AK47, "res/Weapons/AK47.png", 8, 50);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_GUN)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_GUN);
-		m_strFilename = "res/Weapons/Gun.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 9;
-		m_quentityBullet	= 15;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_GUN, "res/Weapons/Gun.png", 9, 15);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MI71)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_MI71);
-		m_strFilename = "res/Weapons/MI71.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 10;
-		m_quentityBullet	= 20;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_MI71, "res/Weapons/MI71.png", 10, 20);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_MK15)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_MK15);
-		m_strFilename = "res/Weapons/MK15.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 11;
-		m_quentityBullet	= 25;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_MK15, "res/Weapons/MK15.png", 11, 25);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_REVOLVER_MONI_SHADE)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE);
-		m_strFilename = "res/Weapons/Revolver_moni_shade.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 12;
-		m_quentityBullet	= 30;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_REVOLVER_MONI_SHADE, "res/Weapons/Revolver_moni_shade.png", 12, 30);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_STEN_GUN_SHADE_2)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2);
-		m_strFilename = "res/Weapons/Sten_gun_shade_2.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 13;
-		m_quentityBullet	= 35;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_STEN_GUN_SHADE_2, "res/Weapons/Sten_gun_shade_2.png", 13, 35);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_TS23)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_TS23);
-		m_strFilename = "res/Weapons/TS23.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 14;
-		m_quentityBullet	= 40;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_TS23, "res/Weapons/TS23.png", 14, 40);
 	}
 	else if (m_typeObject == CNT_NAME_WEAPON_UMG)
 	{
-		this->setTag(CNT_TYPE_OBJECT_WEAPON_UMG);
-		m_strFilename = "res/Weapons/Umg.png";
-		this->initWithFile(m_strFilename);
-		m_speedBullet		= 14;
-		m_quentityBullet	= 45;
+		SetPropertiesWeapon(CNT_TYPE_OBJECT_WEAPON_UMG, "res/Weapons/Umg.png", 14, 45);
 	}
 
 	this->setName(m_typeObject);
@@ -126,6 +94,16 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 		this->initWithFile(m_strFilename);
 	}
 }
+
+void WeaponGraphicComponent::SetPropertiesWeapon(const int& i_typeObject, const std::string& i_filename, const int& i_speedBullet, const int& i_quentityBullet)
+{
+	this->setTag(i_typeObject);
+	m_strFilename = i_filename;
+	this->initWithFile(i_filename);
+	m_speedBullet = i_speedBullet;
+	m_quentityBullet = i_quentityBullet;
+}
+
 
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
