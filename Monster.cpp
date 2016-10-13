@@ -25,7 +25,7 @@ Monster::Monster(
 								m_botInputComponent			(&botInputComponent),
 								m_physicComponent			(&physicComponent)
 {
-	m_stateHero		= Monster::StateHero::HERO_STATE_WALK;
+	m_stateHero		= Monster::StateHero::HERO_STATE_JUMP_UP;
 	m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_FIRE;
 	m_stateBullet	= Monster::StateBullet::BULLET_STATE_REST;
 	m_statePhysic	= Monster::StatePhysic::PHYSIC_NOTHING;
@@ -261,11 +261,11 @@ void Monster::CauseDamage(int damage)
 {
 	if (m_graphicComponentHero->Dead(damage))
 	{
-		m_stateHero = Monster::StateHero::HERO_STATE_DEATH;
-		m_stateBullet = Monster::StateBullet::BULLET_STATE_DEATH;
-		m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_DEATH;
-		m_stateEnemy = Monster::StateEnemys::ENEMY_STATE_DEATH;
-		m_stateBonus = Monster::StateBonus::BONUS_DEATH;
+		m_stateHero		= Monster::StateHero::HERO_STATE_DEATH;
+		m_stateBullet	= Monster::StateBullet::BULLET_STATE_DEATH;
+		m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEATH;
+		m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_DEATH;
+		m_stateBonus	= Monster::StateBonus::BONUS_DEATH;
 	}
 	else
 	{

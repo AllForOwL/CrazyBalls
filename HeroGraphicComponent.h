@@ -26,31 +26,30 @@ public:
 
 	virtual void SetTargetPosition_YForHero(int target_y);
 
-	void LoadSpritesForHell();
+	void LoadNameSpritesForHell();
 	void LoadNumberCoinsForTransitionNextLevel();
+
+	void SpeedHeroSuitablyEnemy(Monster& i_hero);
+	
+	void ChangeWeapon(Monster& i_hero, GameScene& i_scene);
+	void ChangeBullet(Monster& i_hero, GameScene& i_scene);
+	
+	void LoadSpritesDizzy(Monster& i_hero);
+
+	void JumpUp(Monster& i_hero);
+	void JumpDown(Monster& i_hero);
+	void GoToNextLevel(Monster& i_hero);
 
 	~HeroGraphicComponent();
 
 public:
-	std::vector<std::string> m_vecSpritesWalk;
-	std::vector<std::string> m_vecSpritesAttack;
-	std::vector<std::string> m_vecSpritesRun;
 	std::vector<std::string> m_vecSpritesFall;
-	std::vector<std::string> m_vecSpritesDie;
 	std::vector<std::string> m_vecSpritesDizzy;
-	std::vector<std::string> m_vecSpritesClimb;
 
 	std::vector<int> m_vecNumberCoinsForTransitionNextLevel;
 
-	int m_countSpriteInVectorWalk;
-	int m_countSpriteInVectorAttack;
-	int m_countSpriteInVectorRun;
 	int m_countSpriteInVectorDizzy;
-	int m_countSpriteInVectorDie;
 	int m_countSpriteInVectorFall;
-
-	int m_countSpritesInVectorClimbUp;
-	int m_countSpritesInVectorClimbDown;
 
 	std::string m_typeHero;
 
@@ -64,6 +63,13 @@ public:
 	int m_speed_Y;
 	int m_sizeEnemy;
 	bool m_getSizeEnemy;
+
+	// refactoring
+
+	Size  m_visibleSize;
+	float m_fTopOrderScreen;
+	float m_fBottomOrderScreen;
+	float m_fPositionY;
 };
 
 #endif

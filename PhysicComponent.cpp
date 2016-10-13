@@ -20,7 +20,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (m_statePhysic)
 	{
-		case StatePhysic::STATE_WOUNDED_ENEMY:
+		case StatePhysic::STATE_WOUNDED_ENEMY:	// when bullet hit in enemy
 		{		
 			int _indexEnemy			= hero.m_objectMonster->GetIndexEnemyForRemove(m_TagEnemy);
 			int _coinForRemoveEnemy = hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
