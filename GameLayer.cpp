@@ -14,9 +14,9 @@ const int CNT_SCALE = 25;
 const std::string CNT_ANIMATION_COIN	= "Animation coin";
 const std::string CNT_ANIMATION_POWER	= "Animation power";
 
-const int CNT_INDEX_COIN = 0;
-const int CNT_INDEX_POWER = 1;
-const int CNT_INDEX_WEAPON = 2;
+const int CNT_INDEX_COIN	= 0;
+const int CNT_INDEX_POWER	= 1;
+const int CNT_INDEX_WEAPON	= 2;
 
 USING_NS_CC;
 
@@ -146,4 +146,10 @@ Animation:
 	- save on next level chooises counter;
 */
 
-/******Need set position on this layer********/
+////*** Tasks ****////	Mission complete
+
+/* 
+	+ Need set position on this layer
+	+ Change weapon when touch on hero
+	+ refactoring GameLayer
+*/

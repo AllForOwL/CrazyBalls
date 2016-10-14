@@ -46,6 +46,9 @@ public:
 	bool		Death();
 
 	std::chrono::time_point<std::chrono::system_clock> GetTime();
+	bool StartFire(Monster& hero);
+
+	void SetPropertiesEnemy(const std::string& i_filename, const int& i_timeShot, const int& i_speedMove, const int& i_positionXShot);
 
 	~BreedGraphicComponent();
 
