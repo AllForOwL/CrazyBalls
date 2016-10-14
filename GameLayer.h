@@ -13,40 +13,25 @@ public:
 
 	void Update(Monster& hero);
 
-	void ShowAnimation(float dt);
-
 	void GoToPause(cocos2d::Ref* ref);
-	void ShowQuentityBullet(int tagWeapon, int quentityBullet);
-
-	void LoadSpritesName();
 
 	CREATE_FUNC(GameLayer);
 
 public:
-	cocos2d::Label* m_lblAttackHero;
-	cocos2d::Label* m_lblHealthHero;
-	cocos2d::Label* m_lblCoinsHero;
+	
+	cocos2d::Size m_visibleSize;
 
-	std::vector<std::string> m_vecNameSpritesWeapon;
-	std::vector<std::string> m_vecNameSpritesBonus;
-	std::vector<cocos2d::Sprite*> m_vecSpritesWeapon;
-	std::vector<cocos2d::Sprite*> m_vecSpritesBonus;
+	cocos2d::Label* m_lblCoin;
+	cocos2d::Label* m_lblPower;
+	cocos2d::Label* m_lblPoint;
 
-	std::vector<cocos2d::Label*> m_vecLevelQuentityBullet;
-	std::vector<int> m_IndexShowWeapon;
+	//cocos2d::Sprite* m_sprCoin;
+	//cocos2d::Sprite* m_sprPower;
+	//cocos2d::Sprite* m_sprWeapon;
 
-	int m_positionX;
-
-	cocos2d::Sprite* m_animationPower;
-	cocos2d::Sprite* m_animationCoin;
-
-	std::vector<std::string> m_vecNameSpritesAnimationPower;
-	std::vector<std::string> m_vecNameSpritesAnimationCoin;
-
-	std::string m_typeAnimation;
-
-	int m_indexInVectorAnimation;
-
+	std::vector<cocos2d::Label*>  m_veclblProperties;
+	std::vector<cocos2d::Sprite*> m_vecsprProperties;
+	std::vector<cocos2d::Point>	  m_vecPointProperties;
 };
 
 #endif // __GAME_LAYER_H__

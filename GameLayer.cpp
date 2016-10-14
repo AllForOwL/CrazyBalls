@@ -1,15 +1,31 @@
+#include <iostream>
 #include <string>
+#include <sstream>	
 #include "GameLayer.h"
 #include "Monster.h"
 #include "PauseScene.h"
 #include "constants.h"
+#include "WeaponGraphicComponent.h"
+
+using namespace std;
 
 const int CNT_SCALE = 25;
 
 const std::string CNT_ANIMATION_COIN	= "Animation coin";
 const std::string CNT_ANIMATION_POWER	= "Animation power";
 
+const int CNT_INDEX_COIN = 0;
+const int CNT_INDEX_POWER = 1;
+const int CNT_INDEX_WEAPON = 2;
+
 USING_NS_CC;
+
+std::string to_string(int i)
+{
+	std::stringstream ss;
+	ss << i;
+	return ss.str();
+}
 
 bool GameLayer::init()
 {
@@ -18,219 +34,68 @@ bool GameLayer::init()
 		return false;
 	}
 
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
-
-	LoadSpritesName();
-	m_animationPower	= Sprite::create("res/Bonus/Power/life_power_up_1.png");
-	Size _sizeSprite	= m_animationPower->getContentSize();
-	m_animationPower->setScale(_visibleSize.width / _sizeSprite.width / CNT_SCALE,
-		_visibleSize.height / _sizeSprite.height / CNT_SCALE);
-
-	m_animationCoin		= Sprite::create("res/Bonus/Coins/Coin_1.png");
-	_sizeSprite	= m_animationCoin->getContentSize();
-	m_animationCoin->setScale(_visibleSize.width / _sizeSprite.width / CNT_SCALE,
-		_visibleSize.height / _sizeSprite.height / CNT_SCALE);
-
-
-	this->addChild(m_animationPower);
-	this->addChild(m_animationCoin);
-
-	m_indexInVectorAnimation = 0;
-
-	m_vecNameSpritesWeapon.push_back("res/Weapons/AK47.png");
-	m_vecNameSpritesWeapon.push_back("res/Weapons/Gun.png");
-	m_vecNameSpritesWeapon.push_back("res/Weapons/MI71.png");
-	m_vecNameSpritesWeapon.push_back("res/Weapons/MK15.png");
-	m_vecNameSpritesWeapon.push_back("res/Weapons/Revolver_moni_shade.png");
-	m_vecNameSpritesWeapon.push_back("res/Weapons/Sten_gun_shade_2.png");
-	m_vecNameSpritesWeapon.push_back("res/Weapons/TS23.png");
-	m_vecNameSpritesWeapon.push_back("res/Weapons/Umg.png");
-
-
-	for (int i = 0; i < m_vecNameSpritesWeapon.size(); i++)
-	{
-		Sprite* _tempWeapon = Sprite::create(m_vecNameSpritesWeapon[i]);
-		m_vecSpritesWeapon.push_back(_tempWeapon);
-		m_vecSpritesWeapon[i]->setTag(i);
-	}
-
-	for (int i = 0; i < m_vecSpritesWeapon.size(); i++)
-	{
-		_sizeSprite = m_vecSpritesWeapon[i]->getContentSize();
-		m_vecSpritesWeapon[i]->setScale(_visibleSize.width / _sizeSprite.width / CNT_SCALE,
-			_visibleSize.height / _sizeSprite.height / CNT_SCALE);
-
-		Label* _labelQuentityBullet = Label::create();
-		m_vecLevelQuentityBullet.push_back(_labelQuentityBullet);
-	}
-
-	m_vecNameSpritesBonus.push_back("res/Bonus/Coins/Coin_1.png");
-	m_vecNameSpritesBonus.push_back("res/Bonus/Power/life_power_up_1.png");
-	m_vecNameSpritesBonus.push_back("res/Bonus/Onyx.png");
-
-	for (int i = 0; i < m_vecNameSpritesBonus.size(); i++)
-	{
-		Sprite* _tempBonus = Sprite::create(m_vecNameSpritesBonus[i]);
-		m_vecSpritesBonus.push_back(_tempBonus);
-	}
-
-	for (int i = 0; i < m_vecSpritesBonus.size(); i++)
-	{
-		_sizeSprite = m_vecSpritesBonus[i]->getContentSize();
-		m_vecSpritesBonus[i]->setScale(_visibleSize.width / _sizeSprite.width / CNT_SCALE,
-			_visibleSize.height / _sizeSprite.height / CNT_SCALE);
-	}
-
-	m_lblAttackHero = Label::create();
-	m_lblHealthHero = Label::create();
-	m_lblCoinsHero  = Label::create();
-
-	cocos2d::Label* _lblPause = Label::create("Pause", "", 12);
-
-	auto _itemMenuPause = MenuItemLabel::create(_lblPause, CC_CALLBACK_1(GameLayer::GoToPause, this));
-	_itemMenuPause->setPosition(_visibleSize.width - _itemMenuPause->getContentSize().width,
-		_visibleSize.height - _itemMenuPause->getContentSize().height);
-
-	auto menu = Menu::create(_itemMenuPause, NULL);
-	menu->setPosition(Point::ZERO);
-
-	this->addChild(menu);
-
-	m_vecSpritesBonus[0]->setPosition(30, 300);
-	m_lblAttackHero->setPosition(60, 300);
-
-	m_vecSpritesBonus[1]->setPosition(90, 300);
-	m_lblHealthHero->setPosition(120, 300);
-
-	m_vecSpritesBonus[2]->setPosition(150, 300);
-	m_lblCoinsHero->setPosition(180, 300);
-
-	m_positionX = 210;
-
-	this->addChild(m_lblAttackHero);
-	this->addChild(m_lblHealthHero);
-	this->addChild(m_lblCoinsHero);
-
-	for (int i = 0; i < m_vecNameSpritesWeapon.size(); i++)
-	{
-		this->addChild(m_vecSpritesWeapon[i]);
-		this->addChild(m_vecLevelQuentityBullet[i]);
-	}
+	m_visibleSize = Director::getInstance()->getVisibleSize();
 	
-	for (int i = 0; i < m_vecSpritesBonus.size(); i++)
+	m_veclblProperties.push_back(Label::create());
+	m_veclblProperties.push_back(Label::create());
+	m_veclblProperties.push_back(Label::create());
+
+	m_vecsprProperties.push_back(Sprite::create("res/Bonus/Coins/Coin_1.png"));
+	m_vecsprProperties.push_back(Sprite::create("res/Bonus/Power/life_power_up_1.png"));
+	m_vecsprProperties.push_back(Sprite::create("res/Weapons/AK47.png"));
+
+	for (int i = 0; i < m_vecsprProperties.size(); i++)
 	{
-		this->addChild(m_vecSpritesBonus[i]);
+		Size _sizeSprite = m_vecsprProperties[i]->getContentSize();
+		m_vecsprProperties[i]->setScale(m_visibleSize.width /_sizeSprite.width / CNT_SCALE,
+			m_visibleSize.height / _sizeSprite.height / CNT_SCALE);
 	}
 
-	this->schedule(schedule_selector(GameLayer::ShowAnimation), 0.5);
+	Point _position = Point::ZERO;
+	Size _sizeSpriteAfterScale = m_vecsprProperties[0]->getBoundingBox().size;
+	_position.y = m_visibleSize.height - (_sizeSpriteAfterScale.height * 2);
+
+	for (int i = 0; i < 6; i++)
+	{
+		_position.x += _sizeSpriteAfterScale.width * 2;
+		m_vecPointProperties.push_back(_position);
+	}
+
+	m_vecsprProperties[CNT_INDEX_COIN]->setPosition(m_vecPointProperties[0]);
+	m_vecsprProperties[CNT_INDEX_POWER]->setPosition(m_vecPointProperties[2]);
+	m_vecsprProperties[CNT_INDEX_WEAPON]->setPosition(m_vecPointProperties[4]);
+
+	m_veclblProperties[CNT_INDEX_COIN]->setPosition(m_vecPointProperties[1]);
+	m_veclblProperties[CNT_INDEX_POWER]->setPosition(m_vecPointProperties[3]);
+	m_veclblProperties[CNT_INDEX_WEAPON]->setPosition(m_vecPointProperties[5]);
+
+	for (int i = 0; i < 3; i++)
+	{
+		this->addChild(m_vecsprProperties[i]);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		this->addChild(m_veclblProperties[i]);
+	}
 
 	return true;
 }
 
-void GameLayer::ShowAnimation(float dt)
-{
-	if (m_typeAnimation == CNT_ANIMATION_COIN)
-	{
-		if (m_indexInVectorAnimation == 0)
-		{
-			m_vecSpritesBonus[0]->setVisible(false);
-			m_animationCoin->setPosition(30, 300);
-			m_animationCoin->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesAnimationCoin[m_indexInVectorAnimation]));
-		}
-		else
-		{
-			m_animationCoin->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesAnimationCoin[m_indexInVectorAnimation]));
-		}
-
-		if (++m_indexInVectorAnimation == m_vecNameSpritesAnimationCoin.size())
-		{
-			m_vecSpritesBonus[0]->setVisible(true);
-			m_typeAnimation = "";
-			m_indexInVectorAnimation = 0;
-			m_animationPower->setPosition(-100, -100);
-		}
-	}
-	else if (m_typeAnimation == CNT_ANIMATION_POWER)
-	{
-		if (m_indexInVectorAnimation == 0)
-		{
-			m_vecSpritesBonus[1]->setVisible(false);
-			m_animationPower->setPosition(90, 300);
-			m_animationPower->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesAnimationPower[m_indexInVectorAnimation]));
-		}
-		else
-		{
-			m_animationPower->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecNameSpritesAnimationPower[m_indexInVectorAnimation]));
-		}
-
-		if (++m_indexInVectorAnimation == m_vecNameSpritesAnimationCoin.size())
-		{
-			m_vecSpritesBonus[1]->setVisible(true);
-			m_typeAnimation = "";
-			m_indexInVectorAnimation = 0;
-			m_animationPower->setPosition(-100, -100);
-		}
-	}
-}
-
-void GameLayer::ShowQuentityBullet(int tagWeapon, int quentityBullet)
-{
-		int _tagWeapon		= tagWeapon;
-		int _quentityBullet = quentityBullet;
-
-		int _index = _tagWeapon - 3;												
-		if (m_vecLevelQuentityBullet[_index]->getTag() == _tagWeapon)
-		{
-			std::string _strQuentityBullet;
-			_strQuentityBullet = std::to_string(_quentityBullet);
-			m_vecLevelQuentityBullet[_index]->setString(_strQuentityBullet);
-		}
-		else
-		{
-			m_vecSpritesWeapon[_index]->setPosition(m_positionX, 300);
-
-			m_positionX += 30;
-			std::string _strQuentityBullet;
-			_strQuentityBullet = std::to_string(_quentityBullet);
-			m_vecLevelQuentityBullet[_index]->setString(_strQuentityBullet);
-			m_vecLevelQuentityBullet[_index]->setPosition(m_positionX, 300);
-			m_vecLevelQuentityBullet[_index]->setTag(_tagWeapon);
-
-			m_positionX += 30;
-		}
-}
-
-void GameLayer::LoadSpritesName()
-{
-	m_vecNameSpritesAnimationPower.push_back("res/Bonus/Power/life_power_up_1.png");
-	m_vecNameSpritesAnimationPower.push_back("res/Bonus/Power/life_power_up_2.png");
-	m_vecNameSpritesAnimationPower.push_back("res/Bonus/Power/life_power_up_3.png");
-	m_vecNameSpritesAnimationPower.push_back("res/Bonus/Power/life_power_up_4.png");
-	
-	m_vecNameSpritesAnimationCoin.push_back("res/Bonus/Coins/Coin_1.png");
-	m_vecNameSpritesAnimationCoin.push_back("res/Bonus/Coins/Coin_2.png");
-	m_vecNameSpritesAnimationCoin.push_back("res/Bonus/Coins/Coin_3.png");
-	m_vecNameSpritesAnimationCoin.push_back("res/Bonus/Coins/Coin_4.png");
-}
-
 void GameLayer::Update(Monster& hero)
 {
-	std::string _strAttack = std::to_string(hero.m_graphicComponentHero->GetAttack());
-	std::string _strHealth = std::to_string(hero.m_graphicComponentHero->GetHealth());
-	std::string _strCoin = std::to_string(hero.m_graphicComponentHero->GetValue());
+	std::string _strCoin	= std::to_string(hero.m_graphicComponentHero->GetValue());
+	std::string _strHealth	= std::to_string(hero.m_graphicComponentHero->GetHealth());
 
-	m_lblAttackHero->setString	(_strAttack);
-	m_lblHealthHero->setString	(_strHealth);
-	m_lblCoinsHero->setString	(_strCoin);
+	m_veclblProperties[CNT_INDEX_COIN]->setString	(_strCoin);
+	m_veclblProperties[CNT_INDEX_POWER]->setString	(_strHealth);
 
 	switch (hero.m_stateBonus)
 	{
 		case Monster::StateBonus::BONUS_TAKE_COIN:
 		{
-			_strAttack = std::to_string(hero.m_graphicComponentHero->GetAttack());
-			m_lblAttackHero->setString(_strAttack);
+			_strCoin = std::to_string(hero.m_graphicComponentHero->GetValue());
+			m_veclblProperties[CNT_INDEX_COIN]->setString(_strCoin);
 
-			m_typeAnimation = CNT_ANIMATION_COIN;
 			hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
 				
 			break;
@@ -239,22 +104,22 @@ void GameLayer::Update(Monster& hero)
 		case Monster::StateBonus::BONUS_TAKE_POWER:
 		{
 			_strHealth = std::to_string(hero.m_graphicComponentHero->GetHealth());
-			m_lblHealthHero->setString(_strHealth);
+			m_veclblProperties[CNT_INDEX_POWER]->setString(_strHealth);
 
-			m_typeAnimation = CNT_ANIMATION_POWER;
 			hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
 
 			break;
 		}
 		case Monster::StateBonus::BONUS_WEAPON:
 		{
-			for (int i = 0; i < hero.m_vecGraphicComponentWeapon.size(); i++)
-			{
-				int _tagWeapon		= hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->getTag();
-				int _quentityBullet = hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->GetQuentityBullet();	
+			int _indexActiveWeapon = hero.GetIndexActiveWeapon();
 
-				ShowQuentityBullet(_tagWeapon, _quentityBullet);
-			}
+			int _quentityBullet = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetQuentityBullet();
+			std::string	_nameWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetFileName();
+
+			m_veclblProperties[CNT_INDEX_WEAPON]->setString(std::to_string(_quentityBullet));
+			m_vecsprProperties[CNT_INDEX_WEAPON]->create(_nameWeapon);
+
 			break;
 		}
 		default:
@@ -280,3 +145,5 @@ Animation:
 		3 - ball for kills enemy(onyx);
 	- save on next level chooises counter;
 */
+
+/******Need set position on this layer********/

@@ -35,9 +35,8 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 		LoadNameSpritesForHell();
 		m_attack = 120;
 		m_health = 1000;
+		m_coins = 80;
 	}
-
-	m_coins = 0;
 
 	m_countSpriteInVectorDizzy		= 0;
 	m_countSpriteInVectorFall		= 0;

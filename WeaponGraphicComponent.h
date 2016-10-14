@@ -21,6 +21,8 @@ public:
 	virtual void DescreaseQuentityBullet();
 	virtual int  GetQuentityBullet() const;
 
+	virtual std::string& GetFileName();
+
 	void SetPropertiesWeapon(const int& i_typeObject, const std::string& i_filename, const int& i_speedBullet, const int& quentityBullet);
 
 	~WeaponGraphicComponent();
@@ -33,7 +35,6 @@ public:
 	std::string m_strFilename;
 
 	int			m_quentityBullet;
-
 };
 
 #endif

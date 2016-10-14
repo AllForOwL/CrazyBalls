@@ -81,6 +81,11 @@ public:
 	{
 
 	}
+	virtual std::string& GetFileName()
+	{
+		return std::string(" ");
+	}
+
 };
 
 #endif
