@@ -118,7 +118,7 @@ void GameLayer::Update(Monster& hero)
 			std::string	_nameWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetFileName();
 
 			m_veclblProperties[CNT_INDEX_WEAPON]->setString(std::to_string(_quentityBullet));
-			m_vecsprProperties[CNT_INDEX_WEAPON]->create(_nameWeapon);
+			m_vecsprProperties[CNT_INDEX_WEAPON]->initWithFile(_nameWeapon);
 
 			break;
 		}

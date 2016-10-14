@@ -40,12 +40,18 @@ PlayerInputComponent::PlayerInputComponent()
 		}
 		case EventKeyboard::KeyCode::KEY_ENTER:
 		{
-			Rect _rectButton = hero.m_graphicComponentButtonFire->getBoundingBox();
+			Rect _rectButton	= hero.m_graphicComponentButtonFire->getBoundingBox();
+			Rect _rectHero		= hero.m_graphicComponentHero->getBoundingBox();
 
 			if (_rectButton.containsPoint(m_locationTouch))
 			{
 				hero.m_stateButtonFire	= Monster::StateButtonFire::BUTTON_STATE_FIRE;
 				hero.m_stateBullet		= Monster::StateBullet::BULLET_STATE_FIRE;
+			}
+			else if (_rectHero.containsPoint(m_locationTouch))
+			{
+				hero.m_stateHero	= Monster::StateHero::HERO_STATE_CHANGE_WEAPON;
+				hero.m_stateBonus	= Monster::StateBonus::BONUS_WEAPON;
 			}
 
 			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
