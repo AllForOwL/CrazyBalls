@@ -25,10 +25,6 @@ public:
 	cocos2d::Label* m_lblPower;
 	cocos2d::Label* m_lblPoint;
 
-	//cocos2d::Sprite* m_sprCoin;
-	//cocos2d::Sprite* m_sprPower;
-	//cocos2d::Sprite* m_sprWeapon;
-
 	std::vector<cocos2d::Label*>  m_veclblProperties;
 	std::vector<cocos2d::Sprite*> m_vecsprProperties;
 	std::vector<cocos2d::Point>	  m_vecPointProperties;

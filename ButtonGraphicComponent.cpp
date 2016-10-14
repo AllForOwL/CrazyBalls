@@ -13,15 +13,13 @@ ButtonGraphicComponent::ButtonGraphicComponent()
 	Size _sizeBtn = this->getContentSize();
 
 	this->setScale(_visibleSize.width / _sizeBtn.width / 6,
-		_visibleSize.height / _sizeBtn.height / 6);
+					_visibleSize.height / _sizeBtn.height / 6);
 
-	_sizeBtn.width = this->getScaleX();
-	_sizeBtn.height = this->getScaleY();
+	_sizeBtn = this->getBoundingBox().size;
 
-	cocos2d::Point _positionBtn = cocos2d::Point(_visibleSize.width - _sizeBtn.width - 30,
-		_sizeBtn.height + 30);
+	cocos2d::Point _positionBtn = cocos2d::Point(_visibleSize.width - _sizeBtn.width / 2,
+												_sizeBtn.height / 2);
 	this->setPosition(_positionBtn);
-
 }
 
 /*virtual*/ void ButtonGraphicComponent::Update(Monster& hero, GameScene& scene)
@@ -38,7 +36,6 @@ ButtonGraphicComponent::ButtonGraphicComponent()
 			this->setOpacity(CNT_OPACITY_RELEASE_FIRE);
 			break;
 		}
-
 		default:
 			break;
 	}
