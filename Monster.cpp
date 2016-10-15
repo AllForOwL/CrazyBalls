@@ -27,22 +27,27 @@ Monster::Monster(
 	m_statePhysic	= Monster::StatePhysic::PHYSIC_NOTHING;
 	m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_LIFE;;
 	m_stateBonus	= Monster::StateBonus::BONUS_WEAPON;
+
+	m_counterID = 0;
 }
 
 void Monster::CreateBulletsForFire()
 {
-	int _ID = m_vecGraphicComponentBullet.size();
+	srand(time(NULL));
+	int _IDTopBullet = m_counterID;
 
-	++_ID;
-	PlayerBulletGraphicComponent* _bulletTopPosition = new PlayerBulletGraphicComponent(_ID, 120, CNT_NAME_BULLET_POSITION_TOP);
+	PlayerBulletGraphicComponent* _bulletTopPosition = new PlayerBulletGraphicComponent(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
 	_bulletTopPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
-	++_ID;
-	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(_ID, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
+	int _IDBottomBullet = ++m_counterID;
+	++m_counterID;
+	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
 	ComponentHero* _bulletTop	 = new ComponentHero(_bulletTopPosition, true);
 	ComponentHero* _bulletBottom = new ComponentHero(_bulletBottomPosition, true);
+
+	int _sizeMap = m_vecGraphicComponentBullet.size();
 
 	m_vecGraphicComponentBullet.push_back(_bulletTop);
 	m_vecGraphicComponentBullet.push_back(_bulletBottom);
@@ -60,7 +65,8 @@ void Monster::Update(GameScene& scene)
 	for (int i = 0; i < m_vecGraphicComponentBullet.size(); i++)
 	{
 		m_vecGraphicComponentBullet[i]->m_GraphicComponent->Update(*this, scene);
-	}	
+	}
+
 }
 
 void Monster::CheckHeroOnLevelCompete()

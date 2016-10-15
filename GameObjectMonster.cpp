@@ -236,7 +236,6 @@ void GameObjectMonster::ReleaseCell(Point point)
 int GameObjectMonster::GetIndexEnemyForRemove(int tagEnemy) const
 {
 	int _tagEnemy = tagEnemy;
-
 	for (int i = 0; i < m_vecComponentEnemy.size(); i++)
 	{
 		auto body = m_vecComponentEnemy[i]->getPhysicsBody();

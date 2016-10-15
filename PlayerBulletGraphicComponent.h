@@ -40,13 +40,17 @@ public:
 	void ChangeStateBullet(const StateBullet& newState);
 
 	virtual int GetID() const;
+	
+	virtual bool Remove() const;
 
 	~PlayerBulletGraphicComponent();
 
-private:
+public:
 	StateBullet		m_stateBullet;
 	Size			m_visibleSize;
 	int				m_ID;
+	std::map<int, ComponentHero*>::iterator m_iterator;
+				
 
 	int m_speed;
 	cocos2d::Point	m_pointBegin;
@@ -59,6 +63,7 @@ private:
 
 	cocos2d::Point	m_targetPoint;
 
+	bool m_remove;
 };
 
 #endif

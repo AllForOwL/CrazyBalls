@@ -93,6 +93,10 @@ public:
 	{
 		return 1;
 	}
+	virtual bool Remove() const
+	{
+		return false;
+	}
 
 };
 

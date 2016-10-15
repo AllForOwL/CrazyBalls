@@ -12,17 +12,17 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack,
 																				m_attack		(attack),
 																				m_typeObject	(typeObject)
 {
-	m_stateBullet = StateBullet::BULLET_STATE_REST;
 	m_visibleSize = Director::getInstance()->getVisibleSize();
 
+	m_remove = false;
 	m_speed = CNT_SPEED_BULLET;
 
 	this->initWithFile("res/Bullets/Meteor1.png");
-	this->setScale(m_visibleSize.width / this->getContentSize().width / 20,
-		m_visibleSize.height / this->getContentSize().height / 20);
+	this->setScale(m_visibleSize.width / this->getContentSize().width / 25,
+		m_visibleSize.height / this->getContentSize().height / 25);
 
 
-	auto physicBodyBullet = PhysicsBody::createBox(this->getContentSize());
+	auto physicBodyBullet = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBodyBullet->setContactTestBitmask(true);
 	physicBodyBullet->setCollisionBitmask(BULLET_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyBullet);
@@ -84,7 +84,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	{
 		case StateBullet::BULLET_STATE_FIRE:
 		{
-			if (this->getPosition() < m_visibleSize)	// while visible on screen
+			if (this->getPositionX() < m_visibleSize.width)	// while visible on screen
 			{
 				this->setPositionX(this->getPositionX() + m_speed);
 			}
@@ -95,7 +95,8 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 					if (hero.m_vecGraphicComponentBullet[i]->m_GraphicComponent->GetID() == m_ID)
 					{
 						hero.m_vecGraphicComponentBullet.erase(hero.m_vecGraphicComponentBullet.begin() + i);
-						m_stateBullet = StateBullet::BULLET_STATE_DEATH;
+						this->removeAllChildrenWithCleanup(true);
+						this->getPhysicsBody()->removeFromWorld();
 					}
 				}
 			}
@@ -104,19 +105,21 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 		}
 		case StateBullet::BULLET_STATE_TARGET:
 		{
-			/*m_position = this->getPosition();
-			m_position = Point::ZERO;
-			this->setPosition(m_position);
-			this->setVisible(false);*/
-
 			break;
 		}
 		case StateBullet::BULLET_STATE_DEATH:
 		{
+			this->getPhysicsBody()->removeFromWorld();
 			this->removeFromParentAndCleanup(true);
+
 			break;
 		}
 	}
+}
+
+/*virtual*/ bool PlayerBulletGraphicComponent::Remove() const
+{
+	return m_remove;
 }
 
 /*virtual*/ void PlayerBulletGraphicComponent::SetTargetPointForBullet(cocos2d::Point point)

@@ -147,6 +147,8 @@ public:
 	StateButtonFire		m_stateButtonFire;
 
 	std::vector<ComponentHero*> m_vecGraphicComponentBullet;
+	
+	int m_counterID;
 };
 
 #endif
