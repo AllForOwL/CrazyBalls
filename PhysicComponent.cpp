@@ -47,29 +47,29 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		}
 		case StatePhysic::STATE_TARGET_BONUS:
 		{	
-			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_TARGET;
-			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
+			//hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_TARGET;
+			//hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
 
-			if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_COINS)
-			{
-				hero.m_stateHero  = Monster::StateHero::HERO_STATE_TAKE_COIN;
-				scene.m_bonusGraphicComponent->StartShowAnimation();
-			}
-			else if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_POWER)
-			{
-				hero.m_stateHero  = Monster::StateHero::HERO_STATE_TAKE_POWER; 
-				scene.m_bonusGraphicComponent->StartShowAnimation();
-			}
-			else if (m_TagBonus <= CNT_TYPE_OBJECT_WEAPON_UMG)	// last object for weapon
-			{
-				hero.AddWeapon(m_TagBonus);
-				scene.m_bonusGraphicComponent->HideObject();
-			}
-			else if (m_TagBonus == CNT_TYPE_OBJECT_BULLET_NORMAL)
-			{
-				hero.AddBullet(m_TagBonus);
-				scene.m_bonusGraphicComponent->HideObject();
-			}
+			//if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_COINS)
+			//{
+			//	hero.m_stateHero  = Monster::StateHero::HERO_STATE_TAKE_COIN;
+			//	scene.m_bonusGraphicComponent->StartShowAnimation();
+			//}
+			//else if (m_TagBonus == CNT_TYPE_OBJECT_CASKET_POWER)
+			//{
+			//	hero.m_stateHero  = Monster::StateHero::HERO_STATE_TAKE_POWER; 
+			//	scene.m_bonusGraphicComponent->StartShowAnimation();
+			//}
+			//else if (m_TagBonus <= CNT_TYPE_OBJECT_WEAPON_UMG)	// last object for weapon
+			//{
+			//	hero.AddWeapon(m_TagBonus);
+			//	scene.m_bonusGraphicComponent->HideObject();
+			//}
+			//else if (m_TagBonus == CNT_TYPE_OBJECT_BULLET_NORMAL)
+			//{
+			//	hero.AddBullet(m_TagBonus);
+			//	scene.m_bonusGraphicComponent->HideObject();
+			//}
 
 			this->m_statePhysic	= StatePhysic::STATE_NOTHING;
 

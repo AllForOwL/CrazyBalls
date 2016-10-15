@@ -66,7 +66,8 @@ const std::string CNT_NAME_WEAPON_STEN_GUN_SHADE_2		= "Sten_gun_shade_2";
 const std::string CNT_NAME_WEAPON_TS23					= "TS-23";
 const std::string CNT_NAME_WEAPON_UMG					= "UMG";
 
-const std::string CNT_NAME_BULLET_DEFAULT	= "Bullet_normal";
+const std::string CNT_NAME_BULLET_POSITION_TOP		= "Bullet_position_top";
+const std::string CNT_NAME_BULLET_POSITION_BOTTOM	= "Bullet_position_bottom";
 const std::string CNT_NAME_BOMB				= "Bomd";
 
 const std::string CNT_NAME_COINS			= "Coins";

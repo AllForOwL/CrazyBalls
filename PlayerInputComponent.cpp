@@ -15,8 +15,7 @@ PlayerInputComponent::PlayerInputComponent()
 	{
 		case EventKeyboard::KeyCode::KEY_F:
 		{
-			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE;
-			m_locationTouch = Vec2::ZERO;
+			hero.CreateBulletsForFire();
 			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 			break;
 		}
@@ -45,8 +44,7 @@ PlayerInputComponent::PlayerInputComponent()
 
 			if (_rectButton.containsPoint(m_locationTouch))
 			{
-				hero.m_stateButtonFire	= Monster::StateButtonFire::BUTTON_STATE_FIRE;
-				hero.m_stateBullet		= Monster::StateBullet::BULLET_STATE_FIRE;
+				hero.CreateBulletsForFire();
 			}
 			else if (_rectHero.containsPoint(m_locationTouch))
 			{

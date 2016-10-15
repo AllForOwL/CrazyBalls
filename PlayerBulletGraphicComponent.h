@@ -10,7 +10,17 @@ using namespace cocos2d;
 class PlayerBulletGraphicComponent : public GraphicComponent
 {
 public:
-	PlayerBulletGraphicComponent(int attack, const std::string& typeObject);
+
+	enum StateBullet
+	{
+		BULLET_STATE_FIRE,
+		BULLET_STATE_FIRE_UP,
+		BULLET_STATE_REST,
+		BULLET_STATE_TARGET,
+		BULLET_STATE_DEATH
+	};
+
+	PlayerBulletGraphicComponent(int i_ID, int attack, const std::string& typeObject);
 	PlayerBulletGraphicComponent(PlayerBulletGraphicComponent& bullet);
 
 	virtual void Update(Monster& hero, GameScene& scene);
@@ -27,11 +37,19 @@ public:
 
 	virtual void HideObject();
 
+	void ChangeStateBullet(const StateBullet& newState);
+
+	virtual int GetID() const;
+
 	~PlayerBulletGraphicComponent();
 
 private:
+	StateBullet		m_stateBullet;
+	Size			m_visibleSize;
+	int				m_ID;
+
 	int m_speed;
-	cocos2d::Point	m_position;
+	cocos2d::Point	m_pointBegin;
 	std::string		m_typeObject;
 	int				m_attack;
 

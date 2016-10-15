@@ -32,16 +32,16 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 	this->m_typeObject	= bullet.GetTypeObject();
 	this->m_position	= cocos2d::Point::ZERO;
 
-	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
-	{
-		LoadBulletNormal();
-		this->initWithFile(m_strFilename);
-	}
-	else if (m_typeObject == CNT_NAME_BOMB)
-	{
-		LoadBomb();
-		this->initWithFile(m_strFilename);
-	}
+	//if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
+	//{
+	//	LoadBulletNormal();
+	//	this->initWithFile(m_strFilename);
+	//}
+	//else if (m_typeObject == CNT_NAME_BOMB)
+	//{
+	//	LoadBomb();
+	//	this->initWithFile(m_strFilename);
+	//}
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);

@@ -50,7 +50,6 @@ public:
 	Monster*				m_hero;
 	GraphicComponent*		m_graphicComponentHero;
 	GraphicComponent*		m_graphicComponentWeapon;
-	GraphicComponent*		m_graphicComponentBullet;
 	GraphicComponent*		m_graphicComponentButtonFire;
 	InputComponent*			m_inputComponent;
 	GameObjectMonster*		m_gameObjectMonster;

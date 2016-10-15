@@ -106,7 +106,7 @@ void WeaponGraphicComponent::SetPropertiesWeapon(const int& i_typeObject, const 
 
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateWeapon)
+/*switch (hero.m_stateWeapon)
 	{
 		case Monster::StateWeapon::WEAPON_STATE_FIRE:
 		{
@@ -139,26 +139,27 @@ void WeaponGraphicComponent::SetPropertiesWeapon(const int& i_typeObject, const 
 			break;
 		}
 		case Monster::StateWeapon::WEAPON_STATE_DEATH:
-		{
-			for (int i = 0; i < hero.m_vecGraphicComponentWeapon.size(); i++)
+		{*/
+			/*for (int i = 0; i < hero.m_vecGraphicComponentWeapon.size(); i++)
 			{
-				if (!hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->GetQuentityBullet())
+				/if (!hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->GetQuentityBullet())
 				{
-					hero.m_vecGraphicComponentWeapon.erase(hero.m_vecGraphicComponentWeapon.begin() + i);
+//					hero.m_vecGraphicComponentWeapon.erase(hero.m_vecGraphicComponentWeapon.begin() + i);
 //					hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->removeFromParentAndCleanup(true);
 					break;
 				}
 			}
 
 			this->removeFromParentAndCleanup(true);
-			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
+			*/
+	/*		hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
 
 			break;
 		}
 	default:
 		break;
 	}
-
+	*/
 	return;
 }
 

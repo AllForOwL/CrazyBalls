@@ -47,7 +47,7 @@ void BonusGraphicComponent::SetPropertiesBonus(const std::string& i_nameSprites,
 
 void BonusGraphicComponent::AddBonus(int typeObject)
 {
-	int _typeObject = typeObject;
+	/*int _typeObject = typeObject;
 
 	if (_typeObject == CNT_TYPE_OBJECT_RANDOM)
 	{
@@ -135,7 +135,7 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 		}
 	default:
 		break;
-	}
+	}*/
 }
 
 void BonusGraphicComponent::AddSuperBonus(float dt)

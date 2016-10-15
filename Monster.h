@@ -83,15 +83,6 @@ public:
 		WEAPON_STATE_DEATH
 	};
 
-	enum StateBullet
-	{
-		BULLET_STATE_FIRE,
-		BULLET_STATE_FIRE_UP,
-		BULLET_STATE_REST,
-		BULLET_STATE_TARGET,
-		BULLET_STATE_DEATH
-	};
-
 	enum StateEnemys
 	{
 		ENEMY_STATE_LIFE,
@@ -118,30 +109,16 @@ public:
 	};
 
 	Monster(
-						GraphicComponent& graphicComponentHero, GraphicComponent& graphiComponentWeapon, 
-						GraphicComponent& graphicComponentBullet, GraphicComponent& graphicComponentButtonFire,
-						GameObjectMonster& objectMonster, 
-						InputComponent& inputComponent, InputComponent& botInputComponent,
-						PhysicComponent& physicComponent
-					 );
+				GraphicComponent& graphicComponentHero,			GraphicComponent& graphicComponentButtonFire,	GameObjectMonster& objectMonster, 
+				InputComponent& inputComponent,					InputComponent& botInputComponent,
+				PhysicComponent& physicComponent
+			);
 
 	virtual void Update(GameScene& scene);
 	
-	virtual void SetTargetPointForBullet(cocos2d::Point point);
-
-	int GetIndexActiveWeapon();
-	int GetIndexActiveBullet();
-
-	void AddWeapon(int typeWeapon);
-	void AddBullet(int typeBullet);
-
-	void SetActiveBullet(GameScene& scene, int index);
-	void SetActiveWeapon(GameScene& scene, int index);
+	//virtual void SetTargetPointForBullet(cocos2d::Point point);
 
 	void CheckQuentityBulletInActiveWeapon();
-	int  GetRandWeapon();
-
-	void HideBullet();
 
 	void CheckHeroOnLevelCompete();
 
@@ -151,12 +128,12 @@ public:
 
 	void LoadGameOver() const;
 
+	void CreateBulletsForFire();
+
 	~Monster();
 
 public:
 	GraphicComponent*	m_graphicComponentHero;
-	GraphicComponent*	m_graphicComponentHeroWeapon;
-	GraphicComponent*	m_graphiComponentHeroBullet;
 	GraphicComponent*	m_graphicComponentButtonFire;
 	GameObjectMonster*	m_objectMonster;
 	InputComponent*		m_inputComponentHero;
@@ -164,13 +141,11 @@ public:
 	PhysicComponent*	m_physicComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;
-	StateBullet			m_stateBullet;
 	StatePhysic			m_statePhysic;
 	StateEnemys			m_stateEnemy;
 	StateBonus			m_stateBonus;
 	StateButtonFire		m_stateButtonFire;
 
-	std::vector<ComponentHero*> m_vecGraphicComponentWeapon;
 	std::vector<ComponentHero*> m_vecGraphicComponentBullet;
 };
 

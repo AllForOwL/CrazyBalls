@@ -42,7 +42,8 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 	m_countSpriteInVectorDizzy		= 0;
 	m_countSpriteInVectorFall		= 0;
 
-	this->initWithFile(m_vecSpritesFall[m_countSpriteInVectorFall]);
+	this->initWithFile("res/Hero/player/playerShip3_red.png");
+	this->setRotation(90.0);
 
 	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
 	physicBodyHero->setContactTestBitmask(true);
@@ -84,13 +85,13 @@ int HeroGraphicComponent::GetArmor() const
 
 void HeroGraphicComponent::LoadNameSpritesForHell()
 {
-	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0001.png");
-	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0002.png");
-	m_vecSpritesDizzy.push_back("res/Hero/Dizzy/dizzy-0003.png");
+	m_vecSpritesDizzy.push_back("res/Hero/player/playerShip3_red.png");
+	m_vecSpritesDizzy.push_back("res/Hero/player/playerShip3_red.png");
+	m_vecSpritesDizzy.push_back("res/Hero/player/playerShip3_red.png");
 
-	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0001.png");
-	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0002.png");
-	m_vecSpritesFall.push_back("res/Hero/Fall/fall-0003.png");
+	m_vecSpritesFall.push_back("res/Hero/player/playerShip3_red.png");
+	m_vecSpritesFall.push_back("res/Hero/player/playerShip3_red.png");
+	m_vecSpritesFall.push_back("res/Hero/player/playerShip3_red.png");
 }
 
 void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
@@ -131,7 +132,7 @@ void HeroGraphicComponent::SpeedHeroSuitablyEnemy(Monster& i_hero)
 
 void HeroGraphicComponent::ChangeWeapon(Monster& i_hero, GameScene& i_scene)
 {
-	int _amountWeapon = i_hero.m_vecGraphicComponentWeapon.size();
+	/*int _amountWeapon = i_hero.m_vecGraphicComponentWeapon.size();
 	if (_amountWeapon == 0)
 	{
 		return;
@@ -153,31 +154,31 @@ void HeroGraphicComponent::ChangeWeapon(Monster& i_hero, GameScene& i_scene)
 		}
 		i_hero.SetActiveWeapon(i_scene, _currentIndexWeapon);
 	}
-	i_hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;
+	i_hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;*/
 }
 
 void HeroGraphicComponent::ChangeBullet(Monster& i_hero, GameScene& i_scene)
 {
-	int _amountBullet = i_hero.m_vecGraphicComponentBullet.size();
-	if (_amountBullet == 0)
-	{
-		return;
-	}
+	//int _amountBullet = i_hero.m_vecGraphicComponentBullet.size();
+	//if (_amountBullet == 0)
+	//{
+	//	return;
+	//}
 
-	if (_amountBullet == 1)
-	{
-		i_hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;
-		return;
-	}
-	else
-	{
-		int _currentIndexBullet = i_hero.GetIndexActiveBullet();
-		if (++_currentIndexBullet >= _amountBullet)
-		{
-			_currentIndexBullet = 0;
-		}
-		i_hero.SetActiveBullet(i_scene, _currentIndexBullet);
-	}
+	//if (_amountBullet == 1)
+	//{
+	//	i_hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;
+	//	return;
+	//}
+	//else
+	//{
+	//	int _currentIndexBullet = i_hero.GetIndexActiveBullet();
+	//	if (++_currentIndexBullet >= _amountBullet)
+	//	{
+	//		_currentIndexBullet = 0;
+	//	}
+	//	i_hero.SetActiveBullet(i_scene, _currentIndexBullet);
+	//}
 }
 
 void HeroGraphicComponent::LoadSpritesDizzy(Monster& i_hero)
@@ -233,7 +234,7 @@ void HeroGraphicComponent::JumpDown(Monster& i_hero)
 
 void HeroGraphicComponent::GoToNextLevel(Monster& i_hero)
 {
-	int _coin = GetAttack();
+	/*int _coin = GetAttack();
 	int _health = GetHealth();
 
 	std::vector<int> _vecTagWeapon;
@@ -245,7 +246,7 @@ void HeroGraphicComponent::GoToNextLevel(Monster& i_hero)
 	}
 
 	auto reScene = TransitionFade::create(0.1f, TransitionMainScene::createScene(_coin, _health, _vecTagWeapon), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
-	Director::getInstance()->replaceScene(reScene);
+	Director::getInstance()->replaceScene(reScene);*/
 }
 
 /*virtual*/ void HeroGraphicComponent::Update(Monster& hero, GameScene& scene)

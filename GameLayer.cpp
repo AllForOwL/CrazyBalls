@@ -75,52 +75,52 @@ bool GameLayer::init()
 
 void GameLayer::Update(Monster& hero)
 {
-	std::string _strCoin	= std::to_string(hero.m_graphicComponentHero->GetValue());
-	std::string _strHealth	= std::to_string(hero.m_graphicComponentHero->GetHealth());
+	//std::string _strCoin	= std::to_string(hero.m_graphicComponentHero->GetValue());
+	//std::string _strHealth	= std::to_string(hero.m_graphicComponentHero->GetHealth());
 
-	m_veclblProperties[CNT_INDEX_COIN]->setString	(_strCoin);
-	m_veclblProperties[CNT_INDEX_POWER]->setString	(_strHealth);
+	//m_veclblProperties[CNT_INDEX_COIN]->setString	(_strCoin);
+	//m_veclblProperties[CNT_INDEX_POWER]->setString	(_strHealth);
 
-	switch (hero.m_stateBonus)
-	{
-		case Monster::StateBonus::BONUS_TAKE_COIN:
-		{
-			_strCoin = std::to_string(hero.m_graphicComponentHero->GetValue());
-			m_veclblProperties[CNT_INDEX_COIN]->setString(_strCoin);
+	//switch (hero.m_stateBonus)
+	//{
+	//	case Monster::StateBonus::BONUS_TAKE_COIN:
+	//	{
+	//		_strCoin = std::to_string(hero.m_graphicComponentHero->GetValue());
+	//		m_veclblProperties[CNT_INDEX_COIN]->setString(_strCoin);
 
-			hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
-				
-			break;
-		}
+	//		hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
+	//			
+	//		break;
+	//	}
 
-		case Monster::StateBonus::BONUS_TAKE_POWER:
-		{
-			_strHealth = std::to_string(hero.m_graphicComponentHero->GetHealth());
-			m_veclblProperties[CNT_INDEX_POWER]->setString(_strHealth);
+	//	case Monster::StateBonus::BONUS_TAKE_POWER:
+	//	{
+	//		_strHealth = std::to_string(hero.m_graphicComponentHero->GetHealth());
+	//		m_veclblProperties[CNT_INDEX_POWER]->setString(_strHealth);
 
-			hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
+	//		hero.m_stateBonus = Monster::StateBonus::BONUS_WEAPON;
 
-			break;
-		}
-		case Monster::StateBonus::BONUS_WEAPON:
-		{
-			int _indexActiveWeapon = hero.GetIndexActiveWeapon();
+	//		break;
+	//	}
+	//	case Monster::StateBonus::BONUS_WEAPON:
+	//	{
+	//		int _indexActiveWeapon = hero.GetIndexActiveWeapon();
 
-			//if (_indexActiveWeapon > 0)
-			//{
-				int _quentityBullet = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetQuentityBullet();
-				std::string	_nameWeapon = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetFileName();
-				int _armor = hero.m_graphicComponentHero->GetArmor();
+	//		//if (_indexActiveWeapon > 0)
+	//		//{
+	//			int _quentityBullet = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetQuentityBullet();
+	//			std::string	_nameWeapon = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetFileName();
+	//			int _armor = hero.m_graphicComponentHero->GetArmor();
 
-				m_veclblProperties[CNT_INDEX_WEAPON]->setString(std::to_string(_quentityBullet));
-				m_veclblProperties[CNT_INDEX_ARMOR]->setString(std::to_string(_armor));
-			//}
+	//			m_veclblProperties[CNT_INDEX_WEAPON]->setString(std::to_string(_quentityBullet));
+	//			m_veclblProperties[CNT_INDEX_ARMOR]->setString(std::to_string(_armor));
+	//		//}
 
-			break;
-		}
-		default:
-			break;
-	}
+	//		break;
+	//	}
+	//	default:
+	//		break;
+	//}
 }
 
 void GameLayer::GoToPause(cocos2d::Ref* ref)

@@ -5,46 +5,35 @@
 #include "constants.h"
 #include "GameObjectMonster.h"
 
-PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int attack, const std::string& typeObject)
-																			: m_attack		(attack),
-																			  m_typeObject	(typeObject)
+//const int CNT_SPEED_BULLET = 8;
+
+PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack, const std::string& typeObject)
+																			:	m_ID			(i_ID),
+																				m_attack		(attack),
+																				m_typeObject	(typeObject)
 {
-	m_speed = 8;
-	m_position = Point(-10, -10);
-	m_targetPoint = Point(Point::ZERO);
-	this->setPosition(m_position);
-	this->setVisible(false);
+	m_stateBullet = StateBullet::BULLET_STATE_REST;
+	m_visibleSize = Director::getInstance()->getVisibleSize();
 
-	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
-	{
-		LoadBulletNormal();
-		this->initWithFile(m_strFilename);
-	}
+	m_speed = CNT_SPEED_BULLET;
 
-	this->setName(m_typeObject);
+	this->initWithFile("res/Bullets/Meteor1.png");
+	this->setScale(m_visibleSize.width / this->getContentSize().width / 20,
+		m_visibleSize.height / this->getContentSize().height / 20);
 
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	physicBody->setContactTestBitmask(true);
-	//physicBody->setDynamic(false);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
-	physicBody->setName("physics");
 
-	this->setPhysicsBody(physicBody);
-	m_isBody = true;
+	auto physicBodyBullet = PhysicsBody::createBox(this->getContentSize());
+	physicBodyBullet->setContactTestBitmask(true);
+	physicBodyBullet->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+	this->setPhysicsBody(physicBodyBullet);
 }
 
 PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicComponent& bullet)
 {
 	this->m_attack		= bullet.GetAttack();
 	this->m_typeObject	= bullet.GetTypeObject();
-	this->m_position	= cocos2d::Point::ZERO;
-	this->m_targetPoint = cocos2d::Point::ZERO;
 
-	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
-	{
-		LoadBulletNormal();
-		this->initWithFile(m_strFilename);
-	}
+	this->m_targetPoint = cocos2d::Point::ZERO;
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
@@ -63,54 +52,66 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	return m_typeObject;
 }
 
+/*virtual*/ int PlayerBulletGraphicComponent::GetID() const
+{
+	return m_ID;
+}
+
 /*virtual*/ void PlayerBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateBullet)
+	if (!this->getParent())
 	{
-		case Monster::StateBullet::BULLET_STATE_FIRE:
+		scene.addChild(this);
+		if (this->m_typeObject == CNT_NAME_BULLET_POSITION_TOP)
 		{
-			m_position = this->getPosition();
+			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
+				hero.m_graphicComponentHero->getPositionY() + (hero.m_graphicComponentHero->getBoundingBox().size.height / 2)
+								);
+			this->setPosition(m_pointBegin);
+			this->setVisible(false);
+		}
+		else
+		{
+			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
+				hero.m_graphicComponentHero->getPositionY() - (hero.m_graphicComponentHero->getBoundingBox().size.height / 2)
+				);
+			this->setPosition(m_pointBegin);
+			this->setVisible(false);
+		}
+	}
 
-			if (m_position.x < 0)
+	switch (m_stateBullet)
+	{
+		case StateBullet::BULLET_STATE_FIRE:
+		{
+			if (this->getPosition() < m_visibleSize)	// while visible on screen
 			{
-				int _indexActiveWeapon = hero.GetIndexActiveWeapon();
-
-				this->setVisible(true);
-				Vec2 _positionWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->getPosition();
-				hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->DescreaseQuentityBullet();
-				_positionWeapon.x		+= CNT_SPEED_BULLET;
-				m_position				= _positionWeapon;
-				this->setPosition(m_position);
-			}
-			else if (m_position.x > Director::getInstance()->getVisibleSize().width)
-			{
-				m_position = Point(-10, -10);
-				this->setPosition(m_position);
-				this->setVisible(false);
-				hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
-				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_CHECK_QUENTITY_BULLET;
+				this->setPositionX(this->getPositionX() + m_speed);
 			}
 			else
 			{
-				Size _visibleSize = Director::getInstance()->getVisibleSize();
-				Size _size = this->getContentSize();
-
-				Point _myPosition = Point(this->getPositionX() + CNT_SPEED_BULLET, this->getPositionY());
-				this->setPosition(_myPosition);
+				for (int i = 0; i < hero.m_vecGraphicComponentBullet.size(); i++)
+				{
+					if (hero.m_vecGraphicComponentBullet[i]->m_GraphicComponent->GetID() == m_ID)
+					{
+						hero.m_vecGraphicComponentBullet.erase(hero.m_vecGraphicComponentBullet.begin() + i);
+						m_stateBullet = StateBullet::BULLET_STATE_DEATH;
+					}
+				}
 			}
 
 			break;
 		}
-		case Monster::StateBullet::BULLET_STATE_TARGET:
+		case StateBullet::BULLET_STATE_TARGET:
 		{
-			m_position = this->getPosition();
+			/*m_position = this->getPosition();
 			m_position = Point::ZERO;
 			this->setPosition(m_position);
-			this->setVisible(false);
+			this->setVisible(false);*/
 
 			break;
 		}
-		case  Monster::StateBullet::BULLET_STATE_DEATH:
+		case StateBullet::BULLET_STATE_DEATH:
 		{
 			this->removeFromParentAndCleanup(true);
 			break;
@@ -125,7 +126,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 
 void PlayerBulletGraphicComponent::LoadBulletNormal()
 {
-	m_position = Point::ZERO;
+//	m_position = Point::ZERO;
 	m_strFilename = "res/Bullets/Bullet_normal.png";
 }
 
@@ -143,6 +144,11 @@ int PlayerBulletGraphicComponent::GetSpeedBullet() const
 {
 	this->setVisible(false);
 	this->setPosition(Point(-10, -10));
+}
+
+void PlayerBulletGraphicComponent::ChangeStateBullet(const StateBullet& newState)
+{
+	m_stateBullet = newState;
 }
 
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()

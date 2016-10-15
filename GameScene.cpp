@@ -92,24 +92,17 @@ bool GameScene::init()
 	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
-	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 8,
-									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 6);
+	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 10,
+									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 8);
 	this->addChild(m_graphicComponentHero);
 	
-	
-	m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK47);
-	m_graphicComponentWeapon->setPosition(m_graphicComponentHero->getPosition().x, m_graphicComponentHero->getPosition().y - 20);
-	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 12,
-									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 10);
-	this->addChild(m_graphicComponentWeapon);
-	
-	
-	m_graphicComponentBullet	= new PlayerBulletGraphicComponent(150, CNT_NAME_BULLET_DEFAULT); 
-	m_graphicComponentBullet->setScale(_visibleSize.width / m_graphicComponentBullet->getContentSize().width / 50,
-										_visibleSize.height / m_graphicComponentBullet->getContentSize().height  / 50
-										);
-	this->addChild(m_graphicComponentBullet);
-
+	//
+	//m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK47);
+	//m_graphicComponentWeapon->setPosition(m_graphicComponentHero->getPosition().x, m_graphicComponentHero->getPosition().y - 20);
+	//m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 12,
+	//								   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 10);
+	//this->addChild(m_graphicComponentWeapon);
+	//
 	m_graphicComponentButtonFire = new ButtonGraphicComponent();
 	this->addChild(m_graphicComponentButtonFire);
 
@@ -117,34 +110,11 @@ bool GameScene::init()
 	m_gameObjectMonster				= new GameObjectMonster();
 	m_botInputComponent				= new BotInputComponent();
 	m_physicComponent				= new PhysicComponent();
-	m_hero							= new Monster(	*m_graphicComponentHero,	*m_graphicComponentWeapon, 
-													*m_graphicComponentBullet,	*m_graphicComponentButtonFire,
-													*m_gameObjectMonster, 		*m_inputComponent,			
-													*m_botInputComponent,		*m_physicComponent
+	m_hero							= new Monster(	*m_graphicComponentHero,		*m_graphicComponentButtonFire,	
+													*m_gameObjectMonster, 			*m_inputComponent,				*m_botInputComponent,		
+													*m_physicComponent
 												 );
 	
-	if (GameScene::m_level)
-	{
-		m_hero->m_vecGraphicComponentWeapon[0]->m_GraphicComponent->removeFromParentAndCleanup(true);
-		m_hero->m_vecGraphicComponentWeapon.clear();
-		
-		if (m_coin)
-		{
-			m_hero->m_graphicComponentHero->ChangeCoins(m_coin);
-		}
-		if (m_life)
-		{
-			m_hero->m_graphicComponentHero->ChangeHealth(m_life);
-		}
-		if (m_vecNameWeapon.size())
-		{
-			for (int i = 0; i < m_vecNameWeapon.size(); i++)
-			{
-				m_hero->AddWeapon(m_vecNameWeapon[i]);
-			}
-		}
-	}
-
 	m_bonusGraphicComponent = new BonusGraphicComponent();
 	m_bonusGraphicComponent->setName("bonus");
 	this->addChild(m_bonusGraphicComponent);
@@ -173,7 +143,7 @@ bool GameScene::init()
 
 /*virtual*/ bool GameScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	m_hero->m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE_UP;
+//	m_hero->m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE_UP;
 
 	return true;
 }

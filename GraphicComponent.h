@@ -89,6 +89,10 @@ public:
 	{
 		return 1;
 	}
+	virtual int GetID() const
+	{
+		return 1;
+	}
 
 };
 
