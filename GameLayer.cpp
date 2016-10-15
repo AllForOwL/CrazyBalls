@@ -17,6 +17,7 @@ const std::string CNT_ANIMATION_POWER	= "Animation power";
 const int CNT_INDEX_COIN	= 0;
 const int CNT_INDEX_POWER	= 1;
 const int CNT_INDEX_WEAPON	= 2;
+const int CNT_INDEX_ARMOR   = 3;
 
 USING_NS_CC;
 
@@ -36,45 +37,36 @@ bool GameLayer::init()
 
 	m_visibleSize = Director::getInstance()->getVisibleSize();
 	
-	m_veclblProperties.push_back(Label::create());
-	m_veclblProperties.push_back(Label::create());
-	m_veclblProperties.push_back(Label::create());
+	m_menuBarBottom = Sprite::create("res/Menu/BarBottomGood.jpg");
+	m_menuBarBottom->setScale(m_visibleSize.width / m_menuBarBottom->getContentSize().width,
+		m_visibleSize.height / m_menuBarBottom->getContentSize().height / 6);
+	m_menuBarBottom->setPosition(m_visibleSize.width / 2, m_menuBarBottom->getBoundingBox().size.height / 2);
+	this->addChild(m_menuBarBottom);
 
-	m_vecsprProperties.push_back(Sprite::create("res/Bonus/Coins/Coin_1.png"));
-	m_vecsprProperties.push_back(Sprite::create("res/Bonus/Power/life_power_up_1.png"));
-	m_vecsprProperties.push_back(Sprite::create("res/Weapons/AK47.png"));
+	m_veclblProperties.push_back(CCLabelTTF::create("", "res/Fonts/kenvector_future.ttf", 18));
+	m_veclblProperties.push_back(CCLabelTTF::create("", "res/Fonts/kenvector_future.ttf", 18));
+	m_veclblProperties.push_back(CCLabelTTF::create("", "res/Fonts/kenvector_future.ttf", 18));
+	m_veclblProperties.push_back(CCLabelTTF::create("", "res/Fonts/kenvector_future.ttf", 18));
 
-	for (int i = 0; i < m_vecsprProperties.size(); i++)
-	{
-		Size _sizeSprite = m_vecsprProperties[i]->getContentSize();
-		m_vecsprProperties[i]->setScale(m_visibleSize.width /_sizeSprite.width / CNT_SCALE,
-			m_visibleSize.height / _sizeSprite.height / CNT_SCALE);
-	}
-
-	Point _position = Point::ZERO;
-	Size _sizeSpriteAfterScale = m_vecsprProperties[0]->getBoundingBox().size;
-	_position.y = m_visibleSize.height - (_sizeSpriteAfterScale.height * 2);
-
-	for (int i = 0; i < 6; i++)
+	//_position.y = m_visibleSize.height - (_sizeSpriteAfterScale.height * 2);
+	/*for (int i = 0; i < 6; i++)
 	{
 		_position.x += _sizeSpriteAfterScale.width * 2;
 		m_vecPointProperties.push_back(_position);
-	}
+	}*/
 
-	m_vecsprProperties[CNT_INDEX_COIN]->setPosition(m_vecPointProperties[0]);
-	m_vecsprProperties[CNT_INDEX_POWER]->setPosition(m_vecPointProperties[2]);
-	m_vecsprProperties[CNT_INDEX_WEAPON]->setPosition(m_vecPointProperties[4]);
+	m_veclblProperties[CNT_INDEX_COIN]->setPosition(m_menuBarBottom->getBoundingBox().size.width / 2 + 47,
+		m_menuBarBottom->getBoundingBox().size.height - 40);
+	m_veclblProperties[CNT_INDEX_POWER]->setPosition(m_menuBarBottom->getBoundingBox().size.width / 2 + 42,
+		m_menuBarBottom->getBoundingBox().size.height - 15);
+	m_veclblProperties[CNT_INDEX_WEAPON]->setPosition(m_menuBarBottom->getBoundingBox().size.width / 2 + 150,
+		m_menuBarBottom->getBoundingBox().size.height - 40);
+	m_veclblProperties[CNT_INDEX_ARMOR]->setPosition(m_menuBarBottom->getBoundingBox().size.width / 2 + 150, 
+		m_menuBarBottom->getBoundingBox().size.height - 15);
 
-	m_veclblProperties[CNT_INDEX_COIN]->setPosition(m_vecPointProperties[1]);
-	m_veclblProperties[CNT_INDEX_POWER]->setPosition(m_vecPointProperties[3]);
-	m_veclblProperties[CNT_INDEX_WEAPON]->setPosition(m_vecPointProperties[5]);
-
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		this->addChild(m_vecsprProperties[i]);
-	}
-	for (int i = 0; i < 3; i++)
-	{
+		m_veclblProperties[i]->setFontFillColor(Color3B(Color3B::GRAY));
 		this->addChild(m_veclblProperties[i]);
 	}
 
@@ -114,11 +106,15 @@ void GameLayer::Update(Monster& hero)
 		{
 			int _indexActiveWeapon = hero.GetIndexActiveWeapon();
 
-			int _quentityBullet = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetQuentityBullet();
-			std::string	_nameWeapon	= hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetFileName();
+			//if (_indexActiveWeapon > 0)
+			//{
+				int _quentityBullet = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetQuentityBullet();
+				std::string	_nameWeapon = hero.m_vecGraphicComponentWeapon[_indexActiveWeapon]->m_GraphicComponent->GetFileName();
+				int _armor = hero.m_graphicComponentHero->GetArmor();
 
-			m_veclblProperties[CNT_INDEX_WEAPON]->setString(std::to_string(_quentityBullet));
-			m_vecsprProperties[CNT_INDEX_WEAPON]->initWithFile(_nameWeapon);
+				m_veclblProperties[CNT_INDEX_WEAPON]->setString(std::to_string(_quentityBullet));
+				m_veclblProperties[CNT_INDEX_ARMOR]->setString(std::to_string(_armor));
+			//}
 
 			break;
 		}

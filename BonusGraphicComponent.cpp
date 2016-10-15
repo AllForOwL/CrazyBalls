@@ -57,17 +57,17 @@ void BonusGraphicComponent::AddBonus(int typeObject)
 	switch (_typeObject)
 	{
 		case CNT_TYPE_OBJECT_CASKET_COINS:
-		{
-			SetPropertiesBonus(m_vecNameSpritesOpenCasket[m_indexInVector], CNT_NAME_CASKET_COINS, CNT_TYPE_OBJECT_CASKET_COINS);
+		{	
 			LoadNameOpenCakset(CNT_NAME_CASKET_COINS);
+			SetPropertiesBonus(m_vecNameSpritesOpenCasket[m_indexInVector], CNT_NAME_CASKET_COINS, CNT_TYPE_OBJECT_CASKET_COINS);
 			this->m_openCasket = true;
 
 			break;
 		}
 		case CNT_TYPE_OBJECT_CASKET_POWER:
 		{
-			SetPropertiesBonus(m_vecNameSpritesOpenCasket[m_indexInVector], CNT_NAME_CASKET_POWERS, CNT_TYPE_OBJECT_CASKET_POWER);
 			LoadNameOpenCakset(CNT_NAME_CASKET_POWERS);
+			SetPropertiesBonus(m_vecNameSpritesOpenCasket[m_indexInVector], CNT_NAME_CASKET_POWERS, CNT_TYPE_OBJECT_CASKET_POWER);
 			this->m_openCasket = true;
 	
 			break;

@@ -45,8 +45,8 @@ WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& ty
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	Size _sizeWeapon  = this->getContentSize();
 
-	this->setScale(_visibleSize.width / _sizeWeapon.width / 8,
-		_visibleSize.height / _sizeWeapon.height / 8);
+	this->setScale(_visibleSize.width / _sizeWeapon.width / 12,
+		_visibleSize.height / _sizeWeapon.height / 10);
 }
 
 WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
@@ -145,6 +145,7 @@ void WeaponGraphicComponent::SetPropertiesWeapon(const int& i_typeObject, const 
 				if (!hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->GetQuentityBullet())
 				{
 					hero.m_vecGraphicComponentWeapon.erase(hero.m_vecGraphicComponentWeapon.begin() + i);
+//					hero.m_vecGraphicComponentWeapon[i]->m_GraphicComponent->removeFromParentAndCleanup(true);
 					break;
 				}
 			}
@@ -190,3 +191,13 @@ WeaponGraphicComponent::~WeaponGraphicComponent()
 {
 
 }
+
+/** List tasks on 15:10:2016**/
+/*
+	- Full working Weapon:
+			- AddWeapon();
+			- GetIndexActiveWeapon();
+	- transition between levels;
+	- save from previous level;
+	- STATE_DEATH for all objects;
+*/

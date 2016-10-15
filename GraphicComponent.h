@@ -85,6 +85,10 @@ public:
 	{
 		return std::string(" ");
 	}
+	virtual int GetArmor() const
+	{
+		return 1;
+	}
 
 };
 

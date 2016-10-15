@@ -12,7 +12,7 @@
 
 using namespace cocos2d;
 
-class GameScene : public cocos2d::LayerColor
+class GameScene : public cocos2d::Layer
 {
 public:
 	// methods
@@ -60,10 +60,12 @@ public:
 	BonusGraphicComponent*	m_bonusGraphicComponent;
 
 	std::vector<std::string>	m_vecNameBackground;
-	cocos2d::Sprite*			m_background;
+//	cocos2d::Sprite*			m_background;
 	cocos2d::Sprite*			m_btnFire;
 	float						m_widthBackground;
 	int							m_countLevel;
+
+	Sprite* m_background;
 };
 
 #endif // __GAME_SCENE_H__

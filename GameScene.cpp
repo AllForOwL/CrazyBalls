@@ -59,13 +59,20 @@ Scene *GameScene::createScene(bool nextLevel, int coin, int life, std::vector<in
 
 bool GameScene::init()
 {
-	if (!LayerColor::initWithColor(cocos2d::Color4B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0)))	// if layer not create exit from function
+	if (!Layer::init())	// if layer not create exit from function
 	{
 		return false;
 	}
 
 	Size _visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
+
+	m_background = Sprite::create("res/Backgrounds/BackgroundNebula.jpg");
+	m_background->setScale(_visibleSize.width / m_background->getContentSize().width,
+		_visibleSize.height / m_background->getContentSize().height);
+	m_background->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+
+	this->addChild(m_background);
 
 	m_countLevel = 0;
 
@@ -92,8 +99,8 @@ bool GameScene::init()
 	
 	m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK47);
 	m_graphicComponentWeapon->setPosition(m_graphicComponentHero->getPosition().x, m_graphicComponentHero->getPosition().y - 20);
-	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 8,
-									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 8);
+	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 12,
+									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 10);
 	this->addChild(m_graphicComponentWeapon);
 	
 	
@@ -110,11 +117,11 @@ bool GameScene::init()
 	m_gameObjectMonster				= new GameObjectMonster();
 	m_botInputComponent				= new BotInputComponent();
 	m_physicComponent				= new PhysicComponent();
-	m_hero						= new Monster(	*m_graphicComponentHero,	*m_graphicComponentWeapon, 
-												*m_graphicComponentBullet,	*m_graphicComponentButtonFire,
-												*m_gameObjectMonster, 		*m_inputComponent,			
-												*m_botInputComponent,		*m_physicComponent
-											 );
+	m_hero							= new Monster(	*m_graphicComponentHero,	*m_graphicComponentWeapon, 
+													*m_graphicComponentBullet,	*m_graphicComponentButtonFire,
+													*m_gameObjectMonster, 		*m_inputComponent,			
+													*m_botInputComponent,		*m_physicComponent
+												 );
 	
 	if (GameScene::m_level)
 	{

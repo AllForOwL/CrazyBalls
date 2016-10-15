@@ -266,13 +266,14 @@ void Monster::CauseDamage(int damage)
 		m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEATH;
 		m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_DEATH;
 		m_stateBonus	= Monster::StateBonus::BONUS_DEATH;
+
+		LoadGameOver();
 	}
 	else
 	{
 		m_stateHero = Monster::StateHero::HERO_STATE_WOUNDED;
 	}
 }
-
 
 void Monster::LoadGameOver() const
 {

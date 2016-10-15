@@ -40,6 +40,8 @@ public:
 	void JumpDown(Monster& i_hero);
 	void GoToNextLevel(Monster& i_hero);
 
+	virtual int GetArmor() const;
+
 	~HeroGraphicComponent();
 
 public:
@@ -56,6 +58,7 @@ public:
 	int m_attack;
 	int m_health;
 	int m_coins;
+	int m_armor;
 
 	int m_target_Y;
 	int m_speed;

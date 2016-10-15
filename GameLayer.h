@@ -19,14 +19,15 @@ public:
 
 public:
 	
+	cocos2d::Sprite* m_menuBarBottom;
+
 	cocos2d::Size m_visibleSize;
 
 	cocos2d::Label* m_lblCoin;
 	cocos2d::Label* m_lblPower;
 	cocos2d::Label* m_lblPoint;
 
-	std::vector<cocos2d::Label*>  m_veclblProperties;
-	std::vector<cocos2d::Sprite*> m_vecsprProperties;
+	std::vector<cocos2d::LabelTTF*>  m_veclblProperties;
 	std::vector<cocos2d::Point>	  m_vecPointProperties;
 };
 
