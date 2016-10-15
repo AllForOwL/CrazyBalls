@@ -103,10 +103,6 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 
 			break;
 		}
-		case StateBullet::BULLET_STATE_TARGET:
-		{
-			break;
-		}
 		case StateBullet::BULLET_STATE_DEATH:
 		{
 			this->getPhysicsBody()->removeFromWorld();

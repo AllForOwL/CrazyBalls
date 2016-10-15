@@ -216,7 +216,6 @@ void HeroGraphicComponent::JumpUp(Monster& i_hero)
 void HeroGraphicComponent::JumpDown(Monster& i_hero)
 {
 	m_fPositionY = this->getPositionY();
-	m_fBottomOrderScreen = (this->getBoundingBox().size.height / 2);
 
 	if (m_fPositionY <= m_fBottomOrderScreen)
 	{
@@ -266,7 +265,16 @@ void HeroGraphicComponent::GoToNextLevel(Monster& i_hero)
 		}
 		case Monster::StateHero::HERO_STATE_JUMP_DOWN:
 		{
-			JumpDown(hero);
+			if (m_fBottomOrderScreen)
+			{
+				JumpDown(hero);
+			}
+			else
+			{
+				m_fBottomOrderScreen = scene.m_gameLayer->m_menuBarBottom->getBoundingBox().size.height;
+				m_fBottomOrderScreen += this->getBoundingBox().size.height / 2;
+				JumpDown(hero);
+			}
 
 			break;
 		}

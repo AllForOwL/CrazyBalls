@@ -11,6 +11,8 @@ using namespace std;
 class InputComponent 
 {
 public:
+	virtual ~InputComponent() {};
+
 	virtual void Update(Monster& heroes) = 0;
 
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
@@ -25,11 +27,6 @@ public:
 	{
 
 	}
-
-	virtual ~InputComponent() {};
-
-public:
-	EventKeyboard::KeyCode m_keyCode;
 };
 
 #endif

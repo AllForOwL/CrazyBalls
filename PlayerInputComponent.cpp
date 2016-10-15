@@ -6,38 +6,20 @@
 
 PlayerInputComponent::PlayerInputComponent()
 {
-	m_keyCode = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
+	m_stateInput = StateInput::STATE_REST;
 }
 
 /*virtual*/ void PlayerInputComponent::Update(Monster& hero)
 {
-	switch (m_keyCode)
+	switch (m_stateInput)
 	{
-		case EventKeyboard::KeyCode::KEY_F:
+		case StateInput::STATE_FIRE:
 		{
 			hero.CreateBulletsForFire();
-			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
+			
 			break;
 		}
-		case EventKeyboard::KeyCode::KEY_W:
-		{
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_WEAPON;
-			break;
-		}
-		case EventKeyboard::KeyCode::KEY_B:
-		{
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_BULLET;
-			break;
-		}
-		case EventKeyboard::KeyCode::KEY_CAPITAL_R:
-		{
-			hero.m_stateButtonFire = Monster::StateButtonFire::BUTTON_STATE_RELEASE;
-
-			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
-
-			break;
-		}
-		case EventKeyboard::KeyCode::KEY_ENTER:
+		case StateInput::STATE_CHECK_INPUT_FOR_FIRE:
 		{
 			Rect _rectButton	= hero.m_graphicComponentButtonFire->getBoundingBox();
 			Rect _rectHero		= hero.m_graphicComponentHero->getBoundingBox();
@@ -45,26 +27,32 @@ PlayerInputComponent::PlayerInputComponent()
 			if (_rectButton.containsPoint(m_locationTouch))
 			{
 				hero.CreateBulletsForFire();
+				m_stateInput = StateInput::STATE_FIRE;
 			}
-			else if (_rectHero.containsPoint(m_locationTouch))
+			else
 			{
-				hero.m_stateHero	= Monster::StateHero::HERO_STATE_CHANGE_WEAPON;
-				hero.m_stateBonus	= Monster::StateBonus::BONUS_WEAPON;
+				m_stateInput = StateInput::STATE_REST;
 			}
-
-			m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 
 			break;
 		}
-		
+		case StateInput::STATE_HERO_UP:
+		{
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;
+			break;
+		}
+		case StateInput::STATE_HERO_DOWN:
+		{
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_DOWN;
+			break;
+		}
 	}
 }
 
 /*virtual*/ bool PlayerInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 	m_locationTouch = touch->getLocation();
-	
-	m_keyCode = EventKeyboard::KeyCode::KEY_ENTER;
+	m_stateInput = StateInput::STATE_CHECK_INPUT_FOR_FIRE;
 
 	return true;
 }
@@ -78,27 +66,17 @@ PlayerInputComponent::PlayerInputComponent()
 
 	if (_locationTouchNow > _locationTouchStart)
 	{
-		m_keyCode = EventKeyboard::KeyCode::KEY_UP_ARROW;
+		m_stateInput = StateInput::STATE_HERO_UP;
 	}
 	else
 	{
-		m_keyCode = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
+		m_stateInput = StateInput::STATE_HERO_DOWN;
 	}
 }
 
 /*virtual*/ void PlayerInputComponent::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	m_keyCode = EventKeyboard::KeyCode::KEY_CAPITAL_R;
-}
-
-/*virtual*/ void PlayerInputComponent::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
-{
-	m_keyCode = keyCode;
-}
-
-/*virtual*/ void PlayerInputComponent::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
-{
-
+	m_stateInput = StateInput::STATE_REST;
 }
 
 PlayerInputComponent::~PlayerInputComponent()
