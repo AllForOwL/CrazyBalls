@@ -35,6 +35,8 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		}
 		case StatePhysic::STATE_WOUNDED_HERO:
 		{
+			hero.m_objectMonster->RemoveBullet(m_TagEnemy);
+
 			hero.CauseDamage(50);
 			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
@@ -88,7 +90,6 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	if (_a->getCollisionBitmask() == BOT_BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == HERO_COLLISION_BITMASK)
 	{
 		m_TagEnemy = _a->getTag();
-		_a->setTag(-1);
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_HERO;
 
 		CCLOG("Collision enemy a");

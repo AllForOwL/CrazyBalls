@@ -20,12 +20,12 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int i_ID, int attack, const
 
 	srand(time(NULL));
 	int _randTag = rand() % 100000 + 0;
+	this->setTag(_randTag);
 
 	auto physicBody = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBody->setContactTestBitmask(true);
 	physicBody->setDynamic(false);
 	physicBody->setCollisionBitmask(BOT_BULLET_COLLISION_BITMASK);
-	physicBody->setTag(_randTag);
 
 	this->setPhysicsBody(physicBody);
 }
@@ -65,11 +65,6 @@ void BotBulletGraphicComponent::ChangeState(const StateBullet& newState)
 		scene.addChild(this);
 	}
 
-	if (this->getPhysicsBody()->getTag() == -1)
-	{
-		m_stateBullet = StateBullet::STATE_DEATH;
-	}
-
 	switch (m_stateBullet)
 	{
 		case StateBullet::STATE_FIRE:
@@ -95,8 +90,8 @@ void BotBulletGraphicComponent::ChangeState(const StateBullet& newState)
 		}
 		case StateBullet::STATE_DEATH:
 		{
+			this->removeAllChildrenWithCleanup(true);
 			this->getPhysicsBody()->removeFromWorld();
-			this->removeFromParentAndCleanup(true);
 
 			break;
 		}

@@ -10,6 +10,7 @@ class GameScene;
 class BreedGraphicComponent;
 class Monster;
 class GraphicComponent;
+class AirplaneEnemyGraphicComponent;
 
 // interface for other graphics classes
 class GameObjectMonster
@@ -49,6 +50,7 @@ public:
 	bool FreePosition			(int indexPosition);
 	void ReleaseCell			(Point point);
 
+	void RemoveBullet(int tagEnemy);
 	int GetIndexEnemyForRemove	(int tagEnemy) const;
 	int RemoveAndCleanEnemy		(int tagEnemy);
 	int GetCoinForEnemy() const;
@@ -61,8 +63,8 @@ public:
 	std::vector<GraphicComponent*>	m_vecComponentEnemyMeteor;
 	GraphicComponent*				m_enemyMeteor;
 
-	std::vector<GraphicComponent*>	m_vecComponentEnemyAirplane;
-	GraphicComponent*				m_enemyAirplane;
+	std::vector<AirplaneEnemyGraphicComponent*>	m_vecComponentEnemyAirplane;
+	AirplaneEnemyGraphicComponent*				m_enemyAirplane;
 
 	std::vector<GraphicComponent*>	m_vecComponentWeapon;
 	GraphicComponent*				m_weapon;

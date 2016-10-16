@@ -309,6 +309,29 @@ int GameObjectMonster::GetIndexEnemyForRemove(int tagEnemy) const
 	}
 }
 
+void GameObjectMonster::RemoveBullet(int tagEnemy)
+{
+	int _quentityAirplane	= 0;
+	int _quentityBullet		= 0;
+	int _tagEnemy = tagEnemy;
+	for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
+	{
+		for (int j = 0; j < m_vecComponentEnemyAirplane[i]->m_vecBullet.size(); j++)
+		{
+			auto body = m_vecComponentEnemyAirplane[i]->m_vecBullet[j]->getPhysicsBody();
+			if (body->getTag() == _tagEnemy)
+			{
+				_quentityAirplane	= i;
+				_quentityBullet		= j;
+			}
+		}
+	}
+
+	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet[_quentityBullet]->removeFromParentAndCleanup(true);
+	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet.erase(m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet.begin() + _quentityBullet);
+
+}
+
 int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 {
 	if (m_vecComponentEnemyAirplane.size())

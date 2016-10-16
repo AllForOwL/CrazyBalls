@@ -29,13 +29,6 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 			{
 				m_vecBullet[i]->Update(hero, scene);
 			}
-			for (int i = 0; i < m_vecBullet.size(); i++)
-			{
-				if (m_vecBullet[i]->getPhysicsBody()->getTag() == -1)
-				{
-					m_vecBullet.erase(m_vecBullet.begin() + i);
-				}
-			}
 			Move();
 
 			break;
