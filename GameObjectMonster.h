@@ -44,6 +44,7 @@ public:
 	void SpawnerEnemyMeteor		(GameScene& scene);
 	void SpawnerEnemyAirplane	(GameScene& scene);
 	cocos2d::Point GetPosition();
+	cocos2d::Point GetPositionAirplane();
 	void LoadField();
 	bool FreePosition			(int indexPosition);
 	void ReleaseCell			(Point point);
@@ -78,6 +79,7 @@ public:
 	cocos2d::Size		m_sizeEnemy;
 
 	int					m_coinForEnemy;
+	Size				m_visibleSize;
 };
 
 

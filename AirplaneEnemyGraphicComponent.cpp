@@ -48,7 +48,7 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 
 void AirplaneEnemyGraphicComponent::Move()
 {
-	this->setPositionX(this->getPositionX() + 1);
+	this->setPositionX(this->getPositionX() - 1);
 }
 
 void AirplaneEnemyGraphicComponent::CreateBullets()
@@ -181,9 +181,10 @@ void AirplaneEnemyGraphicComponent::DetermineTypeObject()
 void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_filename, const int& i_attack, const int& i_armor, const int& i_health ,const int& i_spawnShot)
 {
 	this->initWithFile(i_filename);
-	this->setScale(m_visibleSize.width / this->getContentSize().width / 10,
-		m_visibleSize.height / this->getContentSize().height / 8);
+	this->setScale(m_visibleSize.width / this->getContentSize().width / 12,
+		m_visibleSize.height / this->getContentSize().height / 10);
 	this->setRotation(90.0);
+	this->setVisible(true);
 
 	this->m_timeSpawnShot	= i_spawnShot;
 	this->m_attack			= i_attack;

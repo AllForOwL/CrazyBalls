@@ -13,8 +13,12 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int i_ID, int attack, const
 	m_visibleSize	= Director::getInstance()->getVisibleSize();
 	m_pointBegin	= Point::ZERO;
 	m_speed			= CNT_SPEED_BULLET;	
+	
+	this->initWithFile("res/Bullets/Meteor1.png");
+	this->setScale(m_visibleSize.width / this->getContentSize().width / 25,
+		m_visibleSize.height / this->getContentSize().height / 25);
 
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	auto physicBody = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBody->setContactTestBitmask(true);
 	physicBody->setDynamic(false);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
@@ -57,16 +61,16 @@ void BotBulletGraphicComponent::ChangeState(const StateBullet& newState)
 		scene.addChild(this);
 		if (this->m_typeObject == CNT_NAME_BULLET_POSITION_TOP)
 		{
-			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
-				hero.m_graphicComponentHero->getPositionY() + (hero.m_graphicComponentHero->getBoundingBox().size.height / 2)
+			m_pointBegin = Point(hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionX() - (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.width  / 2),
+				hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionY() + (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.height / 2)
 								);
 			this->setPosition(m_pointBegin);
 			this->setVisible(false);
 		}
 		else
-		{
-			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
-				hero.m_graphicComponentHero->getPositionY() - (hero.m_graphicComponentHero->getBoundingBox().size.height / 2)
+		{ 
+			m_pointBegin = Point(hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionX()- (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.width / 2),
+				hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionY() - (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.height / 2)
 				);
 			this->setPosition(m_pointBegin);
 			this->setVisible(false);

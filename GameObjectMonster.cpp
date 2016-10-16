@@ -12,6 +12,7 @@
 GameObjectMonster::GameObjectMonster()
 {
 	m_sizeEnemy = Point::ZERO;
+	m_visibleSize = Director::getInstance()->getVisibleSize();
 
 	LoadNameEnemies();
 }
@@ -190,9 +191,11 @@ void GameObjectMonster::SpawnerEnemyAirplane(GameScene& scene)
 	int _randTypeAirplane = rand() % m_vecNameEnemyAirplane.size() + 0;
 
 	m_enemyAirplane = new AirplaneEnemyGraphicComponent(m_vecNameEnemyAirplane[_randTypeAirplane]);
-	m_enemyAirplane->setPosition(GetPosition());
+	m_enemyAirplane->setPosition(GetPositionAirplane());
 
 	m_vecComponentEnemyAirplane.push_back(m_enemyAirplane);
+
+	scene.addChild(m_enemyAirplane);
 }
 
 void GameObjectMonster::LoadField()
@@ -248,6 +251,17 @@ cocos2d::Point GameObjectMonster::GetPosition()
 	_position.y = m_vecField[_randPosition].m_Y;
 
 	return _position;
+}
+
+cocos2d::Point GameObjectMonster::GetPositionAirplane()
+{
+	int _randPositionX = m_visibleSize.width - m_enemyAirplane->getBoundingBox().size.width;
+	int _orderTopRand = m_visibleSize.height - (m_enemyAirplane->getBoundingBox().size.height / 2);
+	int _orderBottomRand = m_enemyAirplane->getBoundingBox().size.height * 2;
+
+	int _randPositionY = rand() % _orderTopRand + _orderBottomRand;
+		
+	return Point(_randPositionX, _randPositionY);
 }
 
 bool GameObjectMonster::FreePosition(int indexPosition)
