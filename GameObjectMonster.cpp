@@ -339,6 +339,11 @@ int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 		int _indexEnemy = indexEnemy;
 		int _coinEnemy = m_vecComponentEnemyAirplane[_indexEnemy]->GetValue();
 
+		for (int i = 0; i < m_vecComponentEnemyAirplane[_indexEnemy]->m_vecBullet.size(); i++)
+		{
+			m_vecComponentEnemyAirplane[_indexEnemy]->m_vecBullet[i]->removeFromParentAndCleanup(true);
+		}
+
 		//ReleaseCell(m_vecComponentEnemyAirplane[_indexEnemy]->getPosition());
 		m_vecComponentEnemyAirplane[_indexEnemy]->removeFromParentAndCleanup(true);
 		m_vecComponentEnemyAirplane.erase(m_vecComponentEnemyAirplane.begin() + _indexEnemy);
