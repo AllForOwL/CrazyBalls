@@ -135,7 +135,7 @@ bool GameScene::init()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
-	this->schedule(schedule_selector(GameScene::Spawn),			CNT_TIME_SPAWN);
+	this->schedule(schedule_selector(GameScene::SpawnEnemyMeteor),			CNT_TIME_SPAWN_ENEMY_METEOR);
 	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
 
 	return true;
@@ -166,9 +166,14 @@ void GameScene::update(float dt)
 	}*/
 }
 
-void GameScene::Spawn(float dt)
+void GameScene::SpawnEnemyMeteor(float dt)
 {
-	m_gameObjectMonster->Spawner(*this);
+	m_gameObjectMonster->SpawnerEnemyMeteor(*this);
+}
+
+void GameScene::SpawnEnemyAirplane(float dt)
+{
+	m_gameObjectMonster->SpawnerEnemyAirplane(*this);
 }
 
 void GameScene::SpawnBonus(float dt)

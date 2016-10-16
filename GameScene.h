@@ -23,7 +23,8 @@ public:
 	virtual bool onTouchBegan(cocos2d::Touch*, cocos2d::Event*);
 
 	void update		(float dt);
-	void Spawn		(float dt);
+	void SpawnEnemyMeteor		(float dt);
+	void SpawnEnemyAirplane(float dt);
 	void SpawnBonus	(float dt);
 	
 	void LoadLevel();

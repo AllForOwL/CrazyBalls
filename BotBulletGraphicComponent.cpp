@@ -5,23 +5,19 @@
 #include "constants.h"
 #include "GameObjectMonster.h"
 
-BotBulletGraphicComponent::BotBulletGraphicComponent(int attack, const std::string& typeObject)
-														: m_attack		(attack),
-														  m_typeObject	(typeObject)
+BotBulletGraphicComponent::BotBulletGraphicComponent(int i_ID, int attack, const std::string& typeObject)
+														:	m_ID			(i_ID),
+															m_attack		(attack),
+															m_typeObject	(typeObject)
 {
+	m_visibleSize	= Director::getInstance()->getVisibleSize();
+	m_pointBegin	= Point::ZERO;
+	m_speed			= CNT_SPEED_BULLET;	
+
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
 	physicBody->setDynamic(false);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
-
-	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
-	{
-		this->initWithFile("res/Stones/rock1.png");
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
-	{
-		this->initWithFile("res/Stones/rock2.png");
-	}
 
 	this->setPhysicsBody(physicBody);
 }
@@ -31,17 +27,6 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 	this->m_attack		= bullet.GetAttack();
 	this->m_typeObject	= bullet.GetTypeObject();
 	this->m_position	= cocos2d::Point::ZERO;
-
-	//if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
-	//{
-	//	LoadBulletNormal();
-	//	this->initWithFile(m_strFilename);
-	//}
-	//else if (m_typeObject == CNT_NAME_BOMB)
-	//{
-	//	LoadBomb();
-	//	this->initWithFile(m_strFilename);
-	//}
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
@@ -60,50 +45,64 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 	return m_typeObject;
 }
 
+void BotBulletGraphicComponent::ChangeState(const StateBullet& newState)
+{
+	m_stateBullet = newState;
+}
+
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_objectMonster->m_stateBullet)
+	if (!this->getParent())
 	{
-		case GameObjectMonster::StateBullet::STATE_FIRE:
+		scene.addChild(this);
+		if (this->m_typeObject == CNT_NAME_BULLET_POSITION_TOP)
 		{
-			Vec2 _position = this->getPosition();															
-			this->setPosition(_position.x -= CNT_SPEED_BULLET, _position.y);
-			this->setVisible(true);
-
-			break;
+			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
+				hero.m_graphicComponentHero->getPositionY() + (hero.m_graphicComponentHero->getBoundingBox().size.height / 2)
+								);
+			this->setPosition(m_pointBegin);
+			this->setVisible(false);
 		}
-		case GameObjectMonster::StateBullet::STATE_FIRE_UP:
+		else
 		{
-			Vec2 _position = this->getPosition();
-			Size _visibleSize = Director::getInstance()->getVisibleSize();
+			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
+				hero.m_graphicComponentHero->getPositionY() - (hero.m_graphicComponentHero->getBoundingBox().size.height / 2)
+				);
+			this->setPosition(m_pointBegin);
+			this->setVisible(false);
+		}
+	}
 
-			if (_position.x >= _visibleSize.width / 2)
+	switch (m_stateBullet)
+	{
+		case StateBullet::STATE_FIRE:
+		{
+			if (this->getPositionX() > 0)	// while visible on screen
 			{
-				_position.y += 2;
-				this->setPosition(--_position.x, _position.y);
+				this->setPositionX(this->getPositionX() - m_speed);
 			}
 			else
 			{
-				_position.y -= 2;
-				this->setPosition(--_position.x, _position.y);
+				/*for (int i = 0; i < hero.m_objectMonster->m_vecComponentEnemyAirplane.size(); i++)
+				{
+					if (m_vecGraphicComponentBullet[i]->m_GraphicComponent->GetID() == m_ID)
+					{
+						hero.m_vecGraphicComponentBullet.erase(hero.m_vecGraphicComponentBullet.begin() + i);
+						this->removeAllChildrenWithCleanup(true);
+						this->getPhysicsBody()->removeFromWorld();
+					}
+				}*/
 			}
 
 			break;
 		}
-		case GameObjectMonster::StateBullet::STATE_FIRE_BOMB:
+		case StateBullet::STATE_DEATH:
 		{
-			break;
-		}
-		case GameObjectMonster::StateBullet::STATE_HIT_IN_TARGET:
-		{
-			hero.m_graphicComponentHero->setTag(this->GetAttack());
+			this->getPhysicsBody()->removeFromWorld();
 			this->removeFromParentAndCleanup(true);
-			hero.m_objectMonster->m_vecComponentBullet.pop_back();
 
 			break;
 		}
-		default:
-			break;
 	}
 }
 

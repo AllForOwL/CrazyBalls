@@ -107,10 +107,10 @@ void HeroGraphicComponent::LoadNumberCoinsForTransitionNextLevel()
 
 void HeroGraphicComponent::SpeedHeroSuitablyEnemy(Monster& i_hero)
 {
-	if (i_hero.m_objectMonster->m_vecComponentEnemy.size())
+	if (i_hero.m_objectMonster->m_vecComponentEnemyMeteor.size())
 	{
 		m_getSizeEnemy = true;
-		m_speed_Y = i_hero.m_objectMonster->m_vecComponentEnemy[0]->getBoundingBox().size.height / 2;
+		m_speed_Y = i_hero.m_objectMonster->m_vecComponentEnemyMeteor[0]->getBoundingBox().size.height / 2;
 	}
 }
 

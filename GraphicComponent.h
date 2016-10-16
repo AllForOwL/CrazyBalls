@@ -21,17 +21,20 @@ public:
 		return std::string("");
 	}
 
-	virtual int	GetValue() const
+	virtual int GetValue() const
 	{
-		return 1;
+		int _number = 1;
+		return _number;
 	}
-	virtual int	GetAttack()	const
+	virtual int GetAttack()	const
 	{
-		return 1;
+		int _number = 1;
+		return _number;
 	}
-	virtual int	GetHealth() const
+	virtual int GetHealth() const
 	{
-		return 1;
+		int _number = 1;
+		return _number;
 	}
 	virtual bool Dead(int wounded)
 	{
@@ -55,7 +58,8 @@ public:
 	}
 	virtual int	GetSpeedBullet() const
 	{
-		return 1;
+		int _number = 1;
+		return _number;
 	}
 	virtual void DescreaseQuentityBullet()
 	{
@@ -63,7 +67,8 @@ public:
 	}
 	virtual int	GetQuentityBullet()	const
 	{
-		return 1;
+		int _number = 1;
+		return _number;
 	}
 	virtual void SetTargetPointForBullet(cocos2d::Point point)
 	{
@@ -87,17 +92,22 @@ public:
 	}
 	virtual int GetArmor() const
 	{
-		return 1;
+		int _number = 1;
+		return _number;
 	}
 	virtual int GetID() const
 	{
-		return 1;
+		int _number = 1;
+		return _number;
 	}
 	virtual bool Remove() const
 	{
 		return false;
 	}
+	virtual void CauseDamage(const int& i_numberDamageHealth, const int& i_numberDamageArmor)
+	{
 
+	}
 };
 
 #endif

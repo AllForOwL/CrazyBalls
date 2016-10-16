@@ -1,6 +1,7 @@
 #include "GameObjectMonster.h"
 #include "GameScene.h"
 #include "BreedGraphicComponent.h"
+#include "AirplaneEnemyGraphicComponent.h"
 #include "WeaponGraphicComponent.h"
 #include "BotBulletGraphicComponent.h"
 #include "Monster.h"
@@ -11,6 +12,33 @@
 GameObjectMonster::GameObjectMonster()
 {
 	m_sizeEnemy = Point::ZERO;
+
+	LoadNameEnemies();
+}
+
+void GameObjectMonster::LoadNameEnemies()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		m_vecNameEnemyMeteor.push_back("Rock" + std::to_string(i+1));
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		m_vecNameEnemyAirplane.push_back("black_" + std::to_string(i + 1));
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		m_vecNameEnemyAirplane.push_back("blue_" + std::to_string(i + 1));
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		m_vecNameEnemyAirplane.push_back("green_" + std::to_string(i + 1));
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		m_vecNameEnemyAirplane.push_back("red_" + std::to_string(i + 1));
+	}
 }
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
@@ -19,23 +47,34 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 	{
 		case Monster::StateEnemys::ENEMY_STATE_LIFE:
 		{
-			if (m_vecComponentEnemy.size())
+			if (m_vecComponentEnemyMeteor.size())
 			{
-				for (int i = 0; i < m_vecComponentEnemy.size(); i++)
+				for (int i = 0; i < m_vecComponentEnemyMeteor.size(); i++)
 				{
-					if (m_vecComponentEnemy.size())
+					if (m_vecComponentEnemyMeteor.size())
 					{
-						m_vecComponentEnemy[i]->Update(hero, scene);
+						m_vecComponentEnemyMeteor[i]->Update(hero, scene);
 					}
+				}
+			}
+			if (m_vecComponentEnemyAirplane.size())
+			{
+				for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
+				{
+					m_vecComponentEnemyAirplane[i]->Update(hero, scene);
 				}
 			}
 			break;
 		}
 		case Monster::StateEnemys::ENEMY_STATE_DEATH:
 		{
-			for (int i = 0; i < m_vecComponentEnemy.size(); i++)
+			for (int i = 0; i < m_vecComponentEnemyMeteor.size(); i++)
 			{
-				m_vecComponentEnemy[i]->removeFromParentAndCleanup(true);
+				m_vecComponentEnemyMeteor[i]->removeFromParentAndCleanup(true);
+			}
+			for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
+			{
+				m_vecComponentEnemyAirplane[i]->removeAllChildrenWithCleanup(true);
 			}
 			break;
 		}
@@ -44,7 +83,7 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 	}
 }
 
-void GameObjectMonster::Spawner(GameScene& scene)
+void GameObjectMonster::SpawnerEnemyMeteor(GameScene& scene)
 {
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
@@ -124,26 +163,36 @@ void GameObjectMonster::Spawner(GameScene& scene)
 			break;
 	}
 	
-	m_enemy	= new BreedGraphicComponent(_attackEnemy, _health, _typeObjectEnemy);
+	m_enemyMeteor	= new BreedGraphicComponent(_attackEnemy, _health, _typeObjectEnemy);
 	
-	int _widthEnemy	 = m_enemy->getContentSize().width;
-	int _heightEnemy = m_enemy->getContentSize().height;
+	int _widthEnemy	 = m_enemyMeteor->getContentSize().width;
+	int _heightEnemy = m_enemyMeteor->getContentSize().height;
 
-	m_enemy->setScale(_visibleSize.width / _widthEnemy / 20,
+	m_enemyMeteor->setScale(_visibleSize.width / _widthEnemy / 20,
 					 _visibleSize.height / _heightEnemy / 20);
 
-	m_vecComponentEnemy.push_back(m_enemy);
+	m_vecComponentEnemyMeteor.push_back(m_enemyMeteor);
 
 	if (m_sizeEnemy.width == 0)
 	{
 		LoadField();
 	}
 
-	m_enemy->setPosition(GetPosition());
-	m_enemy->setName(_typeObjectEnemy);
+	m_enemyMeteor->setPosition(GetPosition());
+	m_enemyMeteor->setName(_typeObjectEnemy);
 
-	
-	scene.addChild(m_vecComponentEnemy[m_vecComponentEnemy.size() - 1]);
+	scene.addChild(m_vecComponentEnemyMeteor[m_vecComponentEnemyMeteor.size() - 1]);
+}
+
+void GameObjectMonster::SpawnerEnemyAirplane(GameScene& scene)
+{
+	srand(time(NULL));
+	int _randTypeAirplane = rand() % m_vecNameEnemyAirplane.size() + 0;
+
+	m_enemyAirplane = new AirplaneEnemyGraphicComponent(m_vecNameEnemyAirplane[_randTypeAirplane]);
+	m_enemyAirplane->setPosition(GetPosition());
+
+	m_vecComponentEnemyAirplane.push_back(m_enemyAirplane);
 }
 
 void GameObjectMonster::LoadField()
@@ -156,7 +205,7 @@ void GameObjectMonster::LoadField()
 	std::vector<int> _vecPositionX;
 	std::vector<int> _vecPositionY;
 
-	m_sizeEnemy = m_vecComponentEnemy[0]->getBoundingBox().size;
+	m_sizeEnemy = m_vecComponentEnemyMeteor[0]->getBoundingBox().size;
 
 	int _tempPositionX = _widthField;
 	while (_tempPositionX < _visibleSize.width)
@@ -236,9 +285,9 @@ void GameObjectMonster::ReleaseCell(Point point)
 int GameObjectMonster::GetIndexEnemyForRemove(int tagEnemy) const
 {
 	int _tagEnemy = tagEnemy;
-	for (int i = 0; i < m_vecComponentEnemy.size(); i++)
+	for (int i = 0; i < m_vecComponentEnemyMeteor.size(); i++)
 	{
-		auto body = m_vecComponentEnemy[i]->getPhysicsBody();
+		auto body = m_vecComponentEnemyMeteor[i]->getPhysicsBody();
 		if (body->getTag() == _tagEnemy)
 		{
 			return i;
@@ -248,14 +297,14 @@ int GameObjectMonster::GetIndexEnemyForRemove(int tagEnemy) const
 
 int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 {
-	if (m_vecComponentEnemy.size())
+	if (m_vecComponentEnemyMeteor.size())
 	{
 		int _indexEnemy = indexEnemy;
-		int _coinEnemy = m_vecComponentEnemy[_indexEnemy]->GetValue();
+		int _coinEnemy = m_vecComponentEnemyMeteor[_indexEnemy]->GetValue();
 
-		ReleaseCell(m_vecComponentEnemy[_indexEnemy]->getPosition());
-		m_vecComponentEnemy[_indexEnemy]->removeFromParentAndCleanup(true);
-		m_vecComponentEnemy.erase(m_vecComponentEnemy.begin() + _indexEnemy);
+		ReleaseCell(m_vecComponentEnemyMeteor[_indexEnemy]->getPosition());
+		m_vecComponentEnemyMeteor[_indexEnemy]->removeFromParentAndCleanup(true);
+		m_vecComponentEnemyMeteor.erase(m_vecComponentEnemyMeteor.begin() + _indexEnemy);
 
 		return _coinEnemy;
 	}
@@ -272,7 +321,7 @@ int GameObjectMonster::GetCoinForEnemy() const
 
 int GameObjectMonster::GetDamage(int indexEnemy) const
 {
-	return m_vecComponentEnemy[indexEnemy]->GetAttack();
+	return m_vecComponentEnemyMeteor[indexEnemy]->GetAttack();
 }
 
 GameObjectMonster::~GameObjectMonster()
