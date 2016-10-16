@@ -108,6 +108,7 @@ public:
 		PHYSIC_KILL_HERO
 	};
 
+
 	Monster(
 				GraphicComponent& graphicComponentHero,			GraphicComponent& graphicComponentButtonFire,	GameObjectMonster& objectMonster, 
 				InputComponent& inputComponent,					InputComponent& botInputComponent,

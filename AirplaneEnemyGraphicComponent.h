@@ -43,7 +43,7 @@ public:
 	void CreateBullets();
 	void Move();
 
-private:
+public:
 	int			m_attack;
 	int			m_armor;
 	int			m_health;

@@ -299,9 +299,9 @@ void GameObjectMonster::ReleaseCell(Point point)
 int GameObjectMonster::GetIndexEnemyForRemove(int tagEnemy) const
 {
 	int _tagEnemy = tagEnemy;
-	for (int i = 0; i < m_vecComponentEnemyMeteor.size(); i++)
+	for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
 	{
-		auto body = m_vecComponentEnemyMeteor[i]->getPhysicsBody();
+		auto body = m_vecComponentEnemyAirplane[i]->getPhysicsBody();
 		if (body->getTag() == _tagEnemy)
 		{
 			return i;
@@ -311,14 +311,14 @@ int GameObjectMonster::GetIndexEnemyForRemove(int tagEnemy) const
 
 int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 {
-	if (m_vecComponentEnemyMeteor.size())
+	if (m_vecComponentEnemyAirplane.size())
 	{
 		int _indexEnemy = indexEnemy;
-		int _coinEnemy = m_vecComponentEnemyMeteor[_indexEnemy]->GetValue();
+		int _coinEnemy = m_vecComponentEnemyAirplane[_indexEnemy]->GetValue();
 
-		ReleaseCell(m_vecComponentEnemyMeteor[_indexEnemy]->getPosition());
-		m_vecComponentEnemyMeteor[_indexEnemy]->removeFromParentAndCleanup(true);
-		m_vecComponentEnemyMeteor.erase(m_vecComponentEnemyMeteor.begin() + _indexEnemy);
+		//ReleaseCell(m_vecComponentEnemyAirplane[_indexEnemy]->getPosition());
+		m_vecComponentEnemyAirplane[_indexEnemy]->removeFromParentAndCleanup(true);
+		m_vecComponentEnemyAirplane.erase(m_vecComponentEnemyAirplane.begin() + _indexEnemy);
 
 		return _coinEnemy;
 	}
@@ -335,7 +335,7 @@ int GameObjectMonster::GetCoinForEnemy() const
 
 int GameObjectMonster::GetDamage(int indexEnemy) const
 {
-	return m_vecComponentEnemyMeteor[indexEnemy]->GetAttack();
+	return m_vecComponentEnemyAirplane[indexEnemy]->GetAttack();
 }
 
 GameObjectMonster::~GameObjectMonster()

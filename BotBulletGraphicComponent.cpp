@@ -18,10 +18,14 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int i_ID, int attack, const
 	this->setScale(m_visibleSize.width / this->getContentSize().width / 25,
 		m_visibleSize.height / this->getContentSize().height / 25);
 
+	srand(time(NULL));
+	int _randTag = rand() % 100000 + 0;
+
 	auto physicBody = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBody->setContactTestBitmask(true);
 	physicBody->setDynamic(false);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+	physicBody->setCollisionBitmask(BOT_BULLET_COLLISION_BITMASK);
+	physicBody->setTag(_randTag);
 
 	this->setPhysicsBody(physicBody);
 }
@@ -34,7 +38,7 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+	physicBody->setCollisionBitmask(BOT_BULLET_COLLISION_BITMASK);
 
 	this->setPhysicsBody(physicBody);
 }
@@ -59,22 +63,11 @@ void BotBulletGraphicComponent::ChangeState(const StateBullet& newState)
 	if (!this->getParent())
 	{
 		scene.addChild(this);
-		if (this->m_typeObject == CNT_NAME_BULLET_POSITION_TOP)
-		{
-			m_pointBegin = Point(hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionX() - (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.width  / 2),
-				hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionY() + (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.height / 2)
-								);
-			this->setPosition(m_pointBegin);
-			this->setVisible(false);
-		}
-		else
-		{ 
-			m_pointBegin = Point(hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionX()- (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.width / 2),
-				hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getPositionY() - (hero.m_objectMonster->m_vecComponentEnemyAirplane[0]->getBoundingBox().size.height / 2)
-				);
-			this->setPosition(m_pointBegin);
-			this->setVisible(false);
-		}
+	}
+
+	if (this->getPhysicsBody()->getTag() == -1)
+	{
+		m_stateBullet = StateBullet::STATE_DEATH;
 	}
 
 	switch (m_stateBullet)

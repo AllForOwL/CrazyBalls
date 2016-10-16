@@ -24,7 +24,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack,
 
 	auto physicBodyBullet = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBodyBullet->setContactTestBitmask(true);
-	physicBodyBullet->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+	physicBodyBullet->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyBullet);
 }
 
@@ -37,7 +37,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+	physicBody->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
 
 	this->setPhysicsBody(physicBody);
 }

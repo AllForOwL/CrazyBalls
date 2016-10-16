@@ -29,6 +29,13 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 			{
 				m_vecBullet[i]->Update(hero, scene);
 			}
+			for (int i = 0; i < m_vecBullet.size(); i++)
+			{
+				if (m_vecBullet[i]->getPhysicsBody()->getTag() == -1)
+				{
+					m_vecBullet.erase(m_vecBullet.begin() + i);
+				}
+			}
 			Move();
 
 			break;
@@ -58,10 +65,22 @@ void AirplaneEnemyGraphicComponent::CreateBullets()
 
 	BotBulletGraphicComponent* _bulletTopPosition = new BotBulletGraphicComponent(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
 	_bulletTopPosition->ChangeState(BotBulletGraphicComponent::StateBullet::STATE_FIRE);
+	Point m_pointBegin = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
+		this->getPositionY() + (this->getBoundingBox().size.height / 2)
+		);
+	_bulletTopPosition->setPosition(m_pointBegin);
+	_bulletTopPosition->setVisible(false);
+
 
 	int _IDBottomBullet = rand() % 100000 + 0;
 	BotBulletGraphicComponent* _bulletBottomPosition = new BotBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeState(BotBulletGraphicComponent::StateBullet::STATE_FIRE);
+	m_pointBegin = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
+		this->getPositionY() - (this->getBoundingBox().size.height / 2)
+		);
+	_bulletBottomPosition->setPosition(m_pointBegin);
+	_bulletBottomPosition->setVisible(false);
+
 
 	m_vecBullet.push_back(_bulletTopPosition);
 	m_vecBullet.push_back(_bulletBottomPosition);
@@ -185,6 +204,9 @@ void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_f
 		m_visibleSize.height / this->getContentSize().height / 10);
 	this->setRotation(90.0);
 	this->setVisible(true);
+
+	int _randTagForPhysicCollision = rand() % 100000 + 0;
+	this->setTag(_randTagForPhysicCollision);
 
 	this->m_timeSpawnShot	= i_spawnShot;
 	this->m_attack			= i_attack;
