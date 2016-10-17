@@ -28,8 +28,11 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			hero.m_graphicComponentHero->ChangeCoins(_coinForRemoveEnemy);
 			hero.CheckHeroOnLevelCompete();
 
+			hero.RemoveBullet(m_TagBullet);
+
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
-			m_TagEnemy = 0;
+			m_TagEnemy	= 0;
+			m_TagBullet = 0;
 
 			break;
 		}
@@ -75,14 +78,16 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	}
 	else */if (_a->getCollisionBitmask() == HERO_BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == ENEMY_COLLISION_BITMASK)
 	{
-		m_TagEnemy = _b->getTag();
+		m_TagEnemy	= _b->getTag();
+		m_TagBullet = _a->getTag();
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_ENEMY;
 
 		CCLOG("Collision enemy a");
 	}
 	else if (_a->getCollisionBitmask() == ENEMY_COLLISION_BITMASK && _b->getCollisionBitmask() == HERO_BULLET_COLLISION_BITMASK)
 	{
-		m_TagEnemy = _a->getTag();
+		m_TagEnemy	= _a->getTag();
+		m_TagBullet = _b->getTag();
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_ENEMY;
 
 		CCLOG("Collision enemy b");

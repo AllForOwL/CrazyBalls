@@ -20,12 +20,12 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int i_ID, int attack, const
 
 	srand(time(NULL));
 	int _randTag = rand() % 100000 + 0;
-	this->setTag(_randTag);
 
 	auto physicBody = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBody->setContactTestBitmask(true);
 	physicBody->setDynamic(false);
 	physicBody->setCollisionBitmask(BOT_BULLET_COLLISION_BITMASK);
+	physicBody->setTag(_randTag);
 
 	this->setPhysicsBody(physicBody);
 }

@@ -9,7 +9,7 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 
 	DetermineTypeObject();
 
-	m_stateAirplane = StateAirplane::STATE_REST;
+	m_stateAirplane = StateAirplane::STATE_MOVE;
 
 	this->schedule(schedule_selector(AirplaneEnemyGraphicComponent::SetStateCreateBullets), m_timeSpawnShot);
 }
@@ -190,12 +190,13 @@ void AirplaneEnemyGraphicComponent::DetermineTypeObject()
 	}
 }
 
-void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_filename, const int& i_attack, const int& i_armor, const int& i_health ,const int& i_spawnShot)
+void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_filename, 
+	const int& i_attack, const int& i_armor, const int& i_health ,const int& i_spawnShot)
 {
 	this->initWithFile(i_filename);
 	this->setScale(m_visibleSize.width / this->getContentSize().width / 12,
 		m_visibleSize.height / this->getContentSize().height / 10);
-	this->setRotation(90.0);
+	this->setRotation(-90.0);
 	this->setVisible(true);
 
 	int _randTagForPhysicCollision = rand() % 100000 + 0;
@@ -206,7 +207,7 @@ void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_f
 	this->m_armor			= i_armor;
 	this->m_health			= i_health;
 
-	auto physicBodyEnemy = PhysicsBody::createBox(this->getBoundingBox().size);
+	auto physicBodyEnemy = PhysicsBody::createBox(this->getContentSize());
 	physicBodyEnemy->setContactTestBitmask(true);
 	physicBodyEnemy->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyEnemy);

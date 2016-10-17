@@ -21,10 +21,13 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack,
 	this->setScale(m_visibleSize.width / this->getContentSize().width / 25,
 		m_visibleSize.height / this->getContentSize().height / 25);
 
-
+	srand(time(NULL));
+	int _randTag = rand() % 100000 + 0;
+	
 	auto physicBodyBullet = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBodyBullet->setContactTestBitmask(true);
 	physicBodyBullet->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
+	physicBodyBullet->setTag(_randTag);
 	this->setPhysicsBody(physicBodyBullet);
 }
 
@@ -33,13 +36,16 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	this->m_attack		= bullet.GetAttack();
 	this->m_typeObject	= bullet.GetTypeObject();
 
-	this->m_targetPoint = cocos2d::Point::ZERO;
-
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
-
-	this->setPhysicsBody(physicBody);
+	this->create("res/Bullets/Meteor1.png");
+	
+	srand(time(NULL));
+	int _randTag = rand() % 100000 + 0;
+	
+	auto physicBodyBullet = PhysicsBody::createBox(this->getBoundingBox().size);
+	physicBodyBullet->setContactTestBitmask(true);
+	physicBodyBullet->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
+	physicBodyBullet->setTag(_randTag);
+	this->setPhysicsBody(physicBodyBullet);
 }
 
 /*virtual*/ int PlayerBulletGraphicComponent::GetAttack() const
@@ -92,7 +98,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			{
 				for (int i = 0; i < hero.m_vecGraphicComponentBullet.size(); i++)
 				{
-					if (hero.m_vecGraphicComponentBullet[i]->m_GraphicComponent->GetID() == m_ID)
+					if (hero.m_vecGraphicComponentBullet[i]->GetID() == m_ID)
 					{
 						hero.m_vecGraphicComponentBullet.erase(hero.m_vecGraphicComponentBullet.begin() + i);
 						this->removeAllChildrenWithCleanup(true);

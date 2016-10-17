@@ -4,6 +4,8 @@
 #include "Monster.h"
 #include "GameScene.h"
 
+const int CNT_TIME_DELAY_CREATE_BULLET = 2;
+
 PlayerInputComponent::PlayerInputComponent()
 {
 	m_stateInput = StateInput::STATE_REST;
@@ -52,6 +54,7 @@ PlayerInputComponent::PlayerInputComponent()
 /*virtual*/ bool PlayerInputComponent::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 	m_locationTouch = touch->getLocation();
+
 	m_stateInput = StateInput::STATE_CHECK_INPUT_FOR_FIRE;
 
 	return true;

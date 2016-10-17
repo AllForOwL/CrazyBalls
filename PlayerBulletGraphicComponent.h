@@ -48,9 +48,7 @@ public:
 public:
 	StateBullet		m_stateBullet;
 	Size			m_visibleSize;
-	int				m_ID;
-	std::map<int, ComponentHero*>::iterator m_iterator;
-				
+	int				m_ID;				
 
 	int m_speed;
 	cocos2d::Point	m_pointBegin;

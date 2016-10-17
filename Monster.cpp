@@ -33,6 +33,11 @@ Monster::Monster(
 
 void Monster::CreateBulletsForFire()
 {
+	if (m_vecGraphicComponentBullet.size())
+	{
+		return;
+	}
+
 	srand(time(NULL));
 	int _IDTopBullet = m_counterID;
 
@@ -44,13 +49,29 @@ void Monster::CreateBulletsForFire()
 	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
-	ComponentHero* _bulletTop	 = new ComponentHero(_bulletTopPosition, true);
-	ComponentHero* _bulletBottom = new ComponentHero(_bulletBottomPosition, true);
 
 	int _sizeMap = m_vecGraphicComponentBullet.size();
 
-	m_vecGraphicComponentBullet.push_back(_bulletTop);
-	m_vecGraphicComponentBullet.push_back(_bulletBottom);
+	m_vecGraphicComponentBullet.push_back(_bulletTopPosition);
+	m_vecGraphicComponentBullet.push_back(_bulletBottomPosition);
+}
+
+void Monster::RemoveBullet(int i_tagBullet)
+{
+	for (int i = 0; i < m_vecGraphicComponentBullet.size(); i++)
+	{
+		auto body = m_vecGraphicComponentBullet[i]->getPhysicsBody();
+		if (body->getTag() == i_tagBullet)
+		{
+			m_vecGraphicComponentBullet[i]->removeAllChildrenWithCleanup(true);
+			m_vecGraphicComponentBullet[i]->getPhysicsBody()->removeFromWorld();
+
+			m_vecGraphicComponentBullet.erase(m_vecGraphicComponentBullet.begin() + i);
+
+			break;
+			break;
+		}
+	}
 }
 
 void Monster::Update(GameScene& scene)
@@ -64,9 +85,8 @@ void Monster::Update(GameScene& scene)
 
 	for (int i = 0; i < m_vecGraphicComponentBullet.size(); i++)
 	{
-		m_vecGraphicComponentBullet[i]->m_GraphicComponent->Update(*this, scene);
+		m_vecGraphicComponentBullet[i]->Update(*this, scene);
 	}
-
 }
 
 void Monster::CheckHeroOnLevelCompete()
