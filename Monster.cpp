@@ -49,7 +49,6 @@ void Monster::CreateBulletsForFire()
 	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
-
 	int _sizeMap = m_vecGraphicComponentBullet.size();
 
 	m_vecGraphicComponentBullet.push_back(_bulletTopPosition);
@@ -102,7 +101,6 @@ void Monster::CauseDamage(int damage)
 	if (m_graphicComponentHero->Dead(damage))
 	{
 		m_stateHero		= Monster::StateHero::HERO_STATE_DEATH;
-//		m_stateBullet	= Monster::StateBullet::BULLET_STATE_DEATH;
 		m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEATH;
 		m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_DEATH;
 		m_stateBonus	= Monster::StateBonus::BONUS_DEATH;

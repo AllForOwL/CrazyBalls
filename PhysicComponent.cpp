@@ -22,11 +22,14 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 	switch (m_statePhysic)
 	{
 		case StatePhysic::STATE_WOUNDED_ENEMY:	// when bullet hit in enemy
-		{		
+		{
+			int _coinForEnemy = hero.m_objectMonster->GetCoinForEnemy(m_TagBullet);
+			hero.m_graphicComponentHero->ChangeCoins(_coinForEnemy);
+		
 			int _indexEnemy			= hero.m_objectMonster->GetIndexEnemyForRemove(m_TagEnemy);
-			int _coinForRemoveEnemy = hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
-			hero.m_graphicComponentHero->ChangeCoins(_coinForRemoveEnemy);
-			hero.CheckHeroOnLevelCompete();
+			int _temp = hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
+
+			//hero.CheckHeroOnLevelCompete();
 
 			hero.RemoveBullet(m_TagBullet);
 

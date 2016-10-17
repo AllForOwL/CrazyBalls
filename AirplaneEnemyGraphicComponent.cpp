@@ -200,8 +200,7 @@ void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_f
 	this->setVisible(true);
 
 	int _randTagForPhysicCollision = rand() % 100000 + 0;
-	this->setTag(_randTagForPhysicCollision);
-
+	
 	this->m_timeSpawnShot	= i_spawnShot;
 	this->m_attack			= i_attack;
 	this->m_armor			= i_armor;
@@ -210,6 +209,7 @@ void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_f
 	auto physicBodyEnemy = PhysicsBody::createBox(this->getContentSize());
 	physicBodyEnemy->setContactTestBitmask(true);
 	physicBodyEnemy->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
+	physicBodyEnemy->setTag(_randTagForPhysicCollision);
 	this->setPhysicsBody(physicBodyEnemy);
 }
 

@@ -53,7 +53,7 @@ public:
 	void RemoveBullet(int tagEnemy);
 	int GetIndexEnemyForRemove	(int tagEnemy) const;
 	int RemoveAndCleanEnemy		(int tagEnemy);
-	int GetCoinForEnemy() const;
+	int GetCoinForEnemy			(int i_tagBullet) const;
 	int GetDamage				(int indexEnemy) const;
 
 	void LoadNameEnemies();

@@ -9,6 +9,11 @@
 #include "constants.h"
 #include <time.h>      
 
+const int CNT_COIN_FOR_ENEMY_BLACK	= 50;
+const int CNT_COIN_FOR_ENEMY_BLUE	= 100;
+const int CNT_COIN_FOR_ENEMY_GREEN	= 150;
+const int CNT_COIN_FOR_ENEMY_RED	= 200;
+
 GameObjectMonster::GameObjectMonster()
 {
 	m_sizeEnemy = Point::ZERO;
@@ -355,9 +360,43 @@ int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 	}
 }
 
-int GameObjectMonster::GetCoinForEnemy() const
+int GameObjectMonster::GetCoinForEnemy(int i_tagBullet) const
 {
-	return m_coinForEnemy;
+	int _quentityAirplane = 0;
+	for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
+	{
+		for (int j = 0; j < m_vecComponentEnemyAirplane[i]->m_vecBullet.size(); j++)
+		{
+			auto body = m_vecComponentEnemyAirplane[i]->m_vecBullet[j]->getPhysicsBody();
+			if (body->getTag() == i_tagBullet)
+			{
+				_quentityAirplane = i;
+
+				break;
+				break;
+			}
+		}
+	}
+
+	std::string _strTypeEnemy = m_vecComponentEnemyAirplane[_quentityAirplane]->GetTypeObject();
+	std::string::size_type _findStr;
+
+	if ((_findStr = _strTypeEnemy.find("black")) != std::string::npos)
+	{
+		return CNT_COIN_FOR_ENEMY_BLACK;
+	}
+	else if ((_findStr = _strTypeEnemy.find("blue")) != std::string::npos)
+	{
+		return CNT_COIN_FOR_ENEMY_BLUE;
+	} 
+	else if ((_findStr = _strTypeEnemy.find("green")) != std::string::npos)
+	{
+		return CNT_COIN_FOR_ENEMY_GREEN;
+	}
+	else if ((_findStr = _strTypeEnemy.find("red")) != std::string::npos)
+	{
+		return CNT_COIN_FOR_ENEMY_RED;
+	}
 }
 
 int GameObjectMonster::GetDamage(int indexEnemy) const

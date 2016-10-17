@@ -4,8 +4,6 @@
 #include "Monster.h"
 #include "GameScene.h"
 
-const int CNT_TIME_DELAY_CREATE_BULLET = 2;
-
 PlayerInputComponent::PlayerInputComponent()
 {
 	m_stateInput = StateInput::STATE_REST;
