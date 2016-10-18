@@ -5,8 +5,6 @@
 #include "constants.h"
 #include "GameObjectMonster.h"
 
-//const int CNT_SPEED_BULLET = 8;
-
 PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack, const std::string& typeObject)
 																			:	m_ID			(i_ID),
 																				m_attack		(attack),
@@ -26,6 +24,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack,
 	
 	auto physicBodyBullet = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBodyBullet->setContactTestBitmask(true);
+	physicBodyBullet->setDynamic(false);
 	physicBodyBullet->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
 	physicBodyBullet->setTag(_randTag);
 	this->setPhysicsBody(physicBodyBullet);

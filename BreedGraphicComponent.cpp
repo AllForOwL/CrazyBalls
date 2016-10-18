@@ -27,45 +27,46 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 
 	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
 	{
-		SetPropertiesEnemy("res/Stones/rock1.png", CNT_TIME_SHOT_STONE_ROCK_1, 1, 5);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big1.png", CNT_TIME_SHOT_STONE_ROCK_1, 1, 5);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
 	{
-		SetPropertiesEnemy("res/Stones/rock2.png", CNT_TIME_SHOT_STONE_ROCK_2, 2, 10);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big2.png", CNT_TIME_SHOT_STONE_ROCK_2, 2, 10);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_3)
 	{
-		SetPropertiesEnemy("res/Stones/rock3.png", CNT_TIME_SHOT_STONE_ROCK_3, 3, 15);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_3, 3, 15);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_4)
 	{
-		SetPropertiesEnemy("res/Stones/rock4.png", CNT_TIME_SHOT_STONE_ROCK_4, 4, 20);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_4, 4, 20);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_5)
 	{
-		SetPropertiesEnemy("res/Stones/rock5.png", CNT_TIME_SHOT_STONE_ROCK_5, 5, 25);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_5, 5, 25);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_6)
 	{
-		SetPropertiesEnemy("res/Stones/rock6.png", CNT_TIME_SHOT_STONE_ROCK_6, 6, 5);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_6, 6, 5);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_7)
 	{
-		SetPropertiesEnemy("res/Stones/rock7.png", CNT_TIME_SHOT_STONE_ROCK_7, 2, 10);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_7, 2, 10);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_8)
 	{
-		SetPropertiesEnemy("res/Stones/rock8.png", CNT_TIME_SHOT_STONE_ROCK_8, 3, 15);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_8, 3, 15);
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_9)
 	{
-		SetPropertiesEnemy("res/Stones/rock9.png", CNT_TIME_SHOT_STONE_ROCK_9, 4, 25);
+		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_9, 4, 25);
 	}
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
 	physicsBody->setRotationEnable(true);
+	physicsBody->setDynamic(false);
 
 	srand(time(NULL));
 	physicsBody->setTag(rand() % 1000000 + 1);
@@ -274,6 +275,7 @@ void BreedGraphicComponent::Fire(Point i_position)
 void BreedGraphicComponent::Move()
 {
 	this->setPositionX(this->getPositionX() - m_SpeedMove);
+	//this->setRotation(this->getRotation() + 5.0);
 }
 
 void BreedGraphicComponent::Wounded()

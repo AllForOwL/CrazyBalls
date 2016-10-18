@@ -208,6 +208,7 @@ void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_f
 
 	auto physicBodyEnemy = PhysicsBody::createBox(this->getContentSize());
 	physicBodyEnemy->setContactTestBitmask(true);
+	physicBodyEnemy->setDynamic(false);
 	physicBodyEnemy->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicBodyEnemy->setTag(_randTagForPhysicCollision);
 	this->setPhysicsBody(physicBodyEnemy);

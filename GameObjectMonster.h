@@ -50,11 +50,13 @@ public:
 	bool FreePosition			(int indexPosition);
 	void ReleaseCell			(Point point);
 
-	void RemoveBullet(int tagEnemy);
+	void RemoveBullet			(int tagEnemy);
 	int GetIndexEnemyForRemove	(int tagEnemy) const;
 	int RemoveAndCleanEnemy		(int tagEnemy);
 	int GetCoinForEnemy			(int i_tagBullet) const;
 	int GetDamage				(int indexEnemy) const;
+
+	int GetParentBullet(int i_tagBullet) const;
 
 	void LoadNameEnemies();
 
@@ -83,8 +85,6 @@ public:
 	int					m_coinForEnemy;
 	Size				m_visibleSize;
 };
-
-
 // Add vector for bullet, weapon enemy
 
 #endif

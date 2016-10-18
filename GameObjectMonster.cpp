@@ -341,8 +341,8 @@ int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 {
 	if (m_vecComponentEnemyAirplane.size())
 	{
-		int _indexEnemy = indexEnemy;
-		int _coinEnemy = m_vecComponentEnemyAirplane[_indexEnemy]->GetValue();
+		int _indexEnemy				= indexEnemy;
+		std::string _strTypeEnemy	= m_vecComponentEnemyAirplane[_indexEnemy]->GetTypeObject();
 
 		for (int i = 0; i < m_vecComponentEnemyAirplane[_indexEnemy]->m_vecBullet.size(); i++)
 		{
@@ -352,7 +352,24 @@ int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 		m_vecComponentEnemyAirplane[_indexEnemy]->removeFromParentAndCleanup(true);
 		m_vecComponentEnemyAirplane.erase(m_vecComponentEnemyAirplane.begin() + _indexEnemy);
 
-		return _coinEnemy;
+		std::string::size_type _findStr;
+
+		if ((_findStr = _strTypeEnemy.find("black")) != std::string::npos)
+		{
+			return CNT_COIN_FOR_ENEMY_BLACK;
+		}
+		else if ((_findStr = _strTypeEnemy.find("blue")) != std::string::npos)
+		{
+			return CNT_COIN_FOR_ENEMY_BLUE;
+		}
+		else if ((_findStr = _strTypeEnemy.find("green")) != std::string::npos)
+		{
+			return CNT_COIN_FOR_ENEMY_GREEN;
+		}
+		else if ((_findStr = _strTypeEnemy.find("red")) != std::string::npos)
+		{
+			return CNT_COIN_FOR_ENEMY_RED;
+		}
 	}
 	else
 	{
@@ -360,9 +377,8 @@ int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 	}
 }
 
-int GameObjectMonster::GetCoinForEnemy(int i_tagBullet) const
+int GameObjectMonster::GetParentBullet(int i_tagBullet) const
 {
-	int _quentityAirplane = 0;
 	for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
 	{
 		for (int j = 0; j < m_vecComponentEnemyAirplane[i]->m_vecBullet.size(); j++)
@@ -370,13 +386,15 @@ int GameObjectMonster::GetCoinForEnemy(int i_tagBullet) const
 			auto body = m_vecComponentEnemyAirplane[i]->m_vecBullet[j]->getPhysicsBody();
 			if (body->getTag() == i_tagBullet)
 			{
-				_quentityAirplane = i;
-
-				break;
-				break;
+				return i;
 			}
 		}
 	}
+}
+
+int GameObjectMonster::GetCoinForEnemy(int i_tagBullet) const
+{
+	int _quentityAirplane = GetParentBullet(i_tagBullet);
 
 	std::string _strTypeEnemy = m_vecComponentEnemyAirplane[_quentityAirplane]->GetTypeObject();
 	std::string::size_type _findStr;

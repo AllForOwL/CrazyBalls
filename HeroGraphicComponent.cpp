@@ -47,6 +47,7 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 
 	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
 	physicBodyHero->setContactTestBitmask(true);
+	physicBodyHero->setDynamic(false);
 	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyHero);
 }
@@ -72,7 +73,7 @@ HeroGraphicComponent::HeroGraphicComponent(HeroGraphicComponent& heroGraphicComp
 	this->initWithFile(m_vecSpritesFall[m_countSpriteInVectorFall]);
 
 	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
-//	physicBodyHero->setDynamic(false);
+	physicBodyHero->setDynamic(false);
 	physicBodyHero->setContactTestBitmask(true);
 	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyHero);
