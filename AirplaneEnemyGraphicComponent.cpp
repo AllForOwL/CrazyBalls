@@ -34,11 +34,11 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 		{
 			for (int i = 0; i < m_vecBullet.size(); i++)
 			{
-				if (m_vecBullet[i]->getPositionX() > m_visibleSize.width)
+				if (m_vecBullet[i]->getPositionX() < 0)
 				{
 					m_vecBullet[i]->removeFromParentAndCleanup(true);
-					m_vecBullet.erase(m_vecBullet.begin() + i);
 					delete m_vecBullet[i];
+					m_vecBullet.erase(m_vecBullet.begin() + i);
 				}
 				else
 				{
