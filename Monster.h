@@ -74,9 +74,12 @@ public:
 
 
 	Monster(
-				GraphicComponent& graphicComponentHero,			GraphicComponent& graphicComponentButtonFire,	GameObjectMonster& objectMonster, 
-				InputComponent& inputComponent,					InputComponent& botInputComponent,
-				PhysicComponent& physicComponent
+			GraphicComponent& graphicComponentHero, 
+			GraphicComponent& graphicComponentButtonFire,
+			GameObjectMonster& objectMonster,
+			InputComponent& inputComponent,
+			InputComponent& botInputComponent,
+			PhysicComponent& physicComponent
 			);
 
 	virtual void Update(GameScene& scene);
@@ -100,12 +103,12 @@ public:
 	~Monster();
 
 public:
-	std::shared_ptr<GraphicComponent>	m_graphicComponentHero;
-	std::shared_ptr<GraphicComponent>	m_graphicComponentButtonFire;
-	std::shared_ptr<GameObjectMonster>	m_objectMonster;
-	std::shared_ptr<InputComponent>		m_inputComponentHero;
-	std::shared_ptr<InputComponent>		m_botInputComponent;
-	std::shared_ptr<PhysicComponent>	m_physicComponent;
+	GraphicComponent*	m_graphicComponentHero;
+	GraphicComponent*	m_graphicComponentButtonFire;
+	GameObjectMonster*	m_objectMonster;
+	InputComponent*		m_inputComponentHero;
+	InputComponent*		m_botInputComponent;
+	PhysicComponent*	m_physicComponent;
 	StateHero		m_stateHero;
 	StateWeapon		m_stateWeapon;
 	StatePhysic		m_statePhysic;
@@ -113,7 +116,7 @@ public:
 	StateBonus		m_stateBonus;
 	StateButtonFire	m_stateButtonFire;
 
-	std::vector<std::shared_ptr<PlayerBulletGraphicComponent>> m_vecGraphicComponentBullet;
+	std::vector<PlayerBulletGraphicComponent*> m_vecGraphicComponentBullet;
 	
 	int m_counterID;
 

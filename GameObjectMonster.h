@@ -66,8 +66,8 @@ public:
 	std::vector<GraphicComponent*>	m_vecComponentEnemyMeteor;
 	GraphicComponent*				m_enemyMeteor;
 
-	std::vector<std::shared_ptr<AirplaneEnemyGraphicComponent>>	m_vecComponentEnemyAirplane;
-	std::shared_ptr<AirplaneEnemyGraphicComponent>				m_enemyAirplane;
+	std::vector<AirplaneEnemyGraphicComponent*>	m_vecComponentEnemyAirplane;
+	AirplaneEnemyGraphicComponent*				m_enemyAirplane;
 
 	std::vector<GraphicComponent*>	m_vecComponentWeapon;
 	GraphicComponent*				m_weapon;

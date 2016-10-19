@@ -27,7 +27,7 @@ BonusGraphicComponent::BonusGraphicComponent()
 				  );
 	this->setPosition(Point(500, 500));
 
-	this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.2);
+	//this->schedule(schedule_selector(BonusGraphicComponent::ShowBonusAnimation), 0.2);
 
 	auto physicBodyBonus = PhysicsBody::createBox(this->getContentSize());
 	physicBodyBonus->setContactTestBitmask(true);

@@ -54,6 +54,6 @@ public:
 	int				m_timeSpawnShot;
 	StateAirplane	m_stateAirplane;
 
-	std::vector<std::shared_ptr<BotBulletGraphicComponent>> m_vecBullet;
+	std::vector<BotBulletGraphicComponent*> m_vecBullet;
 };
 #endif
