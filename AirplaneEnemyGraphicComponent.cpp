@@ -1,6 +1,8 @@
+#include <iostream>
 #include "AirplaneEnemyGraphicComponent.h"
 #include "BotBulletGraphicComponent.h"
 #include "constants.h"
+#include <GameScene.h>
 
 AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& i_typeObject)
 																: m_typeObject(i_typeObject)
@@ -16,6 +18,11 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 
 /*virtual*/ void AirplaneEnemyGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	if (!this->getParent())
+	{
+		scene.addChild(this);
+	}
+
 	switch (m_stateAirplane)
 	{
 		case StateAirplane::STATE_CREATE_BULLETS:
@@ -56,7 +63,7 @@ void AirplaneEnemyGraphicComponent::CreateBullets()
 	srand(time(NULL));
 	int _IDTopBullet = rand() % 100000 + 0;
 
-	BotBulletGraphicComponent* _bulletTopPosition = new BotBulletGraphicComponent(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
+	std::shared_ptr<BotBulletGraphicComponent> _bulletTopPosition = std::make_shared<BotBulletGraphicComponent>(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
 	_bulletTopPosition->ChangeState(BotBulletGraphicComponent::StateBullet::STATE_FIRE);
 	Point m_pointBegin = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
 		this->getPositionY() + (this->getBoundingBox().size.height / 2)
@@ -66,7 +73,7 @@ void AirplaneEnemyGraphicComponent::CreateBullets()
 
 
 	int _IDBottomBullet = rand() % 100000 + 0;
-	BotBulletGraphicComponent* _bulletBottomPosition = new BotBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
+	std::shared_ptr<BotBulletGraphicComponent> _bulletBottomPosition = std::make_shared<BotBulletGraphicComponent>(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeState(BotBulletGraphicComponent::StateBullet::STATE_FIRE);
 	m_pointBegin = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
 		this->getPositionY() - (this->getBoundingBox().size.height / 2)
@@ -245,5 +252,10 @@ std::string AirplaneEnemyGraphicComponent::GetTypeObject() const
 {
 	m_health	-= i_numberDamageHealth;
 	m_armor		-= i_numberDamageArmor;
+}
+
+AirplaneEnemyGraphicComponent::~AirplaneEnemyGraphicComponent()
+{
+	CCLOG("destructor airplanes");
 }
 

@@ -26,6 +26,7 @@ public:
 
 	AirplaneEnemyGraphicComponent(const std::string& i_typeObject);
 	AirplaneEnemyGraphicComponent(const AirplaneEnemyGraphicComponent& copyObject);
+	~AirplaneEnemyGraphicComponent();
 
 	virtual void Update(Monster& hero, GameScene& scene);
 
@@ -53,6 +54,6 @@ public:
 	int				m_timeSpawnShot;
 	StateAirplane	m_stateAirplane;
 
-	std::vector<BotBulletGraphicComponent*> m_vecBullet;
+	std::vector<std::shared_ptr<BotBulletGraphicComponent>> m_vecBullet;
 };
 #endif

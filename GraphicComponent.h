@@ -14,7 +14,10 @@ class GraphicComponent : public cocos2d::Sprite
 {
 public:
 	virtual void Update(Monster& hero, GameScene& scene)  = 0;
-	virtual ~GraphicComponent() {};
+	virtual ~GraphicComponent() 
+	{ 
+		CCLOG("destructor graphiccomponent"); 
+	};
 
 	virtual std::string GetTypeObject()const
 	{

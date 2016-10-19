@@ -263,27 +263,10 @@ bool BonusGraphicComponent::StopShowSuperBonus()
 
 /*virtual*/ void BonusGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateBonus)
+	if (!this->getParent())
 	{
-		case Monster::StateBonus::SUPER_BONUS:
-		{
-			if (StopShowSuperBonus())
-			{
-				hero.m_stateBonus = Monster::StateBonus::BONUS_REST;
-			}
-			break;
-		}
-		case Monster::StateBonus::BONUS_DEATH:
-		{
-			this->removeFromParentAndCleanup(true);
-
-			break;
-		}
-	default:
-		break;
+		scene.addChild(this);
 	}
-
-	return;
 }
 
 /*virtual*/ std::string BonusGraphicComponent::GetTypeObject() const
@@ -305,7 +288,7 @@ void BonusGraphicComponent::HideObject()
 
 BonusGraphicComponent::~BonusGraphicComponent()
 {
-
+	CCLOG("destructor bonus");
 }
 
 // ***Bonus element*** //

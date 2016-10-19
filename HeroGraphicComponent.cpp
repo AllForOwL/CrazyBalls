@@ -250,6 +250,11 @@ void HeroGraphicComponent::GoToNextLevel(Monster& i_hero)
 
 /*virtual*/ void HeroGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	if (!this->getParent())
+	{
+		scene.addChild(this);
+	}
+
 	if (!m_getSizeEnemy)
 	{
 		SpeedHeroSuitablyEnemy(hero);
@@ -374,7 +379,7 @@ void HeroGraphicComponent::GoToNextLevel(Monster& i_hero)
 
 HeroGraphicComponent::~HeroGraphicComponent()
 {
-
+	CCLOG("destructor herographic");
 }
 
 /*  GraphicComponent	- тільки малює спрайти 

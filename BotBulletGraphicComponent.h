@@ -28,7 +28,7 @@ public:
 	void LoadBulletNormal();
 	void LoadBomb();
 
-	void ChangeState(const StateBullet& newState);
+	void ChangeState(const StateBullet newState);
 
 	~BotBulletGraphicComponent();
 

@@ -24,6 +24,11 @@ ButtonGraphicComponent::ButtonGraphicComponent()
 
 /*virtual*/ void ButtonGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	if (!this->getParent())
+	{
+		scene.addChild(this);
+	}
+
 	switch (hero.m_stateButtonFire)
 	{
 		case Monster::StateButtonFire::BUTTON_STATE_FIRE:
@@ -43,5 +48,5 @@ ButtonGraphicComponent::ButtonGraphicComponent()
 
 ButtonGraphicComponent::~ButtonGraphicComponent()
 {
-
+	CCLOG("destructor buttongraphic");
 }

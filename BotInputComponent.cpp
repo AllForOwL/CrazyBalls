@@ -14,5 +14,5 @@ BotInputComponent::BotInputComponent()
 
 BotInputComponent::~BotInputComponent()
 {
-
+	CCLOG("destructor botinput");
 }

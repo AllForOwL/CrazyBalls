@@ -190,7 +190,7 @@ void WeaponGraphicComponent::SetPropertiesWeapon(const int& i_typeObject, const 
 
 WeaponGraphicComponent::~WeaponGraphicComponent()
 {
-
+	CCLOG("destructor weapongraphic");
 }
 
 /** List tasks on 15:10:2016**/

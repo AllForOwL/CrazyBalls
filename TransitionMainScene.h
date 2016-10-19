@@ -10,6 +10,7 @@ class TransitionMainScene : public cocos2d::Layer
 public:
 	static cocos2d::Scene *createScene(int coin, int life, std::vector<int>& vecWeapon);
 	virtual bool init();
+	~TransitionMainScene();
 
 	virtual bool onTouchBegan(cocos2d::Touch*, cocos2d::Event*);
 

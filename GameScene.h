@@ -20,8 +20,6 @@ public:
 	static cocos2d::Scene *createScene(bool nextLevel, int coin, int life, std::vector<int>& vecNameWeapon);
 	virtual bool init();
 	
-	virtual bool onTouchBegan(cocos2d::Touch*, cocos2d::Event*);
-
 	void update		(float dt);
 	void SpawnEnemyMeteor		(float dt);
 	void SpawnEnemyAirplane(float dt);
@@ -43,24 +41,24 @@ public:
 		m_sceneWorld = world;
 	}
 	
-	static int				m_level;
-	static int				m_coin;
-	static int				m_life;
-	static std::vector<int> m_vecNameWeapon;
-	GameLayer*				m_gameLayer;
-	Monster*				m_hero;
-	GraphicComponent*		m_graphicComponentHero;
-	GraphicComponent*		m_graphicComponentWeapon;
-	GraphicComponent*		m_graphicComponentButtonFire;
-	InputComponent*			m_inputComponent;
-	GameObjectMonster*		m_gameObjectMonster;
-	GraphicComponent*		m_objectMonster;
-	InputComponent*			m_botInputComponent;
-	PhysicComponent*		m_physicComponent;
-	BonusGraphicComponent*	m_bonusGraphicComponent;
+	static int					m_level;
+	static int					m_coin;
+	static int					m_life;
+	static std::vector<int>		m_vecNameWeapon;
+
+	GameLayer*					m_gameLayer;
+	std::shared_ptr<Monster>	m_hero;
+	std::shared_ptr<GraphicComponent>	m_graphicComponentHero;
+	std::shared_ptr<GraphicComponent>	m_graphicComponentWeapon;
+	std::shared_ptr<GraphicComponent>	m_graphicComponentButtonFire;
+	std::shared_ptr<InputComponent>		m_inputComponent;
+	std::shared_ptr<GameObjectMonster>	m_gameObjectMonster;
+	std::shared_ptr<GraphicComponent>	m_objectMonster;
+	std::shared_ptr<InputComponent>		m_botInputComponent;
+	std::shared_ptr<PhysicComponent>	m_physicComponent;
+	std::shared_ptr<BonusGraphicComponent>		m_bonusGraphicComponent;
 
 	std::vector<std::string>	m_vecNameBackground;
-//	cocos2d::Sprite*			m_background;
 	cocos2d::Sprite*			m_btnFire;
 	float						m_widthBackground;
 	int							m_countLevel;

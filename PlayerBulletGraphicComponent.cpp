@@ -5,8 +5,6 @@
 #include "constants.h"
 #include "GameObjectMonster.h"
 
-//const int CNT_SPEED_BULLET = 8;
-
 PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack, const std::string& typeObject)
 																			:	m_ID			(i_ID),
 																				m_attack		(attack),
@@ -90,28 +88,12 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	{
 		case StateBullet::BULLET_STATE_FIRE:
 		{
-			if (this->getPositionX() < m_visibleSize.width)	// while visible on screen
-			{
-				this->setPositionX(this->getPositionX() + m_speed);
-			}
-			else
-			{
-				for (int i = 0; i < hero.m_vecGraphicComponentBullet.size(); i++)
-				{
-					if (hero.m_vecGraphicComponentBullet[i]->GetID() == m_ID)
-					{
-						hero.m_vecGraphicComponentBullet.erase(hero.m_vecGraphicComponentBullet.begin() + i);
-						this->removeAllChildrenWithCleanup(true);
-						this->getPhysicsBody()->removeFromWorld();
-					}
-				}
-			}
+			this->setPositionX(this->getPositionX() + m_speed);
 
 			break;
 		}
 		case StateBullet::BULLET_STATE_DEATH:
 		{
-			this->getPhysicsBody()->removeFromWorld();
 			this->removeFromParentAndCleanup(true);
 
 			break;
@@ -158,5 +140,5 @@ void PlayerBulletGraphicComponent::ChangeStateBullet(const StateBullet& newState
 
 PlayerBulletGraphicComponent::~PlayerBulletGraphicComponent()
 {
-
+	CCLOG("destructor playerbullet");
 }

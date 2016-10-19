@@ -12,8 +12,8 @@
 
 Monster::Monster(
 				GraphicComponent& graphicComponentHero,			GraphicComponent& graphicComponentButtonFire,	
-				GameObjectMonster& objectMonster,				InputComponent& inputComponent,					InputComponent& botInputComponent,
-				PhysicComponent& physicComponent
+				GameObjectMonster& objectMonster,				InputComponent& inputComponent,					
+				InputComponent& botInputComponent,				PhysicComponent& physicComponent
 				) 
 							:	m_graphicComponentHero		(&graphicComponentHero),
 								m_graphicComponentButtonFire(&graphicComponentButtonFire),
@@ -29,6 +29,7 @@ Monster::Monster(
 	m_stateBonus	= Monster::StateBonus::BONUS_WEAPON;
 
 	m_counterID = 0;
+	m_visibleSize = Director::getInstance()->getVisibleSize();
 }
 
 void Monster::CreateBulletsForFire()
@@ -41,12 +42,12 @@ void Monster::CreateBulletsForFire()
 	srand(time(NULL));
 	int _IDTopBullet = m_counterID;
 
-	PlayerBulletGraphicComponent* _bulletTopPosition = new PlayerBulletGraphicComponent(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
+	std::shared_ptr<PlayerBulletGraphicComponent> _bulletTopPosition = std::make_shared<PlayerBulletGraphicComponent>(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
 	_bulletTopPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
 	int _IDBottomBullet = ++m_counterID;
 	++m_counterID;
-	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
+	std::shared_ptr<PlayerBulletGraphicComponent> _bulletBottomPosition = std::make_shared<PlayerBulletGraphicComponent>(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
 	int _sizeMap = m_vecGraphicComponentBullet.size();
@@ -62,8 +63,7 @@ void Monster::RemoveBullet(int i_tagBullet)
 		auto body = m_vecGraphicComponentBullet[i]->getPhysicsBody();
 		if (body->getTag() == i_tagBullet)
 		{
-			m_vecGraphicComponentBullet[i]->removeAllChildrenWithCleanup(true);
-			m_vecGraphicComponentBullet[i]->getPhysicsBody()->removeFromWorld();
+			m_vecGraphicComponentBullet[i]->removeFromParentAndCleanup(true);
 
 			m_vecGraphicComponentBullet.erase(m_vecGraphicComponentBullet.begin() + i);
 
@@ -84,7 +84,15 @@ void Monster::Update(GameScene& scene)
 
 	for (int i = 0; i < m_vecGraphicComponentBullet.size(); i++)
 	{
-		m_vecGraphicComponentBullet[i]->Update(*this, scene);
+		if (m_vecGraphicComponentBullet[i]->getPositionX() > m_visibleSize.width)
+		{
+			m_vecGraphicComponentBullet[i]->removeFromParentAndCleanup(true);
+			m_vecGraphicComponentBullet.erase(m_vecGraphicComponentBullet.begin() + i);
+		}
+		else
+		{
+			m_vecGraphicComponentBullet[i]->Update(*this, scene);
+		}
 	}
 }
 
@@ -122,9 +130,7 @@ void Monster::LoadGameOver() const
 
 Monster::~Monster()
 {
-	delete m_graphicComponentHero;
-//	delete m_graphicComponentHeroWeapon;
-	delete m_inputComponentHero;
+	CCLOG("destructor monster");
 }
 
 /*  GraphicComponent	- тільки малює спрайти 
