@@ -69,23 +69,8 @@ void BotBulletGraphicComponent::ChangeState(const StateBullet newState)
 	{
 		case StateBullet::STATE_FIRE:
 		{
-			if (this->getPositionX() > 0)	// while visible on screen
-			{
-				this->setPositionX(this->getPositionX() - m_speed);
-			}
-			else
-			{
-				/*for (int i = 0; i < hero.m_objectMonster->m_vecComponentEnemyAirplane.size(); i++)
-				{
-					if (m_vecGraphicComponentBullet[i]->m_GraphicComponent->GetID() == m_ID)
-					{
-						hero.m_vecGraphicComponentBullet.erase(hero.m_vecGraphicComponentBullet.begin() + i);
-						this->removeAllChildrenWithCleanup(true);
-						this->getPhysicsBody()->removeFromWorld();
-					}
-				}*/
-			}
-
+			this->setPositionX(this->getPositionX() - m_speed);
+	
 			break;
 		}
 		case StateBullet::STATE_DEATH:
