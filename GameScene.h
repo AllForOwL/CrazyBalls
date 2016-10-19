@@ -47,7 +47,8 @@ public:
 	static std::vector<int>		m_vecNameWeapon;
 
 	GameLayer*			m_gameLayer;
-	Monster*			m_hero;
+	std::shared_ptr<Monster>					m_hero;
+	std::shared_ptr<BonusGraphicComponent>		m_bonusGraphicComponent;
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentWeapon;
 	GraphicComponent*	m_graphicComponentButtonFire;
@@ -56,7 +57,6 @@ public:
 	GraphicComponent*	m_objectMonster;
 	InputComponent*		m_botInputComponent;
 	PhysicComponent*	m_physicComponent;
-	BonusGraphicComponent*		m_bonusGraphicComponent;
 
 	std::vector<std::string>	m_vecNameBackground;
 	cocos2d::Sprite*			m_btnFire;

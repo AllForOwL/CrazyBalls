@@ -101,7 +101,7 @@ bool GameScene::init()
 	m_gameObjectMonster				= new GameObjectMonster();
 	m_botInputComponent				= new BotInputComponent();
 	m_physicComponent				= new PhysicComponent();
-	m_hero							= new Monster(
+	m_hero							= std::make_shared<Monster>(
 													*m_graphicComponentHero, 
 													*m_graphicComponentButtonFire,
 													*m_gameObjectMonster,
@@ -110,7 +110,7 @@ bool GameScene::init()
 													*m_physicComponent
 												 );
 	
-	m_bonusGraphicComponent = new BonusGraphicComponent();
+	m_bonusGraphicComponent = std::make_shared<BonusGraphicComponent>();
 	m_bonusGraphicComponent->setName("bonus");
 
 	m_gameLayer = GameLayer::create();
