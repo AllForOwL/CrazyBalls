@@ -46,17 +46,17 @@ public:
 	static int					m_life;
 	static std::vector<int>		m_vecNameWeapon;
 
-	GameLayer*					m_gameLayer;
-	std::shared_ptr<Monster>	m_hero;
-	std::shared_ptr<GraphicComponent>	m_graphicComponentHero;
-	std::shared_ptr<GraphicComponent>	m_graphicComponentWeapon;
-	std::shared_ptr<GraphicComponent>	m_graphicComponentButtonFire;
-	std::shared_ptr<InputComponent>		m_inputComponent;
-	std::shared_ptr<GameObjectMonster>	m_gameObjectMonster;
-	std::shared_ptr<GraphicComponent>	m_objectMonster;
-	std::shared_ptr<InputComponent>		m_botInputComponent;
-	std::shared_ptr<PhysicComponent>	m_physicComponent;
-	std::shared_ptr<BonusGraphicComponent>		m_bonusGraphicComponent;
+	GameLayer*			m_gameLayer;
+	Monster*			m_hero;
+	GraphicComponent*	m_graphicComponentHero;
+	GraphicComponent*	m_graphicComponentWeapon;
+	GraphicComponent*	m_graphicComponentButtonFire;
+	InputComponent*		m_inputComponent;
+	GameObjectMonster*	m_gameObjectMonster;
+	GraphicComponent*	m_objectMonster;
+	InputComponent*		m_botInputComponent;
+	PhysicComponent*	m_physicComponent;
+	BonusGraphicComponent*		m_bonusGraphicComponent;
 
 	std::vector<std::string>	m_vecNameBackground;
 	cocos2d::Sprite*			m_btnFire;

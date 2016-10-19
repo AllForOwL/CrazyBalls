@@ -20,6 +20,7 @@ ButtonGraphicComponent::ButtonGraphicComponent()
 	cocos2d::Point _positionBtn = cocos2d::Point(_visibleSize.width - _sizeBtn.width / 2,
 												_sizeBtn.height / 2);
 	this->setPosition(_positionBtn);
+	this->setOpacity(0);
 }
 
 /*virtual*/ void ButtonGraphicComponent::Update(Monster& hero, GameScene& scene)

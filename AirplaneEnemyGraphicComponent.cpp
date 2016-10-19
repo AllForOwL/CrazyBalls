@@ -34,7 +34,16 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 		{
 			for (int i = 0; i < m_vecBullet.size(); i++)
 			{
-				m_vecBullet[i]->Update(hero, scene);
+				if (m_vecBullet[i]->getPositionX() > m_visibleSize.width)
+				{
+					m_vecBullet[i]->removeFromParentAndCleanup(true);
+					m_vecBullet.erase(m_vecBullet.begin() + i);
+					delete m_vecBullet[i];
+				}
+				else
+				{
+					m_vecBullet[i]->Update(hero, scene);
+				}
 			}
 			Move();
 
@@ -63,24 +72,36 @@ void AirplaneEnemyGraphicComponent::CreateBullets()
 	srand(time(NULL));
 	int _IDTopBullet = rand() % 100000 + 0;
 
-	std::shared_ptr<BotBulletGraphicComponent> _bulletTopPosition = std::make_shared<BotBulletGraphicComponent>(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
+	Point _pointBeginTop;
+	Point _pointBeginBottom;
+
+	if (this->getPositionX() > this->getBoundingBox().size.width)
+	{
+		_pointBeginTop = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
+			this->getPositionY() + (this->getBoundingBox().size.height / 2)
+			);
+
+		_pointBeginBottom = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
+			this->getPositionY() - (this->getBoundingBox().size.height / 2)
+			);
+	}
+	else
+	{
+		return;
+	}
+
+	BotBulletGraphicComponent* _bulletTopPosition = new BotBulletGraphicComponent(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
 	_bulletTopPosition->ChangeState(BotBulletGraphicComponent::StateBullet::STATE_FIRE);
-	Point m_pointBegin = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
-		this->getPositionY() + (this->getBoundingBox().size.height / 2)
-		);
-	_bulletTopPosition->setPosition(m_pointBegin);
+
+	_bulletTopPosition->setPosition(_pointBeginTop);
 	_bulletTopPosition->setVisible(false);
 
-
 	int _IDBottomBullet = rand() % 100000 + 0;
-	std::shared_ptr<BotBulletGraphicComponent> _bulletBottomPosition = std::make_shared<BotBulletGraphicComponent>(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
+	BotBulletGraphicComponent* _bulletBottomPosition = new BotBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeState(BotBulletGraphicComponent::StateBullet::STATE_FIRE);
-	m_pointBegin = Point(this->getPositionX() - (this->getBoundingBox().size.width / 2),
-		this->getPositionY() - (this->getBoundingBox().size.height / 2)
-		);
-	_bulletBottomPosition->setPosition(m_pointBegin);
-	_bulletBottomPosition->setVisible(false);
 
+	_bulletBottomPosition->setPosition(_pointBeginBottom);
+	_bulletBottomPosition->setVisible(false);
 
 	m_vecBullet.push_back(_bulletTopPosition);
 	m_vecBullet.push_back(_bulletBottomPosition);

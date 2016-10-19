@@ -9,11 +9,16 @@
 #include "GameOverScene.h"
 #include "constants.h"
 #include "PlayerBulletGraphicComponent.h"
+#include <memory>
+
 
 Monster::Monster(
-				GraphicComponent& graphicComponentHero,			GraphicComponent& graphicComponentButtonFire,	
-				GameObjectMonster& objectMonster,				InputComponent& inputComponent,					
-				InputComponent& botInputComponent,				PhysicComponent& physicComponent
+					GraphicComponent& graphicComponentHero,  
+					GraphicComponent& graphicComponentButtonFire,
+					GameObjectMonster& objectMonster,
+					InputComponent& inputComponent,
+					InputComponent& botInputComponent,
+					PhysicComponent& physicComponent
 				) 
 							:	m_graphicComponentHero		(&graphicComponentHero),
 								m_graphicComponentButtonFire(&graphicComponentButtonFire),
@@ -42,12 +47,12 @@ void Monster::CreateBulletsForFire()
 	srand(time(NULL));
 	int _IDTopBullet = m_counterID;
 
-	std::shared_ptr<PlayerBulletGraphicComponent> _bulletTopPosition = std::make_shared<PlayerBulletGraphicComponent>(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
+	PlayerBulletGraphicComponent* _bulletTopPosition = new PlayerBulletGraphicComponent(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
 	_bulletTopPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
 	int _IDBottomBullet = ++m_counterID;
 	++m_counterID;
-	std::shared_ptr<PlayerBulletGraphicComponent> _bulletBottomPosition = std::make_shared<PlayerBulletGraphicComponent>(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
+	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
 	int _sizeMap = m_vecGraphicComponentBullet.size();
@@ -64,6 +69,7 @@ void Monster::RemoveBullet(int i_tagBullet)
 		if (body->getTag() == i_tagBullet)
 		{
 			m_vecGraphicComponentBullet[i]->removeFromParentAndCleanup(true);
+			delete m_vecGraphicComponentBullet[i];
 
 			m_vecGraphicComponentBullet.erase(m_vecGraphicComponentBullet.begin() + i);
 
@@ -87,6 +93,8 @@ void Monster::Update(GameScene& scene)
 		if (m_vecGraphicComponentBullet[i]->getPositionX() > m_visibleSize.width)
 		{
 			m_vecGraphicComponentBullet[i]->removeFromParentAndCleanup(true);
+			delete m_vecGraphicComponentBullet[i];
+
 			m_vecGraphicComponentBullet.erase(m_vecGraphicComponentBullet.begin() + i);
 		}
 		else

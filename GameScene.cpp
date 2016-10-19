@@ -89,24 +89,28 @@ bool GameScene::init()
 	LoadFileNameBackground();
 	SetBackground();
 
-	m_graphicComponentHero	= std::make_shared<HeroGraphicComponent>(CNT_NAME_HERO_HELL);
+	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
 	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 10,
 									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 8);
 	
-	m_graphicComponentButtonFire = std::make_shared<ButtonGraphicComponent>();
+	m_graphicComponentButtonFire = new ButtonGraphicComponent();
 
-	m_inputComponent				= std::make_shared<PlayerInputComponent>();
-	m_gameObjectMonster				= std::make_shared<GameObjectMonster>();
-	m_botInputComponent				= std::make_shared<BotInputComponent>();
-	m_physicComponent				= std::make_shared<PhysicComponent>();
-	m_hero							= std::make_shared<Monster>(*m_graphicComponentHero,*m_graphicComponentButtonFire,	
-																*m_gameObjectMonster, 	*m_inputComponent,				
-																*m_botInputComponent,	*m_physicComponent
-																);
+	m_inputComponent				= new PlayerInputComponent();
+	m_gameObjectMonster				= new GameObjectMonster();
+	m_botInputComponent				= new BotInputComponent();
+	m_physicComponent				= new PhysicComponent();
+	m_hero							= new Monster(
+													*m_graphicComponentHero, 
+													*m_graphicComponentButtonFire,
+													*m_gameObjectMonster,
+													*m_inputComponent,
+													*m_botInputComponent,
+													*m_physicComponent
+												 );
 	
-	m_bonusGraphicComponent = std::make_shared<BonusGraphicComponent>();
+	m_bonusGraphicComponent = new BonusGraphicComponent();
 	m_bonusGraphicComponent->setName("bonus");
 
 	m_gameLayer = GameLayer::create();

@@ -194,7 +194,7 @@ void GameObjectMonster::SpawnerEnemyAirplane(GameScene& scene)
 	srand(time(NULL));
 	int _randTypeAirplane = rand() % m_vecNameEnemyAirplane.size() + 0;
 
-	m_enemyAirplane = std::make_shared<AirplaneEnemyGraphicComponent>(m_vecNameEnemyAirplane[_randTypeAirplane]);
+	m_enemyAirplane = new AirplaneEnemyGraphicComponent(m_vecNameEnemyAirplane[_randTypeAirplane]);
 	m_enemyAirplane->setPosition(GetPositionAirplane());
 
 	m_vecComponentEnemyAirplane.push_back(m_enemyAirplane);
@@ -257,8 +257,8 @@ cocos2d::Point GameObjectMonster::GetPosition()
 
 cocos2d::Point GameObjectMonster::GetPositionAirplane()
 {
-	int _randPositionX = m_visibleSize.width - m_enemyAirplane->getBoundingBox().size.width;
-	int _orderTopRand = m_visibleSize.height - (m_enemyAirplane->getBoundingBox().size.height / 2);
+	int _randPositionX = m_visibleSize.width - (m_enemyAirplane->getBoundingBox().size.width * 2);
+	int _orderTopRand = m_visibleSize.height - (m_enemyAirplane->getBoundingBox().size.height * 2);
 	int _orderBottomRand = m_enemyAirplane->getBoundingBox().size.height * 2;
 
 	int _randPositionY = rand() % _orderTopRand + _orderBottomRand;
@@ -329,6 +329,8 @@ void GameObjectMonster::RemoveBullet(int tagEnemy)
 		}
 	}
 	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet[_quentityBullet]->removeFromParentAndCleanup(true);
+	delete m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet[_quentityBullet];
+
 	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet.erase(m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet.begin() + _quentityBullet);
 }
 
@@ -345,7 +347,8 @@ int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 		}
 
 		m_vecComponentEnemyAirplane[_indexEnemy]->removeFromParentAndCleanup(true);
-		
+		delete m_vecComponentEnemyAirplane[_indexEnemy];
+
 		m_vecComponentEnemyAirplane.erase(m_vecComponentEnemyAirplane.begin() + _indexEnemy);
 
 		return _coinEnemy;
