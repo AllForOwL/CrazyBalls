@@ -130,5 +130,5 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 
 PhysicComponent::~PhysicComponent()
 {
-
+	CCLOG("destructor physiccomponent");
 }

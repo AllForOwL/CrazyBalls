@@ -89,35 +89,25 @@ bool GameScene::init()
 	LoadFileNameBackground();
 	SetBackground();
 
-	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
+	m_graphicComponentHero	= std::make_shared<HeroGraphicComponent>(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
 	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 10,
 									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 8);
-	this->addChild(m_graphicComponentHero);
 	
-	//
-	//m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK47);
-	//m_graphicComponentWeapon->setPosition(m_graphicComponentHero->getPosition().x, m_graphicComponentHero->getPosition().y - 20);
-	//m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 12,
-	//								   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 10);
-	//this->addChild(m_graphicComponentWeapon);
-	//
-	m_graphicComponentButtonFire = new ButtonGraphicComponent();
-	this->addChild(m_graphicComponentButtonFire);
+	m_graphicComponentButtonFire = std::make_shared<ButtonGraphicComponent>();
 
-	m_inputComponent				= new PlayerInputComponent();
-	m_gameObjectMonster				= new GameObjectMonster();
-	m_botInputComponent				= new BotInputComponent();
-	m_physicComponent				= new PhysicComponent();
-	m_hero							= new Monster(	*m_graphicComponentHero,		*m_graphicComponentButtonFire,	
-													*m_gameObjectMonster, 			*m_inputComponent,				*m_botInputComponent,		
-													*m_physicComponent
-												 );
+	m_inputComponent				= std::make_shared<PlayerInputComponent>();
+	m_gameObjectMonster				= std::make_shared<GameObjectMonster>();
+	m_botInputComponent				= std::make_shared<BotInputComponent>();
+	m_physicComponent				= std::make_shared<PhysicComponent>();
+	m_hero							= std::make_shared<Monster>(*m_graphicComponentHero,*m_graphicComponentButtonFire,	
+																*m_gameObjectMonster, 	*m_inputComponent,				
+																*m_botInputComponent,	*m_physicComponent
+																);
 	
-	m_bonusGraphicComponent = new BonusGraphicComponent();
+	m_bonusGraphicComponent = std::make_shared<BonusGraphicComponent>();
 	m_bonusGraphicComponent->setName("bonus");
-	this->addChild(m_bonusGraphicComponent);
 
 	m_gameLayer = GameLayer::create();
 	
@@ -142,29 +132,10 @@ bool GameScene::init()
 	return true;
 }
 
-/*virtual*/ bool GameScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
-{
-//	m_hero->m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE_UP;
-
-	return true;
-}
-
 void GameScene::update(float dt)
 {
 	m_hero->Update		(*this);
 	m_gameLayer->Update	(*m_hero);
-
-	/*Size _visibleSize = Director::getInstance()->getVisibleSize();
-
-	if ((_visibleSize.width / 2) - m_background->getPositionX() > (m_background->getContentSize().width - _visibleSize.width) / 2)
-	{
-		m_background->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
-	}
-	else
-	{
-		Point _positionBackground = m_background->getPosition();
-		m_background->setPosition(--_positionBackground.x, _positionBackground.y);
-	}*/
 }
 
 void GameScene::SpawnEnemyMeteor(float dt)
@@ -207,11 +178,6 @@ void GameScene::SpawnBonus(float dt)
 		)
 	{
 		this->m_hero->m_stateBonus = Monster::StateBonus::SUPER_BONUS;
-	}
-
-	if (!m_bonusGraphicComponent->getParent())
-	{
-		this->addChild(m_bonusGraphicComponent);
 	}
 }
 
@@ -258,7 +224,7 @@ void GameScene::LoadLevel()
 
 GameScene::~GameScene()
 {
-
+	CCLOG("destructor gamescene");
 }
 
 /**********Jump table*********/

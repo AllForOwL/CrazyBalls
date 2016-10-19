@@ -53,7 +53,7 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 	return m_typeObject;
 }
 
-void BotBulletGraphicComponent::ChangeState(const StateBullet& newState)
+void BotBulletGraphicComponent::ChangeState(const StateBullet newState)
 {
 	m_stateBullet = newState;
 }
@@ -91,8 +91,7 @@ void BotBulletGraphicComponent::ChangeState(const StateBullet& newState)
 		case StateBullet::STATE_DEATH:
 		{
 			this->removeAllChildrenWithCleanup(true);
-			this->getPhysicsBody()->removeFromWorld();
-
+	
 			break;
 		}
 	}
@@ -112,5 +111,5 @@ void BotBulletGraphicComponent::LoadBomb()
 
 BotBulletGraphicComponent::~BotBulletGraphicComponent()
 {
-
+	CCLOG("destructor botbullet");
 }

@@ -310,5 +310,5 @@ bool BreedGraphicComponent::Death()
 
 BreedGraphicComponent::~BreedGraphicComponent()
 {
-
+	CCLOG("destructor breedgraphic");
 }

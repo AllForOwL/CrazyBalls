@@ -16,9 +16,17 @@ const int CNT_COIN_FOR_ENEMY_RED	= 200;
 
 GameObjectMonster::GameObjectMonster()
 {
-	m_sizeEnemy = Point::ZERO;
-	m_visibleSize = Director::getInstance()->getVisibleSize();
+	m_sizeEnemy		= Point::ZERO;
+	m_visibleSize	= Director::getInstance()->getVisibleSize();
 
+	LoadNameEnemies();
+}
+
+GameObjectMonster::GameObjectMonster(GameObjectMonster& newObjectMonster)
+{
+	m_sizeEnemy		= Point::ZERO;
+	m_visibleSize	= Director::getInstance()->getVisibleSize();
+	
 	LoadNameEnemies();
 }
 
@@ -31,19 +39,10 @@ void GameObjectMonster::LoadNameEnemies()
 
 	for (int i = 0; i < 5; i++)
 	{
-		m_vecNameEnemyAirplane.push_back("black_" + std::to_string(i + 1));
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		m_vecNameEnemyAirplane.push_back("blue_" + std::to_string(i + 1));
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		m_vecNameEnemyAirplane.push_back("green_" + std::to_string(i + 1));
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		m_vecNameEnemyAirplane.push_back("red_" + std::to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("black_"	+ std::to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("blue_"	+ std::to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("green_"	+ std::to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("red_"		+ std::to_string(i + 1));
 	}
 }
 
@@ -195,12 +194,10 @@ void GameObjectMonster::SpawnerEnemyAirplane(GameScene& scene)
 	srand(time(NULL));
 	int _randTypeAirplane = rand() % m_vecNameEnemyAirplane.size() + 0;
 
-	m_enemyAirplane = new AirplaneEnemyGraphicComponent(m_vecNameEnemyAirplane[_randTypeAirplane]);
+	m_enemyAirplane = std::make_shared<AirplaneEnemyGraphicComponent>(m_vecNameEnemyAirplane[_randTypeAirplane]);
 	m_enemyAirplane->setPosition(GetPositionAirplane());
 
 	m_vecComponentEnemyAirplane.push_back(m_enemyAirplane);
-
-	scene.addChild(m_enemyAirplane);
 }
 
 void GameObjectMonster::LoadField()
@@ -331,9 +328,7 @@ void GameObjectMonster::RemoveBullet(int tagEnemy)
 			}
 		}
 	}
-
-	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet[_quentityBullet]->removeAllChildrenWithCleanup(true);
-	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet[_quentityBullet]->getPhysicsBody()->removeFromWorld();
+	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet[_quentityBullet]->removeFromParentAndCleanup(true);
 	m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet.erase(m_vecComponentEnemyAirplane[_quentityAirplane]->m_vecBullet.begin() + _quentityBullet);
 }
 
@@ -350,6 +345,7 @@ int GameObjectMonster::RemoveAndCleanEnemy(int indexEnemy)
 		}
 
 		m_vecComponentEnemyAirplane[_indexEnemy]->removeFromParentAndCleanup(true);
+		
 		m_vecComponentEnemyAirplane.erase(m_vecComponentEnemyAirplane.begin() + _indexEnemy);
 
 		std::string::size_type _findStr;
@@ -424,5 +420,5 @@ int GameObjectMonster::GetDamage(int indexEnemy) const
 
 GameObjectMonster::~GameObjectMonster()
 {
-	
+	CCLOG("destructor gameobject");
 }

@@ -82,7 +82,7 @@ PlayerInputComponent::PlayerInputComponent()
 
 PlayerInputComponent::~PlayerInputComponent()
 {
-
+	CCLOG("destructor playerinput");
 }
 
 /*  GraphicComponent	- тільки малює спрайти 

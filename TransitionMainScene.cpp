@@ -108,6 +108,11 @@ bool TransitionMainScene::init()
 	return true;
 }
 
+TransitionMainScene::~TransitionMainScene()
+{
+	CCLOG("destructor trnsition mainscene");
+}
+
 /*	04:10:16
 Animation:
 	+ power;
