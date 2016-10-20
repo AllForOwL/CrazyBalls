@@ -44,18 +44,13 @@ void Monster::CreateBulletsForFire()
 		return;
 	}
 
-	srand(time(NULL));
-	int _IDTopBullet = m_counterID;
-
-	PlayerBulletGraphicComponent* _bulletTopPosition = new PlayerBulletGraphicComponent(_IDTopBullet, 120, CNT_NAME_BULLET_POSITION_TOP);
+	++m_counterID;
+	PlayerBulletGraphicComponent* _bulletTopPosition = new PlayerBulletGraphicComponent(m_counterID, 120, CNT_NAME_BULLET_POSITION_TOP);
 	_bulletTopPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
-	int _IDBottomBullet = ++m_counterID;
 	++m_counterID;
-	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(_IDBottomBullet, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
+	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(m_counterID, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
-
-	int _sizeMap = m_vecGraphicComponentBullet.size();
 
 	m_vecGraphicComponentBullet.push_back(_bulletTopPosition);
 	m_vecGraphicComponentBullet.push_back(_bulletBottomPosition);
@@ -73,8 +68,7 @@ void Monster::RemoveBullet(int i_tagBullet)
 
 			m_vecGraphicComponentBullet.erase(m_vecGraphicComponentBullet.begin() + i);
 
-			break;
-			break;
+			return;
 		}
 	}
 }
@@ -114,10 +108,6 @@ void Monster::CauseDamage(int damage)
 		m_stateBonus	= Monster::StateBonus::BONUS_DEATH;
 
 		LoadGameOver();
-	}
-	else
-	{
-		m_stateHero = Monster::StateHero::HERO_STATE_WOUNDED;
 	}
 }
 

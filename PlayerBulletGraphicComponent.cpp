@@ -18,15 +18,12 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int i_ID, int attack,
 	this->initWithFile("res/Bullets/Meteor1.png");
 	this->setScale(m_visibleSize.width / this->getContentSize().width / 25,
 		m_visibleSize.height / this->getContentSize().height / 25);
-
-	srand(time(NULL));
-	int _randTag = rand() % 100000 + 0;
 	
 	auto physicBodyBullet = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBodyBullet->setContactTestBitmask(true);
 	physicBodyBullet->setDynamic(false);
 	physicBodyBullet->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
-	physicBodyBullet->setTag(_randTag);
+	physicBodyBullet->setTag(m_ID);
 	this->setPhysicsBody(physicBodyBullet);
 }
 
@@ -37,13 +34,10 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 
 	this->create("res/Bullets/Meteor1.png");
 	
-	srand(time(NULL));
-	int _randTag = rand() % 100000 + 0;
-	
 	auto physicBodyBullet = PhysicsBody::createBox(this->getBoundingBox().size);
 	physicBodyBullet->setContactTestBitmask(true);
 	physicBodyBullet->setCollisionBitmask(HERO_BULLET_COLLISION_BITMASK);
-	physicBodyBullet->setTag(_randTag);
+	physicBodyBullet->setTag(bullet.GetID());
 	this->setPhysicsBody(physicBodyBullet);
 }
 
