@@ -133,7 +133,7 @@ void AirplaneEnemyGraphicComponent::LoadValueProperties()
 	int _orderHealthTop		= 90;
 	
 	int _orderSpawnShotBottom	= 4;
-	int _orderSpawnShotTop		= 8;
+	int _orderSpawnShotTop		= 10;
 	
 	int _randValue	= 0;
 	
@@ -192,8 +192,11 @@ void AirplaneEnemyGraphicComponent::LoadValueProperties()
 		_randValue = rand() % _orderSpawnShotTop + _orderSpawnShotBottom;
 		m_vecAirplaneRed[i].m_spawnShot = _randValue;
 
-		--_orderSpawnShotBottom;
-		_orderSpawnShotTop -= 2;
+		if (_orderSpawnShotBottom)
+		{
+			--_orderSpawnShotBottom;
+			_orderSpawnShotTop -= 2;
+		}
 	}
 }
 

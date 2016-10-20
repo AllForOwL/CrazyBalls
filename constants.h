@@ -5,10 +5,10 @@ const float CNT_TIME_SPAWN_BONUS	= 15.0;
 
 const int CNT_NUMBER_COINS_ONE_LEVEL = 50;
 
-const int CNT_SPEED_BULLET	= 50;
+const int CNT_SPEED_BULLET	= 20;
 const int CNT_SPEED_STONE	= 8;
 
-const int CNT_QUENTITY_LEVELS = 4;
+const int CNT_QUENTITY_LEVELS = 8;
 
 const int CNT_TAG_BULLET_NORMAL = 1000;
 const int CNT_TAG_ENEMY_WOUNDED	= 1001;

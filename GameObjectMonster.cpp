@@ -257,9 +257,9 @@ cocos2d::Point GameObjectMonster::GetPosition()
 
 cocos2d::Point GameObjectMonster::GetPositionAirplane()
 {
-	int _randPositionX = m_visibleSize.width - (m_enemyAirplane->getBoundingBox().size.width * 2);
-	int _orderTopRand = m_visibleSize.height - (m_enemyAirplane->getBoundingBox().size.height * 2);
-	int _orderBottomRand = m_enemyAirplane->getBoundingBox().size.height * 2;
+	int _randPositionX		= m_visibleSize.width - (m_enemyAirplane->getBoundingBox().size.width * 2);
+	int _orderTopRand		= m_visibleSize.height - (m_enemyAirplane->getBoundingBox().size.height * 2);
+	int _orderBottomRand	= m_enemyAirplane->getBoundingBox().size.height * 2;
 
 	int _randPositionY = rand() % _orderTopRand + _orderBottomRand;
 		
@@ -400,7 +400,18 @@ int GameObjectMonster::GetCoinForEnemy(int i_tagBullet) const
 
 int GameObjectMonster::GetDamage(int indexEnemy) const
 {
-	return m_vecComponentEnemyAirplane[indexEnemy]->GetAttack();
+	int _quentityAirplane = 0;
+	for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
+	{
+		for (int j = 0; j < m_vecComponentEnemyAirplane[i]->m_vecBullet.size(); j++)
+		{
+			auto body = m_vecComponentEnemyAirplane[i]->m_vecBullet[j]->getPhysicsBody();
+			if (body->getTag() == indexEnemy)
+			{
+				return m_vecComponentEnemyAirplane[i]->GetAttack();
+			}
+		}
+	}
 }
 
 GameObjectMonster::~GameObjectMonster()
