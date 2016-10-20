@@ -4,6 +4,15 @@
 #include "constants.h"
 #include <GameScene.h>
 
+const int CNT_QUENTITY_LEVELS = 4;
+
+typedef AirplaneEnemyGraphicComponent Airplane;
+
+std::vector<Airplane::PropertiesAirplane> Airplane::m_vecAirplaneBlack(CNT_QUENTITY_LEVELS);
+std::vector<Airplane::PropertiesAirplane> Airplane::m_vecAirplaneBlue(CNT_QUENTITY_LEVELS);
+std::vector<Airplane::PropertiesAirplane> Airplane::m_vecAirplaneGreen(CNT_QUENTITY_LEVELS);
+std::vector<Airplane::PropertiesAirplane> Airplane::m_vecAirplaneRed(CNT_QUENTITY_LEVELS);
+
 AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& i_typeObject)
 																: m_typeObject(i_typeObject)
 {
@@ -114,112 +123,204 @@ void AirplaneEnemyGraphicComponent::SetStateCreateBullets(float dt)
 	m_stateAirplane = StateAirplane::STATE_CREATE_BULLETS;
 }
 
-void AirplaneEnemyGraphicComponent::DetermineTypeObject()
+void AirplaneEnemyGraphicComponent::LoadValueProperties()
 {
-	if (m_typeObject == CNT_NAME_ENEMY_BLACK_1)
+	int _orderAttackBottom	= 20;
+	int _orderAttackTop		= 45;
+	
+	int _orderArmorBottom	= 50;
+	int _orderArmorTop		= 90;
+	
+	int _orderHealthBottom	= 50;
+	int _orderHealthTop		= 90;
+	
+	int _orderSpawnShotBottom	= 4;
+	int _orderSpawnShotTop		= 8;
+	
+	int _randValue	= 0;
+	
+	for (int i = 0; i < CNT_QUENTITY_LEVELS; i++)
 	{
-		SetPropertiesAirplane("res/Enemies/enemyBlack1.png", CNT_ATTACK_ENEMY_BLACK_1, 
-			CNT_ARMOR_ENEMY_BLACK_1, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLACK_1);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_2)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlack2.png", CNT_ATTACK_ENEMY_BLACK_2, 
-			CNT_ARMOR_ENEMY_BLACK_2, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLACK_2);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_3)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlack3.png", CNT_ATTACK_ENEMY_BLACK_3, 
-			CNT_ARMOR_ENEMY_BLACK_3, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLACK_3);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_4)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlack4.png", CNT_ATTACK_ENEMY_BLACK_4, 
-			CNT_ARMOR_ENEMY_BLACK_4, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLACK_4);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_5)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlack5.png", CNT_ATTACK_ENEMY_BLACK_5, 
-			CNT_ARMOR_ENEMY_BLACK_5, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLACK_5);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_1)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlue1.png", CNT_ATTACK_ENEMY_BLUE_1, 
-			CNT_ARMOR_ENEMY_BLUE_1, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLUE_1);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_2)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlue2.png", CNT_ATTACK_ENEMY_BLUE_2, 
-			CNT_ARMOR_ENEMY_BLUE_2, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLUE_2);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_3)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlue3.png", CNT_ATTACK_ENEMY_BLUE_3, 
-			CNT_ARMOR_ENEMY_BLUE_3, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLUE_3);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_4)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlue4.png", CNT_ATTACK_ENEMY_BLUE_4, 
-			CNT_ARMOR_ENEMY_BLUE_4, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLUE_4);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_5)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyBlue5.png", CNT_ATTACK_ENEMY_BLUE_5, 
-			CNT_ARMOR_ENEMY_BLUE_5, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_BLUE_5);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_1)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyGreen1.png", CNT_ATTACK_ENEMY_GREEN_1, 
-			CNT_ARMOR_ENEMY_GREEN_1, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_GREEN_1);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_2)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyGreen2.png", CNT_ATTACK_ENEMY_GREEN_2, 
-			CNT_ARMOR_ENEMY_GREEN_2, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_GREEN_2);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_3)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyGreen3.png", CNT_ATTACK_ENEMY_GREEN_3, 
-			CNT_ARMOR_ENEMY_GREEN_3, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_GREEN_3);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_4)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyGreen4.png", CNT_ATTACK_ENEMY_GREEN_4, 
-			CNT_ARMOR_ENEMY_GREEN_4, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_GREEN_4);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_5)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyGreen5.png", CNT_ATTACK_ENEMY_GREEN_5, 
-			CNT_ARMOR_ENEMY_GREEN_5, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_GREEN_5);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_RED_1)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyRed1.png", CNT_ATTACK_ENEMY_RED_1, 
-			CNT_ARMOR_ENEMY_RED_1, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_RED_1);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_RED_2)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyRed2.png", CNT_ATTACK_ENEMY_RED_2, 
-			CNT_ARMOR_ENEMY_RED_2, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_RED_2);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_RED_3)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyRed3.png", CNT_ATTACK_ENEMY_RED_3, 
-			CNT_ARMOR_ENEMY_RED_3, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_RED_3);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_RED_4)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyRed4.png", CNT_ATTACK_ENEMY_RED_4, 
-			CNT_ARMOR_ENEMY_RED_4, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_RED_4);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_RED_5)
-	{
-		SetPropertiesAirplane("res/Enemies/enemyRed5.png", CNT_ATTACK_ENEMY_RED_5, 
-			CNT_ARMOR_ENEMY_RED_5, CNT_ENEMY_HEALTH, CNT_TIME_SPAWN_SHOT_RED_5);
+		// fill value attack
+		srand(time(NULL));
+		_randValue = rand() % _orderAttackTop + _orderAttackBottom;
+		m_vecAirplaneBlack[i].m_attack = _randValue;		
+		_randValue = rand() % _orderAttackTop + _orderAttackBottom;
+		m_vecAirplaneBlue[i].m_attack = _randValue;
+		_randValue = rand() % _orderAttackTop + _orderAttackBottom;
+		m_vecAirplaneGreen[i].m_attack = _randValue;
+		_randValue = rand() % _orderAttackTop + _orderAttackBottom;
+		m_vecAirplaneRed[i].m_attack = _randValue;
+
+		_orderAttackBottom	+= 5;
+		_orderAttackTop		+= 5;
+
+		// fill value armor
+		srand(time(NULL));
+		_randValue = rand() % _orderArmorTop + _orderArmorBottom;
+		m_vecAirplaneBlack[i].m_armor = _randValue;
+		_randValue = rand() % _orderArmorTop + _orderArmorBottom;
+		m_vecAirplaneBlue[i].m_armor = _randValue;
+		_randValue = rand() % _orderArmorTop + _orderArmorBottom;
+		m_vecAirplaneGreen[i].m_armor = _randValue;
+		_randValue = rand() % _orderArmorTop + _orderArmorBottom;
+		m_vecAirplaneRed[i].m_armor = _randValue;
+
+		_orderArmorBottom	+= 5;
+		_orderArmorTop		+= 5;
+
+		// fill value health
+		srand(time(NULL));
+		_randValue = rand() % _orderHealthTop + _orderHealthBottom;
+		m_vecAirplaneBlack[i].m_health = _randValue;
+		_randValue = rand() % _orderHealthTop + _orderHealthBottom;
+		m_vecAirplaneBlue[i].m_health = _randValue;
+		_randValue = rand() % _orderHealthTop + _orderHealthBottom;
+		m_vecAirplaneGreen[i].m_health = _randValue;
+		_randValue = rand() % _orderHealthTop + _orderHealthBottom;
+		m_vecAirplaneRed[i].m_health = _randValue;
+
+		_orderHealthBottom  += 5;
+		_orderHealthTop		+= 5;
+
+		// fill value spawn shot
+		srand(time(NULL));
+		_randValue = rand() % _orderSpawnShotTop + _orderSpawnShotBottom;
+		m_vecAirplaneBlack[i].m_spawnShot = _randValue;
+		_randValue = rand() % _orderSpawnShotTop + _orderSpawnShotBottom;
+		m_vecAirplaneBlue[i].m_spawnShot = _randValue;
+		_randValue = rand() % _orderSpawnShotTop + _orderSpawnShotBottom;
+		m_vecAirplaneGreen[i].m_spawnShot = _randValue;
+		_randValue = rand() % _orderSpawnShotTop + _orderSpawnShotBottom;
+		m_vecAirplaneRed[i].m_spawnShot = _randValue;
+
+		--_orderSpawnShotBottom;
+		_orderSpawnShotTop -= 2;
 	}
 }
 
-void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_filename, 
-	const int& i_attack, const int& i_armor, const int& i_health ,const int& i_spawnShot)
+void AirplaneEnemyGraphicComponent::DetermineTypeObject()
+{
+	if (!GameScene::m_level)
+	{
+		LoadValueProperties();
+	}
+
+	std::string::size_type _findStr;
+
+	if ((_findStr = m_typeObject.find("black")) != std::string::npos)
+	{
+		this->m_attack			= m_vecAirplaneBlack[GameScene::m_level].m_attack;
+		this->m_armor			= m_vecAirplaneBlack[GameScene::m_level].m_armor;
+		this->m_health			= m_vecAirplaneBlack[GameScene::m_level].m_health;;
+		this->m_timeSpawnShot	= m_vecAirplaneBlack[GameScene::m_level].m_spawnShot;
+
+	}
+	else if ((_findStr = m_typeObject.find("blue")) != std::string::npos)
+	{
+		this->m_attack			= m_vecAirplaneBlue[GameScene::m_level].m_attack;
+		this->m_armor			= m_vecAirplaneBlue[GameScene::m_level].m_armor;
+		this->m_health			= m_vecAirplaneBlue[GameScene::m_level].m_health;;
+		this->m_timeSpawnShot	= m_vecAirplaneBlue[GameScene::m_level].m_spawnShot;
+	}
+	else if ((_findStr = m_typeObject.find("green")) != std::string::npos)
+	{
+		this->m_attack			= m_vecAirplaneGreen[GameScene::m_level].m_attack;
+		this->m_armor			= m_vecAirplaneGreen[GameScene::m_level].m_armor;
+		this->m_health			= m_vecAirplaneGreen[GameScene::m_level].m_health;;
+		this->m_timeSpawnShot	= m_vecAirplaneGreen[GameScene::m_level].m_spawnShot;
+	}
+	else if ((_findStr = m_typeObject.find("red")) != std::string::npos)
+	{
+		this->m_attack			= m_vecAirplaneRed[GameScene::m_level].m_attack;
+		this->m_armor			= m_vecAirplaneRed[GameScene::m_level].m_armor;
+		this->m_health			= m_vecAirplaneRed[GameScene::m_level].m_health;;
+		this->m_timeSpawnShot	= m_vecAirplaneRed[GameScene::m_level].m_spawnShot;
+	}
+
+	if (m_typeObject == CNT_NAME_ENEMY_BLACK_1)
+	{	
+		SetPropertiesAirplane("res/Enemies/enemyBlack1.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_2)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlack2.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_3)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlack3.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_4)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlack4.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLACK_5)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlack5.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_1)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlue1.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_2)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlue2.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_3)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlue3.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_4)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlue4.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_BLUE_5)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyBlue5.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_1)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyGreen1.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_2)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyGreen2.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_3)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyGreen3.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_4)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyGreen4.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_GREEN_5)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyGreen5.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_RED_1)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyRed1.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_RED_2)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyRed2.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_RED_3)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyRed3.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_RED_4)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyRed4.png");
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_RED_5)
+	{
+		SetPropertiesAirplane("res/Enemies/enemyRed5.png");
+	}
+}
+
+void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_filename)
 {
 	this->initWithFile(i_filename);
 	this->setScale(m_visibleSize.width / this->getContentSize().width / 12,
@@ -228,12 +329,7 @@ void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_f
 	this->setVisible(true);
 
 	int _randTagForPhysicCollision = rand() % 100000 + 0;
-	
-	this->m_timeSpawnShot	= i_spawnShot;
-	this->m_attack			= i_attack;
-	this->m_armor			= i_armor;
-	this->m_health			= i_health;
-
+		
 	auto physicBodyEnemy = PhysicsBody::createBox(this->getContentSize());
 	physicBodyEnemy->setContactTestBitmask(true);
 	physicBodyEnemy->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
