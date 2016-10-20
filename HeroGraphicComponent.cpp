@@ -45,6 +45,11 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 	this->initWithFile("res/Hero/player/playerShip3_red.png");
 	this->setRotation(90.0);
 
+	this->setPosition(m_visibleSize.width / this->getContentSize().width + 100,
+		m_visibleSize.height / this->getContentSize().height + 100);
+	this->setScale(m_visibleSize.width / this->getContentSize().width / 10,
+		m_visibleSize.height / this->getContentSize().height / 8);
+
 	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
 	physicBodyHero->setContactTestBitmask(true);
 	physicBodyHero->setDynamic(false);

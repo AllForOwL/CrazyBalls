@@ -17,13 +17,18 @@ class GameScene : public cocos2d::Layer
 public:
 	// methods
 	
-	static cocos2d::Scene *createScene(bool nextLevel, int coin, int life, std::vector<int>& vecNameWeapon);
+	static cocos2d::Scene *createScene(
+										bool nextLevel, 
+										int coin, 
+										int life, 
+										std::vector<int>& vecNameWeapon
+									   );
 	virtual bool init();
 	
-	void update		(float dt);
-	void SpawnEnemyMeteor		(float dt);
-	void SpawnEnemyAirplane(float dt);
-	void SpawnBonus	(float dt);
+	void update				(float dt);
+	void SpawnEnemyMeteor	(float dt);
+	void SpawnEnemyAirplane	(float dt);
+	void SpawnBonus			(float dt);
 	
 	void LoadLevel();
 	void LoadFileNameBackground();
@@ -47,6 +52,7 @@ public:
 	static std::vector<int>		m_vecNameWeapon;
 
 	GameLayer*			m_gameLayer;
+
 	std::shared_ptr<Monster>					m_hero;
 	std::shared_ptr<BonusGraphicComponent>		m_bonusGraphicComponent;
 	GraphicComponent*	m_graphicComponentHero;

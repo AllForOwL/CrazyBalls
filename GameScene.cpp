@@ -71,7 +71,6 @@ bool GameScene::init()
 	m_background->setScale(_visibleSize.width / m_background->getContentSize().width,
 		_visibleSize.height / m_background->getContentSize().height);
 	m_background->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
-
 	this->addChild(m_background);
 
 	m_countLevel = 0;
@@ -83,32 +82,25 @@ bool GameScene::init()
 	auto edgeNode = Node::create();
 	edgeNode->setPosition(Point(_visibleSize.width / 2 + origin.x, _visibleSize.height / 2 + origin.y));
 	edgeNode->setPhysicsBody(edgeBody);
-
 	this->addChild(edgeNode);
 
 	LoadFileNameBackground();
 	SetBackground();
 
-	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
-	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
-										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
-	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 10,
-									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 8);
-	
-	m_graphicComponentButtonFire = new ButtonGraphicComponent();
-
-	m_inputComponent				= new PlayerInputComponent();
+	m_graphicComponentHero			= new HeroGraphicComponent(CNT_NAME_HERO_HELL);		
+	m_graphicComponentButtonFire	= new ButtonGraphicComponent();
 	m_gameObjectMonster				= new GameObjectMonster();
+	m_inputComponent				= new PlayerInputComponent();
 	m_botInputComponent				= new BotInputComponent();
 	m_physicComponent				= new PhysicComponent();
-	m_hero							= std::make_shared<Monster>(
-													*m_graphicComponentHero, 
-													*m_graphicComponentButtonFire,
-													*m_gameObjectMonster,
-													*m_inputComponent,
-													*m_botInputComponent,
-													*m_physicComponent
-												 );
+	m_hero							= std::make_shared<Monster>	(
+																	*m_graphicComponentHero, 
+																	*m_graphicComponentButtonFire,
+																	*m_gameObjectMonster,
+																	*m_inputComponent,
+																	*m_botInputComponent,
+																	*m_physicComponent
+																 );
 	
 	m_bonusGraphicComponent = std::make_shared<BonusGraphicComponent>();
 	m_bonusGraphicComponent->setName("bonus");
@@ -211,13 +203,8 @@ void GameScene::SetBackground()
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
 	m_background = Sprite::create(m_vecNameBackground[m_level]);
-	//m_background->setScale(_visibleSize.width / m_background->getContentSize().width,
-	//	_visibleSize.height / m_background->getContentSize().height);
-	
 	m_background->setPosition(_visibleSize.width / 2,
 		_visibleSize.height / 2);
-	
-	//this->addChild(m_background);
 }
 
 void GameScene::LoadLevel()
