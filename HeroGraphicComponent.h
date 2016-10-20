@@ -31,24 +31,21 @@ public:
 
 	void SpeedHeroSuitablyEnemy(Monster& i_hero);
 	
-	void ChangeWeapon(Monster& i_hero, GameScene& i_scene);
-	void ChangeBullet(Monster& i_hero, GameScene& i_scene);
-	
-	void LoadSpritesDizzy(Monster& i_hero);
-
 	void JumpUp(Monster& i_hero);
 	void JumpDown(Monster& i_hero);
-	void GoToNextLevel(Monster& i_hero);
-
+	
 	virtual int GetArmor() const;
+
+	void LoadNumberCoinsForTransitionToNextLevel();
+
+	void OpenNextLevel();
 
 	~HeroGraphicComponent();
 
 public:
-	std::vector<std::string> m_vecSpritesFall;
-	std::vector<std::string> m_vecSpritesDizzy;
+	std::string m_filename;
 
-	std::vector<int> m_vecNumberCoinsForTransitionNextLevel;
+	static std::vector<int> m_vecNumberCoinsForTransitionNextLevel;
 
 	int m_countSpriteInVectorDizzy;
 	int m_countSpriteInVectorFall;

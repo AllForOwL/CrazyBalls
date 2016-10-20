@@ -19,9 +19,8 @@ public:
 	
 	static cocos2d::Scene *createScene(
 										bool nextLevel, 
-										int coin, 
-										int life, 
-										std::vector<int>& vecNameWeapon
+										int  coin, 
+										int  life
 									   );
 	virtual bool init();
 	
@@ -49,7 +48,6 @@ public:
 	static int					m_level;
 	static int					m_coin;
 	static int					m_life;
-	static std::vector<int>		m_vecNameWeapon;
 
 	GameLayer*			m_gameLayer;
 

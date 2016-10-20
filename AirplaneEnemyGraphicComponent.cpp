@@ -4,8 +4,6 @@
 #include "constants.h"
 #include <GameScene.h>
 
-const int CNT_QUENTITY_LEVELS = 4;
-
 typedef AirplaneEnemyGraphicComponent Airplane;
 
 std::vector<Airplane::PropertiesAirplane> Airplane::m_vecAirplaneBlack(CNT_QUENTITY_LEVELS);

@@ -101,7 +101,7 @@ bool TransitionMainScene::init()
 	if (++m_quentityCounter == 2)
 	{
 		srand(time(NULL));
-		auto reScene = TransitionFade::create(0.1f, GameScene::createScene(true, m_coin, m_life, m_vecWeapon), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
+		auto reScene = TransitionFade::create(0.1f, GameScene::createScene(true, m_coin, m_life), Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));
 		Director::getInstance()->replaceScene(reScene);
 	}
 

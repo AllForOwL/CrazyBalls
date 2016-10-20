@@ -17,9 +17,8 @@ USING_NS_CC;
 int GameScene::m_level = 0;
 int GameScene::m_coin  = 0;
 int GameScene::m_life  = 0;
-std::vector<int> GameScene::m_vecNameWeapon;
 
-Scene *GameScene::createScene(bool nextLevel, int coin, int life, std::vector<int>& vecNameWeapon) 
+Scene *GameScene::createScene(bool nextLevel, int coin, int life) 
 {
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
@@ -27,27 +26,9 @@ Scene *GameScene::createScene(bool nextLevel, int coin, int life, std::vector<in
 
 	if (nextLevel)
 	{
-		if (++m_level == 12)
-		{
-			m_level = 0;
-		}
-
+		++m_level;
 		m_coin = coin;
 		m_life = life;
-	}
-	else 
-	{
-		m_level = 0;
-	}
-	
-	if (vecNameWeapon.size())
-	{
-		m_vecNameWeapon.resize(vecNameWeapon.size());
-		std::copy(vecNameWeapon.begin(), vecNameWeapon.end(), m_vecNameWeapon.begin());
-	}
-	else
-	{
-		m_vecNameWeapon.clear();
 	}
 
 	auto layer = GameScene::create();
@@ -72,8 +53,6 @@ bool GameScene::init()
 		_visibleSize.height / m_background->getContentSize().height);
 	m_background->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
 	this->addChild(m_background);
-
-	m_countLevel = 0;
 
 	auto edgeBody = PhysicsBody::createEdgeBox(_visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
 	edgeBody->setCollisionBitmask(SCENE_COLLISION_BITMASK);
