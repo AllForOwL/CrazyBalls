@@ -84,8 +84,6 @@ public:
 
 	virtual void Update(GameScene& scene);
 	
-	//virtual void SetTargetPointForBullet(cocos2d::Point point);
-
 	void CheckQuentityBulletInActiveWeapon();
 
 	void CheckHeroOnLevelCompete();

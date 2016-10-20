@@ -38,7 +38,7 @@ bool HelloWorld::init()
 void HelloWorld::GoToGameScene(cocos2d::Ref* ref)
 {
 	std::vector<int> _vec;
-	auto _gameScene = GameScene::createScene(false, 0, 0, _vec);
+	auto _gameScene = GameScene::createScene(false, 0, 0);
 
 	srand(time(NULL));
 	auto reScene = TransitionFade::create(2.0f, _gameScene, Color3B(rand() % 255 + 0, rand() % 255 + 0, rand() % 255 + 0));

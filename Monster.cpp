@@ -104,14 +104,6 @@ void Monster::Update(GameScene& scene)
 	}
 }
 
-void Monster::CheckHeroOnLevelCompete()
-{
-	if (m_graphicComponentHero->Winner())
-	{
-		m_stateHero = Monster::StateHero::HERO_STATE_WINNER;
-	}
-}
-
 void Monster::CauseDamage(int damage)
 {
 	if (m_graphicComponentHero->Dead(damage))

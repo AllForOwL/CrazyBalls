@@ -24,10 +24,14 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		case StatePhysic::STATE_WOUNDED_ENEMY:	// when bullet hit in enemy
 		{
 			int _indexEnemy			= hero.m_objectMonster->GetIndexEnemyForRemove(m_TagEnemy);
+<<<<<<< HEAD
 			int _coin				= hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
 			hero.m_graphicComponentHero->ChangeCoins(_coin);
 
 			//hero.CheckHeroOnLevelCompete();
+=======
+			int _temp				= hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
+>>>>>>> levels
 
 			hero.RemoveBullet(m_TagBullet);
 
@@ -66,21 +70,7 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	PhysicsBody* _a = contact.getShapeA()->getBody();
 	PhysicsBody* _b = contact.getShapeB()->getBody();
 
-	/*if (_a->getCollisionBitmask() == BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == BONUS_COLLISION_BITMASK)
-	{
-		m_TagBonus = _b->getTag();
-		this->m_statePhysic = StatePhysic::STATE_TARGET_BONUS;
-
-		CCLOG("Collision bonus");
-	}
-	else if (_a->getCollisionBitmask() == BONUS_COLLISION_BITMASK && _b->getCollisionBitmask() == BULLET_COLLISION_BITMASK)
-	{
-		m_TagBonus = _a->getTag();
-		this->m_statePhysic = StatePhysic::STATE_TARGET_BONUS;
-
-		CCLOG("Collision bonus");
-	}
-	else */if (_a->getCollisionBitmask() == HERO_BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == ENEMY_COLLISION_BITMASK)
+	if (_a->getCollisionBitmask() == HERO_BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == ENEMY_COLLISION_BITMASK)
 	{
 		m_TagEnemy	= _b->getTag();
 		m_TagBullet = _a->getTag();
@@ -110,20 +100,6 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 
 		CCLOG("Collision enemy b");
 	}
-	//else if (_a->getCollisionBitmask() == ENEMY_COLLISION_BITMASK &&_b->getCollisionBitmask() == HERO_COLLISION_BITMASK)
-	//{
-	//	m_TagEnemy = _a->getTag();
-	//	this->m_statePhysic = StatePhysic::STATE_WOUNDED_HERO;
-
-	//	CCLOG("Collision hero b");
-	//}
-	//else if (_a->getCollisionBitmask() == HERO_COLLISION_BITMASK &&_b->getCollisionBitmask() == ENEMY_COLLISION_BITMASK)
-	//{
-	//	m_TagEnemy = _b->getTag();
-	//	this->m_statePhysic = StatePhysic::STATE_WOUNDED_HERO;
-
-	//	CCLOG("Collision hero a");
-	//}
 
 	return true;
 }
