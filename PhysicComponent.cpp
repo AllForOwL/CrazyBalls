@@ -24,14 +24,10 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		case StatePhysic::STATE_WOUNDED_ENEMY:	// when bullet hit in enemy
 		{
 			int _indexEnemy			= hero.m_objectMonster->GetIndexEnemyForRemove(m_TagEnemy);
-<<<<<<< HEAD
 			int _coin				= hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
 			hero.m_graphicComponentHero->ChangeCoins(_coin);
 
-			//hero.CheckHeroOnLevelCompete();
-=======
 			int _temp				= hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
->>>>>>> levels
 
 			hero.RemoveBullet(m_TagBullet);
 
@@ -43,19 +39,17 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		}
 		case StatePhysic::STATE_WOUNDED_HERO:
 		{
-<<<<<<< HEAD
 			int _numberAirplane = hero.m_objectMonster->GetParentBullet(m_TagEnemy);
 			int _quentityDamage = hero.m_objectMonster->m_vecComponentEnemyAirplane[_numberAirplane]->GetAttack();
 			hero.CauseDamage(_quentityDamage);
 
 			hero.m_objectMonster->RemoveBullet(m_TagEnemy);
 
-=======
 			int _damage = hero.m_objectMonster->GetDamage(m_TagEnemy);
 			hero.m_objectMonster->RemoveBullet(m_TagEnemy);
 
 			hero.CauseDamage(_damage);
->>>>>>> levels
+
 			m_TagEnemy = 0;
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
 

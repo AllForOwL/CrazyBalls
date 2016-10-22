@@ -41,7 +41,7 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 		{
 			for (int i = 0; i < m_vecBullet.size(); i++)
 			{
-				if (m_vecBullet[i]->getPositionX() < 0)
+				if  (m_vecBullet[i]->getPositionX() < 0)
 				{
 					m_vecBullet[i]->removeFromParentAndCleanup(true);
 					delete m_vecBullet[i];

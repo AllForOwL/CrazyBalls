@@ -59,11 +59,11 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 
 	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
 	physicBodyHero->setContactTestBitmask(true);
-<<<<<<< HEAD
+
 	physicBodyHero->setDynamic(false);
-=======
+
 	physicBodyHero->setDynamic(false); 
->>>>>>> levels
+
 	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
 	this->setPhysicsBody(physicBodyHero);
 }

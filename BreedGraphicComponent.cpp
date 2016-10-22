@@ -25,43 +25,6 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 	m_SpeedMove				= CNT_BEGIN_VALUE_SPEED_MOVE;
 	m_PositionXShotInHero	= CNT_BEGIN_VALUE_SHOT_IN_HERO;
 
-	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big1.png", CNT_TIME_SHOT_STONE_ROCK_1, 1, 5);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big2.png", CNT_TIME_SHOT_STONE_ROCK_2, 2, 10);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_3)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_3, 3, 15);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_4)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_4, 4, 20);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_5)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_5, 5, 25);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_6)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_6, 6, 5);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_7)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_7, 2, 10);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_8)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_8, 3, 15);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_9)
-	{
-		SetPropertiesEnemy("res/Meteors/meteorBrown_big3.png", CNT_TIME_SHOT_STONE_ROCK_9, 4, 25);
-	}
-
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
@@ -84,42 +47,7 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 
 	m_BeginSecond = GetTime();
 
-	if (m_typeObject == CNT_NAME_ENEMY_ROCK_1)
-	{
-		SetPropertiesEnemy("res/Stones/rock1.png", CNT_TIME_SHOT_STONE_ROCK_1, 1, 5);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_2)
-	{
-		SetPropertiesEnemy("res/Stones/rock2.png", CNT_TIME_SHOT_STONE_ROCK_2, 2, 10);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_3)
-	{
-		SetPropertiesEnemy("res/Stones/rock3.png", CNT_TIME_SHOT_STONE_ROCK_3, 3, 15);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_4)
-	{
-		SetPropertiesEnemy("res/Stones/rock4.png", CNT_TIME_SHOT_STONE_ROCK_4, 4, 20);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_5)
-	{
-		SetPropertiesEnemy("res/Stones/rock5.png", CNT_TIME_SHOT_STONE_ROCK_5, 5, 25);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_6)
-	{
-		SetPropertiesEnemy("res/Stones/rock6.png", CNT_TIME_SHOT_STONE_ROCK_6, 6, 5);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_7)
-	{
-		SetPropertiesEnemy("res/Stones/rock7.png", CNT_TIME_SHOT_STONE_ROCK_7, 2, 10);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_8)
-	{
-		SetPropertiesEnemy("res/Stones/rock8.png", CNT_TIME_SHOT_STONE_ROCK_8, 3, 15);
-	}
-	else if (m_typeObject == CNT_NAME_ENEMY_ROCK_9)
-	{
-		SetPropertiesEnemy("res/Stones/rock9.png", CNT_TIME_SHOT_STONE_ROCK_9, 4, 25);
-	}
+	
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);

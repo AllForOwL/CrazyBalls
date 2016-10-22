@@ -45,14 +45,14 @@ public:
 		m_sceneWorld = world;
 	}
 	
-	static int					m_level;
-	static int					m_coin;
-	static int					m_life;
+	static int	m_level;
+	static int	m_coin;
+	static int	m_life;
 
 	GameLayer*			m_gameLayer;
 
 	std::shared_ptr<Monster>					m_hero;
-	std::shared_ptr<BonusGraphicComponent>		m_bonusGraphicComponent;
+	BonusGraphicComponent*		m_bonusGraphicComponent;
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentWeapon;
 	GraphicComponent*	m_graphicComponentButtonFire;
@@ -68,6 +68,9 @@ public:
 	int							m_countLevel;
 
 	Sprite* m_background;
+
+	Size m_visibleSize;
+
 };
 
 #endif // __GAME_SCENE_H__

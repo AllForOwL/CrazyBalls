@@ -45,21 +45,21 @@ bool GameScene::init()
 		return false;
 	}
 
-	Size _visibleSize   = Director::getInstance()->getVisibleSize();
+	m_visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
 
 	m_background = Sprite::create("res/Backgrounds/BackgroundNebula.jpg");
-	m_background->setScale(_visibleSize.width / m_background->getContentSize().width,
-		_visibleSize.height / m_background->getContentSize().height);
-	m_background->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+	m_background->setScale(m_visibleSize.width / m_background->getContentSize().width,
+		m_visibleSize.height / m_background->getContentSize().height);
+	m_background->setPosition(m_visibleSize.width / 2, m_visibleSize.height / 2);
 	this->addChild(m_background);
 
-	auto edgeBody = PhysicsBody::createEdgeBox(_visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
+	auto edgeBody = PhysicsBody::createEdgeBox(m_visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
 	edgeBody->setCollisionBitmask(SCENE_COLLISION_BITMASK);
 	edgeBody->setContactTestBitmask(true);
 
 	auto edgeNode = Node::create();
-	edgeNode->setPosition(Point(_visibleSize.width / 2 + origin.x, _visibleSize.height / 2 + origin.y));
+	edgeNode->setPosition(Point(m_visibleSize.width / 2 + origin.x, m_visibleSize.height / 2 + origin.y));
 	edgeNode->setPhysicsBody(edgeBody);
 	this->addChild(edgeNode);
 
@@ -81,8 +81,10 @@ bool GameScene::init()
 																	*m_physicComponent
 																 );
 	
-	m_bonusGraphicComponent = std::make_shared<BonusGraphicComponent>();
+	m_bonusGraphicComponent = new BonusGraphicComponent();
 	m_bonusGraphicComponent->setName("bonus");
+
+	this->addChild(m_bonusGraphicComponent);
 
 	m_gameLayer = GameLayer::create();
 	
@@ -101,8 +103,8 @@ bool GameScene::init()
 
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
 	//this->schedule(schedule_selector(GameScene::SpawnEnemyMeteor),	CNT_TIME_SPAWN_ENEMY_METEOR);
-	this->schedule(schedule_selector(GameScene::SpawnEnemyAirplane), CNT_TIME_SPAWN_ENEMY_AIRPLANE);
-	//this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
+	//this->schedule(schedule_selector(GameScene::SpawnEnemyAirplane), CNT_TIME_SPAWN_ENEMY_AIRPLANE);
+	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
 
 	return true;
 }
@@ -125,35 +127,7 @@ void GameScene::SpawnEnemyAirplane(float dt)
 
 void GameScene::SpawnBonus(float dt)
 {
-	if (m_bonusGraphicComponent->m_actived)
-	{
-		return;
-	}
-
-	m_bonusGraphicComponent->AddBonus(CNT_TYPE_OBJECT_RANDOM);
-
-	Size _visibleSize	= Director::getInstance()->getVisibleSize();
-	Size _sizeBonus		= m_bonusGraphicComponent->getContentSize();		
-
-	srand(time(NULL));
-	int _rand_X = rand() % 240 + 200;
-	int _rand_Y = rand() % 200 + 20;
-
-	m_bonusGraphicComponent->setPosition(_rand_X, _rand_Y);
-	m_bonusGraphicComponent->setScale(	_visibleSize.width  / _sizeBonus.width / 10,
-										_visibleSize.height / _sizeBonus.height / 10
-									 );
-	m_bonusGraphicComponent->m_actived = true;
-	m_bonusGraphicComponent->setVisible(true);
-
-	if (m_bonusGraphicComponent->m_typeObject == CNT_NAME_DIAMOND ||
-		m_bonusGraphicComponent->m_typeObject == CNT_NAME_GOLD ||
-		m_bonusGraphicComponent->m_typeObject == CNT_NAME_ONYX ||
-		m_bonusGraphicComponent->m_typeObject == CNT_NAME_RUBY
-		)
-	{
-		this->m_hero->m_stateBonus = Monster::StateBonus::SUPER_BONUS;
-	}
+	m_bonusGraphicComponent->AddBonus();
 }
 
 void GameScene::LoadFileNameBackground()
@@ -179,11 +153,11 @@ void GameScene::LoadFileNameBackground()
 
 void GameScene::SetBackground()
 {
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	Size m_visibleSize = Director::getInstance()->getVisibleSize();
 
 	m_background = Sprite::create(m_vecNameBackground[m_level]);
-	m_background->setPosition(_visibleSize.width / 2,
-		_visibleSize.height / 2);
+	m_background->setPosition(m_visibleSize.width / 2,
+		m_visibleSize.height / 2);
 }
 
 void GameScene::LoadLevel()
