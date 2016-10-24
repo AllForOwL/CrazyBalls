@@ -19,13 +19,22 @@ public:
 		BULLET_SPEED,
 		BULLET_QUENTITY
 	};
+	
+	enum StateBonus
+	{
+		ACTIVE,
+		NOT_ACTIVE,
+		SHOW,
+		HIDE,
+		DEATH
+	};
 
 	BonusGraphicComponent();
 	
 	virtual void		Update(Monster& hero, GameScene& scene);
 	virtual std::string GetTypeObject() const;
 		
-	void AddBonus();
+	void AddBonus(float dt);
 
 	std::chrono::time_point<std::chrono::system_clock> GetTime();
 
@@ -37,8 +46,10 @@ public:
 public:
 	Size		m_visibleSize;
 	std::string m_typeObject;
+	StateBonus  m_stateBonus;
+	std::chrono::time_point<std::chrono::system_clock> m_secondBeginActive;
 
-	std::chrono::time_point<std::chrono::system_clock> m_BeginSecond;
+	int m_secondEndActive;
 };
 
 #endif

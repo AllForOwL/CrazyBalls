@@ -13,6 +13,7 @@ const int CNT_COUNT_SPRITES_IN_VECTOR	= 3;
 
 const int CNT_COIN_DEFAULT	= 50;
 const int CNT_POWER_DEFAULT = 20;
+const int CNT_ARMOR_DEFAULT = 20;
 
 std::vector<int> HeroGraphicComponent::m_vecNumberCoinsForTransitionNextLevel(CNT_QUENTITY_LEVELS);
 
@@ -227,14 +228,29 @@ void HeroGraphicComponent::JumpDown(Monster& i_hero)
 		}
 		case Monster::StateHero::HERO_STATE_TAKE_COIN:
 		{
-			ChangeCoins(CNT_COIN_DEFAULT);
-		
+			m_coins += CNT_COIN_DEFAULT;
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;
+
 			break;
 		}
 		case Monster::StateHero::HERO_STATE_TAKE_POWER:
 		{
-			ChangeHealth(CNT_POWER_DEFAULT);
+			m_health += CNT_POWER_DEFAULT;
 			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_DOWN;
+
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_TAKE_BONUS_BULLET_QUENTITY:
+		{
+			hero.CreateBulletBonus();
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;
+
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_TAKE_ARMOR:
+		{
+			m_armor += CNT_ARMOR_DEFAULT;
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_JUMP_UP;
 
 			break;
 		}

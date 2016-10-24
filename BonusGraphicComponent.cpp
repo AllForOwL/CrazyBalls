@@ -8,7 +8,9 @@ const int CNT_SECOND_VISIBLE_SUPER_BONUS = 10;
 BonusGraphicComponent::BonusGraphicComponent()
 {
 	this->initWithFile("res/Bonus/powerupBlue_bolt.png");
-	
+
+	m_secondEndActive	= 0;
+	m_stateBonus		= StateBonus::NOT_ACTIVE;
 	m_visibleSize		= Director::getInstance()->getVisibleSize();
 	Size _sizeBonus		= this->getContentSize();
 
@@ -20,7 +22,10 @@ BonusGraphicComponent::BonusGraphicComponent()
 	physicBodyBonus->setContactTestBitmask(true);
 	physicBodyBonus->setCollisionBitmask(BONUS_COLLISION_BITMASK);
 	physicBodyBonus->setDynamic(false);
+	physicBodyBonus->setTag(CNT_TAG_BONUS_POWER);
 	this->setPhysicsBody(physicBodyBonus);
+
+	schedule(schedule_selector(BonusGraphicComponent::AddBonus), CNT_TIME_SPAWN_BONUS);
 }
 
 void BonusGraphicComponent::SetPropertiesBonus(const std::string& i_nameSprites, const std::string& i_typeBonus)
@@ -44,36 +49,51 @@ void BonusGraphicComponent::SetPosition()
 	this->setPosition(_positionBonus.x, _positionBonus.y);
 }
 
-void BonusGraphicComponent::AddBonus()
+void BonusGraphicComponent::AddBonus(float dt)
 {
-	int _typeBonus = rand() % 3 + 0;
+	int _typeBonus = 4;//rand() % 4 + 0;
 
 	switch (_typeBonus)
 	{
 		case TypeBonus::COIN:
 		{
 			SetPropertiesBonus("res/Bonus/powerupBlue_star.png", CNT_NAME_BONUS_COIN);
+			this->getPhysicsBody()->setTag(CNT_TAG_BONUS_COIN);
+			m_secondEndActive = 5;
+
 			break;
 		}
 		case TypeBonus::POWER:
 		{
 			SetPropertiesBonus("res/Bonus/pill_blue.png", CNT_NAME_BONUS_POWER);
+			this->getPhysicsBody()->setTag(CNT_TAG_BONUS_POWER);
+			m_secondEndActive = 5;
+
 			break;
 		}
 		case TypeBonus::ARMOR:
 		{
 			SetPropertiesBonus("res/Bonus/powerupBlue_shield.png", CNT_NAME_BONUS_ARMOR);
+			this->getPhysicsBody()->setTag(CNT_TAG_BONUS_ARMOR);
+			m_secondEndActive = 7;
+
 			break;
 		}
 
 		case TypeBonus::BULLET_SPEED:
 		{
 			SetPropertiesBonus("res/Bonus/powerupBlue_bolt.png", CNT_NAME_BONUS_BULLET_SPEED);
+			this->getPhysicsBody()->setTag(CNT_TAG_BONUS_BULLET_SPEED);
+			m_secondEndActive = 9;
+
 			break;
 		}
 		case TypeBonus::BULLET_QUENTITY:
 		{
 			SetPropertiesBonus("res/Bonus/things_bronze.png", CNT_NAME_BONUS_BULLET_QUENTITY);
+			this->getPhysicsBody()->setTag(CNT_TAG_BONUS_BULLET_QUENTITY);
+			m_secondEndActive = 10;
+
 			break;
 		}
 		
@@ -81,7 +101,8 @@ void BonusGraphicComponent::AddBonus()
 		break;
 	}
 
-	SetPosition();
+	m_stateBonus = StateBonus::SHOW;
+	m_secondBeginActive = GetTime();
 }
 
 std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTime()
@@ -93,7 +114,45 @@ std::chrono::time_point<std::chrono::system_clock> BonusGraphicComponent::GetTim
 
 /*virtual*/ void BonusGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	switch (m_stateBonus)
+	{
+		case StateBonus::ACTIVE:
+		{
+			if ((int)std::chrono::duration<double>(GetTime() - m_secondBeginActive).count() == m_secondEndActive)
+			{
+				m_stateBonus = StateBonus::HIDE;
+			}
+		
+			 break;
+		}
+		case StateBonus::NOT_ACTIVE:
+		{
+		
+			break;
+		}
+		case StateBonus::SHOW:
+		{
+			this->setVisible(true);
+			SetPosition();
+			m_stateBonus = StateBonus::ACTIVE;
 
+			break;
+		}
+		case StateBonus::HIDE:
+		{
+			this->setVisible(false);
+			this->setPosition(-500, -500);
+			m_stateBonus = StateBonus::NOT_ACTIVE;
+
+			break;
+		}
+		case StateBonus::DEATH:
+		{
+			this->removeFromParentAndCleanup(true);
+
+			break;
+		}
+	}
 }
 
 /*virtual*/ std::string BonusGraphicComponent::GetTypeObject() const

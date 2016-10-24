@@ -57,6 +57,36 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 		}
 		case StatePhysic::STATE_TARGET_BONUS:
 		{	
+			switch (m_TagBonus)
+			{
+				case CNT_TAG_BONUS_COIN:
+				{
+					hero.m_stateHero = Monster::StateHero::HERO_STATE_TAKE_COIN;
+					break;
+				}
+				case CNT_TAG_BONUS_POWER:
+				{
+					hero.m_stateHero = Monster::StateHero::HERO_STATE_TAKE_POWER;
+					break;
+				}
+				case CNT_TAG_BONUS_ARMOR:
+				{
+					hero.m_stateHero = Monster::StateHero::HERO_STATE_TAKE_ARMOR;
+					break;
+				}
+				case CNT_TAG_BONUS_BULLET_SPEED:
+				{
+					hero.ChangeBulletSpeed();
+					break;
+				}
+				case CNT_TAG_BONUS_BULLET_QUENTITY:
+				{
+					hero.CreateBulletBonus();
+					break;
+				}
+			}
+
+			m_TagBonus = 0;
 			this->m_statePhysic	= StatePhysic::STATE_NOTHING;
 
 			break;
@@ -100,6 +130,17 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_HERO;
 
 		CCLOG("Collision enemy b");
+	}
+	else if (_a->getCollisionBitmask() == HERO_BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == BONUS_COLLISION_BITMASK)
+	{
+		m_TagBonus = _b->getTag();
+		m_statePhysic = StatePhysic::STATE_TARGET_BONUS;
+
+	}
+	else if (_a->getCollisionBitmask() == BONUS_COLLISION_BITMASK && _b->getCollisionBitmask() == HERO_BULLET_COLLISION_BITMASK)
+	{
+		m_TagBonus = _a->getTag();
+		m_statePhysic = StatePhysic::STATE_TARGET_BONUS;
 	}
 
 	return true;

@@ -31,8 +31,8 @@ Monster::Monster(
 	m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_FIRE;
 	m_statePhysic	= Monster::StatePhysic::PHYSIC_NOTHING;
 	m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_LIFE;;
-	m_stateBonus	= Monster::StateBonus::BONUS_WEAPON;
 
+	m_creatingBulletBonus = false;
 	m_counterID = 0;
 	m_visibleSize = Director::getInstance()->getVisibleSize();
 }
@@ -52,8 +52,33 @@ void Monster::CreateBulletsForFire()
 	PlayerBulletGraphicComponent* _bulletBottomPosition = new PlayerBulletGraphicComponent(m_counterID, 120, CNT_NAME_BULLET_POSITION_BOTTOM);
 	_bulletBottomPosition->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
 
+	if (m_creatingBulletBonus)
+	{
+		++m_counterID;
+		PlayerBulletGraphicComponent* _bulletBonus = new PlayerBulletGraphicComponent(m_counterID, 120, CNT_NAME_BULLET_BONUS);
+		_bulletBonus->ChangeStateBullet(PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_FIRE);
+
+		m_vecGraphicComponentBullet.push_back(_bulletBonus);
+	}
+
 	m_vecGraphicComponentBullet.push_back(_bulletTopPosition);
 	m_vecGraphicComponentBullet.push_back(_bulletBottomPosition);
+}
+
+void Monster::CreateBulletBonus()
+{
+	if (!m_creatingBulletBonus)
+	{
+		m_creatingBulletBonus = true;
+	}
+}
+
+void Monster::ChangeBulletSpeed()
+{
+	for (int i = 0; i < m_vecGraphicComponentBullet.size(); i++)
+	{
+		m_vecGraphicComponentBullet[i]->m_stateBullet = PlayerBulletGraphicComponent::StateBullet::BULLET_STATE_BONUS_SPEED;
+	}
 }
 
 void Monster::RemoveBullet(int i_tagBullet)
@@ -105,7 +130,6 @@ void Monster::CauseDamage(int damage)
 		m_stateHero		= Monster::StateHero::HERO_STATE_DEATH;
 		m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEATH;
 		m_stateEnemy	= Monster::StateEnemys::ENEMY_STATE_DEATH;
-		m_stateBonus	= Monster::StateBonus::BONUS_DEATH;
 
 		LoadGameOver();
 	}

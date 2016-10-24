@@ -72,7 +72,7 @@ bool GameScene::init()
 	m_inputComponent				= new PlayerInputComponent();
 	m_botInputComponent				= new BotInputComponent();
 	m_physicComponent				= new PhysicComponent();
-	m_hero							= std::make_shared<Monster>	(
+	m_hero							= new Monster	(
 																	*m_graphicComponentHero, 
 																	*m_graphicComponentButtonFire,
 																	*m_gameObjectMonster,
@@ -104,8 +104,7 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
 	//this->schedule(schedule_selector(GameScene::SpawnEnemyMeteor),	CNT_TIME_SPAWN_ENEMY_METEOR);
 	//this->schedule(schedule_selector(GameScene::SpawnEnemyAirplane), CNT_TIME_SPAWN_ENEMY_AIRPLANE);
-	this->schedule(schedule_selector(GameScene::SpawnBonus),	CNT_TIME_SPAWN_BONUS);
-
+	
 	return true;
 }
 
@@ -113,6 +112,7 @@ void GameScene::update(float dt)
 {
 	m_hero->Update		(*this);
 	m_gameLayer->Update	(*m_hero);
+	m_bonusGraphicComponent->Update(*m_hero, *this);
 }
 
 void GameScene::SpawnEnemyMeteor(float dt)
@@ -123,11 +123,6 @@ void GameScene::SpawnEnemyMeteor(float dt)
 void GameScene::SpawnEnemyAirplane(float dt)
 {
 	m_gameObjectMonster->SpawnerEnemyAirplane(*this);
-}
-
-void GameScene::SpawnBonus(float dt)
-{
-	m_bonusGraphicComponent->AddBonus();
 }
 
 void GameScene::LoadFileNameBackground()

@@ -27,7 +27,6 @@ public:
 	void update				(float dt);
 	void SpawnEnemyMeteor	(float dt);
 	void SpawnEnemyAirplane	(float dt);
-	void SpawnBonus			(float dt);
 	
 	void LoadLevel();
 	void LoadFileNameBackground();
@@ -51,7 +50,7 @@ public:
 
 	GameLayer*			m_gameLayer;
 
-	std::shared_ptr<Monster>					m_hero;
+	Monster*					m_hero;
 	BonusGraphicComponent*		m_bonusGraphicComponent;
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentWeapon;

@@ -29,10 +29,17 @@ const int CNT_TIME_SHOT_STONE_ROCK_7	= 9;
 const int CNT_TIME_SHOT_STONE_ROCK_8	= 8;
 const int CNT_TIME_SHOT_STONE_ROCK_9	= 7;
 
+const int CNT_TAG_BONUS_COIN			= 100;
+const int CNT_TAG_BONUS_POWER			= 101;
+const int CNT_TAG_BONUS_ARMOR			= 103;
+const int CNT_TAG_BONUS_BULLET_SPEED	= 104;
+const int CNT_TAG_BONUS_BULLET_QUENTITY = 105;
+
 const std::string CNT_NAME_HERO_HELL		= "Hell";
 
 const std::string CNT_NAME_BULLET_POSITION_TOP		= "Bullet_position_top";
 const std::string CNT_NAME_BULLET_POSITION_BOTTOM	= "Bullet_position_bottom";
+const std::string CNT_NAME_BULLET_BONUS			    = "Bullet bonus";
 
 const std::string CNT_NAME_COINS			= "Coins";
 const std::string CNT_NAME_CASKET_COINS		= "Casket_coins";

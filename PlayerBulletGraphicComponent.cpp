@@ -69,11 +69,19 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			this->setPosition(m_pointBegin);
 			this->setVisible(false);
 		}
-		else
+		else if (this->m_typeObject == CNT_NAME_BULLET_POSITION_BOTTOM)
 		{
 			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
 				hero.m_graphicComponentHero->getPositionY() - (hero.m_graphicComponentHero->getBoundingBox().size.height / 2)
 				);
+			this->setPosition(m_pointBegin);
+			this->setVisible(false);
+		}
+		else
+		{
+			m_pointBegin = Point(hero.m_graphicComponentHero->getPositionX() + hero.m_graphicComponentHero->getBoundingBox().size.width,
+								 hero.m_graphicComponentHero->getPositionY()
+								);
 			this->setPosition(m_pointBegin);
 			this->setVisible(false);
 		}
@@ -84,6 +92,13 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 		case StateBullet::BULLET_STATE_FIRE:
 		{
 			this->setPositionX(this->getPositionX() + m_speed);
+
+			break;
+		}
+		case StateBullet::BULLET_STATE_BONUS_SPEED:
+		{
+			m_speed += CNT_SPEED_BULLET;
+			m_stateBullet = StateBullet::BULLET_STATE_FIRE;
 
 			break;
 		}

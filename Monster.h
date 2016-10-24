@@ -36,6 +36,8 @@ public:
 		HERO_STATE_GO_TO_TARGET,
 		HERO_STATE_TAKE_COIN,
 		HERO_STATE_TAKE_POWER,
+		HERO_STATE_TAKE_ARMOR,
+		HERO_STATE_TAKE_BONUS_BULLET_QUENTITY
 	};
 
 	enum StateWeapon
@@ -51,18 +53,6 @@ public:
 	{
 		ENEMY_STATE_LIFE,
 		ENEMY_STATE_DEATH
-	};
-
-	enum StateBonus
-	{
-		SUPER_BONUS,
-		BONUS_WEAPON,
-		BONUS_REST,
-		BONUS_TAKE_BULLET,
-		BONUS_TAKE_COIN,
-		BONUS_TAKE_POWER,
-		BONUS_TAKE_WEAPON,
-		BONUS_DEATH
 	};
 
 	enum StatePhysic
@@ -85,18 +75,14 @@ public:
 	virtual void Update(GameScene& scene);
 	
 	void CheckQuentityBulletInActiveWeapon();
-
 	void CheckHeroOnLevelCompete();
-
 	void CauseDamage(int damage);
-
 	void CauseBonus(int tagBonus);
-
 	void LoadGameOver() const;
-
 	void CreateBulletsForFire();
-
+	void CreateBulletBonus();
 	void RemoveBullet(int i_tagBullet);
+	void ChangeBulletSpeed();
 
 	~Monster();
 
@@ -111,7 +97,6 @@ public:
 	StateWeapon		m_stateWeapon;
 	StatePhysic		m_statePhysic;
 	StateEnemys		m_stateEnemy;
-	StateBonus		m_stateBonus;
 	StateButtonFire	m_stateButtonFire;
 
 	std::vector<PlayerBulletGraphicComponent*> m_vecGraphicComponentBullet;
@@ -119,6 +104,8 @@ public:
 	int m_counterID;
 
 	Size	m_visibleSize;
+
+	bool	m_creatingBulletBonus;
 };
 
 #endif
