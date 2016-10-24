@@ -27,8 +27,6 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			int _coin				= hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
 			hero.m_graphicComponentHero->ChangeCoins(_coin);
 
-			int _temp				= hero.m_objectMonster->RemoveAndCleanEnemy(_indexEnemy);
-
 			hero.RemoveBullet(m_TagBullet);
 
 			this->m_statePhysic = StatePhysic::STATE_NOTHING;
@@ -85,6 +83,8 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 					break;
 				}
 			}
+
+			scene.m_bonusGraphicComponent->m_stateBonus = BonusGraphicComponent::StateBonus::HIDE;
 
 			m_TagBonus = 0;
 			this->m_statePhysic	= StatePhysic::STATE_NOTHING;

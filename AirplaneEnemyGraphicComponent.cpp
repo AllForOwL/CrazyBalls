@@ -328,7 +328,8 @@ void AirplaneEnemyGraphicComponent::SetPropertiesAirplane(const std::string& i_f
 		m_visibleSize.height / this->getContentSize().height / 10);
 	this->setRotation(-90.0);
 	this->setVisible(true);
-
+	
+	srand(time(NULL));
 	int _randTagForPhysicCollision = rand() % 100000 + 0;
 		
 	auto physicBodyEnemy = PhysicsBody::createBox(this->getContentSize());
@@ -345,6 +346,14 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const AirplaneEnemy
 	this->m_armor		= copyObject.m_armor;
 	this->m_health		= copyObject.m_health;
 	this->m_typeObject	= copyObject.m_typeObject;
+
+	m_visibleSize = Director::getInstance()->getVisibleSize();
+
+	DetermineTypeObject();
+
+	m_stateAirplane = StateAirplane::STATE_MOVE;
+
+	this->schedule(schedule_selector(AirplaneEnemyGraphicComponent::SetStateCreateBullets), m_timeSpawnShot);
 }
 
 int AirplaneEnemyGraphicComponent::GetAttack() const

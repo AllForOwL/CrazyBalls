@@ -103,7 +103,7 @@ bool GameScene::init()
 
 	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
 	//this->schedule(schedule_selector(GameScene::SpawnEnemyMeteor),	CNT_TIME_SPAWN_ENEMY_METEOR);
-	//this->schedule(schedule_selector(GameScene::SpawnEnemyAirplane), CNT_TIME_SPAWN_ENEMY_AIRPLANE);
+	this->schedule(schedule_selector(GameScene::SpawnEnemyAirplane), CNT_TIME_SPAWN_ENEMY_AIRPLANE);
 	
 	return true;
 }
