@@ -51,7 +51,7 @@ void BonusGraphicComponent::SetPosition()
 
 void BonusGraphicComponent::AddBonus(float dt)
 {
-	int _typeBonus = 4;//rand() % 4 + 0;
+	int _typeBonus = rand() % 4 + 0;
 
 	switch (_typeBonus)
 	{

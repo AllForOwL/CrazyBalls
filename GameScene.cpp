@@ -46,7 +46,7 @@ bool GameScene::init()
 	}
 
 	m_visibleSize   = Director::getInstance()->getVisibleSize();
-	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
+	Vec2 origin		= Director::getInstance()->getVisibleOrigin();
 
 	m_background = Sprite::create("res/Backgrounds/BackgroundNebula.jpg");
 	m_background->setScale(m_visibleSize.width / m_background->getContentSize().width,
@@ -101,10 +101,10 @@ bool GameScene::init()
 	
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
-	this->schedule(schedule_selector(GameScene::update),		CNT_TIME_UPDATE_SCENE);
+	this->schedule(schedule_selector(GameScene::SpawnEnemyAirplane),	CNT_TIME_SPAWN_ENEMY_AIRPLANE);
+	this->schedule(schedule_selector(GameScene::update),				CNT_TIME_UPDATE_SCENE);
 	//this->schedule(schedule_selector(GameScene::SpawnEnemyMeteor),	CNT_TIME_SPAWN_ENEMY_METEOR);
-	this->schedule(schedule_selector(GameScene::SpawnEnemyAirplane), CNT_TIME_SPAWN_ENEMY_AIRPLANE);
-	
+
 	return true;
 }
 
@@ -155,11 +155,6 @@ void GameScene::SetBackground()
 		m_visibleSize.height / 2);
 }
 
-void GameScene::LoadLevel()
-{
-	/*auto reScene = TransitionFade::create(1.0f, GameScene::createScene(true, ), Color3B(0, 0, 0));
-	Director::getInstance()->replaceScene(reScene);*/
-}
 
 GameScene::~GameScene()
 {

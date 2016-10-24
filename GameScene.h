@@ -28,7 +28,6 @@ public:
 	void SpawnEnemyMeteor	(float dt);
 	void SpawnEnemyAirplane	(float dt);
 	
-	void LoadLevel();
 	void LoadFileNameBackground();
 	void SetBackground();
 
