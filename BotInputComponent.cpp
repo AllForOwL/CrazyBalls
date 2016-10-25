@@ -1,6 +1,8 @@
 #include "BotInputComponent.h"
 #include "Monster.h"
 #include "GameObjectMonster.h"
+#include "Monster.h"
+#include "AirplaneEnemyGraphicComponent.h"
 
 BotInputComponent::BotInputComponent()
 {
@@ -9,7 +11,23 @@ BotInputComponent::BotInputComponent()
 
 /*virtual*/ void BotInputComponent::Update(Monster& heroes)
 {
-
+	if (heroes.m_objectMonster->m_vecComponentEnemyAirplane.size())
+	{
+		int _positionYHero = heroes.m_graphicComponentHero->getPositionY();
+	
+		for (int i = 0; i < heroes.m_objectMonster->m_vecComponentEnemyAirplane.size(); i++)
+		{
+			int _positionYAirplane = heroes.m_objectMonster->m_vecComponentEnemyAirplane[i]->getPositionY();
+			if (_positionYAirplane > _positionYHero)
+			{
+				heroes.m_objectMonster->m_vecComponentEnemyAirplane[i]->m_stateAirplane = AirplaneEnemyGraphicComponent::StateAirplane::STATE_MOVE_DOWN;
+			}
+			else
+			{
+				heroes.m_objectMonster->m_vecComponentEnemyAirplane[i]->m_stateAirplane = AirplaneEnemyGraphicComponent::StateAirplane::STATE_MOVE_UP;
+			}
+		}
+	}
 }
 
 BotInputComponent::~BotInputComponent()
@@ -18,7 +36,7 @@ BotInputComponent::~BotInputComponent()
 }
 /*
 	Tasks on 20:10:16:
-	- create 4 levels for This game(can be different complexity!!!!!);
+	+ create 4 levels for This game(can be different complexity!!!!!);
 */
 
 

@@ -4,7 +4,9 @@
 #include "constants.h"
 #include <GameScene.h>
 
-typedef AirplaneEnemyGraphicComponent Airplane;
+const int CNT_SPEED_MOVE = 1;
+
+using Airplane = AirplaneEnemyGraphicComponent;
 
 std::vector<Airplane::PropertiesAirplane> Airplane::m_vecAirplaneBlack(CNT_QUENTITY_LEVELS);
 std::vector<Airplane::PropertiesAirplane> Airplane::m_vecAirplaneBlue(CNT_QUENTITY_LEVELS);
@@ -20,7 +22,7 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 
 	m_stateAirplane = StateAirplane::STATE_MOVE;
 
-	this->schedule(schedule_selector(AirplaneEnemyGraphicComponent::SetStateCreateBullets), m_timeSpawnShot);
+	this->schedule(schedule_selector(AirplaneEnemyGraphicComponent::CreateBullets), m_timeSpawnShot);
 }
 
 /*virtual*/ void AirplaneEnemyGraphicComponent::Update(Monster& hero, GameScene& scene)
@@ -32,36 +34,27 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 
 	switch (m_stateAirplane)
 	{
-		case StateAirplane::STATE_CREATE_BULLETS:
-		{
-			CreateBullets();
-			break;
-		}
 		case StateAirplane::STATE_MOVE:
 		{
-			for (int i = 0; i < m_vecBullet.size(); i++)
-			{
-				if  (m_vecBullet[i]->getPositionX() < 0)
-				{
-					m_vecBullet[i]->removeFromParentAndCleanup(true);
-					delete m_vecBullet[i];
-					m_vecBullet.erase(m_vecBullet.begin() + i);
-				}
-				else
-				{
-					m_vecBullet[i]->Update(hero, scene);
-				}
-			}
 			Move();
 
 			break;
 		}
-		case StateAirplane::STATE_ATTACK:
+		case StateAirplane::STATE_MOVE_UP:
 		{
+			MoveUp();
+
+			break;
+		}
+		case StateAirplane::STATE_MOVE_DOWN:
+		{
+			MoveDown();
+
 			break;
 		}
 		case StateAirplane::STATE_DEATH:
-		{
+		{		
+
 			break;
 		}
 	default:
@@ -74,7 +67,19 @@ void AirplaneEnemyGraphicComponent::Move()
 	this->setPositionX(this->getPositionX() - 1);
 }
 
-void AirplaneEnemyGraphicComponent::CreateBullets()
+void AirplaneEnemyGraphicComponent::MoveUp()
+{
+	this->setPositionX(this->getPositionX() - 1);
+	this->setPositionY(this->getPositionY() + CNT_SPEED_MOVE);
+}
+
+void AirplaneEnemyGraphicComponent::MoveDown()
+{
+	this->setPositionX(this->getPositionX() - 1);
+	this->setPositionY(this->getPositionY() - CNT_SPEED_MOVE);
+}
+
+void AirplaneEnemyGraphicComponent::CreateBullets(float dt)
 {
 	srand(time(NULL));
 	int _IDTopBullet = rand() % 100000 + 0;
@@ -112,13 +117,6 @@ void AirplaneEnemyGraphicComponent::CreateBullets()
 
 	m_vecBullet.push_back(_bulletTopPosition);
 	m_vecBullet.push_back(_bulletBottomPosition);
-
-	m_stateAirplane = StateAirplane::STATE_MOVE;
-}
-
-void AirplaneEnemyGraphicComponent::SetStateCreateBullets(float dt)
-{
-	m_stateAirplane = StateAirplane::STATE_CREATE_BULLETS;
 }
 
 void AirplaneEnemyGraphicComponent::LoadValueProperties()
@@ -132,8 +130,8 @@ void AirplaneEnemyGraphicComponent::LoadValueProperties()
 	int _orderHealthBottom	= 50;
 	int _orderHealthTop		= 90;
 	
-	int _orderSpawnShotBottom	= 4;
-	int _orderSpawnShotTop		= 10;
+	int _orderSpawnShotBottom	= 1;
+	int _orderSpawnShotTop		= 3;
 	
 	int _randValue	= 0;
 	
@@ -191,12 +189,6 @@ void AirplaneEnemyGraphicComponent::LoadValueProperties()
 		m_vecAirplaneGreen[i].m_spawnShot = _randValue;
 		_randValue = rand() % _orderSpawnShotTop + _orderSpawnShotBottom;
 		m_vecAirplaneRed[i].m_spawnShot = _randValue;
-
-		if (_orderSpawnShotBottom)
-		{
-			--_orderSpawnShotBottom;
-			_orderSpawnShotTop -= 2;
-		}
 	}
 }
 
@@ -353,7 +345,7 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const AirplaneEnemy
 
 	m_stateAirplane = StateAirplane::STATE_MOVE;
 
-	this->schedule(schedule_selector(AirplaneEnemyGraphicComponent::SetStateCreateBullets), m_timeSpawnShot);
+	this->schedule(schedule_selector(AirplaneEnemyGraphicComponent::CreateBullets), m_timeSpawnShot);
 }
 
 int AirplaneEnemyGraphicComponent::GetAttack() const

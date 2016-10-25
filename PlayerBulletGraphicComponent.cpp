@@ -123,7 +123,6 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 
 void PlayerBulletGraphicComponent::LoadBulletNormal()
 {
-//	m_position = Point::ZERO;
 	m_strFilename = "res/Bullets/Bullet_normal.png";
 }
 

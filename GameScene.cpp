@@ -73,13 +73,13 @@ bool GameScene::init()
 	m_botInputComponent				= new BotInputComponent();
 	m_physicComponent				= new PhysicComponent();
 	m_hero							= new Monster	(
-																	*m_graphicComponentHero, 
-																	*m_graphicComponentButtonFire,
-																	*m_gameObjectMonster,
-																	*m_inputComponent,
-																	*m_botInputComponent,
-																	*m_physicComponent
-																 );
+														*m_graphicComponentHero, 
+														*m_graphicComponentButtonFire,
+														*m_gameObjectMonster,
+														*m_inputComponent,
+														*m_botInputComponent,
+														*m_physicComponent
+													);
 	
 	m_bonusGraphicComponent = new BonusGraphicComponent();
 	m_bonusGraphicComponent->setName("bonus");
@@ -154,7 +154,6 @@ void GameScene::SetBackground()
 	m_background->setPosition(m_visibleSize.width / 2,
 		m_visibleSize.height / 2);
 }
-
 
 GameScene::~GameScene()
 {

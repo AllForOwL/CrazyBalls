@@ -67,8 +67,25 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 				for (int i = 0; i < m_vecComponentEnemyAirplane.size(); i++)
 				{
 					m_vecComponentEnemyAirplane[i]->Update(hero, scene);
+					if (m_vecComponentEnemyAirplane[i]->m_vecBullet.size())
+					{
+						for (int j = 0; j < m_vecComponentEnemyAirplane[i]->m_vecBullet.size(); j++)
+						{
+							if (m_vecComponentEnemyAirplane[i]->m_vecBullet[j]->getPositionX() < 0)
+							{
+								m_vecComponentEnemyAirplane[i]->m_vecBullet[j]->removeFromParentAndCleanup(true);
+								delete m_vecComponentEnemyAirplane[i]->m_vecBullet[j];
+								m_vecComponentEnemyAirplane[i]->m_vecBullet.erase(m_vecComponentEnemyAirplane[i]->m_vecBullet.begin() + j);
+							}
+							else
+							{
+								m_vecComponentEnemyAirplane[i]->m_vecBullet[j]->Update(hero, scene);
+							}
+						}
+					}
 				}
 			}
+			
 			break;
 		}
 		case Monster::StateEnemys::ENEMY_STATE_DEATH:

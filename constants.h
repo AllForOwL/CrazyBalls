@@ -1,5 +1,5 @@
 const float CNT_TIME_SPAWN_ENEMY_METEOR		= 3.0;
-const float CNT_TIME_SPAWN_ENEMY_AIRPLANE	= 3.0;
+const float CNT_TIME_SPAWN_ENEMY_AIRPLANE	= 10.0;
 const float CNT_TIME_UPDATE_SCENE	= 0.05;
 const float CNT_TIME_SPAWN_BONUS	= 5.0;
 

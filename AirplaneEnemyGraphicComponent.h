@@ -34,9 +34,9 @@ public:
 
 	enum StateAirplane
 	{
-		STATE_CREATE_BULLETS,
 		STATE_MOVE,
-		STATE_ATTACK,
+		STATE_MOVE_UP,
+		STATE_MOVE_DOWN,
 		STATE_DEATH,
 		STATE_REST
 	};
@@ -57,9 +57,10 @@ public:
 	int GetHealth() const;
 	std::string GetTypeObject() const;
 
-	void SetStateCreateBullets(float dt);
-	void CreateBullets();
+	void CreateBullets(float dt);
 	void Move();
+	void MoveUp();
+	void MoveDown();
 
 	void LoadValueProperties();
 
