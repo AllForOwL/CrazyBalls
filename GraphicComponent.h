@@ -89,9 +89,10 @@ public:
 	{
 
 	}
-	virtual std::string& GetFileName()
+	virtual std::string GetFileName()
 	{
-		return std::string(" ");
+		std::string _empty = " ";
+		return std::string(_empty);
 	}
 	virtual int GetArmor() const
 	{

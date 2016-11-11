@@ -12,6 +12,8 @@ public:
 	virtual bool init();
 
 	void Update(Monster& hero);
+	
+	std::string to_string(int i);
 
 	void GoToPause(cocos2d::Ref* ref);
 

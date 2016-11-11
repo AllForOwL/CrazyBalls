@@ -64,18 +64,18 @@ AirplaneEnemyGraphicComponent::AirplaneEnemyGraphicComponent(const std::string& 
 
 void AirplaneEnemyGraphicComponent::Move()
 {
-	this->setPositionX(this->getPositionX() - 1);
+	this->setPositionX(this->getPositionX() - CNT_SPEED_MOVE);
 }
 
 void AirplaneEnemyGraphicComponent::MoveUp()
 {
-	this->setPositionX(this->getPositionX() - 1);
+	this->setPositionX(this->getPositionX() - CNT_SPEED_MOVE);
 	this->setPositionY(this->getPositionY() + CNT_SPEED_MOVE);
 }
 
 void AirplaneEnemyGraphicComponent::MoveDown()
 {
-	this->setPositionX(this->getPositionX() - 1);
+	this->setPositionX(this->getPositionX() - CNT_SPEED_MOVE);
 	this->setPositionY(this->getPositionY() - CNT_SPEED_MOVE);
 }
 

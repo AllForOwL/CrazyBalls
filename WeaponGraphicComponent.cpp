@@ -56,7 +56,7 @@ void WeaponGraphicComponent::SetPropertiesWeapon(const int& i_typeObject, const 
 	return m_typeObject;
 }
 
-/*virtual*/ std::string& WeaponGraphicComponent::GetFileName()
+/*virtual*/ std::string WeaponGraphicComponent::GetFileName()
 {
 	return m_strFilename;
 }

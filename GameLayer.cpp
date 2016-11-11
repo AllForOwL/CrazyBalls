@@ -21,7 +21,7 @@ const int CNT_INDEX_ARMOR   = 3;
 
 USING_NS_CC;
 
-std::string to_string(int i)
+std::string GameLayer::to_string(int i)
 {
 	std::stringstream ss;
 	ss << i;
@@ -75,8 +75,8 @@ bool GameLayer::init()
 
 void GameLayer::Update(Monster& hero)
 {
-	std::string _strCoin	= std::to_string(hero.m_graphicComponentHero->GetValue());
-	std::string _strHealth	= std::to_string(hero.m_graphicComponentHero->GetHealth());
+	std::string _strCoin	= to_string(hero.m_graphicComponentHero->GetValue());
+	std::string _strHealth	= to_string(hero.m_graphicComponentHero->GetHealth());
 
 	m_veclblProperties[CNT_INDEX_COIN]->setString	(_strCoin);
 	m_veclblProperties[CNT_INDEX_POWER]->setString	(_strHealth);

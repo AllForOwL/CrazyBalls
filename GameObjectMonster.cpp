@@ -14,6 +14,13 @@ const int CNT_COIN_FOR_ENEMY_BLUE	= 100;
 const int CNT_COIN_FOR_ENEMY_GREEN	= 150;
 const int CNT_COIN_FOR_ENEMY_RED	= 200;
 
+std::string GameObjectMonster::to_string(int i)
+{
+	std::stringstream ss;
+	ss << i;
+	return ss.str();
+}
+
 GameObjectMonster::GameObjectMonster()
 {
 	m_sizeEnemy		= Point::ZERO;
@@ -34,15 +41,15 @@ void GameObjectMonster::LoadNameEnemies()
 {
 	for (int i = 0; i < 9; i++)
 	{
-		m_vecNameEnemyMeteor.push_back("Rock" + std::to_string(i+1));
+		m_vecNameEnemyMeteor.push_back("Rock" + to_string(i+1));
 	}
 
 	for (int i = 0; i < 5; i++)
 	{
-		m_vecNameEnemyAirplane.push_back("black_"	+ std::to_string(i + 1));
-		m_vecNameEnemyAirplane.push_back("blue_"	+ std::to_string(i + 1));
-		m_vecNameEnemyAirplane.push_back("green_"	+ std::to_string(i + 1));
-		m_vecNameEnemyAirplane.push_back("red_"		+ std::to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("black_"	+ to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("blue_"	+ to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("green_"	+ to_string(i + 1));
+		m_vecNameEnemyAirplane.push_back("red_"		+ to_string(i + 1));
 	}
 }
 

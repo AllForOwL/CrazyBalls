@@ -61,6 +61,8 @@ public:
 
 	void LoadNameEnemies();
 
+	std::string to_string(int i);
+
 	~GameObjectMonster();
 public:
 	std::vector<GraphicComponent*>	m_vecComponentEnemyMeteor;
